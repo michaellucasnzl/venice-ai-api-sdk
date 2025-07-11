@@ -15,6 +15,12 @@ on:
       - '*.sln'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  actions: read
+  checks: write
+  pull-requests: write
+
 env:
   DOTNET_VERSION: '8.0.x'
   PROJECT_PATH: 'src/VeniceAI.SDK/VeniceAI.SDK.csproj'
