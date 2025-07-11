@@ -26,30 +26,30 @@ public class ImageService : BaseService, IImageService
     /// <inheritdoc />
     public async Task<ImageGenerationResponse> GenerateImageAsync(GenerateImageRequest request, CancellationToken cancellationToken = default)
     {
-        return await SendPostRequestAsync<ImageGenerationResponse>("/image/generate", request, cancellationToken);
+        return await SendPostRequestAsync<ImageGenerationResponse>("image/generate", request, cancellationToken);
     }
 
     /// <inheritdoc />
     public async Task<ImageGenerationResponse> GenerateImageSimpleAsync(SimpleGenerateImageRequest request, CancellationToken cancellationToken = default)
     {
-        return await SendPostRequestAsync<ImageGenerationResponse>("/images/generations", request, cancellationToken);
+        return await SendPostRequestAsync<ImageGenerationResponse>("images/generations", request, cancellationToken);
     }
 
     /// <inheritdoc />
     public async Task<ImageGenerationResponse> UpscaleImageAsync(UpscaleImageRequest request, CancellationToken cancellationToken = default)
     {
-        return await SendPostRequestAsync<ImageGenerationResponse>("/image/upscale", request, cancellationToken);
+        return await SendPostRequestAsync<ImageGenerationResponse>("image/upscale", request, cancellationToken);
     }
 
     /// <inheritdoc />
     public async Task<ImageGenerationResponse> EditImageAsync(EditImageRequest request, CancellationToken cancellationToken = default)
     {
-        return await SendPostRequestAsync<ImageGenerationResponse>("/image/edit", request, cancellationToken);
+        return await SendPostRequestAsync<ImageGenerationResponse>("image/edit", request, cancellationToken);
     }
 
     /// <inheritdoc />
     public async Task<ImageStylesResponse> GetImageStylesAsync(CancellationToken cancellationToken = default)
     {
-        return await SendGetRequestAsync<ImageStylesResponse>("/image/styles", cancellationToken);
+        return await SendGetRequestAsync<ImageStylesResponse>("image/styles", cancellationToken);
     }
 }

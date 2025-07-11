@@ -26,6 +26,6 @@ public class EmbeddingService : BaseService, IEmbeddingService
     /// <inheritdoc />
     public async Task<CreateEmbeddingResponse> CreateEmbeddingAsync(CreateEmbeddingRequest request, CancellationToken cancellationToken = default)
     {
-        return await SendPostRequestAsync<CreateEmbeddingResponse>("/embeddings", request, cancellationToken);
+        return await SendPostRequestAsync<CreateEmbeddingResponse>("embeddings", request, cancellationToken);
     }
 }

@@ -8,6 +8,7 @@ using VeniceAI.SDK.Models.Audio;
 using VeniceAI.SDK.Models.Chat;
 using VeniceAI.SDK.Models.Embeddings;
 using VeniceAI.SDK.Models.Images;
+using VeniceAI.SDK.Models.Models;
 
 namespace VeniceAI.SDK.Samples;
 
@@ -119,6 +120,7 @@ public class Program
     {
         Console.WriteLine("=== Image Generation Samples ===");
 
+        // Basic image generation
         var imageRequest = new GenerateImageRequest
         {
             Model = "hidream",
@@ -132,11 +134,30 @@ public class Program
         var imageResponse = await client.Images.GenerateImageAsync(imageRequest);
         if (imageResponse.IsSuccess && imageResponse.Data.Any())
         {
-            Console.WriteLine($"Generated image with {imageResponse.Data[0].B64Json?.Length} characters of base64 data\n");
+            Console.WriteLine($"Generated image - Base64 length: {imageResponse.Data[0].B64Json?.Length} characters");
         }
         else
         {
-            Console.WriteLine($"Image generation error: {imageResponse.Error?.Error}\n");
+            Console.WriteLine($"Image generation error: {imageResponse.Error?.Error}");
+        }
+
+        // Simple image generation (OpenAI-compatible)
+        var simpleRequest = new SimpleGenerateImageRequest
+        {
+            Model = "hidream",
+            Prompt = "A serene mountain landscape",
+            N = 1,
+            Size = "1024x1024"
+        };
+
+        var simpleResponse = await client.Images.GenerateImageSimpleAsync(simpleRequest);
+        if (simpleResponse.IsSuccess && simpleResponse.Data.Any())
+        {
+            Console.WriteLine($"Simple image generated - Base64 length: {simpleResponse.Data[0].B64Json?.Length} characters");
+        }
+        else
+        {
+            Console.WriteLine($"Simple image generation error: {simpleResponse.Error?.Error}");
         }
 
         // Get image styles
@@ -144,12 +165,20 @@ public class Program
         if (stylesResponse.IsSuccess)
         {
             Console.WriteLine($"Available image styles: {stylesResponse.Styles.Count}");
-            foreach (var style in stylesResponse.Styles.Take(5))
+            foreach (var style in stylesResponse.Styles.Take(3))
             {
                 Console.WriteLine($"- {style.Name}");
             }
-            Console.WriteLine();
         }
+        else
+        {
+            Console.WriteLine($"Image styles error: {stylesResponse.Error?.Error}");
+        }
+
+        // Note: Upscale and Edit operations require existing images as input
+        // These are not included in this basic sample but are available in the SDK
+        
+        Console.WriteLine();
     }
 
     private static async Task RunEmbeddingSamples(IVeniceAIClient client, ILogger logger)
@@ -204,6 +233,7 @@ public class Program
     {
         Console.WriteLine("=== Model Information Samples ===");
 
+        // Get all models
         var modelsResponse = await client.Models.GetModelsAsync();
         if (modelsResponse.IsSuccess)
         {
@@ -214,7 +244,22 @@ public class Program
             Console.WriteLine($"Available models: {modelsResponse.Data.Count}");
             Console.WriteLine($"- Text models: {textModels}");
             Console.WriteLine($"- Image models: {imageModels}");
-            Console.WriteLine($"- Embedding models: {embeddingModels}\n");
+            Console.WriteLine($"- Embedding models: {embeddingModels}");
+        }
+        else
+        {
+            Console.WriteLine($"Models error: {modelsResponse.Error?.Error}");
+        }
+
+        // Get a specific model
+        if (modelsResponse.IsSuccess && modelsResponse.Data.Any())
+        {
+            var firstModel = modelsResponse.Data.First();
+            var modelResponse = await client.Models.GetModelAsync(firstModel.Id);
+            if (modelResponse != null)
+            {
+                Console.WriteLine($"Model details - ID: {firstModel.Id}, Owner: {firstModel.OwnedBy}");
+            }
         }
 
         // Get model traits
@@ -222,12 +267,32 @@ public class Program
         if (traitsResponse.IsSuccess)
         {
             Console.WriteLine($"Model traits: {traitsResponse.Traits.Count}");
-            foreach (var trait in traitsResponse.Traits.Take(5))
+            foreach (var trait in traitsResponse.Traits.Take(3))
             {
                 Console.WriteLine($"- {trait.Key}: {trait.Value}");
             }
-            Console.WriteLine();
         }
+        else
+        {
+            Console.WriteLine($"Model traits error: {traitsResponse.Error?.Error}");
+        }
+
+        // Get model compatibility mapping
+        var compatibilityResponse = await client.Models.GetModelCompatibilityAsync();
+        if (compatibilityResponse.IsSuccess)
+        {
+            Console.WriteLine($"Model compatibility mappings: {compatibilityResponse.Compatibility.Count}");
+            foreach (var mapping in compatibilityResponse.Compatibility.Take(3))
+            {
+                Console.WriteLine($"- {mapping.Key}: {mapping.Value}");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Model compatibility error: {compatibilityResponse.Error?.Error}");
+        }
+
+        Console.WriteLine();
     }
 
     private static async Task RunBillingSamples(IVeniceAIClient client, ILogger logger)

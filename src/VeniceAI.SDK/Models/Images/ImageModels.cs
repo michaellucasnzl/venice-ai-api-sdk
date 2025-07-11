@@ -242,8 +242,25 @@ public class EditImageRequest
 /// </summary>
 public class ImageGenerationResponse : BaseResponse
 {
+    private List<string> _images = new();
+
     /// <summary>
-    /// List of generated images.
+    /// List of generated images (base64 encoded).
+    /// </summary>
+    [JsonPropertyName("images")]
+    public List<string> Images 
+    { 
+        get => _images;
+        set 
+        {
+            _images = value;
+            // Populate Data property for backward compatibility
+            Data = _images.Select(img => new ImageData { B64Json = img }).ToList();
+        }
+    }
+
+    /// <summary>
+    /// List of generated images (for compatibility).
     /// </summary>
     [JsonPropertyName("data")]
     public List<ImageData> Data { get; set; } = new();
@@ -252,7 +269,19 @@ public class ImageGenerationResponse : BaseResponse
     /// The timestamp when the image was created.
     /// </summary>
     [JsonPropertyName("created")]
-    public long Created { get; set; }
+    public long? Created { get; set; }
+
+    /// <summary>
+    /// Request information.
+    /// </summary>
+    [JsonPropertyName("request")]
+    public RequestInfo? Request { get; set; }
+
+    /// <summary>
+    /// Timing information.
+    /// </summary>
+    [JsonPropertyName("timing")]
+    public TimingInfo? Timing { get; set; }
 }
 
 /// <summary>
@@ -313,4 +342,52 @@ public class ImageStylesResponse : BaseResponse
     /// </summary>
     [JsonPropertyName("styles")]
     public List<ImageStyle> Styles { get; set; } = new();
+}
+
+/// <summary>
+/// Request information from the API response.
+/// </summary>
+public class RequestInfo
+{
+    /// <summary>
+    /// Indicates if the request was successful.
+    /// </summary>
+    [JsonPropertyName("success")]
+    public bool Success { get; set; }
+
+    /// <summary>
+    /// Request data details.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public object? Data { get; set; }
+}
+
+/// <summary>
+/// Timing information from the API response.
+/// </summary>
+public class TimingInfo
+{
+    /// <summary>
+    /// Duration of inference in milliseconds.
+    /// </summary>
+    [JsonPropertyName("inferenceDuration")]
+    public long? InferenceDuration { get; set; }
+
+    /// <summary>
+    /// Preprocessing time in milliseconds.
+    /// </summary>
+    [JsonPropertyName("inferencePreprocessingTime")]
+    public long? InferencePreprocessingTime { get; set; }
+
+    /// <summary>
+    /// Queue time in milliseconds.
+    /// </summary>
+    [JsonPropertyName("inferenceQueueTime")]
+    public long? InferenceQueueTime { get; set; }
+
+    /// <summary>
+    /// Total processing time in milliseconds.
+    /// </summary>
+    [JsonPropertyName("total")]
+    public long? Total { get; set; }
 }

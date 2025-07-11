@@ -21,7 +21,7 @@ public class VeniceAIOptions
     /// <summary>
     /// The base URL for the Venice AI API. Defaults to the official API endpoint.
     /// </summary>
-    public string BaseUrl { get; set; } = "https://api.venice.ai/api/v1";
+    public string BaseUrl { get; set; } = "https://api.venice.ai/api/v1/";
 
     /// <summary>
     /// The timeout for HTTP requests in seconds. Defaults to 300 seconds (5 minutes).

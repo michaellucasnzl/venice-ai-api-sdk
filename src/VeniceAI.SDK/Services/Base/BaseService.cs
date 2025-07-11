@@ -29,6 +29,27 @@ public abstract class BaseService
         HttpClient = httpClient;
         Options = options.Value;
         Logger = logger;
+        
+        // Debug: Log the actual HttpClient configuration
+        Logger.LogInformation("BaseService - HttpClient BaseAddress: {BaseAddress}", HttpClient.BaseAddress);
+        Logger.LogInformation("BaseService - Options BaseUrl: {BaseUrl}", Options.BaseUrl);
+        
+        // Ensure HttpClient is properly configured
+        if (HttpClient.BaseAddress == null || HttpClient.BaseAddress.ToString() != Options.BaseUrl)
+        {
+            Logger.LogWarning("HttpClient BaseAddress ({BaseAddress}) does not match options BaseUrl ({BaseUrl}), setting it", HttpClient.BaseAddress, Options.BaseUrl);
+            HttpClient.BaseAddress = new Uri(Options.BaseUrl);
+        }
+        
+        // Ensure authorization header is set
+        if (HttpClient.DefaultRequestHeaders.Authorization == null)
+        {
+            HttpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {Options.ApiKey}");
+        }
+        
+        // Set timeout
+        HttpClient.Timeout = TimeSpan.FromSeconds(Options.TimeoutSeconds);
+        
         JsonSerializerOptions = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -84,6 +105,13 @@ public abstract class BaseService
 
             var json = JsonSerializer.Serialize(request, JsonSerializerOptions);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
+            
+            // Ensure Content-Type is exactly "application/json" without charset
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            // Debug: Log the actual headers being sent
+            Logger.LogInformation("Content-Type header: {ContentType}", content.Headers.ContentType?.ToString());
+            Logger.LogInformation("Request JSON: {Json}", json);
 
             var response = await HttpClient.PostAsync(endpoint, content, cancellationToken);
             return await ProcessResponseAsync<T>(response, cancellationToken);
@@ -121,6 +149,9 @@ public abstract class BaseService
 
             var json = JsonSerializer.Serialize(request, JsonSerializerOptions);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
+            
+            // Ensure Content-Type is exactly "application/json" without charset
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
             response = await HttpClient.PostAsync(endpoint, content, cancellationToken);
             response.EnsureSuccessStatusCode();

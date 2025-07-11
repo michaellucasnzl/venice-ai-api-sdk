@@ -32,7 +32,7 @@ public class ChatService : BaseService, IChatService
         }
 
         request.Stream = false;
-        return await SendPostRequestAsync<ChatCompletionResponse>("/chat/completions", request, cancellationToken);
+        return await SendPostRequestAsync<ChatCompletionResponse>("chat/completions", request, cancellationToken);
     }
 
     /// <inheritdoc />
@@ -42,7 +42,7 @@ public class ChatService : BaseService, IChatService
     {
         request.Stream = true;
         
-        await foreach (var chunk in SendStreamingPostRequestAsync<ChatCompletionResponse>("/chat/completions", request, cancellationToken))
+        await foreach (var chunk in SendStreamingPostRequestAsync<ChatCompletionResponse>("chat/completions", request, cancellationToken))
         {
             yield return chunk;
         }

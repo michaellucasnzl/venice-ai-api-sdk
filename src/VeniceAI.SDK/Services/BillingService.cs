@@ -47,7 +47,7 @@ public class BillingService : BaseService, IBillingService
             queryParams.Add($"sortOrder={request.SortOrder}");
 
         var queryString = queryParams.Count > 0 ? "?" + string.Join("&", queryParams) : "";
-        var endpoint = $"/billing/usage{queryString}";
+        var endpoint = $"billing/usage{queryString}";
 
         return await SendGetRequestAsync<BillingUsageResponse>(endpoint, cancellationToken);
     }

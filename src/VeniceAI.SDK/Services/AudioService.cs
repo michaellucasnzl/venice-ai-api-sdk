@@ -36,9 +36,22 @@ public class AudioService : BaseService, IAudioService
         
         try
         {
-            var response = await HttpClient.PostAsync("/audio/speech", 
-                new StringContent(System.Text.Json.JsonSerializer.Serialize(request), 
-                System.Text.Encoding.UTF8, "application/json"), cancellationToken);
+            if (Options.EnableLogging)
+            {
+                Logger.LogInformation("Sending POST request to audio/speech");
+            }
+
+            var json = System.Text.Json.JsonSerializer.Serialize(request, JsonSerializerOptions);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            
+            // Ensure Content-Type is exactly "application/json" without charset
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            // Debug: Log the actual headers being sent
+            Logger.LogInformation("Content-Type header: {ContentType}", content.Headers.ContentType?.ToString());
+            Logger.LogInformation("Request JSON: {Json}", json);
+
+            var response = await HttpClient.PostAsync("audio/speech", content, cancellationToken);
 
             var result = new CreateSpeechResponse
             {
@@ -73,9 +86,18 @@ public class AudioService : BaseService, IAudioService
 
         try
         {
-            response = await HttpClient.PostAsync("/audio/speech",
-                new StringContent(System.Text.Json.JsonSerializer.Serialize(request),
-                System.Text.Encoding.UTF8, "application/json"), cancellationToken);
+            if (Options.EnableLogging)
+            {
+                Logger.LogInformation("Sending streaming POST request to audio/speech");
+            }
+
+            var json = System.Text.Json.JsonSerializer.Serialize(request, JsonSerializerOptions);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            
+            // Ensure Content-Type is exactly "application/json" without charset
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            response = await HttpClient.PostAsync("audio/speech", content, cancellationToken);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -98,7 +120,8 @@ public class AudioService : BaseService, IAudioService
         }
         finally
         {
-            stream?.Dispose();
+            if (stream != null)
+                await stream.DisposeAsync();
             response?.Dispose();
         }
     }

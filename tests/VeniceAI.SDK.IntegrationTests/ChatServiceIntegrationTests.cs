@@ -66,6 +66,15 @@ public class ChatServiceIntegrationTests : IDisposable
 
         // Assert
         response.Should().NotBeNull();
+        
+        // Debug information if request failed
+        if (!response.IsSuccess)
+        {
+            _output.WriteLine($"Request failed with status code: {response.StatusCode}");
+            _output.WriteLine($"Error: {response.Error?.Error ?? "No error details"}");
+            _output.WriteLine($"Raw content: {response.RawContent}");
+        }
+        
         response.IsSuccess.Should().BeTrue();
         response.Choices.Should().NotBeEmpty();
         response.Choices[0].Message.Content.Should().NotBeNull();

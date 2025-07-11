@@ -56,37 +56,38 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddVeniceAIServices(IServiceCollection services)
     {
-        services.AddHttpClient<IChatService, ChatService>((serviceProvider, client) =>
+        // Register HTTP clients with proper named client configuration
+        services.AddHttpClient<IChatService, ChatService>("ChatService", (serviceProvider, client) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
             ConfigureHttpClient(client, options);
         });
 
-        services.AddHttpClient<IImageService, ImageService>((serviceProvider, client) =>
+        services.AddHttpClient<IImageService, ImageService>("ImageService", (serviceProvider, client) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
             ConfigureHttpClient(client, options);
         });
 
-        services.AddHttpClient<IEmbeddingService, EmbeddingService>((serviceProvider, client) =>
+        services.AddHttpClient<IEmbeddingService, EmbeddingService>("EmbeddingService", (serviceProvider, client) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
             ConfigureHttpClient(client, options);
         });
 
-        services.AddHttpClient<IAudioService, AudioService>((serviceProvider, client) =>
+        services.AddHttpClient<IAudioService, AudioService>("AudioService", (serviceProvider, client) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
             ConfigureHttpClient(client, options);
         });
 
-        services.AddHttpClient<IModelService, ModelService>((serviceProvider, client) =>
+        services.AddHttpClient<IModelService, ModelService>("ModelService", (serviceProvider, client) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
             ConfigureHttpClient(client, options);
         });
 
-        services.AddHttpClient<IBillingService, BillingService>((serviceProvider, client) =>
+        services.AddHttpClient<IBillingService, BillingService>("BillingService", (serviceProvider, client) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
             ConfigureHttpClient(client, options);
