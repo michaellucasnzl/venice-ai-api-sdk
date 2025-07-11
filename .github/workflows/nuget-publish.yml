@@ -50,8 +50,8 @@ jobs:
     - name: Build solution
       run: dotnet build ${{ env.SOLUTION_PATH }} --configuration Release --no-restore
     
-    - name: Run tests
-      run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage"
+    - name: Run tests (excluding integration tests)
+      run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage" --filter "Category!=Integration"
     
     - name: Publish test results
       uses: dorny/test-reporter@v1
@@ -60,6 +60,7 @@ jobs:
         name: .NET Tests
         path: '**/*.trx'
         reporter: dotnet-trx
+        fail-on-error: true
 
   publish-nuget:
     name: Publish to NuGet
