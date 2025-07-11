@@ -1,0 +1,25 @@
+﻿{
+  Id: chatcmpl-3256b6779cbf412284445ef5bbe11f0d,
+  Object: chat.completion,
+  Created: 1752231350,
+  Model: llama-3.3-70b,
+  Choices: [
+    {
+      Message: {
+        Role: assistant,
+        Content: {
+          ValueKind: String
+        }
+      },
+      FinishReason: length
+    }
+  ],
+  Usage: {
+    PromptTokens: 341,
+    CompletionTokens: 200,
+    TotalTokens: 541
+  },
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

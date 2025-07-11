@@ -1,0 +1,19 @@
+﻿{
+  Object: list,
+  Data: [
+    {
+      Object: embedding,
+      Embedding: {Scrubbed},
+      EmbeddingBase64: {Scrubbed},
+      EncodingFormat: base64
+    }
+  ],
+  Model: text-embedding-bge-m3,
+  Usage: {
+    PromptTokens: 12,
+    TotalTokens: 12
+  },
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

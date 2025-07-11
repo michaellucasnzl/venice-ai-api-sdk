@@ -1,0 +1,2321 @@
+﻿[
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        }
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant
+        },
+        FinishReason: length
+      }
+    ],
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-2d91c8147a5d4cedb3ac43fcf79b28cc,
+    Object: chat.completion.chunk,
+    Created: 1752231356,
+    Model: llama-3.3-70b,
+    Usage: {
+      PromptTokens: 342,
+      CompletionTokens: 150,
+      TotalTokens: 492
+    },
+    IsSuccess: true,
+    StatusCode: 200,
+    RawContent: {Scrubbed}
+  }
+]

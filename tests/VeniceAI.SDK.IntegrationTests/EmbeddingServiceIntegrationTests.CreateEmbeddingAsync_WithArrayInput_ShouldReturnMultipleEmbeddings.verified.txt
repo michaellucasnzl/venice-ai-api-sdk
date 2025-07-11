@@ -1,0 +1,30 @@
+﻿{
+  Object: list,
+  Data: [
+    {
+      Object: embedding,
+      Embedding: {Scrubbed},
+      EmbeddingBase64: {Scrubbed}
+    },
+    {
+      Object: embedding,
+      Embedding: {Scrubbed},
+      EmbeddingBase64: {Scrubbed},
+      Index: 1
+    },
+    {
+      Object: embedding,
+      Embedding: {Scrubbed},
+      EmbeddingBase64: {Scrubbed},
+      Index: 2
+    }
+  ],
+  Model: text-embedding-bge-m3,
+  Usage: {
+    PromptTokens: 30,
+    TotalTokens: 30
+  },
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

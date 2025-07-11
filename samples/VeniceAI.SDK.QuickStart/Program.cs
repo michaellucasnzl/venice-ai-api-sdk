@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using VeniceAI.SDK;
 using VeniceAI.SDK.Extensions;
 using VeniceAI.SDK.Models.Chat;
 

@@ -1,51 +1,13 @@
 using FluentAssertions;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using VeniceAI.SDK;
-using VeniceAI.SDK.Extensions;
 using VeniceAI.SDK.Models.Billing;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace VeniceAI.SDK.IntegrationTests;
 
 /// <summary>
 /// Integration tests for the Billing service.
 /// </summary>
-public class BillingServiceIntegrationTests : IDisposable
+public class BillingServiceIntegrationTests(ITestOutputHelper output) : IntegrationTestBase(output)
 {
-    private readonly IHost _host;
-    private readonly IVeniceAIClient _client;
-    private readonly ITestOutputHelper _output;
-
-    public BillingServiceIntegrationTests(ITestOutputHelper output)
-    {
-        _output = output;
-        
-        var hostBuilder = Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration((context, config) =>
-            {
-                config.AddJsonFile("appsettings.json", optional: true);
-                config.AddEnvironmentVariables();
-                config.AddUserSecrets<BillingServiceIntegrationTests>();
-            })
-            .ConfigureServices((context, services) =>
-            {
-                services.AddLogging(builder =>
-                {
-                    builder.AddConsole();
-                    builder.SetMinimumLevel(LogLevel.Debug);
-                });
-                
-                services.AddVeniceAI(context.Configuration);
-            });
-
-        _host = hostBuilder.Build();
-        _client = _host.Services.GetRequiredService<IVeniceAIClient>();
-    }
-
     [Fact]
     public async Task GetBillingUsageAsync_WithDefaultRequest_ShouldReturnUsage()
     {
@@ -58,7 +20,7 @@ public class BillingServiceIntegrationTests : IDisposable
         };
 
         // Act
-        var response = await _client.Billing.GetBillingUsageAsync(request);
+        var response = await Client.Billing.GetBillingUsageAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         response.Should().NotBeNull();
@@ -68,18 +30,20 @@ public class BillingServiceIntegrationTests : IDisposable
         response.Pagination.Limit.Should().Be(10);
         response.Pagination.Page.Should().Be(1);
         
-        _output.WriteLine($"Total usage entries: {response.Pagination.Total}");
-        _output.WriteLine($"Total pages: {response.Pagination.TotalPages}");
-        _output.WriteLine($"Current page entries: {response.Data.Count}");
+        Output.WriteLine($"Total usage entries: {response.Pagination.Total}");
+        Output.WriteLine($"Total pages: {response.Pagination.TotalPages}");
+        Output.WriteLine($"Current page entries: {response.Data.Count}");
         
         if (response.Data.Any())
         {
-            _output.WriteLine("\nRecent usage entries:");
+            Output.WriteLine("\nRecent usage entries:");
             foreach (var entry in response.Data.Take(5))
             {
-                _output.WriteLine($"- {entry.Timestamp:yyyy-MM-dd HH:mm:ss}: {entry.Sku} - {entry.Amount} {entry.Currency}");
+                Output.WriteLine($"- {entry.Timestamp:yyyy-MM-dd HH:mm:ss}: {entry.Sku} - {entry.Amount} {entry.Currency}");
             }
         }
+
+        await VerifyResult(response);
     }
 
     [Fact]
@@ -99,15 +63,15 @@ public class BillingServiceIntegrationTests : IDisposable
         };
 
         // Act
-        var response = await _client.Billing.GetBillingUsageAsync(request);
+        var response = await Client.Billing.GetBillingUsageAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         response.Should().NotBeNull();
         response.IsSuccess.Should().BeTrue();
         response.Data.Should().NotBeNull();
         
-        _output.WriteLine($"Usage entries in last 30 days: {response.Data.Count}");
-        _output.WriteLine($"Date range: {startDate:yyyy-MM-dd} to {endDate:yyyy-MM-dd}");
+        Output.WriteLine($"Usage entries in last 30 days: {response.Data.Count}");
+        Output.WriteLine($"Date range: {startDate:yyyy-MM-dd} to {endDate:yyyy-MM-dd}");
         
         // Verify all entries are within the date range
         foreach (var entry in response.Data)
@@ -119,15 +83,17 @@ public class BillingServiceIntegrationTests : IDisposable
         if (response.Data.Any())
         {
             var totalCost = response.Data.Sum(e => e.Amount);
-            _output.WriteLine($"Total cost in period: {totalCost:F4}");
+            Output.WriteLine($"Total cost in period: {totalCost:F4}");
             
             var groupedByCurrency = response.Data.GroupBy(e => e.Currency).ToList();
             foreach (var group in groupedByCurrency)
             {
                 var currencyTotal = group.Sum(e => e.Amount);
-                _output.WriteLine($"Total {group.Key}: {currencyTotal:F4}");
+                Output.WriteLine($"Total {group.Key}: {currencyTotal:F4}");
             }
         }
+
+        await VerifyResult(response);
     }
 
     [Fact]
@@ -143,14 +109,14 @@ public class BillingServiceIntegrationTests : IDisposable
         };
 
         // Act
-        var response = await _client.Billing.GetBillingUsageAsync(request);
+        var response = await Client.Billing.GetBillingUsageAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         response.Should().NotBeNull();
         response.IsSuccess.Should().BeTrue();
         response.Data.Should().NotBeNull();
         
-        _output.WriteLine($"DIEM usage entries: {response.Data.Count}");
+        Output.WriteLine($"DIEM usage entries: {response.Data.Count}");
         
         // Verify all entries are in DIEM currency
         foreach (var entry in response.Data)
@@ -161,15 +127,17 @@ public class BillingServiceIntegrationTests : IDisposable
         if (response.Data.Any())
         {
             var totalDiem = response.Data.Sum(e => e.Amount);
-            _output.WriteLine($"Total DIEM spent: {totalDiem:F4}");
+            Output.WriteLine($"Total DIEM spent: {totalDiem:F4}");
             
             var skuGroups = response.Data.GroupBy(e => e.Sku).ToList();
             foreach (var group in skuGroups.Take(5))
             {
                 var skuTotal = group.Sum(e => e.Amount);
-                _output.WriteLine($"{group.Key}: {skuTotal:F4} DIEM");
+                Output.WriteLine($"{group.Key}: {skuTotal:F4} DIEM");
             }
         }
+
+        await VerifyResult(response);
     }
 
     [Fact]
@@ -191,8 +159,8 @@ public class BillingServiceIntegrationTests : IDisposable
         };
 
         // Act
-        var page1Response = await _client.Billing.GetBillingUsageAsync(page1Request);
-        var page2Response = await _client.Billing.GetBillingUsageAsync(page2Request);
+        var page1Response = await Client.Billing.GetBillingUsageAsync(page1Request, TestContext.Current.CancellationToken);
+        var page2Response = await Client.Billing.GetBillingUsageAsync(page2Request, TestContext.Current.CancellationToken);
 
         // Assert
         page1Response.Should().NotBeNull();
@@ -205,8 +173,8 @@ public class BillingServiceIntegrationTests : IDisposable
         page2Response.Pagination.Page.Should().Be(2);
         page2Response.Pagination.Limit.Should().Be(5);
         
-        _output.WriteLine($"Page 1 entries: {page1Response.Data.Count}");
-        _output.WriteLine($"Page 2 entries: {page2Response.Data.Count}");
+        Output.WriteLine($"Page 1 entries: {page1Response.Data.Count}");
+        Output.WriteLine($"Page 2 entries: {page2Response.Data.Count}");
         
         // Verify pagination info is consistent
         page1Response.Pagination.Total.Should().Be(page2Response.Pagination.Total);
@@ -220,6 +188,8 @@ public class BillingServiceIntegrationTests : IDisposable
             
             page1Ids.Should().NotIntersectWith(page2Ids);
         }
+
+        await VerifyResult(new { page1Response, page2Response });
     }
 
     [Fact]
@@ -234,7 +204,7 @@ public class BillingServiceIntegrationTests : IDisposable
         };
 
         // Act
-        var response = await _client.Billing.GetBillingUsageAsync(request);
+        var response = await Client.Billing.GetBillingUsageAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         response.Should().NotBeNull();
@@ -244,23 +214,25 @@ public class BillingServiceIntegrationTests : IDisposable
         // Look for entries with inference details
         var inferenceEntries = response.Data.Where(e => e.InferenceDetails != null).ToList();
         
-        _output.WriteLine($"Entries with inference details: {inferenceEntries.Count}");
+        Output.WriteLine($"Entries with inference details: {inferenceEntries.Count}");
         
         foreach (var entry in inferenceEntries.Take(5))
         {
-            _output.WriteLine($"\nInference Entry:");
-            _output.WriteLine($"  SKU: {entry.Sku}");
-            _output.WriteLine($"  Amount: {entry.Amount} {entry.Currency}");
-            _output.WriteLine($"  Timestamp: {entry.Timestamp:yyyy-MM-dd HH:mm:ss}");
+            Output.WriteLine($"\nInference Entry:");
+            Output.WriteLine($"  SKU: {entry.Sku}");
+            Output.WriteLine($"  Amount: {entry.Amount} {entry.Currency}");
+            Output.WriteLine($"  Timestamp: {entry.Timestamp:yyyy-MM-dd HH:mm:ss}");
             
             if (entry.InferenceDetails != null)
             {
-                _output.WriteLine($"  Request ID: {entry.InferenceDetails.RequestId}");
-                _output.WriteLine($"  Prompt Tokens: {entry.InferenceDetails.PromptTokens}");
-                _output.WriteLine($"  Completion Tokens: {entry.InferenceDetails.CompletionTokens}");
-                _output.WriteLine($"  Execution Time: {entry.InferenceDetails.InferenceExecutionTime}ms");
+                Output.WriteLine($"  Request ID: {entry.InferenceDetails.RequestId}");
+                Output.WriteLine($"  Prompt Tokens: {entry.InferenceDetails.PromptTokens}");
+                Output.WriteLine($"  Completion Tokens: {entry.InferenceDetails.CompletionTokens}");
+                Output.WriteLine($"  Execution Time: {entry.InferenceDetails.InferenceExecutionTime}ms");
             }
         }
+
+        await VerifyResult(response);
     }
 
     [Fact]
@@ -283,8 +255,8 @@ public class BillingServiceIntegrationTests : IDisposable
         };
 
         // Act
-        var ascResponse = await _client.Billing.GetBillingUsageAsync(ascRequest);
-        var descResponse = await _client.Billing.GetBillingUsageAsync(descRequest);
+        var ascResponse = await Client.Billing.GetBillingUsageAsync(ascRequest, TestContext.Current.CancellationToken);
+        var descResponse = await Client.Billing.GetBillingUsageAsync(descRequest, TestContext.Current.CancellationToken);
 
         // Assert
         ascResponse.Should().NotBeNull();
@@ -301,8 +273,8 @@ public class BillingServiceIntegrationTests : IDisposable
                 ascResponse.Data[i].Timestamp.Should().BeOnOrBefore(ascResponse.Data[i + 1].Timestamp);
             }
             
-            _output.WriteLine($"Ascending order - First: {ascResponse.Data.First().Timestamp:yyyy-MM-dd HH:mm:ss}");
-            _output.WriteLine($"Ascending order - Last: {ascResponse.Data.Last().Timestamp:yyyy-MM-dd HH:mm:ss}");
+            Output.WriteLine($"Ascending order - First: {ascResponse.Data.First().Timestamp:yyyy-MM-dd HH:mm:ss}");
+            Output.WriteLine($"Ascending order - Last: {ascResponse.Data.Last().Timestamp:yyyy-MM-dd HH:mm:ss}");
         }
         
         if (descResponse.Data.Count > 1)
@@ -313,13 +285,10 @@ public class BillingServiceIntegrationTests : IDisposable
                 descResponse.Data[i].Timestamp.Should().BeOnOrAfter(descResponse.Data[i + 1].Timestamp);
             }
             
-            _output.WriteLine($"Descending order - First: {descResponse.Data.First().Timestamp:yyyy-MM-dd HH:mm:ss}");
-            _output.WriteLine($"Descending order - Last: {descResponse.Data.Last().Timestamp:yyyy-MM-dd HH:mm:ss}");
+            Output.WriteLine($"Descending order - First: {descResponse.Data.First().Timestamp:yyyy-MM-dd HH:mm:ss}");
+            Output.WriteLine($"Descending order - Last: {descResponse.Data.Last().Timestamp:yyyy-MM-dd HH:mm:ss}");
         }
-    }
 
-    public void Dispose()
-    {
-        _host?.Dispose();
+        await VerifyResult(new { ascResponse, descResponse });
     }
 }

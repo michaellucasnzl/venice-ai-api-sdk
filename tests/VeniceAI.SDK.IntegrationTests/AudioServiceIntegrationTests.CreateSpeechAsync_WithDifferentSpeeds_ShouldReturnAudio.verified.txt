@@ -1,0 +1,7 @@
+﻿{
+  AudioContent: {Scrubbed},
+  ContentType: audio/mpeg,
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

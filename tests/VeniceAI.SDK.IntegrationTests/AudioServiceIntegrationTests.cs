@@ -1,49 +1,15 @@
 using FluentAssertions;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using VeniceAI.SDK;
-using VeniceAI.SDK.Extensions;
 using VeniceAI.SDK.Models.Audio;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace VeniceAI.SDK.IntegrationTests;
 
 /// <summary>
 /// Integration tests for the Audio service.
 /// </summary>
-public class AudioServiceIntegrationTests : IDisposable
+public class AudioServiceIntegrationTests : IntegrationTestBase
 {
-    private readonly IHost _host;
-    private readonly IVeniceAIClient _client;
-    private readonly ITestOutputHelper _output;
-
-    public AudioServiceIntegrationTests(ITestOutputHelper output)
+    public AudioServiceIntegrationTests(ITestOutputHelper output) : base(output)
     {
-        _output = output;
-        
-        var hostBuilder = Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration((context, config) =>
-            {
-                config.AddJsonFile("appsettings.json", optional: true);
-                config.AddEnvironmentVariables();
-                config.AddUserSecrets<AudioServiceIntegrationTests>();
-            })
-            .ConfigureServices((context, services) =>
-            {
-                services.AddLogging(builder =>
-                {
-                    builder.AddConsole();
-                    builder.SetMinimumLevel(LogLevel.Debug);
-                });
-                
-                services.AddVeniceAI(context.Configuration);
-            });
-
-        _host = hostBuilder.Build();
-        _client = _host.Services.GetRequiredService<IVeniceAIClient>();
     }
 
     [Fact]
@@ -60,16 +26,18 @@ public class AudioServiceIntegrationTests : IDisposable
         };
 
         // Act
-        var response = await _client.Audio.CreateSpeechAsync(request);
+        var response = await Client.Audio.CreateSpeechAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         response.Should().NotBeNull();
         response.IsSuccess.Should().BeTrue();
         response.AudioContent.Should().NotBeEmpty();
         response.ContentType.Should().Contain("audio");
-        
-        _output.WriteLine($"Generated audio with {response.AudioContent.Length} bytes");
-        _output.WriteLine($"Content type: {response.ContentType}");
+
+        Output.WriteLine($"Generated audio with {response.AudioContent.Length} bytes");
+        Output.WriteLine($"Content type: {response.ContentType}");
+
+        await VerifyResult(response);
     }
 
     [Fact]
@@ -96,14 +64,15 @@ public class AudioServiceIntegrationTests : IDisposable
             };
 
             // Act
-            var response = await _client.Audio.CreateSpeechAsync(request);
+            var response = await Client.Audio.CreateSpeechAsync(request, TestContext.Current.CancellationToken);
 
             // Assert
             response.Should().NotBeNull();
             response.IsSuccess.Should().BeTrue();
             response.AudioContent.Should().NotBeEmpty();
-            
-            _output.WriteLine($"Voice {voice}: Generated {response.AudioContent.Length} bytes");
+
+            Output.WriteLine($"Voice {voice}: Generated {response.AudioContent.Length} bytes");
+            await VerifyResult(response, voice.Replace(".", "_"));
         }
     }
 
@@ -131,14 +100,15 @@ public class AudioServiceIntegrationTests : IDisposable
             };
 
             // Act
-            var response = await _client.Audio.CreateSpeechAsync(request);
+            var response = await Client.Audio.CreateSpeechAsync(request, TestContext.Current.CancellationToken);
 
             // Assert
             response.Should().NotBeNull();
             response.IsSuccess.Should().BeTrue();
             response.AudioContent.Should().NotBeEmpty();
-            
-            _output.WriteLine($"Format {format}: Generated {response.AudioContent.Length} bytes");
+
+            Output.WriteLine($"Format {format}: Generated {response.AudioContent.Length} bytes");
+            await VerifyResult(response, format.ToString());
         }
     }
 
@@ -161,14 +131,15 @@ public class AudioServiceIntegrationTests : IDisposable
             };
 
             // Act
-            var response = await _client.Audio.CreateSpeechAsync(request);
+            var response = await Client.Audio.CreateSpeechAsync(request, TestContext.Current.CancellationToken);
 
             // Assert
             response.Should().NotBeNull();
             response.IsSuccess.Should().BeTrue();
             response.AudioContent.Should().NotBeEmpty();
-            
-            _output.WriteLine($"Speed {speed}: Generated {response.AudioContent.Length} bytes");
+
+            Output.WriteLine($"Speed {speed}: Generated {response.AudioContent.Length} bytes");
+            await VerifyResult(response, $"Speed{speed.ToString("0_0")}");
         }
     }
 
@@ -189,8 +160,9 @@ public class AudioServiceIntegrationTests : IDisposable
         // Act
         var totalBytes = 0;
         var chunks = 0;
-        
-        await foreach (var chunk in _client.Audio.CreateSpeechStreamAsync(request))
+
+        await foreach (var chunk in Client.Audio.CreateSpeechStreamAsync(request,
+                           TestContext.Current.CancellationToken))
         {
             chunk.Should().NotBeEmpty();
             totalBytes += chunk.Length;
@@ -200,8 +172,8 @@ public class AudioServiceIntegrationTests : IDisposable
         // Assert
         chunks.Should().BeGreaterThan(0);
         totalBytes.Should().BeGreaterThan(0);
-        
-        _output.WriteLine($"Received {chunks} chunks with total {totalBytes} bytes");
+
+        Output.WriteLine($"Received {chunks} chunks with total {totalBytes} bytes");
     }
 
     [Fact]
@@ -212,9 +184,10 @@ public class AudioServiceIntegrationTests : IDisposable
         {
             VoiceOptions.Chinese.XiaoXiao,
             VoiceOptions.International.Siwis, // French
-            VoiceOptions.International.Sara   // Italian
+            VoiceOptions.International.Sara // Italian
         };
 
+        var responses = new List<CreateSpeechResponse>();
         foreach (var voice in internationalVoices)
         {
             // Arrange
@@ -228,19 +201,17 @@ public class AudioServiceIntegrationTests : IDisposable
             };
 
             // Act
-            var response = await _client.Audio.CreateSpeechAsync(request);
+            var response = await Client.Audio.CreateSpeechAsync(request, TestContext.Current.CancellationToken);
 
             // Assert
             response.Should().NotBeNull();
             response.IsSuccess.Should().BeTrue();
             response.AudioContent.Should().NotBeEmpty();
-            
-            _output.WriteLine($"International voice {voice}: Generated {response.AudioContent.Length} bytes");
-        }
-    }
 
-    public void Dispose()
-    {
-        _host?.Dispose();
+            Output.WriteLine($"International voice {voice}: Generated {response.AudioContent.Length} bytes");
+            responses.Add(response);
+        }
+
+        await VerifyResult(responses);
     }
 }

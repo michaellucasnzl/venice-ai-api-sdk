@@ -2,13 +2,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using VeniceAI.SDK;
 using VeniceAI.SDK.Extensions;
 using VeniceAI.SDK.Models.Audio;
 using VeniceAI.SDK.Models.Chat;
 using VeniceAI.SDK.Models.Embeddings;
 using VeniceAI.SDK.Models.Images;
-using VeniceAI.SDK.Models.Models;
 
 namespace VeniceAI.SDK.Samples;
 

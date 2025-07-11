@@ -72,6 +72,7 @@ public class CreateEmbeddingResponse : BaseResponse
 /// <summary>
 /// Embedding data object.
 /// </summary>
+[JsonConverter(typeof(EmbeddingDataConverter))]
 public class EmbeddingData
 {
     /// <summary>
@@ -85,6 +86,18 @@ public class EmbeddingData
     /// </summary>
     [JsonPropertyName("embedding")]
     public List<double> Embedding { get; set; } = new();
+
+    /// <summary>
+    /// The base64 encoded embedding (when using base64 encoding format).
+    /// </summary>
+    [JsonIgnore]
+    public string? EmbeddingBase64 { get; set; }
+
+    /// <summary>
+    /// The encoding format used for the embedding.
+    /// </summary>
+    [JsonIgnore]
+    public string? EncodingFormat { get; set; }
 
     /// <summary>
     /// The index of the embedding in the list of embeddings.

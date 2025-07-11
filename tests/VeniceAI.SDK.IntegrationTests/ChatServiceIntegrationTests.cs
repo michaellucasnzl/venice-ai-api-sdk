@@ -1,49 +1,15 @@
 using FluentAssertions;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using VeniceAI.SDK;
-using VeniceAI.SDK.Extensions;
 using VeniceAI.SDK.Models.Chat;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace VeniceAI.SDK.IntegrationTests;
 
 /// <summary>
 /// Integration tests for the Chat service.
 /// </summary>
-public class ChatServiceIntegrationTests : IDisposable
+public class ChatServiceIntegrationTests : IntegrationTestBase
 {
-    private readonly IHost _host;
-    private readonly IVeniceAIClient _client;
-    private readonly ITestOutputHelper _output;
-
-    public ChatServiceIntegrationTests(ITestOutputHelper output)
+    public ChatServiceIntegrationTests(ITestOutputHelper output) : base(output)
     {
-        _output = output;
-        
-        var hostBuilder = Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration((context, config) =>
-            {
-                config.AddJsonFile("appsettings.json", optional: true);
-                config.AddEnvironmentVariables();
-                config.AddUserSecrets<ChatServiceIntegrationTests>();
-            })
-            .ConfigureServices((context, services) =>
-            {
-                services.AddLogging(builder =>
-                {
-                    builder.AddConsole();
-                    builder.SetMinimumLevel(LogLevel.Debug);
-                });
-                
-                services.AddVeniceAI(context.Configuration);
-            });
-
-        _host = hostBuilder.Build();
-        _client = _host.Services.GetRequiredService<IVeniceAIClient>();
     }
 
     [Fact]
@@ -62,7 +28,7 @@ public class ChatServiceIntegrationTests : IDisposable
         };
 
         // Act
-        var response = await _client.Chat.CreateChatCompletionAsync(request);
+        var response = await Client.Chat.CreateChatCompletionAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         response.Should().NotBeNull();
@@ -70,16 +36,18 @@ public class ChatServiceIntegrationTests : IDisposable
         // Debug information if request failed
         if (!response.IsSuccess)
         {
-            _output.WriteLine($"Request failed with status code: {response.StatusCode}");
-            _output.WriteLine($"Error: {response.Error?.Error ?? "No error details"}");
-            _output.WriteLine($"Raw content: {response.RawContent}");
+            Output.WriteLine($"Request failed with status code: {response.StatusCode}");
+            Output.WriteLine($"Error: {response.Error?.Error ?? "No error details"}");
+            Output.WriteLine($"Raw content: {response.RawContent}");
         }
         
         response.IsSuccess.Should().BeTrue();
         response.Choices.Should().NotBeEmpty();
         response.Choices[0].Message.Content.Should().NotBeNull();
         
-        _output.WriteLine($"Response: {response.Choices[0].Message.Content}");
+        Output.WriteLine($"Response: {response.Choices[0].Message.Content}");
+
+        await VerifyResult(response);
     }
 
     [Fact]
@@ -100,14 +68,16 @@ public class ChatServiceIntegrationTests : IDisposable
         // Act & Assert
         var chunks = new List<ChatCompletionResponse>();
         
-        await foreach (var chunk in _client.Chat.CreateChatCompletionStreamAsync(request))
+        await foreach (var chunk in Client.Chat.CreateChatCompletionStreamAsync(request, TestContext.Current.CancellationToken))
         {
             chunks.Add(chunk);
-            _output.WriteLine($"Chunk: {chunk.Choices?.FirstOrDefault()?.Message?.Content}");
+            Output.WriteLine($"Chunk: {chunk.Choices?.FirstOrDefault()?.Message?.Content}");
         }
 
         chunks.Should().NotBeEmpty();
         chunks.Any(c => c.Choices?.Any() == true).Should().BeTrue();
+
+        await VerifyResult(chunks);
     }
 
     [Fact]
@@ -140,7 +110,7 @@ public class ChatServiceIntegrationTests : IDisposable
         };
 
         // Act
-        var response = await _client.Chat.CreateChatCompletionAsync(request);
+        var response = await Client.Chat.CreateChatCompletionAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         response.Should().NotBeNull();
@@ -148,7 +118,9 @@ public class ChatServiceIntegrationTests : IDisposable
         response.Choices.Should().NotBeEmpty();
         response.Choices[0].Message.Content.Should().NotBeNull();
         
-        _output.WriteLine($"Vision Response: {response.Choices[0].Message.Content}");
+        Output.WriteLine($"Vision Response: {response.Choices[0].Message.Content}");
+
+        await VerifyResult(response);
     }
 
     [Fact]
@@ -167,7 +139,7 @@ public class ChatServiceIntegrationTests : IDisposable
         };
 
         // Act
-        var response = await _client.Chat.CreateChatCompletionAsync(request);
+        var response = await Client.Chat.CreateChatCompletionAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         response.Should().NotBeNull();
@@ -175,7 +147,9 @@ public class ChatServiceIntegrationTests : IDisposable
         response.Choices.Should().NotBeEmpty();
         response.Choices[0].Message.Content.Should().NotBeNull();
         
-        _output.WriteLine($"System Message Response: {response.Choices[0].Message.Content}");
+        Output.WriteLine($"System Message Response: {response.Choices[0].Message.Content}");
+
+        await VerifyResult(response);
     }
 
     [Fact]
@@ -198,7 +172,7 @@ public class ChatServiceIntegrationTests : IDisposable
         };
 
         // Act
-        var response = await _client.Chat.CreateChatCompletionAsync(request);
+        var response = await Client.Chat.CreateChatCompletionAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         response.Should().NotBeNull();
@@ -206,20 +180,17 @@ public class ChatServiceIntegrationTests : IDisposable
         response.Choices.Should().NotBeEmpty();
         response.Choices[0].Message.Content.Should().NotBeNull();
         
-        _output.WriteLine($"Web Search Response: {response.Choices[0].Message.Content}");
+        Output.WriteLine($"Web Search Response: {response.Choices[0].Message.Content}");
         
         if (response.Citations != null)
         {
-            _output.WriteLine($"Citations: {response.Citations.Count}");
+            Output.WriteLine($"Citations: {response.Citations.Count}");
             foreach (var citation in response.Citations)
             {
-                _output.WriteLine($"- {citation.Title}: {citation.Url}");
+                Output.WriteLine($"- {citation.Title}: {citation.Url}");
             }
         }
-    }
 
-    public void Dispose()
-    {
-        _host?.Dispose();
+        await VerifyResult(response);
     }
 }
