@@ -1,5 +1,0 @@
-root = true
-
-[*.cs]
-# Suppress URI hardcoding warning for this test project
-dotnet_diagnostic.CA1055.severity = none
