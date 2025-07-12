@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   actions: read
   checks: write
   pull-requests: write
@@ -62,7 +62,14 @@ jobs:
       run: dotnet build ${{ env.SOLUTION_PATH }} --configuration Release --no-restore
     
     - name: Run tests (excluding integration tests)
-      run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage" --filter "Category!=Integration"
+      run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage" --filter "Category!=Integration" --results-directory ./TestResults
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        directory: ./TestResults
+        fail_ci_if_error: false
+        token: ${{ secrets.CODECOV_TOKEN }}
     
     - name: Publish test results
       uses: dorny/test-reporter@v1
@@ -88,6 +95,14 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     
+    - name: Check for required secrets
+      run: |
+        if [ -z "${{ secrets.NUGET_API_KEY }}" ]; then
+          echo "::error::NUGET_API_KEY secret is not set"
+          exit 1
+        fi
+        echo "✅ Required secrets are configured"
+    
     - name: Restore dependencies
       run: dotnet restore ${{ env.PROJECT_PATH }}
     
@@ -97,11 +112,26 @@ jobs:
     - name: Get project version
       id: get-version
       run: |
-        VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" ${{ env.PROJECT_PATH }})
+        # Try multiple methods to extract version
+        VERSION=$(dotnet msbuild ${{ env.PROJECT_PATH }} -nologo -verbosity:quiet -target:GetAssemblyVersion -property:GetAssemblyVersionOutputFile=/tmp/version.txt 2>/dev/null && cat /tmp/version.txt 2>/dev/null || echo "")
+        
         if [ -z "$VERSION" ]; then
-          echo "No version found in project file, using 1.0.0"
-          VERSION="1.0.0"
+          VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" ${{ env.PROJECT_PATH }} || echo "")
         fi
+        
+        if [ -z "$VERSION" ]; then
+          VERSION=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" ${{ env.PROJECT_PATH }} || echo "")
+        fi
+        
+        if [ -z "$VERSION" ]; then
+          VERSION=$(grep -oPm1 "(?<=<AssemblyVersion>)[^<]+" ${{ env.PROJECT_PATH }} || echo "")
+        fi
+        
+        if [ -z "$VERSION" ]; then
+          echo "::error::No version found in project file"
+          exit 1
+        fi
+        
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "Package version: $VERSION"
     
@@ -126,14 +156,48 @@ jobs:
       if: steps.check-version.outputs.exists == 'false'
       run: dotnet pack ${{ env.PROJECT_PATH }} --configuration Release --no-build --output ./nupkg
     
+    - name: Validate NuGet package
+      if: steps.check-version.outputs.exists == 'false'
+      run: |
+        echo "Validating NuGet package..."
+        # Check if package was created
+        if [ ! -f ./nupkg/*.nupkg ]; then
+          echo "::error::No NuGet package found"
+          exit 1
+        fi
+        
+        # Check package size (should be reasonable, not too large)
+        for package in ./nupkg/*.nupkg; do
+          size=$(stat -c%s "$package")
+          size_mb=$((size / 1024 / 1024))
+          echo "Package size: ${size_mb}MB"
+          
+          if [ $size_mb -gt 50 ]; then
+            echo "::warning::Package size is quite large (${size_mb}MB)"
+          fi
+          
+          # List package contents
+          echo "Package contents:"
+          unzip -l "$package" | head -20
+        done
+        
+        echo "✅ Package validation completed"
+    
     - name: Publish to NuGet.org
       if: steps.check-version.outputs.exists == 'false'
       run: |
-        dotnet nuget push ./nupkg/*.nupkg \
+        set -e
+        echo "Publishing package to NuGet.org..."
+        
+        if ! dotnet nuget push ./nupkg/*.nupkg \
           --api-key ${{ secrets.NUGET_API_KEY }} \
           --source https://api.nuget.org/v3/index.json \
-          --skip-duplicate \
-          --no-symbols
+          --no-symbols; then
+          echo "::error::Failed to publish package to NuGet.org"
+          exit 1
+        fi
+        
+        echo "✅ Successfully published to NuGet.org"
     
     - name: Upload package artifacts
       if: steps.check-version.outputs.exists == 'false'
@@ -186,3 +250,21 @@ jobs:
         echo "⚠️ Version ${{ steps.get-version.outputs.version }} already exists on NuGet.org"
         echo "To publish a new version, update the <Version> in ${{ env.PROJECT_PATH }}"
         echo "Current version: ${{ steps.get-version.outputs.version }}"
+    
+    - name: Update workflow status
+      if: success() && github.event_name == 'push'
+      run: |
+        echo "✅ Workflow completed successfully"
+        echo "Package version: ${{ steps.get-version.outputs.version }}"
+        echo "Published: ${{ steps.check-version.outputs.exists == 'false' }}"
+        echo "GitHub release created: ${{ steps.check-version.outputs.exists == 'false' }}"
+        
+        # Add a workflow summary
+        echo "## 🚀 Workflow Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- **Package Version**: ${{ steps.get-version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Published to NuGet**: ${{ steps.check-version.outputs.exists == 'false' && 'Yes' || 'No (version exists)' }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **GitHub Release**: ${{ steps.check-version.outputs.exists == 'false' && 'Created' || 'Skipped' }}" >> $GITHUB_STEP_SUMMARY
+        
+        if [ "${{ steps.check-version.outputs.exists }}" == "false" ]; then
+          echo "- **NuGet Package**: [VeniceAI.SDK v${{ steps.get-version.outputs.version }}](https://www.nuget.org/packages/VeniceAI.SDK/${{ steps.get-version.outputs.version }})" >> $GITHUB_STEP_SUMMARY
+        fi
