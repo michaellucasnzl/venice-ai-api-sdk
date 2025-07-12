@@ -7,12 +7,14 @@ on:
       - 'src/**'
       - 'tests/**'
       - '*.sln'
+      - '**/*.csproj'
   pull_request:
     branches: [ main ]
     paths:
       - 'src/**'
       - 'tests/**'
       - '*.sln'
+      - '**/*.csproj'
   workflow_dispatch:
 
 permissions:
@@ -44,7 +46,7 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     
     - name: Cache NuGet packages
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
@@ -133,7 +135,7 @@ jobs:
     
     - name: Upload package artifacts
       if: steps.check-version.outputs.exists == 'false'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: nuget-package-v${{ steps.get-version.outputs.version }}
         path: ./nupkg/*.nupkg
