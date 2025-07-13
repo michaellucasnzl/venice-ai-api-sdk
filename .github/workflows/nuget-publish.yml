@@ -46,6 +46,12 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Set version build number
+      run: |
+        echo "GITHUB_RUN_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+        echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+        echo "Setting build number to: ${{ github.run_number }}"
     
     - name: Cache NuGet packages
       uses: actions/cache@v4
@@ -94,6 +100,12 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Set version build number
+      run: |
+        echo "GITHUB_RUN_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+        echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+        echo "Setting build number to: ${{ github.run_number }}"
     
     - name: Check for required secrets
       run: |
@@ -112,28 +124,35 @@ jobs:
     - name: Get project version
       id: get-version
       run: |
-        # Try multiple methods to extract version
-        VERSION=$(dotnet msbuild ${{ env.PROJECT_PATH }} -nologo -verbosity:quiet -target:GetAssemblyVersion -property:GetAssemblyVersionOutputFile=/tmp/version.txt 2>/dev/null && cat /tmp/version.txt 2>/dev/null || echo "")
+        # Build the project to evaluate MSBuild properties with our versioning
+        dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore --verbosity quiet
         
+        # Get the version using dotnet metadata
+        VERSION=$(dotnet msbuild ${{ env.PROJECT_PATH }} -nologo -verbosity:quiet -property:Configuration=Release -target:GetTargetFrameworksWithPlatformForSingleTargetFramework -property:MSBuildProjectExtensionsPath=/tmp/obj/ | grep -oP 'Version=\K[^;]*' | head -1 || echo "")
+        
+        # Fallback methods if the above doesn't work
         if [ -z "$VERSION" ]; then
-          VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" ${{ env.PROJECT_PATH }} || echo "")
+          # Try extracting from MSBuild evaluation
+          VERSION=$(dotnet msbuild ${{ env.PROJECT_PATH }} -nologo -verbosity:quiet -property:Configuration=Release -getProperty:Version 2>/dev/null || echo "")
         fi
         
         if [ -z "$VERSION" ]; then
-          VERSION=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" ${{ env.PROJECT_PATH }} || echo "")
+          # Manual construction as fallback using the pattern from Directory.Build.props
+          MAJOR=$(grep -oP '<VersionMajor>\K[^<]*' Directory.Build.props | head -1)
+          MINOR=$(grep -oP '<VersionMinor>\K[^<]*' Directory.Build.props | head -1)
+          PATCH=$(grep -oP '<VersionPatch>\K[^<]*' Directory.Build.props | head -1)
+          BUILD="${{ github.run_number }}"
+          VERSION="$MAJOR.$MINOR.$PATCH.$BUILD"
         fi
         
         if [ -z "$VERSION" ]; then
-          VERSION=$(grep -oPm1 "(?<=<AssemblyVersion>)[^<]+" ${{ env.PROJECT_PATH }} || echo "")
-        fi
-        
-        if [ -z "$VERSION" ]; then
-          echo "::error::No version found in project file"
+          echo "::error::No version could be determined"
           exit 1
         fi
         
         echo "version=$VERSION" >> $GITHUB_OUTPUT
-        echo "Package version: $VERSION"
+        echo "📦 Package version: $VERSION"
+        echo "🔢 Build number: ${{ github.run_number }}"
     
     - name: Check if version exists on NuGet
       id: check-version

@@ -27,6 +27,34 @@ Install the Venice AI SDK via NuGet:
 dotnet add package VeniceAI.SDK
 ```
 
+Or via Package Manager Console:
+
+```powershell
+Install-Package VeniceAI.SDK
+```
+
+## Versioning
+
+The Venice AI SDK follows semantic versioning with an auto-incrementing build number:
+
+- **Format**: `{Major}.{Minor}.{Patch}.{Build}` (e.g., `1.2.0.12345`)
+- **Major**: Breaking changes
+- **Minor**: New features (backwards compatible)  
+- **Patch**: Bug fixes (backwards compatible)
+- **Build**: Auto-incremented from GitHub workflow run number
+
+### Version Information
+
+You can access version information programmatically:
+
+```csharp
+using VeniceAI.SDK;
+
+Console.WriteLine($"SDK Version: {VersionInfo.Version}");
+Console.WriteLine($"Build Number: {VersionInfo.BuildNumber}");
+Console.WriteLine($"Full Info: {VersionInfo.InformationalVersion}");
+```
+
 ## Setup
 
 ### Setting Your API Key
