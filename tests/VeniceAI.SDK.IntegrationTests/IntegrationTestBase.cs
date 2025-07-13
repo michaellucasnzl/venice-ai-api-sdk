@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Extensions;
+using Xunit;
 
 namespace VeniceAI.SDK.IntegrationTests;
 

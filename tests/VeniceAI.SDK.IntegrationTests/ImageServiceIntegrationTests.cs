@@ -1,5 +1,7 @@
 using Shouldly;
 using VeniceAI.SDK.Models.Images;
+using Xunit;
+using Xunit.v3;
 
 namespace VeniceAI.SDK.IntegrationTests;
 

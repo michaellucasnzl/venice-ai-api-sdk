@@ -1,5 +1,6 @@
 using Shouldly;
 using VeniceAI.SDK.Models.Audio;
+using Xunit;
 
 namespace VeniceAI.SDK.IntegrationTests;
 

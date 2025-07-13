@@ -1,5 +1,6 @@
 using Shouldly;
 using VeniceAI.SDK.Models.Chat;
+using Xunit;
 
 namespace VeniceAI.SDK.IntegrationTests;
 

@@ -12,6 +12,8 @@
 
     <ItemGroup>
         <PackageReference Include="xunit.v3" Version="2.0.3"/>
+        <PackageReference Include="xunit.v3.runner.console" Version="2.0.3"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0"/>
         <PackageReference Include="Verify.XunitV3" Version="30.4.0"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
         <PackageReference Include="coverlet.collector" Version="6.0.0">

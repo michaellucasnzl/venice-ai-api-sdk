@@ -1,5 +1,6 @@
 using Shouldly;
 using VeniceAI.SDK.Models.Embeddings;
+using Xunit;
 
 namespace VeniceAI.SDK.IntegrationTests;
 

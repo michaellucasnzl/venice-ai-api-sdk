@@ -1,5 +1,6 @@
 using Shouldly;
 using VeniceAI.SDK.Models.Billing;
+using Xunit;
 
 namespace VeniceAI.SDK.IntegrationTests;
 
