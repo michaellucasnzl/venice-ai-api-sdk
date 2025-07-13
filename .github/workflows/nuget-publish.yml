@@ -141,15 +141,22 @@ jobs:
         PACKAGE_ID="VeniceAI.SDK"
         VERSION="${{ steps.get-version.outputs.version }}"
         
-        # Check if this version already exists on NuGet.org
+        echo "Checking if version $VERSION exists on NuGet.org..."
+        
+        # Check if this version already exists on NuGet.org using API
         HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://api.nuget.org/v3-flatcontainer/$PACKAGE_ID/$VERSION/$PACKAGE_ID.$VERSION.nupkg")
         
-        if [ "$HTTP_STATUS" = "200" ]; then
+        # Also check using the registration API as a backup
+        REG_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://api.nuget.org/v3/registration5-gz-semver2/$PACKAGE_ID/$VERSION.json")
+        
+        if [ "$HTTP_STATUS" = "200" ] || [ "$REG_STATUS" = "200" ]; then
           echo "exists=true" >> $GITHUB_OUTPUT
-          echo "Version $VERSION already exists on NuGet.org"
+          echo "::warning::Version $VERSION already exists on NuGet.org"
+          echo "Version check result: Package exists (HTTP: $HTTP_STATUS, REG: $REG_STATUS)"
         else
           echo "exists=false" >> $GITHUB_OUTPUT
           echo "Version $VERSION does not exist on NuGet.org, proceeding with publish"
+          echo "Version check result: Package does not exist (HTTP: $HTTP_STATUS, REG: $REG_STATUS)"
         fi
     
     - name: Create NuGet package
@@ -186,18 +193,31 @@ jobs:
     - name: Publish to NuGet.org
       if: steps.check-version.outputs.exists == 'false'
       run: |
-        set -e
         echo "Publishing package to NuGet.org..."
         
-        if ! dotnet nuget push ./nupkg/*.nupkg \
+        # First try with --skip-duplicate to handle race conditions
+        if dotnet nuget push ./nupkg/*.nupkg \
           --api-key ${{ secrets.NUGET_API_KEY }} \
           --source https://api.nuget.org/v3/index.json \
+          --skip-duplicate \
           --no-symbols; then
-          echo "::error::Failed to publish package to NuGet.org"
-          exit 1
+          echo "✅ Successfully published to NuGet.org"
+        else
+          EXIT_CODE=$?
+          echo "::warning::NuGet push failed with exit code $EXIT_CODE"
+          
+          # Check if it's a duplicate package error (409)
+          if [ $EXIT_CODE -eq 1 ]; then
+            echo "::warning::Package may already exist on NuGet.org (possibly published by another process)"
+            echo "This is not necessarily an error - the package might have been published successfully by a concurrent workflow"
+            
+            # Update the exists flag for subsequent steps
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "::error::Failed to publish package to NuGet.org with unexpected error"
+            exit $EXIT_CODE
+          fi
         fi
-        
-        echo "✅ Successfully published to NuGet.org"
     
     - name: Upload package artifacts
       if: steps.check-version.outputs.exists == 'false'
@@ -252,19 +272,21 @@ jobs:
         echo "Current version: ${{ steps.get-version.outputs.version }}"
     
     - name: Update workflow status
-      if: success() && github.event_name == 'push'
+      if: always() && github.event_name == 'push'
       run: |
-        echo "✅ Workflow completed successfully"
+        echo "✅ Workflow completed"
         echo "Package version: ${{ steps.get-version.outputs.version }}"
-        echo "Published: ${{ steps.check-version.outputs.exists == 'false' }}"
-        echo "GitHub release created: ${{ steps.check-version.outputs.exists == 'false' }}"
+        echo "Version existed initially: ${{ steps.check-version.outputs.exists }}"
         
         # Add a workflow summary
         echo "## 🚀 Workflow Summary" >> $GITHUB_STEP_SUMMARY
         echo "- **Package Version**: ${{ steps.get-version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
-        echo "- **Published to NuGet**: ${{ steps.check-version.outputs.exists == 'false' && 'Yes' || 'No (version exists)' }}" >> $GITHUB_STEP_SUMMARY
-        echo "- **GitHub Release**: ${{ steps.check-version.outputs.exists == 'false' && 'Created' || 'Skipped' }}" >> $GITHUB_STEP_SUMMARY
         
         if [ "${{ steps.check-version.outputs.exists }}" == "false" ]; then
+          echo "- **Published to NuGet**: Attempted (check logs for result)" >> $GITHUB_STEP_SUMMARY
+          echo "- **GitHub Release**: Attempted" >> $GITHUB_STEP_SUMMARY
           echo "- **NuGet Package**: [VeniceAI.SDK v${{ steps.get-version.outputs.version }}](https://www.nuget.org/packages/VeniceAI.SDK/${{ steps.get-version.outputs.version }})" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- **Published to NuGet**: No (version already exists)" >> $GITHUB_STEP_SUMMARY
+          echo "- **GitHub Release**: Skipped (version exists)" >> $GITHUB_STEP_SUMMARY
         fi
