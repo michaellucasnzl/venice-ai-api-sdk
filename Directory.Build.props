@@ -2,8 +2,8 @@
   <PropertyGroup>
     <!-- Centralized versioning for all projects -->
     <VersionMajor>1</VersionMajor>
-    <VersionMinor>2</VersionMinor>
-    <VersionPatch>0</VersionPatch>
+    <VersionMinor>0</VersionMinor>
+    <VersionPatch>1</VersionPatch>
     <VersionBuild Condition="'$(VersionBuild)' == ''">0</VersionBuild>
     
     <!-- Construct the full version -->
