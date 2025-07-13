@@ -1,50 +1,123 @@
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using VeniceAI.SDK.Configuration;
-using VeniceAI.SDK.Models.Chat;
-using VeniceAI.SDK.Services.Base;
+using System.Runtime.CompilerServices;
+using VeniceAI.SDK.Extensions;
+using VeniceAI.SDK.Generated;
 using VeniceAI.SDK.Services.Interfaces;
+using ChatCompletionRequest = VeniceAI.SDK.Models.Chat.ChatCompletionRequest;
+using ChatCompletionResponse = VeniceAI.SDK.Models.Chat.ChatCompletionResponse;
 
 namespace VeniceAI.SDK.Services;
 
 /// <summary>
-/// Service for chat completion operations.
+/// Service for chat completions using the Venice AI API.
 /// </summary>
-public class ChatService : BaseService, IChatService
+public class ChatService : IChatService
 {
+    private readonly IVeniceAIGeneratedClient _generatedClient;
+
     /// <summary>
     /// Initializes a new instance of the ChatService class.
     /// </summary>
-    /// <param name="httpClient">The HTTP client.</param>
-    /// <param name="options">The Venice AI options.</param>
-    /// <param name="logger">The logger.</param>
-    public ChatService(HttpClient httpClient, IOptions<VeniceAIOptions> options, ILogger<ChatService> logger)
-        : base(httpClient, options, logger)
+    /// <param name="generatedClient">The generated Venice AI client.</param>
+    public ChatService(IVeniceAIGeneratedClient generatedClient)
     {
+        _generatedClient = generatedClient ?? throw new ArgumentNullException(nameof(generatedClient));
     }
 
-    /// <inheritdoc />
-    public async Task<ChatCompletionResponse> CreateChatCompletionAsync(ChatCompletionRequest request, CancellationToken cancellationToken = default)
-    {
-        if (request.Stream == true)
-        {
-            throw new InvalidOperationException("Use CreateChatCompletionStreamAsync for streaming requests.");
-        }
-
-        request.Stream = false;
-        return await SendPostRequestAsync<ChatCompletionResponse>("chat/completions", request, cancellationToken);
-    }
-
-    /// <inheritdoc />
-    public async IAsyncEnumerable<ChatCompletionResponse> CreateChatCompletionStreamAsync(
+    /// <summary>
+    /// Creates a chat completion.
+    /// </summary>
+    /// <param name="request">The chat completion request.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The chat completion response.</returns>
+    public async Task<ChatCompletionResponse> CreateChatCompletionAsync(
         ChatCompletionRequest request,
-        [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default)
     {
-        request.Stream = true;
-        
-        await foreach (var chunk in SendStreamingPostRequestAsync<ChatCompletionResponse>("chat/completions", request, cancellationToken))
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (string.IsNullOrEmpty(request.Model))
+            throw new ArgumentException("Model is required", nameof(request));
+
+        if (request.Messages == null || !request.Messages.Any())
+            throw new ArgumentException("Messages are required", nameof(request));
+
+        try
         {
-            yield return chunk;
+            // Convert SDK request to generated client format
+            var generatedRequest = request.ToGeneratedRequest();
+            
+            // Call the generated client
+            var response = await _generatedClient.CreateChatCompletionAsync(
+                "gzip, br", // Accept compression
+                generatedRequest,
+                cancellationToken);
+
+            // Convert back to SDK format
+            return response.ToSdkResponse();
         }
+        catch (ApiException ex)
+        {
+            throw new VeniceAIException($"Chat completion failed: {ex.Message}", ex);
+        }
+        catch (Exception ex)
+        {
+            throw new VeniceAIException($"Unexpected error during chat completion: {ex.Message}", ex);
+        }
+    }
+
+    /// <summary>
+    /// Creates a streaming chat completion.
+    /// </summary>
+    /// <param name="request">The chat completion request.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>An async enumerable of chat completion chunks.</returns>
+    public IAsyncEnumerable<ChatCompletionResponse> CreateChatCompletionStreamAsync(
+        ChatCompletionRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (string.IsNullOrEmpty(request.Model))
+            throw new ArgumentException("Model is required", nameof(request));
+
+        if (request.Messages == null || !request.Messages.Any())
+            throw new ArgumentException("Messages are required", nameof(request));
+
+        return CreateChatCompletionStreamInternalAsync(request, cancellationToken);
+    }
+
+    private async IAsyncEnumerable<ChatCompletionResponse> CreateChatCompletionStreamInternalAsync(
+        ChatCompletionRequest request,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    {
+        // Set streaming to true
+        request.Stream = true;
+
+        // Convert SDK request to generated client format
+        var generatedRequest = request.ToGeneratedRequest();
+        
+        // For streaming, we'll need to implement Server-Sent Events parsing
+        // This is a placeholder that calls the non-streaming version for now
+        // TODO: Implement proper streaming support with SSE parsing
+        ChatCompletionResponse response;
+        try
+        {
+            var generatedResponse = await _generatedClient.CreateChatCompletionAsync(
+                "gzip, br",
+                generatedRequest,
+                cancellationToken);
+
+            response = generatedResponse.ToSdkResponse();
+        }
+        catch (ApiException ex)
+        {
+            throw new VeniceAIException($"Streaming chat completion failed: {ex.Message}", ex);
+        }
+        catch (Exception ex)
+        {
+            throw new VeniceAIException($"Unexpected error during streaming chat completion: {ex.Message}", ex);
+        }
+
+        yield return response;
     }
 }

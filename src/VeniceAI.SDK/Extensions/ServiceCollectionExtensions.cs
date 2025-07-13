@@ -1,7 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.ComponentModel.DataAnnotations;
 using VeniceAI.SDK.Configuration;
+using VeniceAI.SDK.Generated;
 using VeniceAI.SDK.Services;
 using VeniceAI.SDK.Services.Interfaces;
 
@@ -56,41 +58,51 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddVeniceAIServices(IServiceCollection services)
     {
-        // Register HTTP clients with proper named client configuration
-        services.AddHttpClient<IChatService, ChatService>("ChatService", (serviceProvider, client) =>
+        // Register HTTP client for making direct API calls
+        services.AddHttpClient("VeniceAI", (serviceProvider, client) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
             ConfigureHttpClient(client, options);
         });
 
-        services.AddHttpClient<IImageService, ImageService>("ImageService", (serviceProvider, client) =>
+        // Register the generated client with HTTP client (for future use)
+        services.AddHttpClient<IVeniceAIGeneratedClient, VeniceAIGeneratedClient>("VeniceAIGeneratedClient", (serviceProvider, client) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
             ConfigureHttpClient(client, options);
         });
 
-        services.AddHttpClient<IEmbeddingService, EmbeddingService>("EmbeddingService", (serviceProvider, client) =>
+        // Register services with generated client
+        services.AddTransient<IChatService>(serviceProvider =>
         {
-            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            ConfigureHttpClient(client, options);
+            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
+            return new ChatService(generatedClient);
         });
 
-        services.AddHttpClient<IAudioService, AudioService>("AudioService", (serviceProvider, client) =>
+        services.AddTransient<IAudioService>(serviceProvider =>
         {
-            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            ConfigureHttpClient(client, options);
+            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
+            return new AudioService(generatedClient);
         });
-
-        services.AddHttpClient<IModelService, ModelService>("ModelService", (serviceProvider, client) =>
+        services.AddTransient<IImageService>(serviceProvider =>
         {
-            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            ConfigureHttpClient(client, options);
+            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
+            return new ImageService(generatedClient);
         });
-
-        services.AddHttpClient<IBillingService, BillingService>("BillingService", (serviceProvider, client) =>
+        services.AddTransient<IEmbeddingService>(serviceProvider =>
         {
-            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            ConfigureHttpClient(client, options);
+            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
+            return new EmbeddingService(generatedClient);
+        });
+        services.AddTransient<IModelService>(serviceProvider =>
+        {
+            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
+            return new ModelService(generatedClient);
+        });
+        services.AddTransient<IBillingService>(serviceProvider =>
+        {
+            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
+            return new BillingService(generatedClient);
         });
 
         services.AddTransient<IVeniceAIClient, VeniceAIClient>();

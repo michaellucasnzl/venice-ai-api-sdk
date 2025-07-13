@@ -4,7 +4,8 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/veniceai/venice-ai-api-sdk/nuget-publish.yml?branch=main)](https://github.com/veniceai/venice-ai-api-sdk/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-The official .NET SDK for the Venice AI API, providing easy access to advanced AI models for chat completions, image generation, text-to-speech, embeddings, and more.
+The unofficial .NET SDK for the Venice AI API, providing easy access to advanced AI models for chat completions, image
+generation, text-to-speech, embeddings, and more.
 
 ## Features
 
@@ -31,28 +32,6 @@ Or via Package Manager Console:
 
 ```powershell
 Install-Package VeniceAI.SDK
-```
-
-## Versioning
-
-The Venice AI SDK follows semantic versioning with an auto-incrementing build number:
-
-- **Format**: `{Major}.{Minor}.{Patch}.{Build}` (e.g., `1.2.0.12345`)
-- **Major**: Breaking changes
-- **Minor**: New features (backwards compatible)  
-- **Patch**: Bug fixes (backwards compatible)
-- **Build**: Auto-incremented from GitHub workflow run number
-
-### Version Information
-
-You can access version information programmatically:
-
-```csharp
-using VeniceAI.SDK;
-
-Console.WriteLine($"SDK Version: {VersionInfo.Version}");
-Console.WriteLine($"Build Number: {VersionInfo.BuildNumber}");
-Console.WriteLine($"Full Info: {VersionInfo.InformationalVersion}");
 ```
 
 ## Setup
@@ -93,13 +72,8 @@ Add to your `appsettings.json`:
 }
 ```
 
-⚠️ **Important**: Never commit your API key to source control. Use user secrets, environment variables, or secure configuration providers in production.
-
-Or via Package Manager Console:
-
-```powershell
-Install-Package VeniceAI.SDK
-```
+⚠️ **Important**: Never commit your API key to source control. Use user secrets, environment variables, or secure
+configuration providers in production.
 
 ## Quick Start
 
@@ -439,15 +413,15 @@ services.AddHttpClient<IVeniceAIClient, VeniceAIClient>(client =>
 
 ## Configuration Options
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `ApiKey` | Your Venice AI API key | Required |
-| `BaseUrl` | API base URL | `https://api.venice.ai/api/v1` |
-| `TimeoutSeconds` | Request timeout in seconds | `300` |
-| `MaxRetryAttempts` | Maximum retry attempts | `3` |
-| `RetryDelayMs` | Delay between retries | `1000` |
-| `EnableLogging` | Enable request/response logging | `false` |
-| `CustomHeaders` | Additional HTTP headers | `{}` |
+| Option             | Description                     | Default                        |
+|--------------------|---------------------------------|--------------------------------|
+| `ApiKey`           | Your Venice AI API key          | Required                       |
+| `BaseUrl`          | API base URL                    | `https://api.venice.ai/api/v1` |
+| `TimeoutSeconds`   | Request timeout in seconds      | `300`                          |
+| `MaxRetryAttempts` | Maximum retry attempts          | `3`                            |
+| `RetryDelayMs`     | Delay between retries           | `1000`                         |
+| `EnableLogging`    | Enable request/response logging | `false`                        |
+| `CustomHeaders`    | Additional HTTP headers         | `{}`                           |
 
 ## Testing
 
@@ -500,3 +474,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes and version history.
 A .NET SDK for the Venice AI API
+
+## Versioning
+
+The Venice AI SDK follows semantic versioning with an auto-incrementing build number:
+
+- **Format**: `{Major}.{Minor}.{Patch}.{Build}` (e.g., `1.2.0.12345`)
+- **Major**: Breaking changes
+- **Minor**: New features (backwards compatible)
+- **Patch**: Bug fixes (backwards compatible)
+- **Build**: Auto-incremented from GitHub workflow run number

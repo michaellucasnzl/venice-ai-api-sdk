@@ -1,0 +1,182 @@
+name: Venice AI API Change Detection
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      force_update:
+        description: 'Force update even if no changes detected'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-api-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      has_changes: ${{ steps.compare.outputs.has_changes }}
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install OpenAPI tools
+        run: |
+          npm install -g @apidevtools/swagger-diff
+          npm install -g openapi-diff
+          
+      - name: Download latest Venice AI API spec
+        run: |
+          curl -sSL https://api.venice.ai/api/v1/swagger.yaml -o openapi/latest-venice-ai-api.yaml
+          
+      - name: Compare API specifications
+        id: compare
+        run: |
+          set +e  # Don't exit on diff
+          
+          # Check if baseline exists
+          if [ ! -f "openapi/venice-ai-api.yaml" ]; then
+            echo "No baseline spec found. This will be treated as a change."
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Compare specs using openapi-diff
+          openapi-diff openapi/venice-ai-api.yaml openapi/latest-venice-ai-api.yaml > api-diff-report.txt 2>&1
+          DIFF_EXIT_CODE=$?
+          
+          # Also try swagger-diff as backup
+          swagger-diff openapi/venice-ai-api.yaml openapi/latest-venice-ai-api.yaml --format json > swagger-diff-report.json 2>&1
+          SWAGGER_DIFF_EXIT_CODE=$?
+          
+          # Check if there are differences
+          if [ $DIFF_EXIT_CODE -ne 0 ] || [ $SWAGGER_DIFF_EXIT_CODE -ne 0 ] || [ "${{ inputs.force_update }}" == "true" ]; then
+            echo "API changes detected or force update requested"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            
+            # Create a summary of changes
+            echo "## API Changes Detected" > change-summary.md
+            echo "" >> change-summary.md
+            echo "### OpenAPI Diff Output:" >> change-summary.md
+            echo '```' >> change-summary.md
+            cat api-diff-report.txt >> change-summary.md
+            echo '```' >> change-summary.md
+            echo "" >> change-summary.md
+            echo "### Swagger Diff Output:" >> change-summary.md
+            echo '```json' >> change-summary.md
+            cat swagger-diff-report.json >> change-summary.md
+            echo '```' >> change-summary.md
+          else
+            echo "No API changes detected"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Upload diff reports as artifacts
+        if: steps.compare.outputs.has_changes == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-diff-reports
+          path: |
+            api-diff-report.txt
+            swagger-diff-report.json
+            change-summary.md
+            
+  regenerate-sdk:
+    needs: check-api-changes
+    if: needs.check-api-changes.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+          
+      - name: Regenerate SDK using script
+        run: |
+          chmod +x ./scripts/regenerate-sdk.sh
+          ./scripts/regenerate-sdk.sh --force
+          
+      - name: Download diff reports
+        uses: actions/download-artifact@v4
+        with:
+          name: api-diff-reports
+          
+      - name: Create Pull Request
+        id: create-pr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            feat: update SDK to match latest Venice AI API spec
+            
+            Automated update triggered by API change detection workflow.
+            
+            Changes detected in Venice AI API specification:
+            - Source: https://api.venice.ai/doc/api/swagger.yaml
+            - Generated client updated using NSwag
+            
+          title: 🤖 Automated Venice AI API Update
+          body: |
+            ## 🔄 Automated Venice AI API Update
+            
+            This PR was automatically generated because changes were detected in the Venice AI API specification.
+            
+            ### 📋 Changes Made:
+            - ✅ Updated baseline OpenAPI specification (`openapi/venice-ai-api.yaml`)
+            - ✅ Regenerated C# client using NSwag (`src/VeniceAI.SDK/Generated/VeniceAIGeneratedClient.cs`)  
+            - ✅ Updated version numbers
+            - ✅ Updated VERSION.md with change log
+            - ✅ All unit tests pass
+            
+            ### 📊 API Diff Summary:
+            
+            $(cat change-summary.md)
+            
+            ### 🧪 Testing:
+            - Unit tests have been run and are passing
+            - Integration tests will need to be run manually with valid API keys
+            
+            ### 🔍 Manual Review Required:
+            Please review the changes carefully, especially:
+            1. **Breaking Changes**: Check if any existing method signatures have changed
+            2. **New Features**: Verify new endpoints/models are properly exposed in the SDK
+            3. **Documentation**: Update README.md if new features are added
+            4. **Integration Tests**: Run integration tests to ensure compatibility
+            
+            ### 📅 API Spec Version:
+            $(grep 'version:' openapi/venice-ai-api.yaml | head -1)
+            
+            ---
+            
+            > 🤖 This PR was created automatically by the Venice AI API Change Detection workflow.
+            > For questions about this automation, check `.github/workflows/api-change-detection.yml`
+            
+          branch: automated/api-update-${{ github.run_number }}
+          delete-branch: true
+          base: main
+          
+      - name: Add labels to PR
+        if: steps.create-pr.outputs.pull-request-number
+        run: |
+          gh pr edit ${{ steps.create-pr.outputs.pull-request-number }} --add-label "automated,api-update,needs-review"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
