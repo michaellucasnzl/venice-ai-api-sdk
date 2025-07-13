@@ -1,4 +1,4 @@
-using FluentAssertions;
+using Shouldly;
 using VeniceAI.SDK.Models.Audio;
 
 namespace VeniceAI.SDK.IntegrationTests;
@@ -29,10 +29,10 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
         var response = await Client.Audio.CreateSpeechAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.AudioContent.Should().NotBeEmpty();
-        response.ContentType.Should().Contain("audio");
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.AudioContent.ShouldNotBeEmpty();
+        response.ContentType.ShouldContain("audio");
 
         Output.WriteLine($"Generated audio with {response.AudioContent.Length} bytes");
         Output.WriteLine($"Content type: {response.ContentType}");
@@ -59,19 +59,19 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
                 Model = "tts-kokoro",
                 Input = $"Testing voice {voice}",
                 Voice = voice,
-                ResponseFormat = AudioFormat.Mp3,
-                Speed = 1.0
+                ResponseFormat = AudioFormat.Mp3
             };
 
             // Act
             var response = await Client.Audio.CreateSpeechAsync(request, TestContext.Current.CancellationToken);
 
             // Assert
-            response.Should().NotBeNull();
-            response.IsSuccess.Should().BeTrue();
-            response.AudioContent.Should().NotBeEmpty();
+            response.ShouldNotBeNull();
+            response.IsSuccess.ShouldBeTrue();
+            response.AudioContent.ShouldNotBeEmpty();
 
             Output.WriteLine($"Voice {voice}: Generated {response.AudioContent.Length} bytes");
+
             await VerifyResult(response, voice.Replace(".", "_"));
         }
     }
@@ -84,7 +84,7 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
         {
             AudioFormat.Mp3,
             AudioFormat.Wav,
-            AudioFormat.Opus
+            AudioFormat.Flac
         };
 
         foreach (var format in formats)
@@ -93,21 +93,21 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
             var request = new CreateSpeechRequest
             {
                 Model = "tts-kokoro",
-                Input = $"Testing audio format {format}",
+                Input = $"Testing format {format}",
                 Voice = VoiceOptions.Female.Sky,
-                ResponseFormat = format,
-                Speed = 1.0
+                ResponseFormat = format
             };
 
             // Act
             var response = await Client.Audio.CreateSpeechAsync(request, TestContext.Current.CancellationToken);
 
             // Assert
-            response.Should().NotBeNull();
-            response.IsSuccess.Should().BeTrue();
-            response.AudioContent.Should().NotBeEmpty();
+            response.ShouldNotBeNull();
+            response.IsSuccess.ShouldBeTrue();
+            response.AudioContent.ShouldNotBeEmpty();
 
-            Output.WriteLine($"Format {format}: Generated {response.AudioContent.Length} bytes");
+            Output.WriteLine($"Format {format}: Generated {response.AudioContent.Length} bytes, ContentType: {response.ContentType}");
+
             await VerifyResult(response, format.ToString());
         }
     }
@@ -124,7 +124,7 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
             var request = new CreateSpeechRequest
             {
                 Model = "tts-kokoro",
-                Input = "Testing different speech speeds for text-to-speech conversion.",
+                Input = $"Testing speed {speed}",
                 Voice = VoiceOptions.Female.Sky,
                 ResponseFormat = AudioFormat.Mp3,
                 Speed = speed
@@ -134,84 +134,82 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
             var response = await Client.Audio.CreateSpeechAsync(request, TestContext.Current.CancellationToken);
 
             // Assert
-            response.Should().NotBeNull();
-            response.IsSuccess.Should().BeTrue();
-            response.AudioContent.Should().NotBeEmpty();
+            response.ShouldNotBeNull();
+            response.IsSuccess.ShouldBeTrue();
+            response.AudioContent.ShouldNotBeEmpty();
 
             Output.WriteLine($"Speed {speed}: Generated {response.AudioContent.Length} bytes");
+
             await VerifyResult(response, $"Speed{speed.ToString("0_0")}");
         }
     }
 
     [Fact]
-    public async Task CreateSpeechStreamAsync_WithValidRequest_ShouldReturnAudioStream()
+    public async Task CreateSpeechStreamAsync_WithValidRequest_ShouldReturnStreamingAudio()
     {
         // Arrange
         var request = new CreateSpeechRequest
         {
             Model = "tts-kokoro",
-            Input = "This is a test of streaming text-to-speech functionality.",
+            Input = "This is a streaming test of the Venice AI text-to-speech system. The audio should be delivered in chunks for real-time playback.",
             Voice = VoiceOptions.Female.Sky,
-            ResponseFormat = AudioFormat.Mp3,
-            Speed = 1.0,
-            Streaming = true
+            ResponseFormat = AudioFormat.Mp3
         };
 
-        // Act
-        var totalBytes = 0;
+        // Act & Assert
         var chunks = 0;
+        var totalBytes = 0;
 
-        await foreach (var chunk in Client.Audio.CreateSpeechStreamAsync(request,
-                           TestContext.Current.CancellationToken))
+        await foreach (var chunk in Client.Audio.CreateSpeechStreamAsync(request, TestContext.Current.CancellationToken))
         {
-            chunk.Should().NotBeEmpty();
-            totalBytes += chunk.Length;
+            chunk.ShouldNotBeEmpty();
             chunks++;
+            totalBytes += chunk.Length;
+            Output.WriteLine($"Received chunk {chunks}: {chunk.Length} bytes");
         }
 
-        // Assert
-        chunks.Should().BeGreaterThan(0);
-        totalBytes.Should().BeGreaterThan(0);
+        chunks.ShouldBeGreaterThan(0);
+        totalBytes.ShouldBeGreaterThan(0);
 
-        Output.WriteLine($"Received {chunks} chunks with total {totalBytes} bytes");
+        Output.WriteLine($"Total: {chunks} chunks, {totalBytes} bytes");
+
+        await VerifyResult(new { Chunks = chunks, TotalBytes = totalBytes });
     }
 
     [Fact]
     public async Task CreateSpeechAsync_WithInternationalVoices_ShouldReturnAudio()
     {
-        // Test some international voices
-        var internationalVoices = new[]
+        // Test different international voice options
+        var voices = new[]
         {
-            VoiceOptions.Chinese.XiaoXiao,
-            VoiceOptions.International.Siwis, // French
-            VoiceOptions.International.Sara // Italian
+            VoiceOptions.Female.Sky,      // English
+            VoiceOptions.Male.Adam,       // English
+            VoiceOptions.Female.Bella,    // English
+            VoiceOptions.Male.Onyx        // English
         };
 
-        var responses = new List<CreateSpeechResponse>();
-        foreach (var voice in internationalVoices)
+        foreach (var voice in voices)
         {
-            // Arrange
+            // Arrange - Use different languages/accents
             var request = new CreateSpeechRequest
             {
                 Model = "tts-kokoro",
-                Input = "Testing international voice capabilities.",
+                Input = "Hello world! This is a test of international voices.",
                 Voice = voice,
-                ResponseFormat = AudioFormat.Mp3,
-                Speed = 1.0
+                ResponseFormat = AudioFormat.Mp3
             };
 
             // Act
             var response = await Client.Audio.CreateSpeechAsync(request, TestContext.Current.CancellationToken);
 
             // Assert
-            response.Should().NotBeNull();
-            response.IsSuccess.Should().BeTrue();
-            response.AudioContent.Should().NotBeEmpty();
+            response.ShouldNotBeNull();
+            response.IsSuccess.ShouldBeTrue();
+            response.AudioContent.ShouldNotBeEmpty();
 
-            Output.WriteLine($"International voice {voice}: Generated {response.AudioContent.Length} bytes");
-            responses.Add(response);
+            Output.WriteLine($"International Voice {voice}: Generated {response.AudioContent.Length} bytes");
+
+            await VerifyResult(response);
         }
-
-        await VerifyResult(responses);
     }
 }

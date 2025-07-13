@@ -1,4 +1,4 @@
-using FluentAssertions;
+using Shouldly;
 using VeniceAI.SDK.Models.Embeddings;
 
 namespace VeniceAI.SDK.IntegrationTests;
@@ -27,12 +27,12 @@ public class EmbeddingServiceIntegrationTests : IntegrationTestBase
         var response = await Client.Embeddings.CreateEmbeddingAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeEmpty();
-        response.Data[0].Embedding.Should().NotBeEmpty();
-        response.Usage.Should().NotBeNull();
-        response.Usage.PromptTokens.Should().BeGreaterThan(0);
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeEmpty();
+        response.Data[0].Embedding.ShouldNotBeEmpty();
+        response.Usage.ShouldNotBeNull();
+        response.Usage.PromptTokens.ShouldBeGreaterThan(0);
         
         Output.WriteLine($"Embedding dimensions: {response.Data[0].Embedding.Count}");
         Output.WriteLine($"Tokens used: {response.Usage.PromptTokens}");
@@ -60,12 +60,12 @@ public class EmbeddingServiceIntegrationTests : IntegrationTestBase
         var response = await Client.Embeddings.CreateEmbeddingAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().HaveCount(3);
-        response.Data.All(d => d.Embedding.Count > 0).Should().BeTrue();
-        response.Usage.Should().NotBeNull();
-        response.Usage.PromptTokens.Should().BeGreaterThan(0);
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.Count.ShouldBe(3);
+        response.Data.All(d => d.Embedding.Count > 0).ShouldBeTrue();
+        response.Usage.ShouldNotBeNull();
+        response.Usage.PromptTokens.ShouldBeGreaterThan(0);
         
         Output.WriteLine($"Generated {response.Data.Count} embeddings");
         Output.WriteLine($"Embedding dimensions: {response.Data[0].Embedding.Count}");
@@ -89,19 +89,19 @@ public class EmbeddingServiceIntegrationTests : IntegrationTestBase
         var response = await Client.Embeddings.CreateEmbeddingAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeEmpty();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeEmpty();
         
         // When using base64 encoding, the embedding should be in base64 format
         if (request.EncodingFormat == "base64")
         {
-            response.Data[0].EmbeddingBase64.Should().NotBeNullOrEmpty();
+            response.Data[0].EmbeddingBase64.ShouldNotBeNullOrEmpty();
             Output.WriteLine($"Base64 embedding length: {response.Data[0].EmbeddingBase64?.Length}");
         }
         else
         {
-            response.Data[0].Embedding.Should().NotBeEmpty();
+            response.Data[0].Embedding.ShouldNotBeEmpty();
             Output.WriteLine($"Embedding dimensions: {response.Data[0].Embedding.Count}");
         }
         
@@ -126,13 +126,13 @@ public class EmbeddingServiceIntegrationTests : IntegrationTestBase
         var response = await Client.Embeddings.CreateEmbeddingAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeEmpty();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeEmpty();
         
         // The API might not support custom dimensions for this model, so check what we got
         var actualDimensions = response.Data[0].Embedding.Count;
-        actualDimensions.Should().BeGreaterThan(0);
+        actualDimensions.ShouldBeGreaterThan(0);
         
         Output.WriteLine($"Requested dimensions: {request.Dimensions}");
         Output.WriteLine($"Actual embedding dimensions: {actualDimensions}");
@@ -140,7 +140,7 @@ public class EmbeddingServiceIntegrationTests : IntegrationTestBase
         // If the model supports custom dimensions, verify it matches; otherwise, accept the default
         if (actualDimensions == 512)
         {
-            response.Data[0].Embedding.Should().HaveCount(512);
+            response.Data[0].Embedding.Count.ShouldBe(512);
         }
         else
         {

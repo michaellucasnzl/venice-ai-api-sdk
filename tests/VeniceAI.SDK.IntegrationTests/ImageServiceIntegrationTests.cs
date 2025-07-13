@@ -1,4 +1,4 @@
-using FluentAssertions;
+using Shouldly;
 using VeniceAI.SDK.Models.Images;
 
 namespace VeniceAI.SDK.IntegrationTests;
@@ -27,10 +27,10 @@ public class ImageServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var response = await Client.Images.GenerateImageAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeEmpty();
-        response.Data[0].B64Json.Should().NotBeNullOrEmpty();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeEmpty();
+        response.Data[0].B64Json.ShouldNotBeNullOrEmpty();
 
         Output.WriteLine($"Generated image with {response.Data[0].B64Json?.Length} characters in base64");
 
@@ -54,10 +54,10 @@ public class ImageServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var response = await Client.Images.GenerateImageSimpleAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeEmpty();
-        response.Data[0].B64Json.Should().NotBeNullOrEmpty();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeEmpty();
+        response.Data[0].B64Json.ShouldNotBeNullOrEmpty();
 
         Output.WriteLine($"Generated simple image with {response.Data[0].B64Json?.Length} characters in base64");
 
@@ -71,9 +71,9 @@ public class ImageServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var response = await Client.Images.GetImageStylesAsync(TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Styles.Should().NotBeEmpty();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Styles.ShouldNotBeEmpty();
 
         Output.WriteLine($"Found {response.Styles.Count} image styles:");
         foreach (var style in response.Styles.Take(5))
@@ -103,10 +103,10 @@ public class ImageServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var response = await Client.Images.GenerateImageAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeEmpty();
-        response.Data[0].B64Json.Should().NotBeNullOrEmpty();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeEmpty();
+        response.Data[0].B64Json.ShouldNotBeNullOrEmpty();
 
         Output.WriteLine($"Generated styled image with {response.Data[0].B64Json?.Length} characters in base64");
 
@@ -132,10 +132,10 @@ public class ImageServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var response = await Client.Images.GenerateImageAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeEmpty();
-        response.Data[0].B64Json.Should().NotBeNullOrEmpty();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeEmpty();
+        response.Data[0].B64Json.ShouldNotBeNullOrEmpty();
 
         Output.WriteLine(
             $"Generated image with negative prompt, {response.Data[0].B64Json?.Length} characters in base64");

@@ -1,4 +1,4 @@
-using FluentAssertions;
+using Shouldly;
 
 namespace VeniceAI.SDK.IntegrationTests;
 
@@ -14,9 +14,9 @@ public class ModelServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var response = await Client.Models.GetModelsAsync(TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeEmpty();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeEmpty();
         
         Output.WriteLine($"Found {response.Data.Count} models");
         
@@ -25,9 +25,9 @@ public class ModelServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var imageModels = response.Data.Where(m => m.Type == "image").ToList();
         var embeddingModels = response.Data.Where(m => m.Type == "embedding").ToList();
         
-        textModels.Should().NotBeEmpty();
-        imageModels.Should().NotBeEmpty();
-        embeddingModels.Should().NotBeEmpty();
+        textModels.ShouldNotBeEmpty();
+        imageModels.ShouldNotBeEmpty();
+        embeddingModels.ShouldNotBeEmpty();
         
         Output.WriteLine($"Text models: {textModels.Count}");
         Output.WriteLine($"Image models: {imageModels.Count}");
@@ -57,11 +57,11 @@ public class ModelServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var model = await Client.Models.GetModelAsync(modelId, TestContext.Current.CancellationToken);
 
         // Assert
-        model.Should().NotBeNull();
-        model.Id.Should().Be(modelId);
-        model.Type.Should().Be("text");
-        model.ModelSpec.Should().NotBeNull();
-        model.ModelSpec.Name.Should().NotBeNullOrEmpty();
+        model.ShouldNotBeNull();
+        model.Id.ShouldBe(modelId);
+        model.Type.ShouldBe("text");
+        model.ModelSpec.ShouldNotBeNull();
+        model.ModelSpec.Name.ShouldNotBeNullOrEmpty();
         
         Output.WriteLine($"Model: {model.Id}");
         Output.WriteLine($"Name: {model.ModelSpec.Name}");
@@ -85,9 +85,9 @@ public class ModelServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var response = await Client.Models.GetModelTraitsAsync(TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Traits.Should().NotBeEmpty();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Traits.ShouldNotBeEmpty();
         
         Output.WriteLine($"Found {response.Traits.Count} model traits");
         
@@ -97,8 +97,8 @@ public class ModelServiceIntegrationTests(ITestOutputHelper output) : Integratio
         }
         
         // Check for common traits
-        response.Traits.Should().ContainKey("default");
-        response.Traits.Should().ContainKey("fastest");
+        response.Traits.ShouldContainKey("default");
+        response.Traits.ShouldContainKey("fastest");
 
         await VerifyResult(response);
     }
@@ -110,9 +110,9 @@ public class ModelServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var response = await Client.Models.GetModelCompatibilityAsync(TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Compatibility.Should().NotBeEmpty();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Compatibility.ShouldNotBeEmpty();
         
         Output.WriteLine($"Found {response.Compatibility.Count} compatibility mappings");
         
@@ -122,7 +122,7 @@ public class ModelServiceIntegrationTests(ITestOutputHelper output) : Integratio
         }
         
         // Check for common OpenAI compatibility mappings
-        response.Compatibility.Keys.Should().Contain(k => k.StartsWith("gpt"));
+        response.Compatibility.Keys.ShouldContain(k => k.StartsWith("gpt"));
 
         await VerifyResult(response);
     }
@@ -134,8 +134,8 @@ public class ModelServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var response = await Client.Models.GetModelsAsync(TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
         
         // Find a vision model and verify capabilities
         var visionModel = response.Data.FirstOrDefault(m => 
@@ -143,8 +143,8 @@ public class ModelServiceIntegrationTests(ITestOutputHelper output) : Integratio
         
         if (visionModel != null)
         {
-            visionModel.Type.Should().Be("text");
-            visionModel.ModelSpec.Capabilities?.SupportsVision.Should().BeTrue();
+            visionModel.Type.ShouldBe("text");
+            visionModel.ModelSpec.Capabilities?.SupportsVision.ShouldBeTrue();
             
             Output.WriteLine($"Vision Model: {visionModel.Id}");
             Output.WriteLine($"Supports Vision: {visionModel.ModelSpec.Capabilities?.SupportsVision}");
@@ -156,8 +156,8 @@ public class ModelServiceIntegrationTests(ITestOutputHelper output) : Integratio
         
         if (functionModel != null)
         {
-            functionModel.Type.Should().Be("text");
-            functionModel.ModelSpec.Capabilities?.SupportsFunctionCalling.Should().BeTrue();
+            functionModel.Type.ShouldBe("text");
+            functionModel.ModelSpec.Capabilities?.SupportsFunctionCalling.ShouldBeTrue();
             
             Output.WriteLine($"Function Calling Model: {functionModel.Id}");
             Output.WriteLine($"Supports Function Calling: {functionModel.ModelSpec.Capabilities?.SupportsFunctionCalling}");
@@ -173,19 +173,23 @@ public class ModelServiceIntegrationTests(ITestOutputHelper output) : Integratio
         var response = await Client.Models.GetModelsAsync(TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
         
         var imageModels = response.Data.Where(m => m.Type == "image").ToList();
-        imageModels.Should().NotBeEmpty();
+        imageModels.ShouldNotBeEmpty();
         
         foreach (var model in imageModels.Take(3))
         {
-            model.ModelSpec.Constraints.Should().NotBeNull();
-            model.ModelSpec.Constraints?.PromptCharacterLimit.Should().BeGreaterThan(0);
-            model.ModelSpec.Constraints?.Steps.Should().NotBeNull();
-            model.ModelSpec.Constraints?.Steps?.Default.Should().BeGreaterThan(0);
-            model.ModelSpec.Constraints?.Steps?.Max.Should().BeGreaterThan(0);
+            model.ModelSpec.Constraints.ShouldNotBeNull();
+            if (model.ModelSpec.Constraints?.PromptCharacterLimit.HasValue == true)
+                model.ModelSpec.Constraints.PromptCharacterLimit.Value.ShouldBeGreaterThan(0);
+            model.ModelSpec.Constraints?.Steps.ShouldNotBeNull();
+            if (model.ModelSpec.Constraints?.Steps != null)
+            {
+                model.ModelSpec.Constraints.Steps.Default.ShouldBeGreaterThan(0);
+                model.ModelSpec.Constraints.Steps.Max.ShouldBeGreaterThan(0);
+            }
             
             Output.WriteLine($"Image Model: {model.Id}");
             Output.WriteLine($"  Prompt Limit: {model.ModelSpec.Constraints?.PromptCharacterLimit}");

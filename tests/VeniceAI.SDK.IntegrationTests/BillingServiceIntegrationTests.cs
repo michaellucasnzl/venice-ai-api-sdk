@@ -1,4 +1,4 @@
-using FluentAssertions;
+using Shouldly;
 using VeniceAI.SDK.Models.Billing;
 
 namespace VeniceAI.SDK.IntegrationTests;
@@ -23,12 +23,12 @@ public class BillingServiceIntegrationTests(ITestOutputHelper output) : Integrat
         var response = await Client.Billing.GetBillingUsageAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeNull();
-        response.Pagination.Should().NotBeNull();
-        response.Pagination.Limit.Should().Be(10);
-        response.Pagination.Page.Should().Be(1);
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeNull();
+        response.Pagination.ShouldNotBeNull();
+        response.Pagination.Limit.ShouldBe(10);
+        response.Pagination.Page.ShouldBe(1);
         
         Output.WriteLine($"Total usage entries: {response.Pagination.Total}");
         Output.WriteLine($"Total pages: {response.Pagination.TotalPages}");
@@ -66,9 +66,9 @@ public class BillingServiceIntegrationTests(ITestOutputHelper output) : Integrat
         var response = await Client.Billing.GetBillingUsageAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeNull();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeNull();
         
         Output.WriteLine($"Usage entries in last 30 days: {response.Data.Count}");
         Output.WriteLine($"Date range: {startDate:yyyy-MM-dd} to {endDate:yyyy-MM-dd}");
@@ -76,8 +76,8 @@ public class BillingServiceIntegrationTests(ITestOutputHelper output) : Integrat
         // Verify all entries are within the date range
         foreach (var entry in response.Data)
         {
-            entry.Timestamp.Should().BeOnOrAfter(startDate);
-            entry.Timestamp.Should().BeOnOrBefore(endDate);
+            entry.Timestamp.ShouldBeGreaterThanOrEqualTo(startDate);
+            entry.Timestamp.ShouldBeLessThanOrEqualTo(endDate);
         }
         
         if (response.Data.Any())
@@ -112,16 +112,16 @@ public class BillingServiceIntegrationTests(ITestOutputHelper output) : Integrat
         var response = await Client.Billing.GetBillingUsageAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeNull();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeNull();
         
         Output.WriteLine($"DIEM usage entries: {response.Data.Count}");
         
         // Verify all entries are in DIEM currency
         foreach (var entry in response.Data)
         {
-            entry.Currency.Should().Be(Currency.DIEM);
+            entry.Currency.ShouldBe(Currency.DIEM);
         }
         
         if (response.Data.Any())
@@ -163,22 +163,22 @@ public class BillingServiceIntegrationTests(ITestOutputHelper output) : Integrat
         var page2Response = await Client.Billing.GetBillingUsageAsync(page2Request, TestContext.Current.CancellationToken);
 
         // Assert
-        page1Response.Should().NotBeNull();
-        page1Response.IsSuccess.Should().BeTrue();
-        page1Response.Pagination.Page.Should().Be(1);
-        page1Response.Pagination.Limit.Should().Be(5);
+        page1Response.ShouldNotBeNull();
+        page1Response.IsSuccess.ShouldBeTrue();
+        page1Response.Pagination.Page.ShouldBe(1);
+        page1Response.Pagination.Limit.ShouldBe(5);
         
-        page2Response.Should().NotBeNull();
-        page2Response.IsSuccess.Should().BeTrue();
-        page2Response.Pagination.Page.Should().Be(2);
-        page2Response.Pagination.Limit.Should().Be(5);
+        page2Response.ShouldNotBeNull();
+        page2Response.IsSuccess.ShouldBeTrue();
+        page2Response.Pagination.Page.ShouldBe(2);
+        page2Response.Pagination.Limit.ShouldBe(5);
         
         Output.WriteLine($"Page 1 entries: {page1Response.Data.Count}");
         Output.WriteLine($"Page 2 entries: {page2Response.Data.Count}");
         
         // Verify pagination info is consistent
-        page1Response.Pagination.Total.Should().Be(page2Response.Pagination.Total);
-        page1Response.Pagination.TotalPages.Should().Be(page2Response.Pagination.TotalPages);
+        page1Response.Pagination.Total.ShouldBe(page2Response.Pagination.Total);
+        page1Response.Pagination.TotalPages.ShouldBe(page2Response.Pagination.TotalPages);
         
         // Verify different entries (if there are enough entries)
         if (page1Response.Data.Any() && page2Response.Data.Any())
@@ -186,7 +186,8 @@ public class BillingServiceIntegrationTests(ITestOutputHelper output) : Integrat
             var page1Ids = page1Response.Data.Select(e => e.Timestamp + e.Sku).ToList();
             var page2Ids = page2Response.Data.Select(e => e.Timestamp + e.Sku).ToList();
             
-            page1Ids.Should().NotIntersectWith(page2Ids);
+            // Verify that pages don't have overlapping data
+            page1Ids.Intersect(page2Ids).ShouldBeEmpty();
         }
 
         await VerifyResult(new { page1Response, page2Response });
@@ -207,9 +208,9 @@ public class BillingServiceIntegrationTests(ITestOutputHelper output) : Integrat
         var response = await Client.Billing.GetBillingUsageAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Data.Should().NotBeNull();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Data.ShouldNotBeNull();
         
         // Look for entries with inference details
         var inferenceEntries = response.Data.Where(e => e.InferenceDetails != null).ToList();
@@ -259,18 +260,18 @@ public class BillingServiceIntegrationTests(ITestOutputHelper output) : Integrat
         var descResponse = await Client.Billing.GetBillingUsageAsync(descRequest, TestContext.Current.CancellationToken);
 
         // Assert
-        ascResponse.Should().NotBeNull();
-        ascResponse.IsSuccess.Should().BeTrue();
+        ascResponse.ShouldNotBeNull();
+        ascResponse.IsSuccess.ShouldBeTrue();
         
-        descResponse.Should().NotBeNull();
-        descResponse.IsSuccess.Should().BeTrue();
+        descResponse.ShouldNotBeNull();
+        descResponse.IsSuccess.ShouldBeTrue();
         
         if (ascResponse.Data.Count > 1)
         {
             // Verify ascending order
             for (int i = 0; i < ascResponse.Data.Count - 1; i++)
             {
-                ascResponse.Data[i].Timestamp.Should().BeOnOrBefore(ascResponse.Data[i + 1].Timestamp);
+                ascResponse.Data[i].Timestamp.ShouldBeLessThanOrEqualTo(ascResponse.Data[i + 1].Timestamp);
             }
             
             Output.WriteLine($"Ascending order - First: {ascResponse.Data.First().Timestamp:yyyy-MM-dd HH:mm:ss}");
@@ -282,7 +283,7 @@ public class BillingServiceIntegrationTests(ITestOutputHelper output) : Integrat
             // Verify descending order
             for (int i = 0; i < descResponse.Data.Count - 1; i++)
             {
-                descResponse.Data[i].Timestamp.Should().BeOnOrAfter(descResponse.Data[i + 1].Timestamp);
+                descResponse.Data[i].Timestamp.ShouldBeGreaterThanOrEqualTo(descResponse.Data[i + 1].Timestamp);
             }
             
             Output.WriteLine($"Descending order - First: {descResponse.Data.First().Timestamp:yyyy-MM-dd HH:mm:ss}");

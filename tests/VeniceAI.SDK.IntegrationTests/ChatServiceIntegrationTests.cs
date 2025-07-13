@@ -1,4 +1,4 @@
-using FluentAssertions;
+using Shouldly;
 using VeniceAI.SDK.Models.Chat;
 
 namespace VeniceAI.SDK.IntegrationTests;
@@ -31,7 +31,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         var response = await Client.Chat.CreateChatCompletionAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
+        response.ShouldNotBeNull();
         
         // Debug information if request failed
         if (!response.IsSuccess)
@@ -41,9 +41,9 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
             Output.WriteLine($"Raw content: {response.RawContent}");
         }
         
-        response.IsSuccess.Should().BeTrue();
-        response.Choices.Should().NotBeEmpty();
-        response.Choices[0].Message.Content.Should().NotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Choices.ShouldNotBeEmpty();
+        response.Choices[0].Message.Content.ShouldNotBeNull();
         
         Output.WriteLine($"Response: {response.Choices[0].Message.Content}");
 
@@ -74,8 +74,8 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
             Output.WriteLine($"Chunk: {chunk.Choices?.FirstOrDefault()?.Message?.Content}");
         }
 
-        chunks.Should().NotBeEmpty();
-        chunks.Any(c => c.Choices?.Any() == true).Should().BeTrue();
+        chunks.ShouldNotBeEmpty();
+        chunks.Any(c => c.Choices?.Any() == true).ShouldBeTrue();
 
         await VerifyResult(chunks);
     }
@@ -113,10 +113,10 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         var response = await Client.Chat.CreateChatCompletionAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Choices.Should().NotBeEmpty();
-        response.Choices[0].Message.Content.Should().NotBeNull();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Choices.ShouldNotBeEmpty();
+        response.Choices[0].Message.Content.ShouldNotBeNull();
         
         Output.WriteLine($"Vision Response: {response.Choices[0].Message.Content}");
 
@@ -142,10 +142,10 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         var response = await Client.Chat.CreateChatCompletionAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Choices.Should().NotBeEmpty();
-        response.Choices[0].Message.Content.Should().NotBeNull();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Choices.ShouldNotBeEmpty();
+        response.Choices[0].Message.Content.ShouldNotBeNull();
         
         Output.WriteLine($"System Message Response: {response.Choices[0].Message.Content}");
 
@@ -175,10 +175,10 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         var response = await Client.Chat.CreateChatCompletionAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
-        response.Should().NotBeNull();
-        response.IsSuccess.Should().BeTrue();
-        response.Choices.Should().NotBeEmpty();
-        response.Choices[0].Message.Content.Should().NotBeNull();
+        response.ShouldNotBeNull();
+        response.IsSuccess.ShouldBeTrue();
+        response.Choices.ShouldNotBeEmpty();
+        response.Choices[0].Message.Content.ShouldNotBeNull();
         
         Output.WriteLine($"Web Search Response: {response.Choices[0].Message.Content}");
         
