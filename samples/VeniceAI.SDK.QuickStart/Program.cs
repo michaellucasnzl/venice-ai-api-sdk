@@ -10,7 +10,7 @@ namespace VeniceAI.SDK.QuickStart;
 /// Quick start example for the Venice AI SDK.
 /// This demonstrates how to set up and use the SDK with user secrets.
 /// </summary>
-public class Program
+public static class Program
 {
     public static async Task Main(string[] args)
     {
@@ -24,7 +24,7 @@ public class Program
                 .ConfigureAppConfiguration((context, config) =>
                 {
                     // This will automatically load user secrets
-                    config.AddUserSecrets<Program>();
+                    config.AddUserSecrets(typeof(Program).Assembly);
                 })
                 .ConfigureServices((context, services) =>
                 {
@@ -52,7 +52,7 @@ public class Program
             
             Console.WriteLine($"Response: {response.Choices[0].Message.Content}");
             Console.WriteLine($"Model: {response.Model}");
-            Console.WriteLine($"Tokens used: {response.Usage.TotalTokens}");
+            Console.WriteLine($"Tokens used: {response.Usage?.TotalTokens ?? 0}");
             
             Console.WriteLine("\nSDK is working correctly!");
         }
