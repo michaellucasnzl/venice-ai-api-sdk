@@ -3,7 +3,7 @@ name: Build and Publish to NuGet
 on:
   push:
     branches: [ main ]
-    paths: 
+    paths:
       - 'src/**'
       - 'tests/**'
       - '*.sln'
@@ -25,23 +25,28 @@ permissions:
   checks: write
   pull-requests: write
   id-token: write
+  packages: write
 
 env:
   DOTNET_VERSION: '8.0.x'
   PROJECT_PATH: 'src/VeniceAI.SDK/VeniceAI.SDK.csproj'
   SOLUTION_PATH: 'VeniceAI.sln'
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
 jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    
+        persist-credentials: false
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -52,7 +57,7 @@ jobs:
         echo "GITHUB_RUN_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
         echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
         echo "Setting build number to: ${{ github.run_number }}"
-    
+
     - name: Cache NuGet packages
       uses: actions/cache@v4
       with:
@@ -60,26 +65,39 @@ jobs:
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
           ${{ runner.os }}-nuget-
-    
+
     - name: Restore dependencies
       run: dotnet restore ${{ env.SOLUTION_PATH }}
-    
+
     - name: Build solution
       run: dotnet build ${{ env.SOLUTION_PATH }} --configuration Release --no-restore
-    
+
     - name: Run tests (with mocked integration tests)
-      run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage" --filter "Category!=KnownIssue" --results-directory ./TestResults
+      run: |
+        echo "🧪 Running tests with mock configuration..."
+        dotnet test ${{ env.SOLUTION_PATH }} \
+          --configuration Release \
+          --no-build \
+          --verbosity normal \
+          --logger "trx;LogFileName=TestResults.trx" \
+          --logger "console;verbosity=normal" \
+          --collect:"XPlat Code Coverage" \
+          --filter "Category!=KnownIssue" \
+          --results-directory ./TestResults \
+          --settings coverlet.runsettings \
+          -- RunConfiguration.DisableAppDomain=true
       env:
         TestConfiguration__UseMockResponses: true
         TestConfiguration__SkipRealApiCalls: true
-    
+
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
+      continue-on-error: true
       with:
         directory: ./TestResults
         fail_ci_if_error: false
         token: ${{ secrets.CODECOV_TOKEN }}
-    
+
     - name: Publish test results
       uses: dorny/test-reporter@v1
       if: success() || failure()
@@ -94,11 +112,13 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+      with:
+        persist-credentials: false
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -109,7 +129,7 @@ jobs:
         echo "GITHUB_RUN_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
         echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
         echo "Setting build number to: ${{ github.run_number }}"
-    
+
     - name: Check for required secrets
       run: |
         if [ -z "${{ secrets.NUGET_API_KEY }}" ]; then
@@ -117,60 +137,77 @@ jobs:
           exit 1
         fi
         echo "✅ Required secrets are configured"
-    
+
+    - name: Harden Security
+      run: |
+        # Disable git config global user settings to prevent potential issues
+        git config --global --unset user.name || true
+        git config --global --unset user.email || true
+        echo "✅ Security hardening applied"
+
     - name: Restore dependencies
       run: dotnet restore ${{ env.PROJECT_PATH }}
-    
+
     - name: Build project
       run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore
-    
+
     - name: Get project version
       id: get-version
       run: |
-        # Build the project to evaluate MSBuild properties with our versioning
+        echo "🔍 Extracting version from project..."
+
+        # Build the project to ensure all properties are evaluated
         dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore --verbosity quiet
-        
-        # Get the version using dotnet metadata
-        VERSION=$(dotnet msbuild ${{ env.PROJECT_PATH }} -nologo -verbosity:quiet -property:Configuration=Release -target:GetTargetFrameworksWithPlatformForSingleTargetFramework -property:MSBuildProjectExtensionsPath=/tmp/obj/ | grep -oP 'Version=\K[^;]*' | head -1 || echo "")
-        
-        # Fallback methods if the above doesn't work
-        if [ -z "$VERSION" ]; then
-          # Try extracting from MSBuild evaluation
-          VERSION=$(dotnet msbuild ${{ env.PROJECT_PATH }} -nologo -verbosity:quiet -property:Configuration=Release -getProperty:Version 2>/dev/null || echo "")
+
+        # Extract version using MSBuild properties
+        VERSION=$(dotnet msbuild ${{ env.PROJECT_PATH }} -nologo -verbosity:quiet -property:Configuration=Release -getProperty:Version 2>/dev/null | head -1 | tr -d '\r\n' || echo "")
+
+        # Fallback: try alternative method
+        if [ -z "$VERSION" ] || [ "$VERSION" = "" ]; then
+          echo "⚠️ Primary method failed, trying alternative extraction..."
+          VERSION=$(dotnet msbuild ${{ env.PROJECT_PATH }} -nologo -verbosity:minimal -property:Configuration=Release -target:GetTargetFrameworksWithPlatformForSingleTargetFramework 2>/dev/null | grep -oP 'Version=\K[^;]*' | head -1 | tr -d '\r\n' || echo "")
         fi
-        
-        if [ -z "$VERSION" ]; then
-          # Manual construction as fallback using the pattern from Directory.Build.props
-          MAJOR=$(grep -oP '<VersionMajor>\K[^<]*' Directory.Build.props | head -1)
-          MINOR=$(grep -oP '<VersionMinor>\K[^<]*' Directory.Build.props | head -1)
-          PATCH=$(grep -oP '<VersionPatch>\K[^<]*' Directory.Build.props | head -1)
+
+        # Manual fallback construction if all else fails
+        if [ -z "$VERSION" ] || [ "$VERSION" = "" ]; then
+          echo "⚠️ Automated extraction failed, constructing version manually..."
+          MAJOR=$(grep -oP '<VersionMajor>\K[^<]*' Directory.Build.props | head -1 | tr -d '\r\n')
+          MINOR=$(grep -oP '<VersionMinor>\K[^<]*' Directory.Build.props | head -1 | tr -d '\r\n')
+          PATCH=$(grep -oP '<VersionPatch>\K[^<]*' Directory.Build.props | head -1 | tr -d '\r\n')
           BUILD="${{ github.run_number }}"
-          VERSION="$MAJOR.$MINOR.$PATCH.$BUILD"
+
+          if [ -n "$MAJOR" ] && [ -n "$MINOR" ] && [ -n "$PATCH" ] && [ -n "$BUILD" ]; then
+            VERSION="$MAJOR.$MINOR.$PATCH.$BUILD"
+          else
+            echo "::error::Unable to determine version components"
+            exit 1
+          fi
         fi
-        
-        if [ -z "$VERSION" ]; then
-          echo "::error::No version could be determined"
+
+        # Validate version format
+        if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?(-[a-zA-Z0-9-]+)?$'; then
+          echo "::error::Invalid version format: '$VERSION'"
           exit 1
         fi
-        
+
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "📦 Package version: $VERSION"
         echo "🔢 Build number: ${{ github.run_number }}"
-    
+
     - name: Check if version exists on NuGet
       id: check-version
       run: |
         PACKAGE_ID="VeniceAI.SDK"
         VERSION="${{ steps.get-version.outputs.version }}"
-        
+
         echo "Checking if version $VERSION exists on NuGet.org..."
-        
+
         # Check if this version already exists on NuGet.org using API
         HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://api.nuget.org/v3-flatcontainer/$PACKAGE_ID/$VERSION/$PACKAGE_ID.$VERSION.nupkg")
-        
+
         # Also check using the registration API as a backup
         REG_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://api.nuget.org/v3/registration5-gz-semver2/$PACKAGE_ID/$VERSION.json")
-        
+
         if [ "$HTTP_STATUS" = "200" ] || [ "$REG_STATUS" = "200" ]; then
           echo "exists=true" >> $GITHUB_OUTPUT
           echo "::warning::Version $VERSION already exists on NuGet.org"
@@ -180,43 +217,61 @@ jobs:
           echo "Version $VERSION does not exist on NuGet.org, proceeding with publish"
           echo "Version check result: Package does not exist (HTTP: $HTTP_STATUS, REG: $REG_STATUS)"
         fi
-    
+
     - name: Create NuGet package
       if: steps.check-version.outputs.exists == 'false'
       run: dotnet pack ${{ env.PROJECT_PATH }} --configuration Release --no-build --output ./nupkg
-    
+
     - name: Validate NuGet package
       if: steps.check-version.outputs.exists == 'false'
       run: |
-        echo "Validating NuGet package..."
+        echo "🔍 Validating NuGet package..."
+
         # Check if package was created
         if [ ! -f ./nupkg/*.nupkg ]; then
           echo "::error::No NuGet package found"
           exit 1
         fi
-        
-        # Check package size (should be reasonable, not too large)
+
+        # Check package size and structure
         for package in ./nupkg/*.nupkg; do
           size=$(stat -c%s "$package")
           size_mb=$((size / 1024 / 1024))
-          echo "Package size: ${size_mb}MB"
-          
+          echo "📦 Package: $(basename "$package")"
+          echo "📏 Package size: ${size_mb}MB"
+
           if [ $size_mb -gt 50 ]; then
             echo "::warning::Package size is quite large (${size_mb}MB)"
           fi
-          
-          # List package contents
-          echo "Package contents:"
+
+          if [ $size -lt 1024 ]; then
+            echo "::error::Package is suspiciously small (${size} bytes)"
+            exit 1
+          fi
+
+          # Basic package structure validation
+          echo "📋 Package contents (first 20 items):"
           unzip -l "$package" | head -20
+
+          # Verify essential files are present
+          if ! unzip -l "$package" | grep -q "\.dll$"; then
+            echo "::error::No DLL files found in package"
+            exit 1
+          fi
+
+          if ! unzip -l "$package" | grep -q "\.nuspec$"; then
+            echo "::error::No nuspec file found in package"
+            exit 1
+          fi
         done
-        
+
         echo "✅ Package validation completed"
-    
+
     - name: Publish to NuGet.org
       if: steps.check-version.outputs.exists == 'false'
       run: |
         echo "Publishing package to NuGet.org..."
-        
+
         # First try with --skip-duplicate to handle race conditions
         if dotnet nuget push ./nupkg/*.nupkg \
           --api-key ${{ secrets.NUGET_API_KEY }} \
@@ -227,12 +282,12 @@ jobs:
         else
           EXIT_CODE=$?
           echo "::warning::NuGet push failed with exit code $EXIT_CODE"
-          
+
           # Check if it's a duplicate package error (409)
           if [ $EXIT_CODE -eq 1 ]; then
             echo "::warning::Package may already exist on NuGet.org (possibly published by another process)"
             echo "This is not necessarily an error - the package might have been published successfully by a concurrent workflow"
-            
+
             # Update the exists flag for subsequent steps
             echo "exists=true" >> $GITHUB_OUTPUT
           else
@@ -240,7 +295,7 @@ jobs:
             exit $EXIT_CODE
           fi
         fi
-    
+
     - name: Upload package artifacts
       if: steps.check-version.outputs.exists == 'false'
       uses: actions/upload-artifact@v4
@@ -248,62 +303,73 @@ jobs:
         name: nuget-package-v${{ steps.get-version.outputs.version }}
         path: ./nupkg/*.nupkg
         retention-days: 30
-    
+
     - name: Create GitHub Release
       if: steps.check-version.outputs.exists == 'false'
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: v${{ steps.get-version.outputs.version }}
         name: Venice AI .NET SDK v${{ steps.get-version.outputs.version }}
         body: |
           ## 🚀 Venice AI .NET SDK v${{ steps.get-version.outputs.version }}
-          
+
           ### 📦 Installation
           ```bash
           dotnet add package VeniceAI.SDK --version ${{ steps.get-version.outputs.version }}
           ```
-          
-          ### 📖 Documentation
-          - [NuGet Package](https://www.nuget.org/packages/VeniceAI.SDK/${{ steps.get-version.outputs.version }})
-          - [GitHub Repository](https://github.com/veniceai/venice-ai-api-sdk)
-          - [API Documentation](https://docs.venice.ai)
-          
+
+          ### � Links
+          - 📦 [NuGet Package](https://www.nuget.org/packages/VeniceAI.SDK/${{ steps.get-version.outputs.version }})
+          - 📚 [Documentation](https://docs.venice.ai)
+          - 🧑‍💻 [GitHub Repository](https://github.com/${{ github.repository }})
+          - 🔧 [Workflow Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
           ### 🔄 Changes
-          See [CHANGELOG.md](https://github.com/veniceai/venice-ai-api-sdk/blob/main/CHANGELOG.md) for detailed changes in this release.
-          
+          This release was automatically generated from the latest Venice AI API specification.
+
+          See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for detailed changes.
+
           ### ✨ Features
-          - Chat completions with streaming support
-          - Image generation and manipulation
-          - Text-to-speech with multiple voices
-          - Text embeddings for semantic search
-          - Model management and billing information
-          - Full async/await support
-          - Dependency injection ready
+          - 💬 Chat completions with streaming support
+          - 🎨 Image generation and manipulation
+          - 🔊 Text-to-speech with multiple voices
+          - 🔍 Text embeddings for semantic search
+          - 📊 Model management and billing information
+          - ⚡ Full async/await support
+          - 💉 Dependency injection ready
+          - 🧪 Comprehensive test coverage
+
+          ### 📋 Build Information
+          - **Build Number**: ${{ github.run_number }}
+          - **Git SHA**: ${{ github.sha }}
+          - **Workflow**: ${{ github.workflow }}
+          - **Trigger**: ${{ github.event_name }}
         files: ./nupkg/*.nupkg
         draft: false
         prerelease: false
         generate_release_notes: true
+        make_latest: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+
     - name: Skip publishing (version exists)
       if: steps.check-version.outputs.exists == 'true'
       run: |
         echo "⚠️ Version ${{ steps.get-version.outputs.version }} already exists on NuGet.org"
         echo "To publish a new version, update the <Version> in ${{ env.PROJECT_PATH }}"
         echo "Current version: ${{ steps.get-version.outputs.version }}"
-    
+
     - name: Update workflow status
       if: always() && github.event_name == 'push'
       run: |
         echo "✅ Workflow completed"
         echo "Package version: ${{ steps.get-version.outputs.version }}"
         echo "Version existed initially: ${{ steps.check-version.outputs.exists }}"
-        
+
         # Add a workflow summary
         echo "## 🚀 Workflow Summary" >> $GITHUB_STEP_SUMMARY
         echo "- **Package Version**: ${{ steps.get-version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
-        
+
         if [ "${{ steps.check-version.outputs.exists }}" == "false" ]; then
           echo "- **Published to NuGet**: Attempted (check logs for result)" >> $GITHUB_STEP_SUMMARY
           echo "- **GitHub Release**: Attempted" >> $GITHUB_STEP_SUMMARY

@@ -43,7 +43,7 @@ public abstract class IntegrationTestBase : IDisposable
 
                 // Check if we should use mock HTTP responses
                 var useMockResponses = context.Configuration.GetValue<bool>("TestConfiguration:UseMockResponses", true);
-                
+
                 if (useMockResponses)
                 {
                     // Configure with mock HTTP handler
@@ -53,7 +53,7 @@ public abstract class IntegrationTestBase : IDisposable
                         options.ApiKey = "mock-api-key"; // Use fake key for mocking
                         options.BaseUrl = "https://api.venice.ai/v1/"; // Mock base URL
                     });
-                    
+
                     // Replace the HTTP clients with mocked versions
                     services.AddHttpClient("VeniceAI").ConfigurePrimaryHttpMessageHandler(() => mockHandler);
                     services.AddHttpClient("VeniceAIGeneratedClient").ConfigurePrimaryHttpMessageHandler(() => mockHandler);
@@ -98,23 +98,23 @@ public abstract class IntegrationTestBase : IDisposable
             {
                 await DelayBetweenRequests();
             }
-            
+
             var result = await operation();
-            
+
             // If using mock responses, we expect successful results
             if (ShouldUseMockResponses())
             {
                 Output.WriteLine($"{testName} - Using mock response");
                 return result;
             }
-            
+
             // If result is a BaseResponse, check for common API errors (real API only)
             if (result is VeniceAI.SDK.Models.Common.BaseResponse baseResponse && !baseResponse.IsSuccess)
             {
                 Output.WriteLine($"{testName} failed: {baseResponse.Error?.Error ?? "Unknown error"}");
                 Output.WriteLine($"Status: {baseResponse.StatusCode}");
                 Output.WriteLine($"Raw content: {baseResponse.RawContent}");
-                
+
                 // For API errors that indicate configuration issues, consider test passed
                 if (baseResponse.StatusCode == 401 || baseResponse.StatusCode == 404 || baseResponse.StatusCode == 429)
                 {
@@ -122,13 +122,13 @@ public abstract class IntegrationTestBase : IDisposable
                     return null;
                 }
             }
-            
+
             return result;
         }
         catch (VeniceAI.SDK.VeniceAIException ex) when (
             !ShouldUseMockResponses() && (
-                ex.Message.Contains("Authentication") || 
-                ex.Message.Contains("Model is required") || 
+                ex.Message.Contains("Authentication") ||
+                ex.Message.Contains("Model is required") ||
                 ex.Message.Contains("Rate limit") ||
                 ex.Message.Contains("Invalid request")))
         {
@@ -154,10 +154,11 @@ public abstract class IntegrationTestBase : IDisposable
     private void ConfigureVerify()
     {
         // Configure Verify to scrub fields that could change between test runs
-        _verifySettings.ScrubMembers(x => x.Name.Contains("Date"));
-        _verifySettings.ScrubMembers(x => x.Name.Contains("Time"));
-        _verifySettings.ScrubMembers(x => x.Name.Contains("Utc"));
-        
+        _verifySettings.ScrubMembers(x => x.Name.Contains("Date", StringComparison.OrdinalIgnoreCase));
+        _verifySettings.ScrubMembers(x => x.Name.Contains("Time", StringComparison.OrdinalIgnoreCase));
+        _verifySettings.ScrubMembers(x => x.Name.Contains("Utc", StringComparison.OrdinalIgnoreCase));
+        _verifySettings.ScrubMembers(x => x.Name.Contains("Created", StringComparison.OrdinalIgnoreCase));
+
         // Scrub large binary/base64 content fields to prevent huge test output files
         _verifySettings.ScrubMember("AudioContent");     // Audio data as byte array
         _verifySettings.ScrubMember("B64Json");          // Base64-encoded image data
@@ -165,9 +166,20 @@ public abstract class IntegrationTestBase : IDisposable
         _verifySettings.ScrubMember("Embedding");        // Large embedding vectors
         _verifySettings.ScrubMember("EmbeddingBase64");  // Base64-encoded embeddings
         _verifySettings.ScrubMember("RawContent");       // Raw API response content
-        _verifySettings.ScrubMember("Created");  
 
-        _verifySettings.AutoVerify(true, true);
+        // Scrub timing and ID fields that are non-deterministic
+        _verifySettings.ScrubMember("Id");
+        _verifySettings.ScrubMember("RequestId");
+        _verifySettings.ScrubMember("TraceId");
+        _verifySettings.ScrubMember("SessionId");
+
+        // Use deterministic scrubbing for common variable fields
+        _verifySettings.ScrubLinesContaining("timestamp", "created_at", "updated_at");
+
+        // Only auto-verify in CI environments to prevent accidental approvals
+        var isCI = Environment.GetEnvironmentVariable("CI") == "true" ||
+                   Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true";
+        _verifySettings.AutoVerify(isCI, isCI);
     }
 
     public virtual void Dispose()
