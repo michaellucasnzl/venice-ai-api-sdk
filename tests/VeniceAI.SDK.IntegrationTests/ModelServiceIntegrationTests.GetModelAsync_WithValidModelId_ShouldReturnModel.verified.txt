@@ -1,5 +1,5 @@
 ﻿{
-  Id: gpt-4o,
+  Id: {Scrubbed},
   Object: model,
   Created: {Scrubbed},
   OwnedBy: venice.ai,

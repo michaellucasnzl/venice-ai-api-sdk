@@ -2,7 +2,7 @@
   Object: list,
   Data: [
     {
-      Id: gpt-4o,
+      Id: {Scrubbed},
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -14,7 +14,7 @@
       }
     },
     {
-      Id: flux-1-schnell,
+      Id: {Scrubbed},
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -26,7 +26,7 @@
       }
     },
     {
-      Id: text-embedding-3-small,
+      Id: {Scrubbed},
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
