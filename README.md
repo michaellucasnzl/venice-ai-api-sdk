@@ -1,7 +1,8 @@
 # Venice AI .NET SDK
 
 [![NuGet](https://img.shields.io/nuget/v/VeniceAI.SDK.svg)](https://www.nuget.org/packages/VeniceAI.SDK/)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/veniceai/venice-ai-api-sdk/nuget-publish.yml?branch=main)](https://github.com/veniceai/venice-ai-api-sdk/actions)
+[![Build and Publish](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/nuget-publish.yml/badge.svg)](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/nuget-publish.yml)
+[![API Change Detection](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/api-change-detection.yml/badge.svg)](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/api-change-detection.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 The unofficial .NET SDK for the Venice AI API, providing easy access to advanced AI models for chat completions, image
