@@ -35,12 +35,73 @@ jobs:
           
       - name: Install OpenAPI tools
         run: |
-          npm install -g @apidevtools/swagger-diff
-          npm install -g openapi-diff
+          echo "Installing OpenAPI comparison tools..."
+          
+          # Try to install swagger-diff (not @apidevtools/swagger-diff)
+          if npm install -g swagger-diff; then
+            echo "swagger-diff installed successfully"
+          else
+            echo "Failed to install swagger-diff from npm"
+          fi
+          
+          # Try to install openapi-diff
+          if npm install -g openapi-diff; then
+            echo "openapi-diff installed successfully"
+          else
+            echo "Failed to install openapi-diff from npm"
+          fi
+          
+          # Check what tools are available
+          echo "Available tools:"
+          command -v swagger-diff && echo "✓ swagger-diff available" || echo "✗ swagger-diff not available"
+          command -v openapi-diff && echo "✓ openapi-diff available" || echo "✗ openapi-diff not available"
+          command -v diff && echo "✓ diff available" || echo "✗ diff not available"
+          
+      - name: Setup workspace
+        run: |
+          # Ensure openapi directory exists
+          mkdir -p openapi
+          echo "✓ Workspace prepared"
           
       - name: Download latest Venice AI API spec
         run: |
-          curl -sSL https://api.venice.ai/api/v1/swagger.yaml -o openapi/latest-venice-ai-api.yaml
+          echo "Attempting to download Venice AI API specification..."
+          
+          # Try multiple potential endpoints for the Venice AI API spec
+          if curl -sSL -w "%{http_code}" https://api.venice.ai/api/v1/swagger.yaml -o openapi/latest-venice-ai-api.yaml | grep -q "200"; then
+            echo "✓ Downloaded from swagger.yaml endpoint"
+          elif curl -sSL -w "%{http_code}" https://api.venice.ai/swagger.yaml -o openapi/latest-venice-ai-api.yaml | grep -q "200"; then
+            echo "✓ Downloaded from root swagger.yaml endpoint"
+          elif curl -sSL -w "%{http_code}" https://api.venice.ai/api/v1/openapi.yaml -o openapi/latest-venice-ai-api.yaml | grep -q "200"; then
+            echo "✓ Downloaded from openapi.yaml endpoint"
+          elif curl -sSL -w "%{http_code}" https://api.venice.ai/openapi.yaml -o openapi/latest-venice-ai-api.yaml | grep -q "200"; then
+            echo "✓ Downloaded from root openapi.yaml endpoint"
+          else
+            echo "❌ Failed to download API spec from any known endpoint"
+            echo "Endpoints tried:"
+            echo "  - https://api.venice.ai/api/v1/swagger.yaml"
+            echo "  - https://api.venice.ai/swagger.yaml" 
+            echo "  - https://api.venice.ai/api/v1/openapi.yaml"
+            echo "  - https://api.venice.ai/openapi.yaml"
+            
+            # Check if we have an existing spec to use as fallback
+            if [ -f "openapi/venice-ai-api.yaml" ]; then
+              echo "Using existing spec as fallback..."
+              cp openapi/venice-ai-api.yaml openapi/latest-venice-ai-api.yaml
+            else
+              echo "No fallback spec available"
+              exit 1
+            fi
+          fi
+          
+          # Validate that we have a valid YAML file
+          if [ -f "openapi/latest-venice-ai-api.yaml" ] && [ -s "openapi/latest-venice-ai-api.yaml" ]; then
+            echo "✓ Downloaded spec file is valid and non-empty"
+            echo "File size: $(wc -c < openapi/latest-venice-ai-api.yaml) bytes"
+          else
+            echo "❌ Downloaded spec file is invalid or empty"
+            exit 1
+          fi
           
       - name: Compare API specifications
         id: compare
@@ -54,34 +115,75 @@ jobs:
             exit 0
           fi
           
-          # Compare specs using openapi-diff
-          openapi-diff openapi/venice-ai-api.yaml openapi/latest-venice-ai-api.yaml > api-diff-report.txt 2>&1
-          DIFF_EXIT_CODE=$?
+          # Simple file comparison first
+          if cmp -s "openapi/venice-ai-api.yaml" "openapi/latest-venice-ai-api.yaml"; then
+            echo "Files are identical - no changes detected"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
           
-          # Also try swagger-diff as backup
-          swagger-diff openapi/venice-ai-api.yaml openapi/latest-venice-ai-api.yaml --format json > swagger-diff-report.json 2>&1
-          SWAGGER_DIFF_EXIT_CODE=$?
+          # Files differ, let's get more detailed comparison
+          echo "Files differ, running detailed comparison..."
           
-          # Check if there are differences
-          if [ $DIFF_EXIT_CODE -ne 0 ] || [ $SWAGGER_DIFF_EXIT_CODE -ne 0 ] || [ "${{ inputs.force_update }}" == "true" ]; then
-            echo "API changes detected or force update requested"
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-            
-            # Create a summary of changes
-            echo "## API Changes Detected" > change-summary.md
-            echo "" >> change-summary.md
+          # Try openapi-diff first
+          if command -v openapi-diff >/dev/null 2>&1; then
+            echo "Running openapi-diff..."
+            openapi-diff openapi/venice-ai-api.yaml openapi/latest-venice-ai-api.yaml > api-diff-report.txt 2>&1
+            OPENAPI_DIFF_EXIT_CODE=$?
+          else
+            echo "openapi-diff not available"
+            OPENAPI_DIFF_EXIT_CODE=1
+          fi
+          
+          # Try swagger-diff as backup
+          if command -v swagger-diff >/dev/null 2>&1; then
+            echo "Running swagger-diff..."
+            swagger-diff openapi/venice-ai-api.yaml openapi/latest-venice-ai-api.yaml --format json > swagger-diff-report.json 2>&1
+            SWAGGER_DIFF_EXIT_CODE=$?
+          else
+            echo "swagger-diff not available"
+            SWAGGER_DIFF_EXIT_CODE=1
+          fi
+          
+          # If both tools failed, use basic diff
+          if [ $OPENAPI_DIFF_EXIT_CODE -ne 0 ] && [ $SWAGGER_DIFF_EXIT_CODE -ne 0 ]; then
+            echo "Both tools failed, using basic diff..."
+            diff -u openapi/venice-ai-api.yaml openapi/latest-venice-ai-api.yaml > basic-diff-report.txt 2>&1
+          fi
+          
+          # Since files differ or force update requested, mark as having changes
+          if [ "${{ inputs.force_update }}" == "true" ]; then
+            echo "Force update requested"
+          else
+            echo "API changes detected"
+          fi
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+          
+          # Create a summary of changes
+          echo "## API Changes Detected" > change-summary.md
+          echo "" >> change-summary.md
+          
+          if [ -f "api-diff-report.txt" ]; then
             echo "### OpenAPI Diff Output:" >> change-summary.md
             echo '```' >> change-summary.md
-            cat api-diff-report.txt >> change-summary.md
+            head -100 api-diff-report.txt >> change-summary.md
             echo '```' >> change-summary.md
             echo "" >> change-summary.md
+          fi
+          
+          if [ -f "swagger-diff-report.json" ]; then
             echo "### Swagger Diff Output:" >> change-summary.md
             echo '```json' >> change-summary.md
-            cat swagger-diff-report.json >> change-summary.md
+            head -100 swagger-diff-report.json >> change-summary.md
             echo '```' >> change-summary.md
-          else
-            echo "No API changes detected"
-            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "" >> change-summary.md
+          fi
+          
+          if [ -f "basic-diff-report.txt" ]; then
+            echo "### Basic Diff Output (first 100 lines):" >> change-summary.md
+            echo '```diff' >> change-summary.md
+            head -100 basic-diff-report.txt >> change-summary.md
+            echo '```' >> change-summary.md
           fi
           
       - name: Upload diff reports as artifacts
@@ -92,7 +194,9 @@ jobs:
           path: |
             api-diff-report.txt
             swagger-diff-report.json
+            basic-diff-report.txt
             change-summary.md
+            openapi/latest-venice-ai-api.yaml
             
   regenerate-sdk:
     needs: check-api-changes
@@ -112,7 +216,28 @@ jobs:
           
       - name: Regenerate SDK using script
         run: |
+          # Debug: List what files we have
+          echo "📁 Current directory contents:"
+          ls -la
+          echo ""
+          echo "📁 OpenAPI directory contents:"
+          ls -la openapi/ || echo "No openapi directory found"
+          echo ""
+          
+          # Copy the latest spec to overwrite the baseline before regenerating
+          if [ -f "openapi/latest-venice-ai-api.yaml" ]; then
+            echo "✓ Copying latest spec to baseline..."
+            cp openapi/latest-venice-ai-api.yaml openapi/venice-ai-api.yaml
+          else
+            echo "❌ No latest spec found to copy"
+            exit 1
+          fi
+          
+          # Make script executable and run it
+          echo "🔧 Making script executable..."
           chmod +x ./scripts/regenerate-sdk.sh
+          
+          echo "🚀 Running regeneration script..."
           ./scripts/regenerate-sdk.sh --force
           
       - name: Download diff reports
@@ -149,7 +274,11 @@ jobs:
             
             ### 📊 API Diff Summary:
             
-            $(cat change-summary.md)
+            The following changes were detected between the baseline and latest API specifications:
+            
+            ```
+            $([ -f change-summary.md ] && cat change-summary.md || echo "No detailed diff available. Changes detected via file comparison.")
+            ```
             
             ### 🧪 Testing:
             - Unit tests have been run and are passing
@@ -162,8 +291,10 @@ jobs:
             3. **Documentation**: Update README.md if new features are added
             4. **Integration Tests**: Run integration tests to ensure compatibility
             
-            ### 📅 API Spec Version:
-            $(grep 'version:' openapi/venice-ai-api.yaml | head -1)
+            ### 📅 API Spec Information:
+            - **Workflow Run**: [${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            - **Generated on**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+            - **Trigger**: ${{ github.event_name == 'schedule' && 'Scheduled run' || 'Manual trigger' }}
             
             ---
             

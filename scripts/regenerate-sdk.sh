@@ -63,10 +63,23 @@ mkdir -p openapi
 
 # Download latest API spec
 print_info "Downloading latest Venice AI API specification..."
+
+# Try multiple potential endpoints for the Venice AI API spec
 if curl -sSL https://api.venice.ai/api/v1/swagger.yaml -o openapi/latest-venice-ai-api.yaml; then
-    print_success "Downloaded latest API specification"
+    print_success "Downloaded latest API specification from swagger.yaml endpoint"
+elif curl -sSL https://api.venice.ai/swagger.yaml -o openapi/latest-venice-ai-api.yaml; then
+    print_success "Downloaded latest API specification from root swagger.yaml endpoint"
+elif curl -sSL https://api.venice.ai/api/v1/openapi.yaml -o openapi/latest-venice-ai-api.yaml; then
+    print_success "Downloaded latest API specification from openapi.yaml endpoint"
+elif curl -sSL https://api.venice.ai/openapi.yaml -o openapi/latest-venice-ai-api.yaml; then
+    print_success "Downloaded latest API specification from root openapi.yaml endpoint"
 else
-    print_error "Failed to download API specification"
+    print_error "Failed to download API specification from any known endpoint"
+    print_info "Tried endpoints:"
+    print_info "  - https://api.venice.ai/api/v1/swagger.yaml"
+    print_info "  - https://api.venice.ai/swagger.yaml"
+    print_info "  - https://api.venice.ai/api/v1/openapi.yaml"
+    print_info "  - https://api.venice.ai/openapi.yaml"
     exit 1
 fi
 

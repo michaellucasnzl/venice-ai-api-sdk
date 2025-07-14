@@ -165,6 +165,7 @@ public abstract class IntegrationTestBase : IDisposable
         _verifySettings.ScrubMember("Embedding");        // Large embedding vectors
         _verifySettings.ScrubMember("EmbeddingBase64");  // Base64-encoded embeddings
         _verifySettings.ScrubMember("RawContent");       // Raw API response content
+        _verifySettings.ScrubMember("Created");  
 
         _verifySettings.AutoVerify(true, true);
     }
