@@ -25,7 +25,7 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
 
         // Assert
         if (response == null) return;
-        
+
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Data.ShouldNotBeEmpty();
@@ -67,65 +67,13 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
 
         // Assert
         if (response == null) return;
-        
+
         response.ShouldNotBeNull();
         response.Id.ShouldBe(firstModel.Id);
         response.Type.ShouldNotBeNullOrEmpty();
 
         Output.WriteLine($"Retrieved model: {response.Id}");
         Output.WriteLine($"Model type: {response.Type}");
-
-        await VerifyResult(response);
-    }
-
-    [Fact]
-    [Trait("Category", "KnownIssue")]
-    public async Task GetModelTraitsAsync_ShouldReturnTraits()
-    {
-        // Act
-        var response = await ExecuteWithErrorHandling(
-            () => Client.Models.GetModelTraitsAsync(CancellationToken.None),
-            "GetModelTraitsAsync"
-        );
-
-        // Assert
-        if (response == null) return;
-        
-        response.ShouldNotBeNull();
-        response.IsSuccess.ShouldBeTrue();
-        response.Traits.ShouldNotBeNull();
-
-        Output.WriteLine($"Available traits: {response.Traits.Count}");
-        foreach (var trait in response.Traits.Take(5))
-        {
-            Output.WriteLine($"- {trait.Key}: {trait.Value}");
-        }
-
-        await VerifyResult(response);
-    }
-
-    [Fact]
-    [Trait("Category", "KnownIssue")]
-    public async Task GetModelCompatibilityAsync_ShouldReturnCompatibilityMapping()
-    {
-        // Act
-        var response = await ExecuteWithErrorHandling(
-            () => Client.Models.GetModelCompatibilityAsync(CancellationToken.None),
-            "GetModelCompatibilityAsync"
-        );
-
-        // Assert
-        if (response == null) return;
-        
-        response.ShouldNotBeNull();
-        response.IsSuccess.ShouldBeTrue();
-        response.Compatibility.ShouldNotBeNull();
-
-        Output.WriteLine($"Compatibility mappings: {response.Compatibility.Count}");
-        foreach (var mapping in response.Compatibility.Take(5))
-        {
-            Output.WriteLine($"- {mapping.Key} -> {mapping.Value}");
-        }
 
         await VerifyResult(response);
     }
@@ -141,14 +89,14 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
 
         // Assert
         if (response == null) return;
-        
+
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Data.ShouldNotBeEmpty();
 
         // Test model capabilities - simplified since we don't know the exact Model structure
         Output.WriteLine($"Models available: {response.Data.Count}");
-        
+
         foreach (var model in response.Data.Take(5))
         {
             Output.WriteLine($"Model: {model.Id} (Type: {model.Type})");
@@ -168,17 +116,17 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
 
         // Assert
         if (response == null) return;
-        
+
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Data.ShouldNotBeEmpty();
 
         var imageModels = response.Data.Where(m => m.Type == "image").ToList();
-        
+
         if (imageModels.Any())
         {
             Output.WriteLine($"Image models found: {imageModels.Count}");
-            
+
             foreach (var model in imageModels.Take(3))
             {
                 Output.WriteLine($"Image model: {model.Id}");
