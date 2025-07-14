@@ -1,0 +1,12 @@
+﻿{
+  Id: gpt-4o,
+  Object: model,
+  Created: 1752453869,
+  OwnedBy: venice.ai,
+  Type: text,
+  ModelSpec: {
+    Name: ,
+    Offline: false,
+    Beta: false
+  }
+}

@@ -17,12 +17,6 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
     [Fact]
     public async Task GetModelsAsync_ShouldReturnModels()
     {
-        if (ShouldSkipRealApiCalls())
-        {
-            Output.WriteLine("Skipping test - no real API key configured");
-            return;
-        }
-
         // Act
         var response = await ExecuteWithErrorHandling(
             () => Client.Models.GetModelsAsync(CancellationToken.None),
@@ -51,12 +45,6 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
     [Fact]
     public async Task GetModelAsync_WithValidModelId_ShouldReturnModel()
     {
-        if (ShouldSkipRealApiCalls())
-        {
-            Output.WriteLine("Skipping test - no real API key configured");
-            return;
-        }
-
         // First get available models
         var modelsResponse = await ExecuteWithErrorHandling(
             () => Client.Models.GetModelsAsync(CancellationToken.None),
@@ -93,12 +81,6 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
     [Fact]
     public async Task GetModelTraitsAsync_ShouldReturnTraits()
     {
-        if (ShouldSkipRealApiCalls())
-        {
-            Output.WriteLine("Skipping test - no real API key configured");
-            return;
-        }
-
         // Act
         var response = await ExecuteWithErrorHandling(
             () => Client.Models.GetModelTraitsAsync(CancellationToken.None),
@@ -124,12 +106,6 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
     [Fact]
     public async Task GetModelCompatibilityAsync_ShouldReturnCompatibilityMapping()
     {
-        if (ShouldSkipRealApiCalls())
-        {
-            Output.WriteLine("Skipping test - no real API key configured");
-            return;
-        }
-
         // Act
         var response = await ExecuteWithErrorHandling(
             () => Client.Models.GetModelCompatibilityAsync(CancellationToken.None),
@@ -155,12 +131,6 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
     [Fact]
     public async Task GetModelsAsync_ModelCapabilities_ShouldBeAccurate()
     {
-        if (ShouldSkipRealApiCalls())
-        {
-            Output.WriteLine("Skipping test - no real API key configured");
-            return;
-        }
-
         // Act
         var response = await ExecuteWithErrorHandling(
             () => Client.Models.GetModelsAsync(CancellationToken.None),
@@ -188,12 +158,6 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
     [Fact]
     public async Task GetModelsAsync_ImageModels_ShouldHaveCorrectConstraints()
     {
-        if (ShouldSkipRealApiCalls())
-        {
-            Output.WriteLine("Skipping test - no real API key configured");
-            return;
-        }
-
         // Act
         var response = await ExecuteWithErrorHandling(
             () => Client.Models.GetModelsAsync(CancellationToken.None),

@@ -339,10 +339,18 @@ public static class GeneratedClientExtensions
         var result = new Models.Models.ModelsResponse
         {
             StatusCode = 200,
-            IsSuccess = true
+            IsSuccess = true,
+            Object = response.Object.ToString().ToLowerInvariant(),
+            Data = response.Data.Select(model => new Models.Models.Model
+            {
+                Id = model.Id,
+                Object = model.Object.ToString().ToLowerInvariant(),
+                Created = (long)model.Created,
+                OwnedBy = model.Owned_by.ToString().Replace("_", ".").ToLowerInvariant(),
+                Type = model.Type.ToString().ToLowerInvariant()
+            }).ToList()
         };
 
-        // For now, return empty response until we understand the generated structure better
         return result;
     }
 

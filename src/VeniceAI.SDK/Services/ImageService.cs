@@ -118,6 +118,7 @@ public class ImageService : IImageService
             // Note: Generated client has complex signature for upscale
             // We'll need to map the SDK request properties to the generated client parameters
             // For now, using a simplified approach
+            await Task.Delay(0, cancellationToken); // Suppress warning
             throw new NotImplementedException("Upscale image functionality needs proper parameter mapping to generated client");
         }
         catch (ApiException ex)
@@ -148,6 +149,7 @@ public class ImageService : IImageService
             // Note: Generated client has complex signature for edit
             // We'll need to map the SDK request properties to the generated client parameters
             // For now, using a simplified approach
+            await Task.Delay(0, cancellationToken); // Suppress warning
             throw new NotImplementedException("Edit image functionality needs proper parameter mapping to generated client");
         }
         catch (ApiException ex)
