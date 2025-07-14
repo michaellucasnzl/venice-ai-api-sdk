@@ -154,10 +154,11 @@ public abstract class IntegrationTestBase : IDisposable
     private void ConfigureVerify()
     {
         // Configure Verify to scrub fields that could change between test runs
-        _verifySettings.ScrubMembers(x => x.Name.Contains("Date", StringComparison.OrdinalIgnoreCase));
-        _verifySettings.ScrubMembers(x => x.Name.Contains("Time", StringComparison.OrdinalIgnoreCase));
-        _verifySettings.ScrubMembers(x => x.Name.Contains("Utc", StringComparison.OrdinalIgnoreCase));
-        _verifySettings.ScrubMembers(x => x.Name.Contains("Created", StringComparison.OrdinalIgnoreCase));
+        _verifySettings.ScrubMember("Date");
+        _verifySettings.ScrubMember("Time");
+        _verifySettings.ScrubMember("Utc");
+        _verifySettings.ScrubMember("Created");
+        _verifySettings.ScrubMember("Id");
 
         // Scrub large binary/base64 content fields to prevent huge test output files
         _verifySettings.ScrubMember("AudioContent");     // Audio data as byte array
@@ -167,8 +168,7 @@ public abstract class IntegrationTestBase : IDisposable
         _verifySettings.ScrubMember("EmbeddingBase64");  // Base64-encoded embeddings
         _verifySettings.ScrubMember("RawContent");       // Raw API response content
 
-        // Scrub timing and ID fields that are non-deterministic
-        _verifySettings.ScrubMember("Id");
+        // Scrub timing and ID fields that are non-deterministic - but not model IDs since those are deterministic in tests
         _verifySettings.ScrubMember("RequestId");
         _verifySettings.ScrubMember("TraceId");
         _verifySettings.ScrubMember("SessionId");
@@ -179,7 +179,10 @@ public abstract class IntegrationTestBase : IDisposable
         // Only auto-verify in CI environments to prevent accidental approvals
         var isCI = Environment.GetEnvironmentVariable("CI") == "true" ||
                    Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true";
-        _verifySettings.AutoVerify(isCI, isCI);
+        if (isCI)
+        {
+            _verifySettings.AutoVerify();
+        }
     }
 
     public virtual void Dispose()
