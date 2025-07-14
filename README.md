@@ -5,8 +5,12 @@
 [![API Change Detection](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/api-change-detection.yml/badge.svg)](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/api-change-detection.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-The unofficial .NET SDK for the Venice AI API, providing easy access to advanced AI models for chat completions, image
+The as-yet unofficial .NET SDK for the Venice AI API, providing easy access to advanced AI models for chat completions, image
 generation, text-to-speech, embeddings, and more.
+
+Note that this SDK is under review by the Venice team and may become the official Venice SDK for .NET.
+
+The SDK is currently in *beta* only - there are some endpoints that are broken but active development will ensure they get fixed soon.
 
 ## Features
 
