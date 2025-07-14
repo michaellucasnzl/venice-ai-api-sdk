@@ -13,7 +13,7 @@ This repository includes automated GitHub Actions workflows to build, test, and 
 
 ## 📋 Workflows Overview
 
-### `nuget-publish.yml` - Main Workflow (Recommended)
+### `nuget-publish.yml` - Main CI/CD Workflow
 - **Triggers**: Push to `main`, Pull Requests, Manual dispatch
 - **Features**:
   - ✅ Builds and tests the entire solution
@@ -24,12 +24,15 @@ This repository includes automated GitHub Actions workflows to build, test, and 
   - ✅ Uploads package artifacts
   - ✅ Test result reporting
 
-### `ci-cd.yml` - Simple Build & Publish
-- Basic workflow for straightforward CI/CD
-
-### `auto-version.yml` - Auto-Versioning
-- Automatically bumps versions and publishes
-- Supports manual version bumping (patch/minor/major)
+### `api-change-detection.yml` - Automated API Monitoring
+- **Triggers**: Daily at 2 AM UTC, Manual dispatch
+- **Features**:
+  - ✅ Monitors Venice AI API for changes
+  - ✅ Downloads latest API specification
+  - ✅ Compares with baseline and detects changes
+  - ✅ Regenerates SDK when API changes
+  - ✅ Creates pull requests with updated code
+  - ✅ Provides detailed change reports
 
 ## ⚙️ Required Setup
 
@@ -53,13 +56,15 @@ This repository includes automated GitHub Actions workflows to build, test, and 
 4. Value: Paste your NuGet API key
 5. Click **"Add secret"**
 
-### 2. Repository Permissions (For auto-version workflow)
+### 2. Repository Permissions (Optional)
 
-If using the auto-version workflow:
+For enhanced automation features:
 1. Go to **Settings** → **Actions** → **General**
 2. Under "Workflow permissions":
    - Select **"Read and write permissions"**
    - Check **"Allow GitHub Actions to create and approve pull requests"**
+
+This enables the API change detection workflow to automatically create pull requests when the Venice AI API is updated.
 
 ## 🔧 How It Works
 
@@ -82,12 +87,27 @@ The workflow reads the version from your project file:
 5. **Publish** → Uploads to NuGet.org
 6. **Release** → Creates GitHub release with changelog
 
+### API Change Detection Process
+1. **Daily Check** → Monitors Venice AI API for changes
+2. **Download Latest** → Fetches current API specification
+3. **Compare** → Detects differences from baseline
+4. **Regenerate SDK** → Updates client code when changes found
+5. **Create PR** → Submits pull request for review
+6. **Manual Review** → You review and merge changes
+
+### Pull Request Testing
+- All PRs automatically build and test
+- No publishing occurs (only on main branch)
+- See test results directly in PR
+
 ### Smart Features
 - 🔍 **Duplicate Prevention**: Checks if version exists before publishing
 - 📊 **Test Reporting**: Visual test results in GitHub
 - 📦 **Artifact Storage**: Packages stored for 30 days
 - 🏷️ **Auto-Tagging**: Creates git tags for releases
 - 📝 **Release Notes**: Auto-generated release descriptions
+- 🤖 **API Monitoring**: Automatically detects API changes and updates SDK
+- 🔄 **Auto-Regeneration**: Keeps SDK in sync with Venice AI API changes
 
 ## 📖 Usage Examples
 
@@ -114,7 +134,20 @@ git push origin main
 4. Click **"Run workflow"** button
 5. Choose the branch and click **"Run workflow"**
 
-### 3. Pull Request Testing
+### 3. API Change Detection (Automated)
+The repository automatically monitors the Venice AI API for changes:
+```bash
+# This happens automatically every day at 2 AM UTC
+# No manual action needed!
+
+# When API changes are detected:
+# 1. SDK is regenerated automatically
+# 2. Pull request is created for review
+# 3. You review and merge the changes
+# 4. Publishing workflow runs on merge
+```
+
+### 4. Pull Request Testing
 - All PRs automatically build and test
 - No publishing occurs (only on main branch)
 - See test results directly in PR
@@ -134,6 +167,8 @@ git push origin main
 | ❌ "Package already exists" | Update version in project file |
 | ❌ Build fails | Check .NET version, dependencies, test failures |
 | ❌ No publish on main | Ensure changes are in `src/` or `tests/` folders |
+| ❌ API detection not working | Check if Venice AI API endpoints are accessible |
+| ❌ PR creation fails | Verify repository write permissions are enabled |
 
 ### Debug a Failed Workflow
 1. Go to **Actions** tab
@@ -149,6 +184,7 @@ git push origin main
 - ✅ Requires successful tests before publishing
 - ✅ Uses official, pinned GitHub Actions
 - ✅ No secrets exposed in logs
+- ✅ Automated API monitoring with manual review process
 
 ## 📋 Manual Commands
 
@@ -172,6 +208,8 @@ dotnet nuget push ./nupkg/*.nupkg --api-key YOUR_API_KEY --source https://api.nu
 3. **Test First**: Ensure all tests pass locally before pushing
 4. **Changelog**: Update CHANGELOG.md with your changes
 5. **Small Commits**: Make focused commits for easier tracking
+6. **API Changes**: Review auto-generated PRs from API monitoring carefully
+7. **Manual Testing**: Test API changes locally before merging auto-generated PRs
 
 ## 📞 Support
 
