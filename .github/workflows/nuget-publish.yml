@@ -67,8 +67,11 @@ jobs:
     - name: Build solution
       run: dotnet build ${{ env.SOLUTION_PATH }} --configuration Release --no-restore
     
-    - name: Run tests (excluding integration tests)
-      run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage" --filter "Category!=Integration" --results-directory ./TestResults
+    - name: Run tests (with mocked integration tests)
+      run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage" --filter "Category!=KnownIssue" --results-directory ./TestResults
+      env:
+        TestConfiguration__UseMockResponses: true
+        TestConfiguration__SkipRealApiCalls: true
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4

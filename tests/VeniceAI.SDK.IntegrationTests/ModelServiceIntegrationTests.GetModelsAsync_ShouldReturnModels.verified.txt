@@ -4,7 +4,7 @@
     {
       Id: gpt-4o,
       Object: model,
-      Created: 1752456608,
+      Created: 1752466202,
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
@@ -16,7 +16,7 @@
     {
       Id: flux-1-schnell,
       Object: model,
-      Created: 1752456608,
+      Created: 1752466202,
       OwnedBy: venice.ai,
       Type: image,
       ModelSpec: {
@@ -28,7 +28,7 @@
     {
       Id: text-embedding-3-small,
       Object: model,
-      Created: 1752456608,
+      Created: 1752466202,
       OwnedBy: venice.ai,
       Type: embedding,
       ModelSpec: {

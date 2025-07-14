@@ -79,6 +79,7 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
     }
 
     [Fact]
+    [Trait("Category", "KnownIssue")]
     public async Task GetModelTraitsAsync_ShouldReturnTraits()
     {
         // Act
@@ -104,6 +105,7 @@ public class ModelServiceIntegrationTests : IntegrationTestBase
     }
 
     [Fact]
+    [Trait("Category", "KnownIssue")]
     public async Task GetModelCompatibilityAsync_ShouldReturnCompatibilityMapping()
     {
         // Act

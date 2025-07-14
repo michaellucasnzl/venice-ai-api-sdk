@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace VeniceAI.SDK.IntegrationTests.Mocks;
 
@@ -14,7 +15,11 @@ public static class MockHttpResponseFactory
     {
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
         WriteIndented = false,
-        DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+        DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+        Converters = 
+        {
+            new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower)
+        }
     };
 
     #region Chat Completions
@@ -222,8 +227,8 @@ public static class MockHttpResponseFactory
     {
         var response = new
         {
-            @object = "list",  // Added required object field
-            traits = new Dictionary<string, string>
+            @object = "list",
+            data = new Dictionary<string, string>
             {
                 { "max_tokens", "4096" },
                 { "supports_streaming", "true" },
@@ -239,8 +244,8 @@ public static class MockHttpResponseFactory
     {
         var response = new
         {
-            @object = "list",  // Added required object field
-            compatibility = new Dictionary<string, string>
+            @object = "list",
+            data = new Dictionary<string, string>
             {
                 { "gpt-4", "gpt-4o" },
                 { "gpt-3.5-turbo", "gpt-4o-mini" },

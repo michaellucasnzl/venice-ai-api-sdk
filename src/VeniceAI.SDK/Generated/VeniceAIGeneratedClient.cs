@@ -3673,7 +3673,7 @@ namespace VeniceAI.SDK.Generated
         public int Seed { get; set; } = 0;
 
         /// <summary>
-        /// Number of inference steps. The following models have reduced max steps from the global max: venice-sd35: 30 max steps, hidream: 50 max steps, fluently-xl: 50 max steps, flux-dev: 30 max steps, flux-dev-uncensored-11: 30 max steps, flux-dev-uncensored: 30 max steps, lustify-sdxl: 50 max steps, pony-realism: 50 max steps, stable-diffusion-3.5: 30 max steps. These constraints are exposed in the model list endpoint for each model.
+        /// Number of inference steps. The following models have reduced max steps from the global max: venice-sd35: 30 max steps, hidream: 50 max steps, fluently-xl: 50 max steps, flux-dev: 30 max steps, flux-dev-uncensored: 30 max steps, lustify-sdxl: 50 max steps, pony-realism: 50 max steps, stable-diffusion-3.5: 30 max steps. These constraints are exposed in the model list endpoint for each model.
         /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("steps")]
