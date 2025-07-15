@@ -45,7 +45,7 @@ public class ChatService : IChatService
         {
             // Convert SDK request to generated client format
             var generatedRequest = request.ToGeneratedRequest();
-            
+
             // Call the generated client
             var response = await _generatedClient.CreateChatCompletionAsync(
                 "gzip, br", // Accept compression
@@ -57,7 +57,7 @@ public class ChatService : IChatService
         }
         catch (ApiException ex)
         {
-            throw new VeniceAIException($"Chat completion failed: {ex.Message}", ex);
+            throw VeniceAIException.FromApiException(ex);
         }
         catch (Exception ex)
         {
@@ -95,7 +95,7 @@ public class ChatService : IChatService
 
         // Convert SDK request to generated client format
         var generatedRequest = request.ToGeneratedRequest();
-        
+
         // For streaming, we'll need to implement Server-Sent Events parsing
         // This is a placeholder that calls the non-streaming version for now
         // TODO: Implement proper streaming support with SSE parsing
@@ -111,7 +111,7 @@ public class ChatService : IChatService
         }
         catch (ApiException ex)
         {
-            throw new VeniceAIException($"Streaming chat completion failed: {ex.Message}", ex);
+            throw VeniceAIException.FromApiException(ex);
         }
         catch (Exception ex)
         {
