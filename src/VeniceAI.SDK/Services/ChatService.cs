@@ -1,30 +1,42 @@
 using System.Runtime.CompilerServices;
-using VeniceAI.SDK.Extensions;
-using VeniceAI.SDK.Generated;
+using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
-using ChatCompletionRequest = VeniceAI.SDK.Models.Chat.ChatCompletionRequest;
-using ChatCompletionResponse = VeniceAI.SDK.Models.Chat.ChatCompletionResponse;
+using VeniceAI.SDK.Models.Chat;
 
 namespace VeniceAI.SDK.Services;
 
 /// <summary>
 /// Service for chat completions using the Venice AI API.
 /// </summary>
-public class ChatService : IChatService
+public class ChatService : BaseHttpService, IChatService
 {
-    private readonly IVeniceAIGeneratedClient _generatedClient;
-
     /// <summary>
     /// Initializes a new instance of the ChatService class.
     /// </summary>
-    /// <param name="generatedClient">The generated Venice AI client.</param>
-    public ChatService(IVeniceAIGeneratedClient generatedClient)
+    /// <param name="httpClient">The HTTP client.</param>
+    /// <param name="apiKey">The API key.</param>
+    public ChatService(HttpClient httpClient, string apiKey) : base(httpClient, apiKey)
     {
-        _generatedClient = generatedClient ?? throw new ArgumentNullException(nameof(generatedClient));
     }
 
     /// <summary>
-    /// Creates a chat completion.
+    /// Helper method to extract content from different message types.
+    /// </summary>
+    /// <param name="message">The message to extract content from.</param>
+    /// <returns>The content string.</returns>
+    private string GetMessageContent(ChatMessage message)
+    {
+        return message.Content switch
+        {
+            string str => str,
+            List<MessageContent> contentList =>
+                contentList.FirstOrDefault(c => c.Type == "text")?.Text ?? string.Empty,
+            _ => string.Empty
+        };
+    }
+
+    /// <summary>
+    /// Creates a chat completion request to the Venice AI API.
     /// </summary>
     /// <param name="request">The chat completion request.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
@@ -43,21 +55,42 @@ public class ChatService : IChatService
 
         try
         {
-            // Convert SDK request to generated client format
-            var generatedRequest = request.ToGeneratedRequest();
+            // Create a simple request object matching the Postman examples
+            var apiRequest = new
+            {
+                model = request.Model,
+                messages = request.Messages.Select(m => new
+                {
+                    role = m.Role,
+                    content = GetMessageContent(m)
+                }).ToList(),
+                stream = request.Stream ?? false
+            };
 
-            // Call the generated client
-            var response = await _generatedClient.CreateChatCompletionAsync(
-                "gzip, br", // Accept compression
-                generatedRequest,
+            // Call the API
+            var apiResponse = await PostAsync<object, ChatCompletionApiResponse>(
+                "chat/completions",
+                apiRequest,
                 cancellationToken);
 
-            // Convert back to SDK format
-            return response.ToSdkResponse();
+            // Convert to SDK response format
+            return new ChatCompletionResponse
+            {
+                Id = apiResponse.Id ?? string.Empty,
+                Object = apiResponse.Object ?? string.Empty,
+                Created = apiResponse.Created,
+                Model = apiResponse.Model ?? string.Empty,
+                Choices = apiResponse.Choices?.Select(c => new ChatChoice
+                {
+                    Index = c.Index,
+                    Message = new AssistantMessage { Content = c.Message?.Content ?? string.Empty },
+                    FinishReason = c.FinishReason ?? string.Empty
+                }).ToList() ?? new List<ChatChoice>()
+            };
         }
-        catch (ApiException ex)
+        catch (VeniceAIException)
         {
-            throw VeniceAIException.FromApiException(ex);
+            throw;
         }
         catch (Exception ex)
         {
@@ -93,31 +126,62 @@ public class ChatService : IChatService
         // Set streaming to true
         request.Stream = true;
 
-        // Convert SDK request to generated client format
-        var generatedRequest = request.ToGeneratedRequest();
+        var streamResponses = PostStreamAsync<ChatCompletionRequest>("chat/completions", request, cancellationToken);
 
-        // For streaming, we'll need to implement Server-Sent Events parsing
-        // This is a placeholder that calls the non-streaming version for now
-        // TODO: Implement proper streaming support with SSE parsing
-        ChatCompletionResponse response;
-        try
+        await foreach (var streamResponse in streamResponses)
         {
-            var generatedResponse = await _generatedClient.CreateChatCompletionAsync(
-                "gzip, br",
-                generatedRequest,
-                cancellationToken);
-
-            response = generatedResponse.ToSdkResponse();
+            if (streamResponse.Choices?.Count > 0)
+            {
+                var choice = streamResponse.Choices[0];
+                if (choice.Delta?.Content != null)
+                {
+                    yield return new ChatCompletionResponse
+                    {
+                        Id = streamResponse.Id ?? string.Empty,
+                        Object = streamResponse.Object ?? "chat.completion.chunk",
+                        Created = streamResponse.Created,
+                        Model = streamResponse.Model ?? string.Empty,
+                        Choices = new List<ChatChoice>
+                        {
+                            new ChatChoice
+                            {
+                                Index = choice.Index,
+                                Message = new AssistantMessage
+                                {
+                                    Content = choice.Delta.Content
+                                },
+                                FinishReason = choice.FinishReason
+                            }
+                        }
+                    };
+                }
+            }
         }
-        catch (ApiException ex)
-        {
-            throw VeniceAIException.FromApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new VeniceAIException($"Unexpected error during streaming chat completion: {ex.Message}", ex);
-        }
-
-        yield return response;
     }
+}
+
+/// <summary>
+/// Internal API response classes for chat completions.
+/// These match the actual Venice AI API response format.
+/// </summary>
+internal class ChatCompletionApiResponse
+{
+    public string? Id { get; set; }
+    public string? Object { get; set; }
+    public long Created { get; set; }
+    public string? Model { get; set; }
+    public List<ChatCompletionChoice>? Choices { get; set; }
+}
+
+internal class ChatCompletionChoice
+{
+    public int Index { get; set; }
+    public ChatCompletionMessage? Message { get; set; }
+    public string? FinishReason { get; set; }
+}
+
+internal class ChatCompletionMessage
+{
+    public string? Role { get; set; }
+    public string? Content { get; set; }
 }

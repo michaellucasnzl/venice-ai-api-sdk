@@ -1,29 +1,25 @@
-using VeniceAI.SDK.Extensions;
-using VeniceAI.SDK.Generated;
+using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
-using BillingUsageRequest = VeniceAI.SDK.Models.Billing.BillingUsageRequest;
-using BillingUsageResponse = VeniceAI.SDK.Models.Billing.BillingUsageResponse;
+using VeniceAI.SDK.Models.Billing;
 
 namespace VeniceAI.SDK.Services;
 
 /// <summary>
 /// Service for billing operations using the Venice AI API.
 /// </summary>
-public class BillingService : IBillingService
+public class BillingService : BaseHttpService, IBillingService
 {
-    private readonly IVeniceAIGeneratedClient _generatedClient;
-
     /// <summary>
     /// Initializes a new instance of the BillingService class.
     /// </summary>
-    /// <param name="generatedClient">The generated Venice AI client.</param>
-    public BillingService(IVeniceAIGeneratedClient generatedClient)
+    /// <param name="httpClient">The HTTP client.</param>
+    /// <param name="apiKey">The API key.</param>
+    public BillingService(HttpClient httpClient, string apiKey) : base(httpClient, apiKey)
     {
-        _generatedClient = generatedClient ?? throw new ArgumentNullException(nameof(generatedClient));
     }
 
     /// <summary>
-    /// Gets billing usage data for the authenticated user.
+    /// Gets billing usage information.
     /// </summary>
     /// <param name="request">The billing usage request.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
@@ -34,38 +30,18 @@ public class BillingService : IBillingService
 
         try
         {
-            // Map SDK parameters to generated client parameters
-            Generated.Currency? currency = null;
-            if (!string.IsNullOrEmpty(request.Currency) && 
-                Enum.TryParse<Generated.Currency>(request.Currency, true, out var currencyEnum))
+            // TODO: Implement billing usage
+            await Task.CompletedTask;
+
+            return new BillingUsageResponse
             {
-                currency = currencyEnum;
-            }
-
-            Generated.SortOrder? sortOrder = null;
-            if (!string.IsNullOrEmpty(request.SortOrder) && 
-                Enum.TryParse<Generated.SortOrder>(request.SortOrder, true, out var sortOrderEnum))
-            {
-                sortOrder = sortOrderEnum;
-            }
-
-            // Call the generated client
-            var response = await _generatedClient.GetBillingUsageAsync(
-                "application/json", // Accept header
-                currency,
-                request.EndDate,
-                request.Limit,
-                request.Page,
-                sortOrder,
-                request.StartDate,
-                cancellationToken);
-
-            // Convert back to SDK format
-            return response.ToSdkBillingUsageResponse();
+                StatusCode = 501,
+                IsSuccess = false
+            };
         }
-        catch (ApiException ex)
+        catch (VeniceAIException)
         {
-            throw new VeniceAIException($"Getting billing usage failed: {ex.Message}", ex);
+            throw;
         }
         catch (Exception ex)
         {

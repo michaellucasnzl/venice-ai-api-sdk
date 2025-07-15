@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.ComponentModel.DataAnnotations;
 using VeniceAI.SDK.Configuration;
-using VeniceAI.SDK.Generated;
 using VeniceAI.SDK.Services;
 using VeniceAI.SDK.Services.Interfaces;
 
@@ -53,7 +52,16 @@ public static class ServiceCollectionExtensions
     /// <returns>The service collection.</returns>
     public static IServiceCollection AddVeniceAI(this IServiceCollection services, string apiKey)
     {
-        return AddVeniceAI(services, options => options.ApiKey = apiKey);
+        if (string.IsNullOrWhiteSpace(apiKey))
+            throw new ArgumentException("API key cannot be null or empty.", nameof(apiKey));
+
+        services.Configure<VeniceAIOptions>(options =>
+        {
+            options.ApiKey = apiKey;
+            ValidateOptions(options);
+        });
+
+        return AddVeniceAIServices(services);
     }
 
     private static IServiceCollection AddVeniceAIServices(IServiceCollection services)
@@ -65,44 +73,53 @@ public static class ServiceCollectionExtensions
             ConfigureHttpClient(client, options);
         });
 
-        // Register the generated client with HTTP client (for future use)
-        services.AddHttpClient<IVeniceAIGeneratedClient, VeniceAIGeneratedClient>("VeniceAIGeneratedClient", (serviceProvider, client) =>
-        {
-            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            ConfigureHttpClient(client, options);
-        });
-
-        // Register services with generated client
+        // Register services with simplified HTTP client approach
         services.AddTransient<IChatService>(serviceProvider =>
         {
-            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
-            return new ChatService(generatedClient);
+            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient("VeniceAI");
+            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
+            return new ChatService(httpClient, options.ApiKey);
         });
 
         services.AddTransient<IAudioService>(serviceProvider =>
         {
-            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
-            return new AudioService(generatedClient);
+            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient("VeniceAI");
+            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
+            return new AudioService(httpClient, options.ApiKey);
         });
+
         services.AddTransient<IImageService>(serviceProvider =>
         {
-            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
-            return new ImageService(generatedClient);
+            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient("VeniceAI");
+            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
+            return new ImageService(httpClient, options.ApiKey);
         });
+
         services.AddTransient<IEmbeddingService>(serviceProvider =>
         {
-            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
-            return new EmbeddingService(generatedClient);
+            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient("VeniceAI");
+            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
+            return new EmbeddingService(httpClient, options.ApiKey);
         });
+
         services.AddTransient<IModelService>(serviceProvider =>
         {
-            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
-            return new ModelService(generatedClient);
+            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient("VeniceAI");
+            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
+            return new ModelService(httpClient, options.ApiKey);
         });
+
         services.AddTransient<IBillingService>(serviceProvider =>
         {
-            var generatedClient = serviceProvider.GetRequiredService<IVeniceAIGeneratedClient>();
-            return new BillingService(generatedClient);
+            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient("VeniceAI");
+            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
+            return new BillingService(httpClient, options.ApiKey);
         });
 
         services.AddTransient<IVeniceAIClient, VeniceAIClient>();
@@ -126,7 +143,7 @@ public static class ServiceCollectionExtensions
     {
         var context = new ValidationContext(options);
         var results = new List<ValidationResult>();
-        
+
         if (!Validator.TryValidateObject(options, context, results, true))
         {
             var errors = string.Join(", ", results.Select(r => r.ErrorMessage));
@@ -150,7 +167,7 @@ public class VeniceAIOptionsValidator : IValidateOptions<VeniceAIOptions>
     {
         var context = new ValidationContext(options);
         var results = new List<ValidationResult>();
-        
+
         if (!Validator.TryValidateObject(options, context, results, true))
         {
             var errors = results.Select(r => r.ErrorMessage!).ToArray();

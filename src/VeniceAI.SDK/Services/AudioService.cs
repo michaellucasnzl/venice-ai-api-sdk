@@ -1,26 +1,22 @@
 using System.Runtime.CompilerServices;
-using VeniceAI.SDK.Extensions;
-using VeniceAI.SDK.Generated;
+using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
-using CreateSpeechRequest = VeniceAI.SDK.Models.Audio.CreateSpeechRequest;
-using CreateSpeechResponse = VeniceAI.SDK.Models.Audio.CreateSpeechResponse;
+using VeniceAI.SDK.Models.Audio;
 
 namespace VeniceAI.SDK.Services;
 
 /// <summary>
 /// Service for audio operations using the Venice AI API.
 /// </summary>
-public class AudioService : IAudioService
+public class AudioService : BaseHttpService, IAudioService
 {
-    private readonly IVeniceAIGeneratedClient _generatedClient;
-
     /// <summary>
     /// Initializes a new instance of the AudioService class.
     /// </summary>
-    /// <param name="generatedClient">The generated Venice AI client.</param>
-    public AudioService(IVeniceAIGeneratedClient generatedClient)
+    /// <param name="httpClient">The HTTP client.</param>
+    /// <param name="apiKey">The API key.</param>
+    public AudioService(HttpClient httpClient, string apiKey) : base(httpClient, apiKey)
     {
-        _generatedClient = generatedClient ?? throw new ArgumentNullException(nameof(generatedClient));
     }
 
     /// <summary>
@@ -28,36 +24,46 @@ public class AudioService : IAudioService
     /// </summary>
     /// <param name="request">The speech creation request.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
-    /// <returns>The speech response.</returns>
-    public async Task<CreateSpeechResponse> CreateSpeechAsync(CreateSpeechRequest request, CancellationToken cancellationToken = default)
+    /// <returns>The speech creation response.</returns>
+    public async Task<CreateSpeechResponse> CreateSpeechAsync(
+        CreateSpeechRequest request,
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
 
         if (string.IsNullOrEmpty(request.Input))
             throw new ArgumentException("Input text is required", nameof(request));
 
-        if (request.Streaming == true)
-        {
-            throw new InvalidOperationException("Use CreateSpeechStreamAsync for streaming requests.");
-        }
-
         try
         {
-            // Ensure streaming is false for non-streaming requests
-            request.Streaming = false;
+            // Create request matching Venice AI API format
+            var apiRequest = new
+            {
+                input = request.Input,
+                model = request.Model ?? "tts-1",
+                voice = request.Voice ?? "alloy",
+                response_format = request.ResponseFormat ?? "mp3",
+                speed = request.Speed ?? 1.0,
+                streaming = request.Streaming ?? false
+            };
 
-            // Convert SDK request to generated client format
-            var generatedRequest = request.ToGeneratedRequest();
-            
-            // Call the generated client
-            var fileResponse = await _generatedClient.CreateSpeechAsync(generatedRequest, cancellationToken);
+            // Get binary response
+            var (audioData, contentType) = await PostForBinaryAsync(
+                "audio/speech",
+                apiRequest,
+                cancellationToken);
 
-            // Convert back to SDK format
-            return await fileResponse.ToSdkSpeechResponseAsync();
+            return new CreateSpeechResponse
+            {
+                AudioContent = audioData,
+                ContentType = contentType,
+                StatusCode = 200,
+                IsSuccess = true
+            };
         }
-        catch (ApiException ex)
+        catch (VeniceAIException)
         {
-            throw new VeniceAIException($"Speech creation failed: {ex.Message}", ex);
+            throw;
         }
         catch (Exception ex)
         {
@@ -71,7 +77,9 @@ public class AudioService : IAudioService
     /// <param name="request">The speech creation request.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>An async enumerable of audio chunks.</returns>
-    public IAsyncEnumerable<byte[]> CreateSpeechStreamAsync(CreateSpeechRequest request, CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<byte[]> CreateSpeechStreamAsync(
+        CreateSpeechRequest request,
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
 
@@ -88,45 +96,13 @@ public class AudioService : IAudioService
         // Set streaming to true
         request.Streaming = true;
 
-        // Convert SDK request to generated client format
-        var generatedRequest = request.ToGeneratedRequest();
+        // For now, use the non-streaming version and return single chunk
+        // TODO: Implement proper streaming support
+        var response = await CreateSpeechAsync(request, cancellationToken);
 
-        FileResponse? fileResponse = null;
-        Stream? stream = null;
-        
-        try
+        if (response.AudioContent != null)
         {
-            // Call the generated client for streaming
-            fileResponse = await _generatedClient.CreateSpeechAsync(generatedRequest, cancellationToken);
-            stream = fileResponse.Stream;
-        }
-        catch (ApiException ex)
-        {
-            throw new VeniceAIException($"Streaming speech creation failed: {ex.Message}", ex);
-        }
-        catch (Exception ex)
-        {
-            throw new VeniceAIException($"Unexpected error during streaming speech creation: {ex.Message}", ex);
-        }
-
-        if (stream != null)
-        {
-            try
-            {
-                var buffer = new byte[8192];
-                int bytesRead;
-
-                while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length, cancellationToken)) > 0)
-                {
-                    var chunk = new byte[bytesRead];
-                    Array.Copy(buffer, chunk, bytesRead);
-                    yield return chunk;
-                }
-            }
-            finally
-            {
-                fileResponse?.Dispose();
-            }
+            yield return response.AudioContent;
         }
     }
 }

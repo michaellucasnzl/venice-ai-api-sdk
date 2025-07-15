@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using VeniceAI.SDK.Generated;
 
 namespace VeniceAI.SDK;
 
@@ -75,14 +74,15 @@ public class VeniceAIException : Exception
     }
 
     /// <summary>
-    /// Creates a VeniceAIException from an ApiException.
+    /// Creates a VeniceAIException from an HTTP exception.
     /// </summary>
-    /// <param name="apiException">The API exception to convert.</param>
+    /// <param name="statusCode">The HTTP status code.</param>
+    /// <param name="response">The response content.</param>
+    /// <param name="innerException">The inner exception.</param>
     /// <returns>A VeniceAIException with detailed error information.</returns>
-    public static VeniceAIException FromApiException(ApiException apiException)
+    public static VeniceAIException FromHttpException(int statusCode, string response, Exception? innerException = null)
     {
-        var statusCode = apiException.StatusCode;
-        var rawResponse = apiException.Response;
+        var rawResponse = response;
 
         try
         {
@@ -100,7 +100,7 @@ public class VeniceAIException : Exception
                         statusCode,
                         validationErrors: validationResult.ValidationErrors,
                         rawResponse: rawResponse,
-                        innerException: apiException);
+                        innerException: innerException);
                 }
 
                 // Try to parse as standard error
@@ -112,7 +112,7 @@ public class VeniceAIException : Exception
                         statusCode,
                         errorCode: standardResult.ErrorCode,
                         rawResponse: rawResponse,
-                        innerException: apiException);
+                        innerException: innerException);
                 }
             }
         }
@@ -123,7 +123,7 @@ public class VeniceAIException : Exception
 
         // Fallback to using the raw response
         var message = $"API Error (Status: {statusCode}): {rawResponse}";
-        return new VeniceAIException(message, statusCode, rawResponse: rawResponse, innerException: apiException);
+        return new VeniceAIException(message, statusCode, rawResponse: rawResponse, innerException: innerException);
     }
 
     private static (bool IsValidationError, string Message, Dictionary<string, List<string>>? ValidationErrors) TryParseValidationError(JsonElement root)

@@ -1,61 +1,49 @@
-using VeniceAI.SDK.Extensions;
-using VeniceAI.SDK.Generated;
+using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
-using GenerateImageRequest = VeniceAI.SDK.Models.Images.GenerateImageRequest;
-using SimpleGenerateImageRequest = VeniceAI.SDK.Models.Images.SimpleGenerateImageRequest;
-using UpscaleImageRequest = VeniceAI.SDK.Models.Images.UpscaleImageRequest;
-using EditImageRequest = VeniceAI.SDK.Models.Images.EditImageRequest;
-using ImageGenerationResponse = VeniceAI.SDK.Models.Images.ImageGenerationResponse;
-using ImageStylesResponse = VeniceAI.SDK.Models.Images.ImageStylesResponse;
+using VeniceAI.SDK.Models.Images;
 
 namespace VeniceAI.SDK.Services;
 
 /// <summary>
-/// Service for image generation operations using the Venice AI API.
+/// Service for image operations using the Venice AI API.
 /// </summary>
-public class ImageService : IImageService
+public class ImageService : BaseHttpService, IImageService
 {
-    private readonly IVeniceAIGeneratedClient _generatedClient;
-
     /// <summary>
     /// Initializes a new instance of the ImageService class.
     /// </summary>
-    /// <param name="generatedClient">The generated Venice AI client.</param>
-    public ImageService(IVeniceAIGeneratedClient generatedClient)
+    /// <param name="httpClient">The HTTP client.</param>
+    /// <param name="apiKey">The API key.</param>
+    public ImageService(HttpClient httpClient, string apiKey) : base(httpClient, apiKey)
     {
-        _generatedClient = generatedClient ?? throw new ArgumentNullException(nameof(generatedClient));
     }
 
     /// <summary>
-    /// Generates an image based on the given prompt.
+    /// Generates an image from a prompt.
     /// </summary>
     /// <param name="request">The image generation request.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
-    /// <returns>The generated image response.</returns>
-    public async Task<ImageGenerationResponse> GenerateImageAsync(GenerateImageRequest request, CancellationToken cancellationToken = default)
+    /// <returns>The image generation response.</returns>
+    public async Task<ImageGenerationResponse> GenerateImageAsync(
+        GenerateImageRequest request,
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
 
-        if (string.IsNullOrEmpty(request.Prompt))
-            throw new ArgumentException("Prompt is required", nameof(request));
-
         try
         {
-            // Convert SDK request to generated client format
-            var generatedRequest = request.ToGeneratedRequest();
-            
-            // Call the generated client
-            var response = await _generatedClient.GenerateImageAsync(
-                "gzip, br", // Accept compression
-                generatedRequest,
-                cancellationToken);
+            // TODO: Implement image generation
+            await Task.CompletedTask;
 
-            // Convert back to SDK format
-            return response.ToSdkImageResponse();
+            return new ImageGenerationResponse
+            {
+                StatusCode = 501,
+                IsSuccess = false
+            };
         }
-        catch (ApiException ex)
+        catch (VeniceAIException)
         {
-            throw new VeniceAIException($"Image generation failed: {ex.Message}", ex);
+            throw;
         }
         catch (Exception ex)
         {
@@ -68,31 +56,27 @@ public class ImageService : IImageService
     /// </summary>
     /// <param name="request">The simple image generation request.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
-    /// <returns>The generated image response.</returns>
-    public async Task<ImageGenerationResponse> GenerateImageSimpleAsync(SimpleGenerateImageRequest request, CancellationToken cancellationToken = default)
+    /// <returns>The image generation response.</returns>
+    public async Task<ImageGenerationResponse> GenerateImageSimpleAsync(
+        SimpleGenerateImageRequest request,
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
 
-        if (string.IsNullOrEmpty(request.Prompt))
-            throw new ArgumentException("Prompt is required", nameof(request));
-
         try
         {
-            // Convert SDK request to generated client format
-            var generatedRequest = request.ToGeneratedRequest();
-            
-            // Call the generated client
-            var response = await _generatedClient.SimpleGenerateImageAsync(
-                "gzip, br", // Accept compression
-                generatedRequest,
-                cancellationToken);
+            // TODO: Implement simple image generation
+            await Task.CompletedTask;
 
-            // Convert back to SDK format
-            return response.ToSdkImageResponse();
+            return new ImageGenerationResponse
+            {
+                StatusCode = 501,
+                IsSuccess = false
+            };
         }
-        catch (ApiException ex)
+        catch (VeniceAIException)
         {
-            throw new VeniceAIException($"Simple image generation failed: {ex.Message}", ex);
+            throw;
         }
         catch (Exception ex)
         {
@@ -106,24 +90,26 @@ public class ImageService : IImageService
     /// <param name="request">The upscale image request.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The upscaled image response.</returns>
-    public async Task<ImageGenerationResponse> UpscaleImageAsync(UpscaleImageRequest request, CancellationToken cancellationToken = default)
+    public async Task<ImageGenerationResponse> UpscaleImageAsync(
+        UpscaleImageRequest request,
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
 
-        if (string.IsNullOrEmpty(request.Image))
-            throw new ArgumentException("Image is required", nameof(request));
-
         try
         {
-            // Note: Generated client has complex signature for upscale
-            // We'll need to map the SDK request properties to the generated client parameters
-            // For now, using a simplified approach
-            await Task.Delay(0, cancellationToken); // Suppress warning
-            throw new NotImplementedException("Upscale image functionality needs proper parameter mapping to generated client");
+            // TODO: Implement image upscaling
+            await Task.CompletedTask;
+
+            return new ImageGenerationResponse
+            {
+                StatusCode = 501,
+                IsSuccess = false
+            };
         }
-        catch (ApiException ex)
+        catch (VeniceAIException)
         {
-            throw new VeniceAIException($"Image upscaling failed: {ex.Message}", ex);
+            throw;
         }
         catch (Exception ex)
         {
@@ -137,24 +123,26 @@ public class ImageService : IImageService
     /// <param name="request">The edit image request.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The edited image response.</returns>
-    public async Task<ImageGenerationResponse> EditImageAsync(EditImageRequest request, CancellationToken cancellationToken = default)
+    public async Task<ImageGenerationResponse> EditImageAsync(
+        EditImageRequest request,
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
 
-        if (string.IsNullOrEmpty(request.Prompt))
-            throw new ArgumentException("Prompt is required", nameof(request));
-
         try
         {
-            // Note: Generated client has complex signature for edit
-            // We'll need to map the SDK request properties to the generated client parameters
-            // For now, using a simplified approach
-            await Task.Delay(0, cancellationToken); // Suppress warning
-            throw new NotImplementedException("Edit image functionality needs proper parameter mapping to generated client");
+            // TODO: Implement image editing
+            await Task.CompletedTask;
+
+            return new ImageGenerationResponse
+            {
+                StatusCode = 501,
+                IsSuccess = false
+            };
         }
-        catch (ApiException ex)
+        catch (VeniceAIException)
         {
-            throw new VeniceAIException($"Image editing failed: {ex.Message}", ex);
+            throw;
         }
         catch (Exception ex)
         {
@@ -166,20 +154,23 @@ public class ImageService : IImageService
     /// Gets available image styles.
     /// </summary>
     /// <param name="cancellationToken">Cancellation token.</param>
-    /// <returns>The available image styles.</returns>
+    /// <returns>The image styles response.</returns>
     public async Task<ImageStylesResponse> GetImageStylesAsync(CancellationToken cancellationToken = default)
     {
         try
         {
-            // Call the generated client
-            var response = await _generatedClient.StylesAsync(cancellationToken);
+            // TODO: Implement get image styles
+            await Task.CompletedTask;
 
-            // Convert back to SDK format
-            return response.ToSdkImageStylesResponse();
+            return new ImageStylesResponse
+            {
+                StatusCode = 501,
+                IsSuccess = false
+            };
         }
-        catch (ApiException ex)
+        catch (VeniceAIException)
         {
-            throw new VeniceAIException($"Getting image styles failed: {ex.Message}", ex);
+            throw;
         }
         catch (Exception ex)
         {
