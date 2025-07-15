@@ -32,7 +32,7 @@ public class Program
                     builder.AddConsole();
                     builder.SetMinimumLevel(LogLevel.Information);
                 });
-                
+
                 // Add Venice AI SDK
                 services.AddVeniceAI(context.Configuration);
             })
@@ -175,7 +175,7 @@ public class Program
 
         // Note: Upscale and Edit operations require existing images as input
         // These are not included in this basic sample but are available in the SDK
-        
+
         Console.WriteLine();
     }
 
@@ -249,45 +249,88 @@ public class Program
             Console.WriteLine($"Models error: {modelsResponse.Error?.Error}");
         }
 
-        // Get a specific model
+        // Get a specific model (Note: Individual model details may not be available for all models)
         if (modelsResponse.IsSuccess && modelsResponse.Data.Any())
         {
             var firstModel = modelsResponse.Data.First();
-            var modelResponse = await client.Models.GetModelAsync(firstModel.Id);
-            if (modelResponse != null)
+            try
             {
-                Console.WriteLine($"Model details - ID: {firstModel.Id}, Owner: {firstModel.OwnedBy}");
+                var modelResponse = await client.Models.GetModelAsync(firstModel.Id);
+                if (modelResponse != null)
+                {
+                    Console.WriteLine($"Model details - ID: {firstModel.Id}, Owner: {firstModel.OwnedBy}");
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex is VeniceAI.SDK.VeniceAIException veniceEx && veniceEx.StatusCode == 404)
+                {
+                    Console.WriteLine($"Individual model details not available for model: {firstModel.Id}");
+                    Console.WriteLine($"Model info from list - ID: {firstModel.Id}, Owner: {firstModel.OwnedBy}, Type: {firstModel.Type}");
+                }
+                else
+                {
+                    Console.WriteLine($"Error getting model details: {ex.Message}");
+                }
             }
         }
 
         // Get model traits
-        var traitsResponse = await client.Models.GetModelTraitsAsync();
-        if (traitsResponse.IsSuccess)
+        try
         {
-            Console.WriteLine($"Model traits: {traitsResponse.Traits.Count}");
-            foreach (var trait in traitsResponse.Traits.Take(3))
+            var traitsResponse = await client.Models.GetModelTraitsAsync();
+            if (traitsResponse.IsSuccess)
             {
-                Console.WriteLine($"- {trait.Key}: {trait.Value}");
+                Console.WriteLine($"Model traits: {traitsResponse.Traits.Count}");
+                foreach (var trait in traitsResponse.Traits.Take(3))
+                {
+                    Console.WriteLine($"- {trait.Key}: {trait.Value}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Model traits error: {traitsResponse.Error?.Error}");
             }
         }
-        else
+        catch (Exception ex)
         {
-            Console.WriteLine($"Model traits error: {traitsResponse.Error?.Error}");
+            if (ex is VeniceAI.SDK.VeniceAIException veniceEx && veniceEx.StatusCode == 404)
+            {
+                Console.WriteLine("Model traits endpoint not available");
+            }
+            else
+            {
+                Console.WriteLine($"Error getting model traits: {ex.Message}");
+            }
         }
 
         // Get model compatibility mapping
-        var compatibilityResponse = await client.Models.GetModelCompatibilityAsync();
-        if (compatibilityResponse.IsSuccess)
+        try
         {
-            Console.WriteLine($"Model compatibility mappings: {compatibilityResponse.Compatibility.Count}");
-            foreach (var mapping in compatibilityResponse.Compatibility.Take(3))
+            var compatibilityResponse = await client.Models.GetModelCompatibilityAsync();
+            if (compatibilityResponse.IsSuccess)
             {
-                Console.WriteLine($"- {mapping.Key}: {mapping.Value}");
+                Console.WriteLine($"Model compatibility mappings: {compatibilityResponse.Compatibility.Count}");
+                foreach (var mapping in compatibilityResponse.Compatibility.Take(3))
+                {
+                    Console.WriteLine($"- {mapping.Key}: {mapping.Value}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Model compatibility error: {compatibilityResponse.Error?.Error}");
             }
         }
-        else
+        catch (Exception ex)
         {
-            Console.WriteLine($"Model compatibility error: {compatibilityResponse.Error?.Error}");
+            if (ex is VeniceAI.SDK.VeniceAIException veniceEx && veniceEx.StatusCode == 404)
+            {
+                Console.WriteLine("Model compatibility endpoint not available");
+            }
+            else
+            {
+                Console.WriteLine($"Error getting model compatibility: {ex.Message}");
+            }
         }
 
         Console.WriteLine();
@@ -309,7 +352,7 @@ public class Program
         {
             Console.WriteLine($"Recent billing entries: {billingResponse.Data.Count}");
             Console.WriteLine($"Total entries: {billingResponse.Pagination.Total}");
-            
+
             foreach (var entry in billingResponse.Data.Take(3))
             {
                 Console.WriteLine($"- {entry.Timestamp:yyyy-MM-dd HH:mm}: {entry.Sku} - {entry.Amount} {entry.Currency}");
