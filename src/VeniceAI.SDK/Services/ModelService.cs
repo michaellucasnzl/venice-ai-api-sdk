@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 using VeniceAI.SDK.Models.Models;
@@ -15,7 +16,8 @@ public class ModelService : BaseHttpService, IModelService
     /// </summary>
     /// <param name="httpClient">The HTTP client.</param>
     /// <param name="apiKey">The API key.</param>
-    public ModelService(HttpClient httpClient, string apiKey) : base(httpClient, apiKey)
+    /// <param name="logger">The logger.</param>
+    public ModelService(HttpClient httpClient, string apiKey, ILogger<BaseHttpService> logger) : base(httpClient, apiKey, logger)
     {
     }
 

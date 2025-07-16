@@ -12,11 +12,7 @@
       FinishReason: length
     }
   ],
-  Usage: {
-    PromptTokens: 4820,
-    CompletionTokens: {Scrubbed},
-    TotalTokens: {Scrubbed}
-  },
+  Usage: {Scrubbed},
   IsSuccess: true,
   RawContent: {Scrubbed}
 }

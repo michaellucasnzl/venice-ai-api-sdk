@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using System.ComponentModel.DataAnnotations;
 using VeniceAI.SDK.Configuration;
 using VeniceAI.SDK.Services;
+using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 
 namespace VeniceAI.SDK.Extensions;
@@ -79,7 +80,8 @@ public static class ServiceCollectionExtensions
             var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
             var httpClient = httpClientFactory.CreateClient("VeniceAI");
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            return new ChatService(httpClient, options.ApiKey);
+            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
+            return new ChatService(httpClient, options.ApiKey, logger);
         });
 
         services.AddTransient<IAudioService>(serviceProvider =>
@@ -87,7 +89,8 @@ public static class ServiceCollectionExtensions
             var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
             var httpClient = httpClientFactory.CreateClient("VeniceAI");
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            return new AudioService(httpClient, options.ApiKey);
+            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
+            return new AudioService(httpClient, options.ApiKey, logger);
         });
 
         services.AddTransient<IImageService>(serviceProvider =>
@@ -95,7 +98,8 @@ public static class ServiceCollectionExtensions
             var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
             var httpClient = httpClientFactory.CreateClient("VeniceAI");
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            return new ImageService(httpClient, options.ApiKey);
+            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
+            return new ImageService(httpClient, options.ApiKey, logger);
         });
 
         services.AddTransient<IEmbeddingService>(serviceProvider =>
@@ -103,7 +107,8 @@ public static class ServiceCollectionExtensions
             var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
             var httpClient = httpClientFactory.CreateClient("VeniceAI");
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            return new EmbeddingService(httpClient, options.ApiKey);
+            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
+            return new EmbeddingService(httpClient, options.ApiKey, logger);
         });
 
         services.AddTransient<IModelService>(serviceProvider =>
@@ -111,7 +116,8 @@ public static class ServiceCollectionExtensions
             var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
             var httpClient = httpClientFactory.CreateClient("VeniceAI");
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            return new ModelService(httpClient, options.ApiKey);
+            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
+            return new ModelService(httpClient, options.ApiKey, logger);
         });
 
         services.AddTransient<IBillingService>(serviceProvider =>
@@ -119,7 +125,8 @@ public static class ServiceCollectionExtensions
             var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
             var httpClient = httpClientFactory.CreateClient("VeniceAI");
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            return new BillingService(httpClient, options.ApiKey);
+            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
+            return new BillingService(httpClient, options.ApiKey, logger);
         });
 
         services.AddTransient<IVeniceAIClient, VeniceAIClient>();

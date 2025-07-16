@@ -3,6 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Extensions.Hosting;
+using Serilog.Sinks.XUnit;
 using VeniceAI.SDK;
 using VeniceAI.SDK.Extensions;
 using Xunit;
@@ -22,10 +25,7 @@ public abstract class IntegrationTestBase : IDisposable
     protected IntegrationTestBase(ITestOutputHelper output)
     {
         Output = output;
-        
-        // Disable console logging from the SDK during tests to reduce noise
-        VeniceAI.SDK.Services.Base.BaseHttpService.EnableConsoleLogging = false;
-        
+
         ConfigureVerify();
 
         var hostBuilder = Host.CreateDefaultBuilder()
@@ -35,14 +35,15 @@ public abstract class IntegrationTestBase : IDisposable
                 config.AddEnvironmentVariables();
                 config.AddUserSecrets(GetType().Assembly);
             })
+            .UseSerilog((context, services, configuration) =>
+            {
+                configuration
+                    .ReadFrom.Configuration(context.Configuration)
+                    .ReadFrom.Services(services)
+                    .WriteTo.TestOutput(output);
+            })
             .ConfigureServices((context, services) =>
             {
-                services.AddLogging(builder =>
-                {
-                    builder.AddConsole();
-                    builder.SetMinimumLevel(LogLevel.Error);
-                });
-
                 // Use real API configuration
                 services.AddVeniceAI(context.Configuration);
             });

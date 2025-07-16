@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 using VeniceAI.SDK.Models.Chat;
@@ -15,7 +16,8 @@ public class ChatService : BaseHttpService, IChatService
     /// </summary>
     /// <param name="httpClient">The HTTP client.</param>
     /// <param name="apiKey">The API key.</param>
-    public ChatService(HttpClient httpClient, string apiKey) : base(httpClient, apiKey)
+    /// <param name="logger">The logger.</param>
+    public ChatService(HttpClient httpClient, string apiKey, ILogger<BaseHttpService> logger) : base(httpClient, apiKey, logger)
     {
     }
 

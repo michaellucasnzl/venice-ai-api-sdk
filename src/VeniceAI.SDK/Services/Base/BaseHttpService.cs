@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Models.Chat;
 
 namespace VeniceAI.SDK.Services.Base;
@@ -13,21 +14,19 @@ public class BaseHttpService
 {
     private readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _jsonOptions;
+    private readonly ILogger<BaseHttpService> _logger;
     private const string ApplicationJsonMediaType = "application/json";
-    
-    /// <summary>
-    /// Gets or sets whether to enable console logging. Defaults to true.
-    /// </summary>
-    public static bool EnableConsoleLogging { get; set; } = true;
 
     /// <summary>
     /// Initializes a new instance of the BaseHttpService class.
     /// </summary>
     /// <param name="httpClient">The HTTP client.</param>
     /// <param name="apiKey">The API key.</param>
-    public BaseHttpService(HttpClient httpClient, string apiKey)
+    /// <param name="logger">The logger.</param>
+    public BaseHttpService(HttpClient httpClient, string apiKey, ILogger<BaseHttpService> logger)
     {
         _httpClient = httpClient;
+        _logger = logger;
 
         // Set up authentication
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
@@ -64,8 +63,8 @@ public class BaseHttpService
         var json = JsonSerializer.Serialize(request, _jsonOptions);
 
         // Debug logging
-        LogToConsole($"POST {endpoint}");
-        LogToConsole($"Request: {json}");
+        _logger.LogDebug("POST {Endpoint}", endpoint);
+        _logger.LogDebug("Request: {Json}", json);
 
         using var content = new StringContent(json, Encoding.UTF8, ApplicationJsonMediaType);
 
@@ -77,8 +76,8 @@ public class BaseHttpService
         var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
 
         // Debug logging
-        LogToConsole($"Response Status: {response.StatusCode}");
-        LogToConsole($"Response: {responseContent}");
+        _logger.LogDebug("Response Status: {StatusCode}", response.StatusCode);
+        _logger.LogDebug("Response: {Response}", responseContent);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -99,13 +98,13 @@ public class BaseHttpService
         string endpoint,
         CancellationToken cancellationToken = default)
     {
-        LogToConsole($"GET {endpoint}");
+        _logger.LogDebug("GET {Endpoint}", endpoint);
 
         using var response = await _httpClient.GetAsync(endpoint, cancellationToken);
         var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
 
-        LogToConsole($"Response Status: {response.StatusCode}");
-        LogToConsole($"Response: {responseContent}");
+        _logger.LogDebug("Response Status: {StatusCode}", response.StatusCode);
+        _logger.LogDebug("Response: {Response}", responseContent);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -130,8 +129,8 @@ public class BaseHttpService
     {
         var json = JsonSerializer.Serialize(request, _jsonOptions);
 
-        LogToConsole($"POST {endpoint} (Binary)");
-        LogToConsole($"Request: {json}");
+        _logger.LogDebug("POST {Endpoint} (Binary)", endpoint);
+        _logger.LogDebug("Request: {Json}", json);
 
         using var content = new StringContent(json, Encoding.UTF8, ApplicationJsonMediaType);
 
@@ -140,8 +139,8 @@ public class BaseHttpService
 
         using var response = await _httpClient.PostAsync(endpoint, content, cancellationToken);
 
-        LogToConsole($"Response Status: {response.StatusCode}");
-        LogToConsole($"Response Content-Type: {response.Content.Headers.ContentType}");
+        _logger.LogDebug("Response Status: {StatusCode}", response.StatusCode);
+        _logger.LogDebug("Response Content-Type: {ContentType}", response.Content.Headers.ContentType);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -170,15 +169,15 @@ public class BaseHttpService
     {
         var json = JsonSerializer.Serialize(request, _jsonOptions);
 
-        LogToConsole($"POST {endpoint} (Stream)");
-        LogToConsole($"Request: {json}");
+        _logger.LogDebug("POST {Endpoint} (Stream)", endpoint);
+        _logger.LogDebug("Request: {Json}", json);
 
         using var content = new StringContent(json, Encoding.UTF8, ApplicationJsonMediaType);
         content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(ApplicationJsonMediaType);
 
         using var response = await _httpClient.PostAsync(endpoint, content, cancellationToken);
 
-        LogToConsole($"Response Status: {response.StatusCode}");
+        _logger.LogDebug("Response Status: {StatusCode}", response.StatusCode);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -228,16 +227,16 @@ public class BaseHttpService
     {
         var json = JsonSerializer.Serialize(request, _jsonOptions);
 
-        LogToConsole($"POST {endpoint} (Binary Stream)");
-        LogToConsole($"Request: {json}");
+        _logger.LogDebug("POST {Endpoint} (Binary Stream)", endpoint);
+        _logger.LogDebug("Request: {Json}", json);
 
         using var content = new StringContent(json, Encoding.UTF8, ApplicationJsonMediaType);
         content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(ApplicationJsonMediaType);
 
         using var response = await _httpClient.PostAsync(endpoint, content, cancellationToken);
 
-        LogToConsole($"Response Status: {response.StatusCode}");
-        LogToConsole($"Response Content-Type: {response.Content.Headers.ContentType}");
+        _logger.LogDebug("Response Status: {StatusCode}", response.StatusCode);
+        _logger.LogDebug("Response Content-Type: {ContentType}", response.Content.Headers.ContentType);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -268,21 +267,8 @@ public class BaseHttpService
         }
         catch (JsonException ex)
         {
-            LogToConsole($"Failed to parse SSE chunk: {jsonData}");
-            LogToConsole($"Error: {ex.Message}");
+            _logger.LogWarning("Failed to parse SSE chunk: {JsonData}. Error: {Error}", jsonData, ex.Message);
             return null;
-        }
-    }
-
-    /// <summary>
-    /// Logs a message to console if console logging is enabled.
-    /// </summary>
-    /// <param name="message">The message to log.</param>
-    private static void LogToConsole(string message)
-    {
-        if (EnableConsoleLogging)
-        {
-            Console.WriteLine(message);
         }
     }
 }

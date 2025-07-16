@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 using VeniceAI.SDK.Models.Images;
@@ -14,7 +15,8 @@ public class ImageService : BaseHttpService, IImageService
     /// </summary>
     /// <param name="httpClient">The HTTP client.</param>
     /// <param name="apiKey">The API key.</param>
-    public ImageService(HttpClient httpClient, string apiKey) : base(httpClient, apiKey)
+    /// <param name="logger">The logger.</param>
+    public ImageService(HttpClient httpClient, string apiKey, ILogger<BaseHttpService> logger) : base(httpClient, apiKey, logger)
     {
     }
 
