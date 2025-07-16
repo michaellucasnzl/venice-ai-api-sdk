@@ -3,10 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using RichardSzalay.MockHttp;
 using VeniceAI.SDK;
 using VeniceAI.SDK.Extensions;
-using VeniceAI.SDK.IntegrationTests.Mocks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -41,28 +39,8 @@ public abstract class IntegrationTestBase : IDisposable
                     builder.SetMinimumLevel(LogLevel.Warning);
                 });
 
-                // Check if we should use mock HTTP responses
-                var useMockResponses = context.Configuration.GetValue<bool>("TestConfiguration:UseMockResponses", true);
-
-                if (useMockResponses)
-                {
-                    // Configure with mock HTTP handler
-                    var mockHandler = Mocks.MockResponseFactory.CreateMockHandler();
-                    services.AddVeniceAI(options =>
-                    {
-                        options.ApiKey = "mock-api-key"; // Use fake key for mocking
-                        options.BaseUrl = "https://api.venice.ai/v1/"; // Mock base URL
-                    });
-
-                    // Replace the HTTP clients with mocked versions
-                    services.AddHttpClient("VeniceAI").ConfigurePrimaryHttpMessageHandler(() => mockHandler);
-                    services.AddHttpClient("VeniceAIGeneratedClient").ConfigurePrimaryHttpMessageHandler(() => mockHandler);
-                }
-                else
-                {
-                    // Use real API configuration
-                    services.AddVeniceAI(context.Configuration);
-                }
+                // Use real API configuration
+                services.AddVeniceAI(context.Configuration);
             });
 
         _host = hostBuilder.Build();
@@ -70,15 +48,11 @@ public abstract class IntegrationTestBase : IDisposable
         Client = _host.Services.GetRequiredService<IVeniceAIClient>();
     }
 
-    protected bool ShouldUseMockResponses()
-    {
-        return Configuration.GetValue<bool>("TestConfiguration:UseMockResponses", true);
-    }
-
     protected bool ShouldSkipRealApiCalls()
     {
-        // Legacy method - now just delegates to ShouldUseMockResponses for backward compatibility
-        return ShouldUseMockResponses();
+        // Check if API key is configured
+        var apiKey = Configuration["VeniceAI:ApiKey"];
+        return string.IsNullOrEmpty(apiKey);
     }
 
     protected async Task DelayBetweenRequests()
@@ -94,21 +68,10 @@ public abstract class IntegrationTestBase : IDisposable
     {
         try
         {
-            if (!ShouldUseMockResponses())
-            {
-                await DelayBetweenRequests();
-            }
-
+            await DelayBetweenRequests();
             var result = await operation();
 
-            // If using mock responses, we expect successful results
-            if (ShouldUseMockResponses())
-            {
-                Output.WriteLine($"{testName} - Using mock response");
-                return result;
-            }
-
-            // If result is a BaseResponse, check for common API errors (real API only)
+            // If result is a BaseResponse, check for common API errors
             if (result is VeniceAI.SDK.Models.Common.BaseResponse baseResponse && !baseResponse.IsSuccess)
             {
                 Output.WriteLine($"{testName} failed: {baseResponse.Error?.Error ?? "Unknown error"}");
@@ -126,11 +89,10 @@ public abstract class IntegrationTestBase : IDisposable
             return result;
         }
         catch (VeniceAI.SDK.VeniceAIException ex) when (
-            !ShouldUseMockResponses() && (
-                ex.Message.Contains("Authentication") ||
-                ex.Message.Contains("Model is required") ||
-                ex.Message.Contains("Rate limit") ||
-                ex.Message.Contains("Invalid request")))
+            ex.Message.Contains("Authentication") ||
+            ex.Message.Contains("Model is required") ||
+            ex.Message.Contains("Rate limit") ||
+            ex.Message.Contains("Invalid request"))
         {
             Output.WriteLine($"{testName} passed - Expected API configuration issue: {ex.Message}");
             return null;
