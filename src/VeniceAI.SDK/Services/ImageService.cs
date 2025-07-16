@@ -30,16 +30,19 @@ public class ImageService : BaseHttpService, IImageService
     {
         ArgumentNullException.ThrowIfNull(request);
 
+        if (string.IsNullOrEmpty(request.Prompt))
+            throw new ArgumentException("Prompt is required", nameof(request));
+
         try
         {
-            // TODO: Implement image generation
-            await Task.CompletedTask;
+            var response = await PostAsync<GenerateImageRequest, ImageGenerationResponse>(
+                "image/generate",
+                request,
+                cancellationToken);
 
-            return new ImageGenerationResponse
-            {
-                StatusCode = 501,
-                IsSuccess = false
-            };
+            response.IsSuccess = true;
+            response.StatusCode = 200;
+            return response;
         }
         catch (VeniceAIException)
         {
@@ -63,16 +66,19 @@ public class ImageService : BaseHttpService, IImageService
     {
         ArgumentNullException.ThrowIfNull(request);
 
+        if (string.IsNullOrEmpty(request.Prompt))
+            throw new ArgumentException("Prompt is required", nameof(request));
+
         try
         {
-            // TODO: Implement simple image generation
-            await Task.CompletedTask;
+            var response = await PostAsync<SimpleGenerateImageRequest, ImageGenerationResponse>(
+                "images/generations",
+                request,
+                cancellationToken);
 
-            return new ImageGenerationResponse
-            {
-                StatusCode = 501,
-                IsSuccess = false
-            };
+            response.IsSuccess = true;
+            response.StatusCode = 200;
+            return response;
         }
         catch (VeniceAIException)
         {
@@ -96,16 +102,19 @@ public class ImageService : BaseHttpService, IImageService
     {
         ArgumentNullException.ThrowIfNull(request);
 
+        if (string.IsNullOrEmpty(request.Image))
+            throw new ArgumentException("Image is required", nameof(request));
+
         try
         {
-            // TODO: Implement image upscaling
-            await Task.CompletedTask;
+            var response = await PostAsync<UpscaleImageRequest, ImageGenerationResponse>(
+                "image/upscale",
+                request,
+                cancellationToken);
 
-            return new ImageGenerationResponse
-            {
-                StatusCode = 501,
-                IsSuccess = false
-            };
+            response.IsSuccess = true;
+            response.StatusCode = 200;
+            return response;
         }
         catch (VeniceAIException)
         {
@@ -129,16 +138,22 @@ public class ImageService : BaseHttpService, IImageService
     {
         ArgumentNullException.ThrowIfNull(request);
 
+        if (string.IsNullOrEmpty(request.Prompt))
+            throw new ArgumentException("Prompt is required", nameof(request));
+
+        if (string.IsNullOrEmpty(request.Image))
+            throw new ArgumentException("Image is required", nameof(request));
+
         try
         {
-            // TODO: Implement image editing
-            await Task.CompletedTask;
+            var response = await PostAsync<EditImageRequest, ImageGenerationResponse>(
+                "image/edit",
+                request,
+                cancellationToken);
 
-            return new ImageGenerationResponse
-            {
-                StatusCode = 501,
-                IsSuccess = false
-            };
+            response.IsSuccess = true;
+            response.StatusCode = 200;
+            return response;
         }
         catch (VeniceAIException)
         {
@@ -159,14 +174,13 @@ public class ImageService : BaseHttpService, IImageService
     {
         try
         {
-            // TODO: Implement get image styles
-            await Task.CompletedTask;
+            var response = await GetAsync<ImageStylesResponse>(
+                "image/styles",
+                cancellationToken);
 
-            return new ImageStylesResponse
-            {
-                StatusCode = 501,
-                IsSuccess = false
-            };
+            response.IsSuccess = true;
+            response.StatusCode = 200;
+            return response;
         }
         catch (VeniceAIException)
         {

@@ -113,8 +113,8 @@ public class ChatService : BaseHttpService, IChatService
                 Choices = apiResponse.Choices?.Select(c => new ChatChoice
                 {
                     Index = c.Index,
-                    Message = new AssistantMessage 
-                    { 
+                    Message = new AssistantMessage
+                    {
                         Content = c.Message?.Content ?? string.Empty,
                         Role = c.Message?.Role ?? "assistant",
                         ToolCalls = c.Message?.ToolCalls?.Select(tc => new ToolCall
