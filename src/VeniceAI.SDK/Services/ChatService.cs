@@ -24,7 +24,7 @@ public class ChatService : BaseHttpService, IChatService
     /// </summary>
     /// <param name="message">The message to extract content from.</param>
     /// <returns>The content string.</returns>
-    private string GetMessageContent(ChatMessage message)
+    private static string GetMessageContent(ChatMessage message)
     {
         return message.Content switch
         {
@@ -55,7 +55,7 @@ public class ChatService : BaseHttpService, IChatService
 
         try
         {
-            // Create a simple request object matching the Postman examples
+            // Create API request with Venice-specific parameters
             var apiRequest = new
             {
                 model = request.Model,
@@ -64,7 +64,37 @@ public class ChatService : BaseHttpService, IChatService
                     role = m.Role,
                     content = GetMessageContent(m)
                 }).ToList(),
-                stream = request.Stream ?? false
+                stream = request.Stream ?? false,
+                max_tokens = request.MaxTokens,
+                temperature = request.Temperature,
+                top_p = request.TopP,
+                frequency_penalty = request.FrequencyPenalty,
+                presence_penalty = request.PresencePenalty,
+                stop = request.Stop,
+                tools = request.Tools?.Select(t => new
+                {
+                    type = t.Type,
+                    function = new
+                    {
+                        name = t.Function.Name,
+                        description = t.Function.Description,
+                        parameters = t.Function.Parameters
+                    }
+                }).ToList(),
+                tool_choice = request.ToolChoice,
+                response_format = request.ResponseFormat != null ? new
+                {
+                    type = request.ResponseFormat.Type,
+                    json_schema = request.ResponseFormat.JsonSchema
+                } : null,
+                venice_parameters = request.VeniceParameters != null ? new
+                {
+                    character_slug = request.VeniceParameters.CharacterSlug,
+                    include_venice_system_prompt = request.VeniceParameters.IncludeVeniceSystemPrompt,
+                    strip_thinking_response = request.VeniceParameters.StripThinkingResponse,
+                    enable_web_search = request.VeniceParameters.EnableWebSearch,
+                    enable_web_citations = request.VeniceParameters.EnableWebCitations
+                } : null
             };
 
             // Call the API
@@ -83,9 +113,29 @@ public class ChatService : BaseHttpService, IChatService
                 Choices = apiResponse.Choices?.Select(c => new ChatChoice
                 {
                     Index = c.Index,
-                    Message = new AssistantMessage { Content = c.Message?.Content ?? string.Empty },
+                    Message = new AssistantMessage 
+                    { 
+                        Content = c.Message?.Content ?? string.Empty,
+                        Role = c.Message?.Role ?? "assistant",
+                        ToolCalls = c.Message?.ToolCalls?.Select(tc => new ToolCall
+                        {
+                            Id = tc.Id ?? string.Empty,
+                            Type = tc.Type ?? string.Empty,
+                            Function = tc.Function != null ? new FunctionCall
+                            {
+                                Name = tc.Function.Name ?? string.Empty,
+                                Arguments = tc.Function.Arguments ?? string.Empty
+                            } : null
+                        }).ToList()
+                    },
                     FinishReason = c.FinishReason ?? string.Empty
-                }).ToList() ?? new List<ChatChoice>()
+                }).ToList() ?? new List<ChatChoice>(),
+                Usage = apiResponse.Usage != null ? new Usage
+                {
+                    PromptTokens = apiResponse.Usage.PromptTokens,
+                    CompletionTokens = apiResponse.Usage.CompletionTokens,
+                    TotalTokens = apiResponse.Usage.TotalTokens
+                } : null
             };
         }
         catch (VeniceAIException)
@@ -171,6 +221,7 @@ internal class ChatCompletionApiResponse
     public long Created { get; set; }
     public string? Model { get; set; }
     public List<ChatCompletionChoice>? Choices { get; set; }
+    public UsageApiResponse? Usage { get; set; }
 }
 
 internal class ChatCompletionChoice
@@ -184,4 +235,25 @@ internal class ChatCompletionMessage
 {
     public string? Role { get; set; }
     public string? Content { get; set; }
+    public List<ToolCallApiResponse>? ToolCalls { get; set; }
+}
+
+internal class UsageApiResponse
+{
+    public int PromptTokens { get; set; }
+    public int CompletionTokens { get; set; }
+    public int TotalTokens { get; set; }
+}
+
+internal class ToolCallApiResponse
+{
+    public string? Id { get; set; }
+    public string? Type { get; set; }
+    public FunctionCallApiResponse? Function { get; set; }
+}
+
+internal class FunctionCallApiResponse
+{
+    public string? Name { get; set; }
+    public string? Arguments { get; set; }
 }
