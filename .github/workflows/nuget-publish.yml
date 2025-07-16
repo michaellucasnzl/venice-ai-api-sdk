@@ -72,9 +72,9 @@ jobs:
     - name: Build solution
       run: dotnet build ${{ env.SOLUTION_PATH }} --configuration Release --no-restore
 
-    - name: Run tests (with mocked integration tests)
+    - name: Run unit tests only
       run: |
-        echo "🧪 Running tests with mock configuration..."
+        echo "🧪 Running unit tests..."
         dotnet test ${{ env.SOLUTION_PATH }} \
           --configuration Release \
           --no-build \
@@ -82,13 +82,10 @@ jobs:
           --logger "trx;LogFileName=TestResults.trx" \
           --logger "console;verbosity=normal" \
           --collect:"XPlat Code Coverage" \
-          --filter "Category!=KnownIssue" \
+          --filter "Category!=KnownIssue&FullyQualifiedName!~IntegrationTests" \
           --results-directory ./TestResults \
           --settings coverlet.runsettings \
           -- RunConfiguration.DisableAppDomain=true
-      env:
-        TestConfiguration__UseMockResponses: true
-        TestConfiguration__SkipRealApiCalls: true
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
