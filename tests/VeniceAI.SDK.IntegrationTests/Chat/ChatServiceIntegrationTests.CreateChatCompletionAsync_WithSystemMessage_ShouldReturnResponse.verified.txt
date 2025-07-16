@@ -9,16 +9,16 @@
         Role: assistant,
         Content:
 Deep blue waters vast
-Mysterious creatures dwell
-Nature's beauty shines
+Mystery and beauty lies
+Nature's mighty song
       },
       FinishReason: stop
     }
   ],
   Usage: {
     PromptTokens: 157,
-    CompletionTokens: 15,
-    TotalTokens: 172
+    CompletionTokens: 16,
+    TotalTokens: 173
   },
   IsSuccess: true,
   RawContent: {Scrubbed}

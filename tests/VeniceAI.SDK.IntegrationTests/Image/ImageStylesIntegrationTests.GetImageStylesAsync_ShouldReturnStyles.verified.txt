@@ -1,0 +1,5 @@
+﻿{
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

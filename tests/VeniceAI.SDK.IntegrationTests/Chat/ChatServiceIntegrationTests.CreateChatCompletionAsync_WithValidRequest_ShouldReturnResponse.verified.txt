@@ -7,15 +7,15 @@
     {
       Message: {
         Role: assistant,
-        Content: I'm just a computer program, so I don't have feelings or emotions like humans do. I'm functioning properly and ready to assist you with any questions or topics you'd like to discuss. What's on your mind?
+        Content: I'm just a language model, so I don't have feelings or emotions like humans do, but I'm functioning properly and ready to assist you with any questions or topics you'd like to discuss. How can I help you today?
       },
       FinishReason: stop
     }
   ],
   Usage: {
     PromptTokens: 340,
-    CompletionTokens: 46,
-    TotalTokens: 386
+    CompletionTokens: 48,
+    TotalTokens: 388
   },
   IsSuccess: true,
   RawContent: {Scrubbed}

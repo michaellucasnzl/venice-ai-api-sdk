@@ -122,6 +122,16 @@ public abstract class IntegrationTestBase : IDisposable
         await Verify(obj, settings, sourceFilePath);
     }
 
+    /// <summary>
+    /// Returns a list of property names that should be scrubbed from verification output.
+    /// Override this method in derived test classes to add additional properties to scrub.
+    /// </summary>
+    /// <returns>Array of property names to scrub</returns>
+    protected virtual string[] GetPropertiesToScrub()
+    {
+        return Array.Empty<string>();
+    }
+
     private void ConfigureVerify()
     {
         // Configure Verify to scrub fields that could change between test runs
@@ -143,6 +153,13 @@ public abstract class IntegrationTestBase : IDisposable
         _verifySettings.ScrubMember("RequestId");
         _verifySettings.ScrubMember("TraceId");
         _verifySettings.ScrubMember("SessionId");
+
+        // Scrub additional properties specified by derived test classes
+        var additionalProperties = GetPropertiesToScrub();
+        foreach (var property in additionalProperties)
+        {
+            _verifySettings.ScrubMember(property);
+        }
 
         // Use deterministic scrubbing for common variable fields
         _verifySettings.ScrubLinesContaining("timestamp", "created_at", "updated_at");

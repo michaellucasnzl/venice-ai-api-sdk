@@ -14,6 +14,14 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
     {
     }
 
+    /// <summary>
+    /// Returns properties that should be scrubbed from verification output for audio tests.
+    /// </summary>
+    protected override string[] GetPropertiesToScrub()
+    {
+        return new[] { "AudioContent" };
+    }
+
     [Fact]
     public async Task CreateSpeechAsync_WithValidRequest_ShouldReturnAudio()
     {

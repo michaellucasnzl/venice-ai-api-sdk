@@ -14,6 +14,14 @@ public class ImageEditIntegrationTests : IntegrationTestBase
     {
     }
 
+    /// <summary>
+    /// Returns properties that should be scrubbed from verification output for image edit tests.
+    /// </summary>
+    protected override string[] GetPropertiesToScrub()
+    {
+        return new[] { "B64Json", "Images", "Image" };
+    }
+
     [Fact]
     public async Task EditImageAsync_WithValidRequest_ShouldReturnEditedImage()
     {

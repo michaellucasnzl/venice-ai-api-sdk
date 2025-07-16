@@ -14,6 +14,14 @@ public class EmbeddingServiceIntegrationTests : IntegrationTestBase
     {
     }
 
+    /// <summary>
+    /// Returns properties that should be scrubbed from verification output for embedding tests.
+    /// </summary>
+    protected override string[] GetPropertiesToScrub()
+    {
+        return new[] { "Embedding", "EmbeddingBase64", "PromptTokens", "TotalTokens" };
+    }
+
     [Fact]
     public async Task CreateEmbeddingAsync_WithStringInput_ShouldReturnEmbedding()
     {

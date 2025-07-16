@@ -14,6 +14,14 @@ public class ImageGenerationIntegrationTests : IntegrationTestBase
     {
     }
 
+    /// <summary>
+    /// Returns properties that should be scrubbed from verification output for image generation tests.
+    /// </summary>
+    protected override string[] GetPropertiesToScrub()
+    {
+        return new[] { "B64Json", "Images", "Image" };
+    }
+
     [Fact]
     public async Task GenerateImageAsync_WithValidRequest_ShouldReturnImage()
     {

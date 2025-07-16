@@ -8,19 +8,19 @@
       Message: {
         Role: assistant,
         Content:
-The weather varies by location, but here are some general forecasts for July 15, 2025:
+The weather varies depending on the location. 
 
-* In the Northeast, it's expected to be hot and humid, with highs ranging from the 70s to mid-80s [REF]19[/REF].
-* In New York, the temperature is expected to be around 30°C, with highs and lows of 30° and 21° respectively [REF]3[/REF].
-* In San Diego, the humidity is expected
+In San Antonio, Texas, there is a Flood Watch in effect until 1 p.m. with rainfall amounts of 1 to 3 inches and isolated amounts up to 6 inches possible [REF]0[/REF]. The forecast for today is partly sunny with a 20% chance of rain and highs between 92 and 96 degrees.
+
+In Seattle, Washington, a Fire Weather Watch is in effect, and a heat advisory has been issued [
       },
       FinishReason: length
     }
   ],
   Usage: {
-    PromptTokens: 5612,
+    PromptTokens: 3184,
     CompletionTokens: 100,
-    TotalTokens: 5712
+    TotalTokens: 3284
   },
   IsSuccess: true,
   RawContent: {Scrubbed}

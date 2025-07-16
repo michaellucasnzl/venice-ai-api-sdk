@@ -14,6 +14,14 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
     {
     }
 
+    /// <summary>
+    /// Returns properties that should be scrubbed from verification output for chat tests.
+    /// </summary>
+    protected override string[] GetPropertiesToScrub()
+    {
+        return new[] { "Content", "CompletionTokens", "TotalTokens" };
+    }
+
     [Fact]
     public async Task CreateChatCompletionAsync_WithValidRequest_ShouldReturnResponse()
     {

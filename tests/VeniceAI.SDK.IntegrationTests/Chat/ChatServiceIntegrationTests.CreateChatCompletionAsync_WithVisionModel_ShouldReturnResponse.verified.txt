@@ -7,15 +7,15 @@
     {
       Message: {
         Role: assistant,
-        Content: Hello! How can I assist you today? Feel free to ask me anything.
+        Content: Hello! How can I assist you today? Feel free to ask about any topic, and I'll do my best to provide a detailed and direct answer.
       },
       FinishReason: stop
     }
   ],
   Usage: {
     PromptTokens: 312,
-    CompletionTokens: 17,
-    TotalTokens: 329
+    CompletionTokens: 32,
+    TotalTokens: 344
   },
   IsSuccess: true,
   RawContent: {Scrubbed}

@@ -14,6 +14,14 @@ public class ImageUpscaleIntegrationTests : IntegrationTestBase
     {
     }
 
+    /// <summary>
+    /// Returns properties that should be scrubbed from verification output for image upscale tests.
+    /// </summary>
+    protected override string[] GetPropertiesToScrub()
+    {
+        return new[] { "B64Json", "Images", "Image" };
+    }
+
     [Fact]
     public async Task UpscaleImageAsync_WithValidRequest_ShouldReturnUpscaledImage()
     {
