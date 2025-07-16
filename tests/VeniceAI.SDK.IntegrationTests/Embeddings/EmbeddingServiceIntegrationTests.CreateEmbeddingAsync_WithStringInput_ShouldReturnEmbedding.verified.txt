@@ -9,8 +9,8 @@
   ],
   Model: text-embedding-bge-m3,
   Usage: {
-    PromptTokens: 14,
-    TotalTokens: 14
+    PromptTokens: {Scrubbed},
+    TotalTokens: {Scrubbed}
   },
   IsSuccess: true,
   RawContent: {Scrubbed}

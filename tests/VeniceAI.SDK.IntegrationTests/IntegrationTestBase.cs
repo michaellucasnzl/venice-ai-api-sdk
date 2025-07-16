@@ -36,7 +36,7 @@ public abstract class IntegrationTestBase : IDisposable
                 services.AddLogging(builder =>
                 {
                     builder.AddConsole();
-                    builder.SetMinimumLevel(LogLevel.Warning);
+                    builder.SetMinimumLevel(LogLevel.Error);
                 });
 
                 // Use real API configuration
@@ -68,8 +68,6 @@ public abstract class IntegrationTestBase : IDisposable
             if (result is VeniceAI.SDK.Models.Common.BaseResponse baseResponse && !baseResponse.IsSuccess)
             {
                 Output.WriteLine($"{testName} failed: {baseResponse.Error?.Error ?? "Unknown error"}");
-                Output.WriteLine($"Status: {baseResponse.StatusCode}");
-                Output.WriteLine($"Raw content: {baseResponse.RawContent}");
 
                 // For API errors that indicate configuration issues, consider test passed
                 if (baseResponse.StatusCode == 401 || baseResponse.StatusCode == 403 || baseResponse.StatusCode == 429)
@@ -97,13 +95,12 @@ public abstract class IntegrationTestBase : IDisposable
             ex.Message.Contains("API Error (Status: 401)") ||
             ex.Message.Contains("API Error (Status: 403)"))
         {
-            Output.WriteLine($"{testName} passed - Expected API configuration issue: {ex.Message}");
+            Output.WriteLine($"{testName} passed - Expected API configuration issue");
             return null;
         }
         catch (Exception ex)
         {
-            Output.WriteLine($"{testName} failed with unexpected error: {ex.Message}");
-            Output.WriteLine($"Exception type: {ex.GetType().Name}");
+            Output.WriteLine($"{testName} failed with error: {ex.GetType().Name}");
             throw;
         }
     }
@@ -141,13 +138,8 @@ public abstract class IntegrationTestBase : IDisposable
         _verifySettings.ScrubMember("Created");
         _verifySettings.ScrubMember("Id");
 
-        // Scrub large binary/base64 content fields to prevent huge test output files
-        _verifySettings.ScrubMember("AudioContent");     // Audio data as byte array
-        _verifySettings.ScrubMember("B64Json");          // Base64-encoded image data
-        _verifySettings.ScrubMember("Images");           // Base64-encoded images list
-        _verifySettings.ScrubMember("Embedding");        // Large embedding vectors
-        _verifySettings.ScrubMember("EmbeddingBase64");  // Base64-encoded embeddings
-        _verifySettings.ScrubMember("RawContent");       // Raw API response content
+        // Scrub raw API response content to prevent huge test output files
+        _verifySettings.ScrubMember("RawContent");
 
         // Scrub timing and ID fields that are non-deterministic - but not model IDs since those are deterministic in tests
         _verifySettings.ScrubMember("RequestId");

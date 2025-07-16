@@ -7,20 +7,15 @@
     {
       Message: {
         Role: assistant,
-        Content:
-The weather varies depending on the location. 
-
-In San Antonio, Texas, there is a Flood Watch in effect until 1 p.m. with rainfall amounts of 1 to 3 inches and isolated amounts up to 6 inches possible [REF]0[/REF]. The forecast for today is partly sunny with a 20% chance of rain and highs between 92 and 96 degrees.
-
-In Seattle, Washington, a Fire Weather Watch is in effect, and a heat advisory has been issued [
+        Content: {Scrubbed}
       },
       FinishReason: length
     }
   ],
   Usage: {
-    PromptTokens: 3184,
-    CompletionTokens: 100,
-    TotalTokens: 3284
+    PromptTokens: 5748,
+    CompletionTokens: {Scrubbed},
+    TotalTokens: {Scrubbed}
   },
   IsSuccess: true,
   RawContent: {Scrubbed}

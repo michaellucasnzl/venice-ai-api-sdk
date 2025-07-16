@@ -7,18 +7,15 @@
     {
       Message: {
         Role: assistant,
-        Content:
-Deep blue waters vast
-Mystery and beauty lies
-Nature's mighty song
+        Content: {Scrubbed}
       },
       FinishReason: stop
     }
   ],
   Usage: {
     PromptTokens: 157,
-    CompletionTokens: 16,
-    TotalTokens: 173
+    CompletionTokens: {Scrubbed},
+    TotalTokens: {Scrubbed}
   },
   IsSuccess: true,
   RawContent: {Scrubbed}

@@ -7,15 +7,15 @@
     {
       Message: {
         Role: assistant,
-        Content: My friend, the meaning of life is a question that has puzzled sages and simpletons alike for centuries, and I'm afraid the answer is not something that can be neatly wrapped up in a tidy little package. You see, the meaning of life is not something that can be found, it's something that's already present, like the air we breathe, or the beat of our own hearts. It's the experience of being alive, in all its messy, beautiful, and bewildering complexity.
+        Content: {Scrubbed}
       },
-      FinishReason: length
+      FinishReason: stop
     }
   ],
   Usage: {
     PromptTokens: 1129,
-    CompletionTokens: 100,
-    TotalTokens: 1229
+    CompletionTokens: {Scrubbed},
+    TotalTokens: {Scrubbed}
   },
   IsSuccess: true,
   RawContent: {Scrubbed}
