@@ -63,12 +63,13 @@ public class ModelService : BaseHttpService, IModelService
     {
         try
         {
-            await GetAsync<object>("model-traits", cancellationToken);
+            var response = await GetAsync<Models.Models.ModelTraitsApiResponse>("models/traits", cancellationToken);
 
             return new ModelTraitsResponse
             {
                 StatusCode = 200,
-                IsSuccess = true
+                IsSuccess = true,
+                Traits = response?.Data ?? new Dictionary<string, string>()
             };
         }
         catch (VeniceAIException)
@@ -90,12 +91,13 @@ public class ModelService : BaseHttpService, IModelService
     {
         try
         {
-            await GetAsync<object>("model-compatibility", cancellationToken);
+            var response = await GetAsync<Models.Models.ModelCompatibilityApiResponse>("models/compatibility_mapping", cancellationToken);
 
             return new ModelCompatibilityResponse
             {
                 StatusCode = 200,
-                IsSuccess = true
+                IsSuccess = true,
+                Compatibility = response?.Data ?? new Dictionary<string, string>()
             };
         }
         catch (VeniceAIException)

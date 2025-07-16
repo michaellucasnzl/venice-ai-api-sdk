@@ -338,3 +338,51 @@ public class ModelCompatibilityResponse : BaseResponse
     [JsonPropertyName("compatibility")]
     public Dictionary<string, string> Compatibility { get; set; } = new();
 }
+
+/// <summary>
+/// Model traits API response.
+/// </summary>
+public class ModelTraitsApiResponse
+{
+    /// <summary>
+    /// Dictionary of traits to model IDs.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public Dictionary<string, string> Data { get; set; } = new();
+
+    /// <summary>
+    /// Object type.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public string Object { get; set; } = "list";
+
+    /// <summary>
+    /// Type of models.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public string Type { get; set; } = "text";
+}
+
+/// <summary>
+/// Model compatibility mapping API response.
+/// </summary>
+public class ModelCompatibilityApiResponse
+{
+    /// <summary>
+    /// Dictionary of compatibility mappings.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public Dictionary<string, string> Data { get; set; } = new();
+
+    /// <summary>
+    /// Object type.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public string Object { get; set; } = "list";
+
+    /// <summary>
+    /// Type of models.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public string Type { get; set; } = "text";
+}

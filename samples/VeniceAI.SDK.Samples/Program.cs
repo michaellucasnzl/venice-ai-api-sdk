@@ -121,7 +121,7 @@ public class Program
         // Basic image generation
         var imageRequest = new GenerateImageRequest
         {
-            Model = "hidream",
+            Model = "flux-schnell",
             Prompt = "A beautiful landscape with mountains and a lake at sunset",
             Width = 1024,
             Height = 1024,
@@ -142,7 +142,7 @@ public class Program
         // Simple image generation (OpenAI-compatible)
         var simpleRequest = new SimpleGenerateImageRequest
         {
-            Model = "hidream",
+            Model = "flux-schnell",
             Prompt = "A serene mountain landscape",
             N = 1,
             Size = "1024x1024"
@@ -249,7 +249,7 @@ public class Program
             Console.WriteLine($"Models error: {modelsResponse.Error?.Error}");
         }
 
-        // Get a specific model (Note: Individual model details may not be available for all models)
+        // Get a specific model (Note: Individual model details endpoint returns 404 for all models)
         if (modelsResponse.IsSuccess && modelsResponse.Data.Any())
         {
             var firstModel = modelsResponse.Data.First();
@@ -265,7 +265,7 @@ public class Program
             {
                 if (ex is VeniceAI.SDK.VeniceAIException veniceEx && veniceEx.StatusCode == 404)
                 {
-                    Console.WriteLine($"Individual model details not available for model: {firstModel.Id}");
+                    Console.WriteLine($"Individual model details endpoint not supported");
                     Console.WriteLine($"Model info from list - ID: {firstModel.Id}, Owner: {firstModel.OwnedBy}, Type: {firstModel.Type}");
                 }
                 else
@@ -276,61 +276,33 @@ public class Program
         }
 
         // Get model traits
-        try
+        var traitsResponse = await client.Models.GetModelTraitsAsync();
+        if (traitsResponse.IsSuccess)
         {
-            var traitsResponse = await client.Models.GetModelTraitsAsync();
-            if (traitsResponse.IsSuccess)
+            Console.WriteLine($"Model traits: {traitsResponse.Traits.Count}");
+            foreach (var trait in traitsResponse.Traits.Take(3))
             {
-                Console.WriteLine($"Model traits: {traitsResponse.Traits.Count}");
-                foreach (var trait in traitsResponse.Traits.Take(3))
-                {
-                    Console.WriteLine($"- {trait.Key}: {trait.Value}");
-                }
-            }
-            else
-            {
-                Console.WriteLine($"Model traits error: {traitsResponse.Error?.Error}");
+                Console.WriteLine($"- {trait.Key}: {trait.Value}");
             }
         }
-        catch (Exception ex)
+        else
         {
-            if (ex is VeniceAI.SDK.VeniceAIException veniceEx && veniceEx.StatusCode == 404)
-            {
-                Console.WriteLine("Model traits endpoint not available");
-            }
-            else
-            {
-                Console.WriteLine($"Error getting model traits: {ex.Message}");
-            }
+            Console.WriteLine($"Model traits error: {traitsResponse.Error?.Error}");
         }
 
         // Get model compatibility mapping
-        try
+        var compatibilityResponse = await client.Models.GetModelCompatibilityAsync();
+        if (compatibilityResponse.IsSuccess)
         {
-            var compatibilityResponse = await client.Models.GetModelCompatibilityAsync();
-            if (compatibilityResponse.IsSuccess)
+            Console.WriteLine($"Model compatibility mappings: {compatibilityResponse.Compatibility.Count}");
+            foreach (var mapping in compatibilityResponse.Compatibility.Take(3))
             {
-                Console.WriteLine($"Model compatibility mappings: {compatibilityResponse.Compatibility.Count}");
-                foreach (var mapping in compatibilityResponse.Compatibility.Take(3))
-                {
-                    Console.WriteLine($"- {mapping.Key}: {mapping.Value}");
-                }
-            }
-            else
-            {
-                Console.WriteLine($"Model compatibility error: {compatibilityResponse.Error?.Error}");
+                Console.WriteLine($"- {mapping.Key}: {mapping.Value}");
             }
         }
-        catch (Exception ex)
+        else
         {
-            if (ex is VeniceAI.SDK.VeniceAIException veniceEx && veniceEx.StatusCode == 404)
-            {
-                Console.WriteLine("Model compatibility endpoint not available");
-            }
-            else
-            {
-                Console.WriteLine($"Error getting model compatibility: {ex.Message}");
-            }
+            Console.WriteLine($"Model compatibility error: {compatibilityResponse.Error?.Error}");
         }
 
         Console.WriteLine();
