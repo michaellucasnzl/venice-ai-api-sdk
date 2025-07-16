@@ -32,14 +32,7 @@ public class EmbeddingService : BaseHttpService, IEmbeddingService
 
         try
         {
-            // TODO: Implement embedding creation
-            await Task.CompletedTask;
-
-            return new CreateEmbeddingResponse
-            {
-                StatusCode = 501,
-                IsSuccess = false
-            };
+            return await PostAsync<CreateEmbeddingRequest, CreateEmbeddingResponse>("embeddings", request, cancellationToken);
         }
         catch (VeniceAIException)
         {
@@ -47,7 +40,7 @@ public class EmbeddingService : BaseHttpService, IEmbeddingService
         }
         catch (Exception ex)
         {
-            throw new VeniceAIException($"Unexpected error during embedding creation: {ex.Message}", ex);
+            throw new VeniceAIException($"Error creating embeddings: {ex.Message}", ex);
         }
     }
 }

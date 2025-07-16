@@ -30,14 +30,7 @@ public class BillingService : BaseHttpService, IBillingService
 
         try
         {
-            // TODO: Implement billing usage
-            await Task.CompletedTask;
-
-            return new BillingUsageResponse
-            {
-                StatusCode = 501,
-                IsSuccess = false
-            };
+            return await GetAsync<BillingUsageResponse>("billing/usage", cancellationToken);
         }
         catch (VeniceAIException)
         {
@@ -45,7 +38,7 @@ public class BillingService : BaseHttpService, IBillingService
         }
         catch (Exception ex)
         {
-            throw new VeniceAIException($"Unexpected error getting billing usage: {ex.Message}", ex);
+            throw new VeniceAIException($"Error getting billing usage: {ex.Message}", ex);
         }
     }
 }

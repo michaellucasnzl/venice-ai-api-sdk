@@ -13,6 +13,7 @@ public class BaseHttpService
 {
     private readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _jsonOptions;
+    private const string ApplicationJsonMediaType = "application/json";
 
     /// <summary>
     /// Initializes a new instance of the BaseHttpService class.
@@ -26,10 +27,10 @@ public class BaseHttpService
         // Set up authentication
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
-        // Set base address
+        // Set base address if not already configured
         if (_httpClient.BaseAddress == null)
         {
-            _httpClient.BaseAddress = new Uri("https://api.venice.ai/api/v1/"); //todo: getthis from appsettings.
+            _httpClient.BaseAddress = new Uri("https://api.venice.ai/api/v1/");
         }
 
         // Configure JSON serialization
@@ -61,10 +62,10 @@ public class BaseHttpService
         Console.WriteLine($"POST {endpoint}");
         Console.WriteLine($"Request: {json}");
 
-        using var content = new StringContent(json, Encoding.UTF8, "application/json");
+        using var content = new StringContent(json, Encoding.UTF8, ApplicationJsonMediaType);
 
         // Explicitly set Content-Type to avoid any issues
-        content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+        content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(ApplicationJsonMediaType);
 
         using var response = await _httpClient.PostAsync(endpoint, content, cancellationToken);
 
@@ -127,10 +128,10 @@ public class BaseHttpService
         Console.WriteLine($"POST {endpoint} (Binary)");
         Console.WriteLine($"Request: {json}");
 
-        using var content = new StringContent(json, Encoding.UTF8, "application/json");
+        using var content = new StringContent(json, Encoding.UTF8, ApplicationJsonMediaType);
 
         // Explicitly set Content-Type to avoid any issues
-        content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+        content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(ApplicationJsonMediaType);
 
         using var response = await _httpClient.PostAsync(endpoint, content, cancellationToken);
 
@@ -167,8 +168,8 @@ public class BaseHttpService
         Console.WriteLine($"POST {endpoint} (Stream)");
         Console.WriteLine($"Request: {json}");
 
-        using var content = new StringContent(json, Encoding.UTF8, "application/json");
-        content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+        using var content = new StringContent(json, Encoding.UTF8, ApplicationJsonMediaType);
+        content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(ApplicationJsonMediaType);
 
         using var response = await _httpClient.PostAsync(endpoint, content, cancellationToken);
 
@@ -204,6 +205,53 @@ public class BaseHttpService
                     yield return streamResponse;
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Makes a POST request that returns streaming binary data (like audio).
+    /// </summary>
+    /// <typeparam name="TRequest">The request type.</typeparam>
+    /// <param name="endpoint">The API endpoint.</param>
+    /// <param name="request">The request object.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>An async enumerable of binary data chunks.</returns>
+    protected async IAsyncEnumerable<byte[]> PostStreamBinaryAsync<TRequest>(
+        string endpoint,
+        TRequest request,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    {
+        var json = JsonSerializer.Serialize(request, _jsonOptions);
+
+        Console.WriteLine($"POST {endpoint} (Binary Stream)");
+        Console.WriteLine($"Request: {json}");
+
+        using var content = new StringContent(json, Encoding.UTF8, ApplicationJsonMediaType);
+        content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(ApplicationJsonMediaType);
+
+        using var response = await _httpClient.PostAsync(endpoint, content, cancellationToken);
+
+        Console.WriteLine($"Response Status: {response.StatusCode}");
+        Console.WriteLine($"Response Content-Type: {response.Content.Headers.ContentType}");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorContent = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new VeniceAIException($"API Error (Status: {(int)response.StatusCode}): {errorContent}");
+        }
+
+        using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+        var buffer = new byte[8192]; // 8KB buffer
+
+        int bytesRead;
+        while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length, cancellationToken)) > 0)
+        {
+            if (cancellationToken.IsCancellationRequested)
+                yield break;
+
+            var chunk = new byte[bytesRead];
+            Array.Copy(buffer, chunk, bytesRead);
+            yield return chunk;
         }
     }
 

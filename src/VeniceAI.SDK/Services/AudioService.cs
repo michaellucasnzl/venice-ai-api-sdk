@@ -96,13 +96,10 @@ public class AudioService : BaseHttpService, IAudioService
         // Set streaming to true
         request.Streaming = true;
 
-        // For now, use the non-streaming version and return single chunk
-        // TODO: Implement proper streaming support
-        var response = await CreateSpeechAsync(request, cancellationToken);
-
-        if (response.AudioContent != null)
+        // Use the streaming binary method for proper streaming support
+        await foreach (var chunk in PostStreamBinaryAsync("audio/speech", request, cancellationToken))
         {
-            yield return response.AudioContent;
+            yield return chunk;
         }
     }
 }

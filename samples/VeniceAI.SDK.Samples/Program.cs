@@ -121,7 +121,7 @@ public class Program
         // Basic image generation
         var imageRequest = new GenerateImageRequest
         {
-            Model = "flux-schnell",
+            Model = "flux-dev",
             Prompt = "A beautiful landscape with mountains and a lake at sunset",
             Width = 1024,
             Height = 1024,
@@ -142,7 +142,7 @@ public class Program
         // Simple image generation (OpenAI-compatible)
         var simpleRequest = new SimpleGenerateImageRequest
         {
-            Model = "flux-schnell",
+            Model = "flux-dev",
             Prompt = "A serene mountain landscape",
             N = 1,
             Size = "1024x1024"
