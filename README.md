@@ -88,36 +88,34 @@ configuration providers in production.
 
 ## Quick Start
 
-### Basic Usage
+### Running the Quickstart Application
 
-```csharp
-using VeniceAI.SDK;
-using VeniceAI.SDK.Models.Chat;
+The easiest way to get started is to run the quickstart application:
 
-// Initialize the client
-var client = new VeniceAIClient("your-api-key");
-
-// Create a chat completion
-var request = new ChatCompletionRequest
-{
-    Model = "llama-3.3-70b",
-    Messages = new List<ChatMessage>
-    {
-        new UserMessage("Hello! How are you?")
-    },
-    MaxTokens = 100
-};
-
-var response = await client.Chat.CreateChatCompletionAsync(request);
-Console.WriteLine(response.Choices[0].Message.Content);
+```bash
+cd samples/VeniceAI.SDK.Quickstart
+dotnet user-secrets set "VeniceAI:ApiKey" "your-api-key-here"
+dotnet run
 ```
 
-### Dependency Injection
+This will demonstrate:
+- Listing available models
+- Creating chat completions
+- Streaming responses
+- Getting model information
+
+See the [quickstart README](samples/VeniceAI.SDK.Quickstart/README.md) for detailed instructions.
+
+### Basic Usage with Dependency Injection
+
+The Venice AI SDK is designed to work with .NET's dependency injection container:
 
 ```csharp
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VeniceAI.SDK;
 using VeniceAI.SDK.Extensions;
+using VeniceAI.SDK.Models.Chat;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
@@ -139,6 +137,33 @@ var host = Host.CreateDefaultBuilder(args)
     .Build();
 
 var client = host.Services.GetRequiredService<IVeniceAIClient>();
+
+// Create a chat completion
+var request = new ChatCompletionRequest
+{
+    Model = "llama-3.3-70b",
+    Messages = new List<ChatMessage>
+    {
+        new UserMessage("Hello! How are you?")
+    },
+    MaxTokens = 100
+};
+
+var response = await client.Chat.CreateChatCompletionAsync(request);
+Console.WriteLine(response.Choices[0].Message.Content);
+```
+var request = new ChatCompletionRequest
+{
+    Model = "llama-3.3-70b",
+    Messages = new List<ChatMessage>
+    {
+        new UserMessage("Hello! How are you?")
+    },
+    MaxTokens = 100
+};
+
+var response = await client.Chat.CreateChatCompletionAsync(request);
+Console.WriteLine(response.Choices[0].Message.Content);
 ```
 
 ### Configuration
@@ -489,30 +514,94 @@ services.AddHttpClient<IVeniceAIClient, VeniceAIClient>(client =>
 
 ## Testing
 
-The SDK includes comprehensive unit tests and integration tests:
+The SDK includes comprehensive testing to ensure reliability:
+
+### Unit Tests
 
 ```bash
 # Run unit tests
 dotnet test tests/VeniceAI.SDK.Tests
 
-# Run integration tests (requires API key)
-dotnet test tests/VeniceAI.SDK.IntegrationTests
+# Run with coverage
+dotnet test tests/VeniceAI.SDK.Tests --collect:"XPlat Code Coverage"
 ```
 
-Set the `VENICE_AI_API_KEY` environment variable for integration tests:
+### Integration Tests
+
+Integration tests verify actual API functionality:
 
 ```bash
-export VENICE_AI_API_KEY="your-api-key"
+# Set API key for integration tests
+dotnet user-secrets set "VeniceAI:ApiKey" "your-api-key" --project tests/VeniceAI.SDK.IntegrationTests
+
+# Run integration tests
 dotnet test tests/VeniceAI.SDK.IntegrationTests
+
+# Run specific test category
+dotnet test tests/VeniceAI.SDK.IntegrationTests --filter "Category=Chat"
+```
+
+Integration tests cover:
+- ✅ **Chat completions** - Standard and streaming
+- ✅ **Image generation** - All formats and styles
+- ✅ **Audio synthesis** - TTS with various voices
+- ✅ **Embeddings** - Text embedding generation
+- ✅ **Model management** - Listing and capabilities
+- ✅ **Billing** - Usage tracking and reporting
+
+### Test Categories
+
+Tests are organized by functionality:
+
+```csharp
+[TestCategory("Chat")]
+[TestCategory("Images")]
+[TestCategory("Audio")]
+[TestCategory("Embeddings")]
+[TestCategory("Models")]
+[TestCategory("Billing")]
+```
+
+### Running All Tests
+
+```bash
+# Run all tests (unit + integration)
+dotnet test
+
+# Run with detailed output
+dotnet test --verbosity normal
+
+# Run only integration tests
+dotnet test --filter "Category!=Unit"
+```
+
+### Test Configuration
+
+Integration tests use the same configuration as the SDK:
+
+```json
+{
+  "VeniceAI": {
+    "ApiKey": "your-api-key",
+    "BaseUrl": "https://api.venice.ai/api/v1",
+    "TimeoutSeconds": 300
+  }
+}
 ```
 
 ## Sample Applications
 
 Check out the [samples](samples/) directory for complete example applications:
 
-- [Quick Start](samples/VeniceAI.SDK.QuickStart/Program.cs) - Comprehensive demonstration of all SDK features
-- [Basic Usage](samples/VeniceAI.SDK.Samples/Program.cs) - Core functionality examples
-- [Error Handling Demo](samples/VeniceAI.SDK.ErrorHandlingDemo/Program.cs) - Error handling patterns
+- [Quickstart](samples/VeniceAI.SDK.Quickstart/Program.cs) - Complete demonstration of all SDK features including chat, models, and streaming
+- [Quickstart README](samples/VeniceAI.SDK.Quickstart/README.md) - Detailed setup and usage instructions
+
+The quickstart application demonstrates:
+- 📋 Model listing and capabilities
+- 💬 Chat completions with token usage
+- 📡 Real-time streaming responses  
+- 🔍 Model details and pricing information
+- ⚙️ Configuration and dependency injection setup
 
 ## API Reference
 
@@ -536,7 +625,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes and version history.
-A .NET SDK for the Venice AI API
+
+# A .NET SDK for the Venice AI API
 
 ## Versioning
 
@@ -588,3 +678,40 @@ foreach (var model in modelsResponse.Data)
     Console.WriteLine();
 }
 ```
+
+## Project Structure
+
+The Venice AI SDK is organized as follows:
+
+```
+venice-ai-api-sdk/
+├── src/
+│   └── VeniceAI.SDK/                    # Main SDK library
+│       ├── Configuration/               # Configuration classes
+│       ├── Extensions/                  # DI extensions
+│       ├── Models/                      # Request/response models
+│       │   ├── Audio/                   # Audio/TTS models
+│       │   ├── Billing/                 # Billing models
+│       │   ├── Chat/                    # Chat completion models
+│       │   ├── Common/                  # Shared models
+│       │   ├── Embeddings/              # Embedding models
+│       │   ├── Images/                  # Image generation models
+│       │   └── Models/                  # Model management models
+│       └── Services/                    # Service implementations
+│           ├── Base/                    # Base service classes
+│           └── Interfaces/              # Service interfaces
+├── samples/
+│   └── VeniceAI.SDK.Quickstart/        # Quickstart console application
+├── tests/
+│   ├── VeniceAI.SDK.Tests/              # Unit tests
+│   └── VeniceAI.SDK.IntegrationTests/   # Integration tests
+└── openapi/                             # OpenAPI specifications
+```
+
+### Key Components
+
+- **VeniceAI.SDK** - Main SDK package providing all functionality
+- **Services** - Core service implementations (Chat, Images, Audio, etc.)
+- **Models** - Strongly-typed request/response models
+- **Configuration** - Configuration options and validation
+- **Extensions** - Dependency injection extensions

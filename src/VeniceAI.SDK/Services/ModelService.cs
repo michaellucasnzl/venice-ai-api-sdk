@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 using VeniceAI.SDK.Models.Models;
@@ -40,7 +41,8 @@ public class ModelService : BaseHttpService, IModelService
                     Object = m.Object ?? "model",
                     Created = m.Created,
                     OwnedBy = m.OwnedBy ?? string.Empty,
-                    Type = m.Type ?? string.Empty
+                    Type = m.Type ?? string.Empty,
+                    ModelSpec = m.ModelSpec ?? new ModelSpec()
                 }).ToList() ?? new List<Model>()
             };
         }
@@ -131,7 +133,8 @@ public class ModelService : BaseHttpService, IModelService
                 Object = apiResponse.Object ?? "model",
                 Created = apiResponse.Created,
                 OwnedBy = apiResponse.OwnedBy ?? string.Empty,
-                Type = apiResponse.Type ?? string.Empty
+                Type = apiResponse.Type ?? string.Empty,
+                ModelSpec = apiResponse.ModelSpec ?? new ModelSpec()
             };
         }
         catch (VeniceAIException)
@@ -161,4 +164,6 @@ internal class ModelApiResponse
     public long Created { get; set; }
     public string? OwnedBy { get; set; }
     public string? Type { get; set; }
+    [JsonPropertyName("model_spec")]
+    public ModelSpec? ModelSpec { get; set; }
 }

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeniceAI.SDK.Samples", "sam
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{5D20AA90-6969-D8BD-9DCD-8634F4692FDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeniceAI.SDK.QuickStart", "samples\VeniceAI.SDK.QuickStart\VeniceAI.SDK.QuickStart.csproj", "{BC19A330-5F61-415A-84F3-40709B9B6663}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeniceAI.SDK.Quickstart", "samples\VeniceAI.SDK.Quickstart\VeniceAI.SDK.Quickstart.csproj", "{BC19A330-5F61-415A-84F3-40709B9B6663}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
