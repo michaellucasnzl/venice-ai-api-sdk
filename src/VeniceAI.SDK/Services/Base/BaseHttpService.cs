@@ -29,7 +29,7 @@ public class BaseHttpService
         // Set base address
         if (_httpClient.BaseAddress == null)
         {
-            _httpClient.BaseAddress = new Uri("https://api.venice.ai/api/v1/");
+            _httpClient.BaseAddress = new Uri("https://api.venice.ai/api/v1/"); //todo: getthis from appsettings.
         }
 
         // Configure JSON serialization

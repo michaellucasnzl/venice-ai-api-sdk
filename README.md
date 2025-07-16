@@ -10,20 +10,26 @@ generation, text-to-speech, embeddings, and more.
 
 Note that this SDK is under review by the Venice team and may become the official Venice SDK for .NET.
 
-The SDK is currently in *beta* only - there are some endpoints that are broken but active development will ensure they get fixed soon.
+The SDK is currently in *beta* with active development ensuring continuous improvements and new features.
 
 ## Features
 
-- **Chat Completions** - Generate text using advanced language models
-- **Image Generation** - Create images from text descriptions
-- **Text-to-Speech** - Convert text to natural-sounding speech
-- **Embeddings** - Generate text embeddings for semantic search
-- **Model Management** - List and manage available models
-- **Billing Information** - Track API usage and costs
-- **Streaming Support** - Real-time streaming for chat and audio
+- **Chat Completions** - Generate text using advanced language models with streaming support
+- **Image Generation** - Create, edit, and upscale images from text descriptions
+- **Text-to-Speech** - Convert text to natural-sounding speech with multiple voices
+- **Embeddings** - Generate text embeddings for semantic search and analysis
+- **Model Management** - List and manage available models with detailed specifications
+- **Billing Information** - Track API usage and costs with detailed breakdowns
+- **Vision Support** - Analyze and understand images with multimodal models
+- **Function Calling** - Execute functions based on natural language requests
+- **Web Search Integration** - Enhanced responses with real-time web search
+- **Venice Parameters** - Advanced Venice-specific features and optimizations
+- **Streaming Support** - Real-time streaming for chat, audio, and other responses
 - **Async/Await** - Full async support throughout the SDK
 - **Dependency Injection** - Built-in support for .NET DI container
 - **Comprehensive Logging** - Detailed logging for debugging and monitoring
+- **Error Handling** - Robust error handling with detailed error information
+- **Configuration Management** - Flexible configuration options for all scenarios
 
 ## Installation
 
@@ -186,9 +192,10 @@ await foreach (var chunk in client.Chat.CreateChatCompletionStreamAsync(chatRequ
 ### Vision (Image Understanding)
 
 ```csharp
+// Analyze an image with vision models
 var visionRequest = new ChatCompletionRequest
 {
-    Model = "llama-3.2-11b-vision",
+    Model = "mistral-31-24b", // Vision-enabled model
     Messages = new List<ChatMessage>
     {
         new UserMessage(new List<MessageContent>
@@ -196,7 +203,7 @@ var visionRequest = new ChatCompletionRequest
             new MessageContent
             {
                 Type = "text",
-                Text = "What do you see in this image?"
+                Text = "What do you see in this image? Describe it in detail."
             },
             new MessageContent
             {
@@ -212,20 +219,22 @@ var visionRequest = new ChatCompletionRequest
 };
 
 var response = await client.Chat.CreateChatCompletionAsync(visionRequest);
+Console.WriteLine($"Vision analysis: {response.Choices[0].Message.Content}");
 ```
 
 ### Image Generation
 
 ```csharp
+// Basic image generation
 var imageRequest = new GenerateImageRequest
 {
-    Model = "hidream",
+    Model = "flux-dev",
     Prompt = "A beautiful sunset over mountains",
     Width = 1024,
     Height = 1024,
-    Steps = 20,
+    Steps = 25,
     CfgScale = 7.5,
-    Format = "webp"
+    Format = "png"
 };
 
 var imageResponse = await client.Images.GenerateImageAsync(imageRequest);
@@ -233,6 +242,33 @@ if (imageResponse.IsSuccess)
 {
     var base64Image = imageResponse.Data[0].B64Json;
     // Save or process the image
+    var imageBytes = Convert.FromBase64String(base64Image);
+    await File.WriteAllBytesAsync("generated_image.png", imageBytes);
+}
+
+// Simple image generation
+var simpleImageResponse = await client.Images.GenerateImageSimpleAsync(
+    "A futuristic cityscape at night", 
+    model: "flux-dev",
+    width: 1024,
+    height: 1024
+);
+
+// Image upscaling
+var upscaleRequest = new UpscaleImageRequest
+{
+    Model = "flux-dev",
+    Image = Convert.ToBase64String(imageBytes),
+    Scale = 2
+};
+
+var upscaleResponse = await client.Images.UpscaleImageAsync(upscaleRequest);
+
+// Get available image styles
+var stylesResponse = await client.Images.GetImageStylesAsync();
+foreach (var style in stylesResponse.Data)
+{
+    Console.WriteLine($"Available style: {style}");
 }
 ```
 
@@ -362,21 +398,36 @@ foreach (var entry in billingResponse.Data)
 ### Venice Parameters
 
 ```csharp
+// Use Venice-specific features for enhanced responses
 var request = new ChatCompletionRequest
 {
     Model = "llama-3.3-70b",
     Messages = new List<ChatMessage>
     {
-        new UserMessage("Tell me about recent news.")
+        new UserMessage("Tell me about recent developments in AI technology.")
     },
     VeniceParameters = new VeniceParameters
     {
-        EnableWebSearch = "auto",
-        EnableWebCitations = true,
-        StripThinkingResponse = true,
-        IncludeVeniceSystemPrompt = true
+        EnableWebSearch = "on", // Enable web search for current information
+        EnableWebCitations = true, // Include citations in response
+        StripThinkingResponse = false, // Show reasoning process
+        IncludeVeniceSystemPrompt = true, // Use Venice optimizations
+        DisableThinking = false // Allow model to show reasoning
     }
 };
+
+var response = await client.Chat.CreateChatCompletionAsync(request);
+Console.WriteLine($"Enhanced response: {response.Choices[0].Message.Content}");
+
+// Check for web search citations
+if (response.VeniceParameters?.WebSearchCitations?.Any() == true)
+{
+    Console.WriteLine("Sources:");
+    foreach (var citation in response.VeniceParameters.WebSearchCitations)
+    {
+        Console.WriteLine($"- {citation.Title}: {citation.Url}");
+    }
+}
 ```
 
 ### Error Handling
@@ -394,7 +445,15 @@ try
     {
         Console.WriteLine($"Error: {response.Error?.Error}");
         Console.WriteLine($"Status Code: {response.StatusCode}");
+        Console.WriteLine($"Error Type: {response.Error?.Type}");
+        Console.WriteLine($"Error Code: {response.Error?.Code}");
     }
+}
+catch (VeniceAIException ex)
+{
+    Console.WriteLine($"Venice AI Error: {ex.Message}");
+    Console.WriteLine($"Error Code: {ex.ErrorCode}");
+    Console.WriteLine($"Status Code: {ex.StatusCode}");
 }
 catch (HttpRequestException ex)
 {
@@ -451,10 +510,9 @@ dotnet test tests/VeniceAI.SDK.IntegrationTests
 
 Check out the [samples](samples/) directory for complete example applications:
 
-- [Basic Usage](samples/VeniceAI.SDK.Samples/Program.cs) - Demonstrates all SDK features
-- [Chat Console App](samples/ChatConsole/) - Interactive chat application
-- [Image Generator](samples/ImageGenerator/) - Batch image generation
-- [Voice Assistant](samples/VoiceAssistant/) - Speech-to-text and text-to-speech
+- [Quick Start](samples/VeniceAI.SDK.QuickStart/Program.cs) - Comprehensive demonstration of all SDK features
+- [Basic Usage](samples/VeniceAI.SDK.Samples/Program.cs) - Core functionality examples
+- [Error Handling Demo](samples/VeniceAI.SDK.ErrorHandlingDemo/Program.cs) - Error handling patterns
 
 ## API Reference
 
@@ -489,3 +547,44 @@ The Venice AI SDK follows semantic versioning with an auto-incrementing build nu
 - **Minor**: New features (backwards compatible)
 - **Patch**: Bug fixes (backwards compatible)
 - **Build**: Auto-incremented from GitHub workflow run number
+
+## Available Models
+
+The Venice AI SDK supports various models for different use cases:
+
+### Text Models
+- **llama-3.3-70b** - High-performance general-purpose model (default)
+- **qwen3-235b** - Large model for complex reasoning tasks
+- **mistral-31-24b** - Vision-enabled model for image understanding
+- **venice-uncensored** - Uncensored model for creative tasks
+- **qwen-2.5-qwq-32b** - Reasoning-focused model
+- **deepseek-r1-671b** - Advanced reasoning model
+
+### Image Models
+- **flux-dev** - High-quality image generation (recommended)
+- **venice-sd35** - Stable Diffusion 3.5 model
+- **hidream** - Artistic image generation
+- **stable-diffusion-3.5** - Latest Stable Diffusion model
+- **pony-realism** - Realistic image generation
+
+### Audio Models
+- **tts-kokoro** - Text-to-speech synthesis
+- **whisper** - Speech recognition and transcription
+
+### Embedding Models
+- **text-embedding-bge-m3** - Multilingual embeddings
+- **text-embedding-ada-002** - General-purpose embeddings
+
+```csharp
+// Get all available models
+var modelsResponse = await client.Models.GetModelsAsync();
+foreach (var model in modelsResponse.Data)
+{
+    Console.WriteLine($"{model.Id}: {model.ModelSpec.Name}");
+    Console.WriteLine($"Type: {model.Type}");
+    Console.WriteLine($"Context Length: {model.ModelSpec.AvailableContextTokens}");
+    Console.WriteLine($"Supports Vision: {model.ModelSpec.Capabilities.SupportsVision}");
+    Console.WriteLine($"Supports Function Calling: {model.ModelSpec.Capabilities.SupportsFunctionCalling}");
+    Console.WriteLine();
+}
+```
