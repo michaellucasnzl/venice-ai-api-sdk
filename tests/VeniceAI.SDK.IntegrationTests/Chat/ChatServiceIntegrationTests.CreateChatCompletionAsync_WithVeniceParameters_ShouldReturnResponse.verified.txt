@@ -13,7 +13,7 @@
     }
   ],
   Usage: {
-    PromptTokens: 5748,
+    PromptTokens: 4820,
     CompletionTokens: {Scrubbed},
     TotalTokens: {Scrubbed}
   },

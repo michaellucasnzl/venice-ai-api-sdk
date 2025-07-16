@@ -13,10 +13,10 @@
     }
   },
   Timing: {
-    InferenceDuration: 6163,
-    InferencePreprocessingTime: 6215,
-    InferenceQueueTime: 1274,
-    Total: 7489
+    InferenceDuration: 6512,
+    InferencePreprocessingTime: 6540,
+    InferenceQueueTime: 1139,
+    Total: 7679
   },
   IsSuccess: true,
   StatusCode: 200,

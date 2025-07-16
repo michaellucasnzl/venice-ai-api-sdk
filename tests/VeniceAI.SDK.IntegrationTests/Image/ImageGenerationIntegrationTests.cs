@@ -19,7 +19,7 @@ public class ImageGenerationIntegrationTests : IntegrationTestBase
     /// </summary>
     protected override string[] GetPropertiesToScrub()
     {
-        return new[] { "B64Json", "Images", "Image" };
+        return new[] { "B64Json", "Images", "Image", "Timing", "InferenceDuration", "InferencePreprocessingTime", "InferenceQueueTime", "Total" };
     }
 
     [Fact]

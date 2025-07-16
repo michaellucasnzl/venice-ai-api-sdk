@@ -19,7 +19,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
     /// </summary>
     protected override string[] GetPropertiesToScrub()
     {
-        return new[] { "Content", "CompletionTokens", "TotalTokens" };
+        return new[] { "Content", "CompletionTokens", "TotalTokens", "PromptTokens", "Usage" };
     }
 
     [Fact]

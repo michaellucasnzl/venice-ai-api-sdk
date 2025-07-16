@@ -22,6 +22,10 @@ public abstract class IntegrationTestBase : IDisposable
     protected IntegrationTestBase(ITestOutputHelper output)
     {
         Output = output;
+        
+        // Disable console logging from the SDK during tests to reduce noise
+        VeniceAI.SDK.Services.Base.BaseHttpService.EnableConsoleLogging = false;
+        
         ConfigureVerify();
 
         var hostBuilder = Host.CreateDefaultBuilder()
