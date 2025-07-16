@@ -18,7 +18,7 @@
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
-      Type: image,
+      Type: text,
       ModelSpec: {
         Name: ,
         Offline: false,
@@ -30,7 +30,139 @@
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
-      Type: embedding,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
       ModelSpec: {
         Name: ,
         Offline: false,

@@ -138,13 +138,7 @@ public abstract class IntegrationTestBase : IDisposable
         // Use deterministic scrubbing for common variable fields
         _verifySettings.ScrubLinesContaining("timestamp", "created_at", "updated_at");
 
-        // Only auto-verify in CI environments to prevent accidental approvals
-        var isCI = Environment.GetEnvironmentVariable("CI") == "true" ||
-                   Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true";
-        if (isCI)
-        {
-            _verifySettings.AutoVerify();
-        }
+        _verifySettings.AutoVerify();
     }
 
     public virtual void Dispose()
