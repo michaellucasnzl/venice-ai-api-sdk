@@ -3,25 +3,21 @@ using VeniceAI.SDK.Models.Images;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace VeniceAI.SDK.IntegrationTests;
+namespace VeniceAI.SDK.IntegrationTests.Image;
 
 /// <summary>
-/// Integration tests for the Image service.
+/// Integration tests for the Image generation endpoints.
 /// </summary>
-public class ImageServiceIntegrationTests : IntegrationTestBase
+public class ImageGenerationIntegrationTests : IntegrationTestBase
 {
-    public ImageServiceIntegrationTests(ITestOutputHelper output) : base(output)
+    public ImageGenerationIntegrationTests(ITestOutputHelper output) : base(output)
     {
     }
 
     [Fact]
     public async Task GenerateImageAsync_WithValidRequest_ShouldReturnImage()
     {
-        if (ShouldSkipRealApiCalls())
-        {
-            Output.WriteLine("Skipping test - no real API key configured");
-            return;
-        }
+
 
         // Arrange
         var request = new GenerateImageRequest
@@ -45,7 +41,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Data.ShouldNotBeEmpty();
-        
+
         // Check if we have either URL or base64 data
         var firstImage = response.Data[0];
         (firstImage.Url != null || firstImage.B64Json != null).ShouldBeTrue("Image should have either URL or base64 data");
@@ -65,11 +61,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
     [Fact]
     public async Task GenerateImageSimpleAsync_WithValidRequest_ShouldReturnImage()
     {
-        if (ShouldSkipRealApiCalls())
-        {
-            Output.WriteLine("Skipping test - no real API key configured");
-            return;
-        }
+
 
         // Arrange
         var request = new SimpleGenerateImageRequest
@@ -93,7 +85,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Data.ShouldNotBeEmpty();
-        
+
         // Check if we have either URL or base64 data
         var firstImage = response.Data[0];
         (firstImage.Url != null || firstImage.B64Json != null).ShouldBeTrue("Image should have either URL or base64 data");
@@ -111,51 +103,9 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task GetImageStylesAsync_ShouldReturnStyles()
-    {
-        if (ShouldSkipRealApiCalls())
-        {
-            Output.WriteLine("Skipping test - no real API key configured");
-            return;
-        }
-
-        // Act
-        var response = await ExecuteWithErrorHandling(
-            () => Client.Images.GetImageStylesAsync(CancellationToken.None),
-            "GetImageStylesAsync"
-        );
-
-        // Assert - Allow empty styles as it may be endpoint-specific
-        if (response == null) return;
-
-        response.ShouldNotBeNull();
-        response.IsSuccess.ShouldBeTrue();
-        response.Styles.ShouldNotBeNull();
-
-        if (response.Styles.Any())
-        {
-            Output.WriteLine($"Available styles: {response.Styles.Count}");
-            foreach (var style in response.Styles.Take(5))
-            {
-                Output.WriteLine($"- {style}");
-            }
-        }
-        else
-        {
-            Output.WriteLine("No styles returned - this may be expected for this endpoint");
-        }
-
-        await VerifyResult(response);
-    }
-
-    [Fact]
     public async Task GenerateImageAsync_WithStylePreset_ShouldReturnImage()
     {
-        if (ShouldSkipRealApiCalls())
-        {
-            Output.WriteLine("Skipping test - no real API key configured");
-            return;
-        }
+
 
         // Arrange
         var request = new GenerateImageRequest
@@ -180,7 +130,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Data.ShouldNotBeEmpty();
-        
+
         // Check if we have either URL or base64 data
         var firstImage = response.Data[0];
         (firstImage.Url != null || firstImage.B64Json != null).ShouldBeTrue("Image should have either URL or base64 data");
@@ -193,7 +143,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
         {
             Output.WriteLine($"Generated styled image as base64 data (length: {firstImage.B64Json.Length} characters)");
         }
-        
+
         Output.WriteLine($"Style preset used: {request.StylePreset}");
 
         await VerifyResult(response);
@@ -202,11 +152,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
     [Fact]
     public async Task GenerateImageAsync_WithNegativePrompt_ShouldReturnImage()
     {
-        if (ShouldSkipRealApiCalls())
-        {
-            Output.WriteLine("Skipping test - no real API key configured");
-            return;
-        }
+
 
         // Arrange
         var request = new GenerateImageRequest
@@ -231,7 +177,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Data.ShouldNotBeEmpty();
-        
+
         // Check if we have either URL or base64 data
         var firstImage = response.Data[0];
         (firstImage.Url != null || firstImage.B64Json != null).ShouldBeTrue("Image should have either URL or base64 data");
@@ -244,7 +190,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
         {
             Output.WriteLine($"Generated image with negative prompt as base64 data (length: {firstImage.B64Json.Length} characters)");
         }
-        
+
         Output.WriteLine($"Negative prompt: {request.NegativePrompt}");
 
         await VerifyResult(response);

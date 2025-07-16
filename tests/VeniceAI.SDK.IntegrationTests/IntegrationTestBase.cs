@@ -48,13 +48,6 @@ public abstract class IntegrationTestBase : IDisposable
         Client = _host.Services.GetRequiredService<IVeniceAIClient>();
     }
 
-    protected bool ShouldSkipRealApiCalls()
-    {
-        // Check if API key is configured
-        var apiKey = Configuration["VeniceAI:ApiKey"];
-        return string.IsNullOrEmpty(apiKey);
-    }
-
     protected async Task DelayBetweenRequests()
     {
         if (Configuration.GetValue<bool>("TestConfiguration:UseThrottling", true))
@@ -84,7 +77,7 @@ public abstract class IntegrationTestBase : IDisposable
                     Output.WriteLine($"{testName} passed - Expected API issue in test environment (auth/rate limit)");
                     return null;
                 }
-                
+
                 // For 404 errors, skip the test as the model might not be available
                 if (baseResponse.StatusCode == 404)
                 {

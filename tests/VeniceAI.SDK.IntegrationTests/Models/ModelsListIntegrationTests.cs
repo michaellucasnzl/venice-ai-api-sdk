@@ -3,14 +3,14 @@ using VeniceAI.SDK.Models.Models;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace VeniceAI.SDK.IntegrationTests;
+namespace VeniceAI.SDK.IntegrationTests.Models;
 
 /// <summary>
-/// Integration tests for the Model service.
+/// Integration tests for the Models list endpoint.
 /// </summary>
-public class ModelServiceIntegrationTests : IntegrationTestBase
+public class ModelsListIntegrationTests : IntegrationTestBase
 {
-    public ModelServiceIntegrationTests(ITestOutputHelper output) : base(output)
+    public ModelsListIntegrationTests(ITestOutputHelper output) : base(output)
     {
     }
 

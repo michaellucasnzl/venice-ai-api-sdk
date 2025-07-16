@@ -1,0 +1,27 @@
+﻿{
+  Id: {Scrubbed},
+  Object: chat.completion,
+  Created: {Scrubbed},
+  Model: llama-3.3-70b,
+  Choices: [
+    {
+      Message: {
+        Role: assistant,
+        Content:
+The weather varies by location, but here are some general forecasts for July 15, 2025:
+
+* In the Northeast, it's expected to be hot and humid, with highs ranging from the 70s to mid-80s [REF]19[/REF].
+* In New York, the temperature is expected to be around 30°C, with highs and lows of 30° and 21° respectively [REF]3[/REF].
+* In San Diego, the humidity is expected
+      },
+      FinishReason: length
+    }
+  ],
+  Usage: {
+    PromptTokens: 5612,
+    CompletionTokens: 100,
+    TotalTokens: 5712
+  },
+  IsSuccess: true,
+  RawContent: {Scrubbed}
+}

@@ -138,7 +138,7 @@ public class ChatService : BaseHttpService, IChatService
                 } : null,
                 IsSuccess = true
             };
-            
+
             return response;
         }
         catch (VeniceAIException)
