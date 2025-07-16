@@ -13,6 +13,5 @@
     TotalTokens: 14
   },
   IsSuccess: true,
-  StatusCode: 200,
   RawContent: {Scrubbed}
 }

@@ -32,7 +32,9 @@ public class EmbeddingService : BaseHttpService, IEmbeddingService
 
         try
         {
-            return await PostAsync<CreateEmbeddingRequest, CreateEmbeddingResponse>("embeddings", request, cancellationToken);
+            var response = await PostAsync<CreateEmbeddingRequest, CreateEmbeddingResponse>("embeddings", request, cancellationToken);
+            response.IsSuccess = true;
+            return response;
         }
         catch (VeniceAIException)
         {

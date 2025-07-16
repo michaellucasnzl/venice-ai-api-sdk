@@ -5,6 +5,7 @@
       B64Json: {Scrubbed}
     }
   ],
+  Created: {Scrubbed},
   Request: {
     Success: true,
     Data: {
@@ -12,10 +13,10 @@
     }
   },
   Timing: {
-    InferenceDuration: 7636,
-    InferencePreprocessingTime: {Scrubbed},
-    InferenceQueueTime: {Scrubbed},
-    Total: 11785
+    InferenceDuration: 6545,
+    InferencePreprocessingTime: 6580,
+    InferenceQueueTime: 860,
+    Total: 7440
   },
   IsSuccess: true,
   StatusCode: 200,

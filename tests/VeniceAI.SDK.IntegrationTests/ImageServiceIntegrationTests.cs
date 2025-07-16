@@ -26,7 +26,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new GenerateImageRequest
         {
-            Model = "flux-1-schnell",
+            Model = "flux-dev",
             Prompt = "A beautiful sunset over the ocean with sailboats in the distance",
             Width = 1024,
             Height = 1024,
@@ -41,13 +41,23 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
 
         // Assert
         if (response == null) return;
-        
+
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Data.ShouldNotBeEmpty();
-        response.Data[0].Url.ShouldNotBeNullOrEmpty();
+        
+        // Check if we have either URL or base64 data
+        var firstImage = response.Data[0];
+        (firstImage.Url != null || firstImage.B64Json != null).ShouldBeTrue("Image should have either URL or base64 data");
 
-        Output.WriteLine($"Generated image URL: {response.Data[0].Url}");
+        if (firstImage.Url != null)
+        {
+            Output.WriteLine($"Generated image URL: {firstImage.Url}");
+        }
+        else if (firstImage.B64Json != null)
+        {
+            Output.WriteLine($"Generated image as base64 data (length: {firstImage.B64Json.Length} characters)");
+        }
 
         await VerifyResult(response);
     }
@@ -65,7 +75,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
         var request = new SimpleGenerateImageRequest
         {
             Prompt = "A majestic mountain landscape with snow-capped peaks",
-            Model = "flux-1-schnell",
+            Model = "flux-dev",
             Size = "1024x1024",
             Quality = "standard",
             N = 1
@@ -79,13 +89,23 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
 
         // Assert
         if (response == null) return;
-        
+
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Data.ShouldNotBeEmpty();
-        response.Data[0].Url.ShouldNotBeNullOrEmpty();
+        
+        // Check if we have either URL or base64 data
+        var firstImage = response.Data[0];
+        (firstImage.Url != null || firstImage.B64Json != null).ShouldBeTrue("Image should have either URL or base64 data");
 
-        Output.WriteLine($"Generated simple image URL: {response.Data[0].Url}");
+        if (firstImage.Url != null)
+        {
+            Output.WriteLine($"Generated simple image URL: {firstImage.Url}");
+        }
+        else if (firstImage.B64Json != null)
+        {
+            Output.WriteLine($"Generated simple image as base64 data (length: {firstImage.B64Json.Length} characters)");
+        }
 
         await VerifyResult(response);
     }
@@ -107,7 +127,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
 
         // Assert - Allow empty styles as it may be endpoint-specific
         if (response == null) return;
-        
+
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Styles.ShouldNotBeNull();
@@ -140,11 +160,11 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new GenerateImageRequest
         {
-            Model = "flux-1-schnell",
+            Model = "flux-dev",
             Prompt = "A cyberpunk cityscape at night with neon lights",
             Width = 1024,
             Height = 1024,
-            StylePreset = "cyberpunk",
+            StylePreset = "Neon Punk",
             Format = "png"
         };
 
@@ -156,13 +176,24 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
 
         // Assert
         if (response == null) return;
-        
+
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Data.ShouldNotBeEmpty();
-        response.Data[0].Url.ShouldNotBeNullOrEmpty();
+        
+        // Check if we have either URL or base64 data
+        var firstImage = response.Data[0];
+        (firstImage.Url != null || firstImage.B64Json != null).ShouldBeTrue("Image should have either URL or base64 data");
 
-        Output.WriteLine($"Generated styled image URL: {response.Data[0].Url}");
+        if (firstImage.Url != null)
+        {
+            Output.WriteLine($"Generated styled image URL: {firstImage.Url}");
+        }
+        else if (firstImage.B64Json != null)
+        {
+            Output.WriteLine($"Generated styled image as base64 data (length: {firstImage.B64Json.Length} characters)");
+        }
+        
         Output.WriteLine($"Style preset used: {request.StylePreset}");
 
         await VerifyResult(response);
@@ -180,7 +211,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new GenerateImageRequest
         {
-            Model = "flux-1-schnell",
+            Model = "flux-dev",
             Prompt = "A peaceful forest scene with wildlife",
             NegativePrompt = "dark, scary, horror, violence",
             Width = 1024,
@@ -196,13 +227,24 @@ public class ImageServiceIntegrationTests : IntegrationTestBase
 
         // Assert
         if (response == null) return;
-        
+
         response.ShouldNotBeNull();
         response.IsSuccess.ShouldBeTrue();
         response.Data.ShouldNotBeEmpty();
-        response.Data[0].Url.ShouldNotBeNullOrEmpty();
+        
+        // Check if we have either URL or base64 data
+        var firstImage = response.Data[0];
+        (firstImage.Url != null || firstImage.B64Json != null).ShouldBeTrue("Image should have either URL or base64 data");
 
-        Output.WriteLine($"Generated image with negative prompt: {response.Data[0].Url}");
+        if (firstImage.Url != null)
+        {
+            Output.WriteLine($"Generated image with negative prompt: {firstImage.Url}");
+        }
+        else if (firstImage.B64Json != null)
+        {
+            Output.WriteLine($"Generated image with negative prompt as base64 data (length: {firstImage.B64Json.Length} characters)");
+        }
+        
         Output.WriteLine($"Negative prompt: {request.NegativePrompt}");
 
         await VerifyResult(response);

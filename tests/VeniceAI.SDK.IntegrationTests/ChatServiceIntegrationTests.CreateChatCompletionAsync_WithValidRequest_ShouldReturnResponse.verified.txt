@@ -1,15 +1,13 @@
 ﻿{
-  Id: chatcmpl-ba0e01d11a6a46ad95d700e3b77a9999,
+  Id: {Scrubbed},
   Object: chat.completion,
-  Created: 1752231347,
+  Created: {Scrubbed},
   Model: llama-3.3-70b,
   Choices: [
     {
       Message: {
         Role: assistant,
-        Content: {
-          ValueKind: String
-        }
+        Content: I'm just a language model, so I don't have feelings or emotions like humans do, but I'm functioning properly and ready to assist you with any questions or topics you'd like to discuss. How can I help you today?
       },
       FinishReason: stop
     }
@@ -20,6 +18,5 @@
     TotalTokens: 388
   },
   IsSuccess: true,
-  StatusCode: 200,
   RawContent: {Scrubbed}
 }

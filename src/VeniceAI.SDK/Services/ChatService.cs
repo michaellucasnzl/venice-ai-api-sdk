@@ -104,7 +104,7 @@ public class ChatService : BaseHttpService, IChatService
                 cancellationToken);
 
             // Convert to SDK response format
-            return new ChatCompletionResponse
+            var response = new ChatCompletionResponse
             {
                 Id = apiResponse.Id ?? string.Empty,
                 Object = apiResponse.Object ?? string.Empty,
@@ -135,8 +135,11 @@ public class ChatService : BaseHttpService, IChatService
                     PromptTokens = apiResponse.Usage.PromptTokens,
                     CompletionTokens = apiResponse.Usage.CompletionTokens,
                     TotalTokens = apiResponse.Usage.TotalTokens
-                } : null
+                } : null,
+                IsSuccess = true
             };
+            
+            return response;
         }
         catch (VeniceAIException)
         {

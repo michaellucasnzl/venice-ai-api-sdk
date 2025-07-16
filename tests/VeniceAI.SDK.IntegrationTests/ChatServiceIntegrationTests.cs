@@ -126,7 +126,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = "llama-3.2-90b-vision",
+            Model = "qwen-2.5-vl",
             Messages = new List<ChatMessage>
             {
                 new UserMessage("What do you see in this image?")
@@ -136,7 +136,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
                         new { type = "text", text = "What is in this image?" },
                         new { 
                             type = "image_url", 
-                            image_url = new { url = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAA..." }
+                            image_url = new { url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" }
                         }
                     }
                 }
@@ -225,7 +225,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
             Temperature = 0.7,
             VeniceParameters = new VeniceParameters
             {
-                EnableWebSearch = "true",
+                EnableWebSearch = "auto",
                 EnableWebCitations = true
             }
         };

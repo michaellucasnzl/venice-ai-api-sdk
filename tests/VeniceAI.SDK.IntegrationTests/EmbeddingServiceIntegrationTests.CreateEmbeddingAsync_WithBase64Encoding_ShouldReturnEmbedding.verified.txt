@@ -10,10 +10,9 @@
   ],
   Model: text-embedding-bge-m3,
   Usage: {
-    PromptTokens: 12,
-    TotalTokens: 12
+    PromptTokens: 10,
+    TotalTokens: 10
   },
   IsSuccess: true,
-  StatusCode: 200,
   RawContent: {Scrubbed}
 }

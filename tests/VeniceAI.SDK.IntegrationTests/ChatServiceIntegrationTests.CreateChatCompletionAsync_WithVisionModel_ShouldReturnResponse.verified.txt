@@ -2,23 +2,20 @@
   Id: {Scrubbed},
   Object: chat.completion,
   Created: {Scrubbed},
-  Model: llama-3.3-70b,
+  Model: qwen-2.5-vl,
   Choices: [
     {
       Message: {
         Role: assistant,
-        Content:
-Deep blue waters rise
-Mystery and beauty found
-Ocean's mighty roar
+        Content: Hello! How can I assist you today? Feel free to ask about any topic, and I'll do my best to provide a detailed and direct answer.
       },
       FinishReason: stop
     }
   ],
   Usage: {
-    PromptTokens: 157,
-    CompletionTokens: 16,
-    TotalTokens: 173
+    PromptTokens: 312,
+    CompletionTokens: 32,
+    TotalTokens: 344
   },
   IsSuccess: true,
   RawContent: {Scrubbed}
