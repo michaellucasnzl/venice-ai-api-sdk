@@ -12,12 +12,7 @@
       ValueKind: Object
     }
   },
-  Timing: {
-    InferenceDuration: 6539,
-    InferencePreprocessingTime: 6576,
-    InferenceQueueTime: 737,
-    Total: 7313
-  },
+  Timing: {Scrubbed},
   IsSuccess: true,
   StatusCode: 200,
   RawContent: {Scrubbed}

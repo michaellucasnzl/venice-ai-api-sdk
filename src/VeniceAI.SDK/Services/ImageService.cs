@@ -109,13 +109,21 @@ public class ImageService : BaseHttpService, IImageService
 
         try
         {
-            var response = await PostAsync<UpscaleImageRequest, ImageGenerationResponse>(
+            var (data, _) = await PostForBinaryAsync(
                 "image/upscale",
                 request,
                 cancellationToken);
 
-            response.IsSuccess = true;
-            response.StatusCode = 200;
+            // Convert binary data to base64 string
+            var base64Image = Convert.ToBase64String(data);
+
+            var response = new ImageGenerationResponse
+            {
+                Images = new List<string> { base64Image },
+                IsSuccess = true,
+                StatusCode = 200
+            };
+
             return response;
         }
         catch (VeniceAIException)
@@ -148,13 +156,24 @@ public class ImageService : BaseHttpService, IImageService
 
         try
         {
-            var response = await PostAsync<EditImageRequest, ImageGenerationResponse>(
+            var imageData = await PostForBinaryAsync(
                 "image/edit",
                 request,
                 cancellationToken);
 
-            response.IsSuccess = true;
-            response.StatusCode = 200;
+            var response = new ImageGenerationResponse
+            {
+                Data = new List<ImageData>
+                {
+                    new ImageData
+                    {
+                        B64Json = Convert.ToBase64String(imageData.Data)
+                    }
+                },
+                IsSuccess = true,
+                StatusCode = 200
+            };
+
             return response;
         }
         catch (VeniceAIException)
