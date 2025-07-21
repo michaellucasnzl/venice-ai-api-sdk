@@ -3,9 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Serilog;
-using Serilog.Extensions.Hosting;
-using Serilog.Sinks.XUnit;
 using VeniceAI.SDK;
 using VeniceAI.SDK.Extensions;
 using Xunit;
@@ -35,12 +32,11 @@ public abstract class IntegrationTestBase : IDisposable
                 config.AddEnvironmentVariables();
                 config.AddUserSecrets(GetType().Assembly);
             })
-            .UseSerilog((context, services, configuration) =>
+            .ConfigureLogging((context, logging) =>
             {
-                configuration
-                    .ReadFrom.Configuration(context.Configuration)
-                    .ReadFrom.Services(services)
-                    .WriteTo.TestOutput(output);
+                logging.ClearProviders();
+                logging.AddConsole();
+                logging.SetMinimumLevel(LogLevel.Information);
             })
             .ConfigureServices((context, services) =>
             {

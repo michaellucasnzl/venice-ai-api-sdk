@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 using VeniceAI.SDK.Models.Chat;
+using VeniceAI.SDK.Extensions;
 
 namespace VeniceAI.SDK.Services;
 
@@ -17,7 +18,7 @@ public class ChatService : BaseHttpService, IChatService
     /// <param name="httpClient">The HTTP client.</param>
     /// <param name="apiKey">The API key.</param>
     /// <param name="logger">The logger.</param>
-    public ChatService(HttpClient httpClient, string apiKey, ILogger<BaseHttpService> logger) : base(httpClient, apiKey, logger)
+    public ChatService(HttpClient httpClient, string apiKey, ILogger<ChatService> logger) : base(httpClient, apiKey, logger)
     {
     }
 
@@ -51,6 +52,9 @@ public class ChatService : BaseHttpService, IChatService
 
         if (string.IsNullOrEmpty(request.Model))
             throw new ArgumentException("Model is required", nameof(request));
+
+        // Validate the model
+        ModelEnumExtensions.ValidateTextModel(request.Model);
 
         if (request.Messages == null || !request.Messages.Any())
             throw new ArgumentException("Messages are required", nameof(request));

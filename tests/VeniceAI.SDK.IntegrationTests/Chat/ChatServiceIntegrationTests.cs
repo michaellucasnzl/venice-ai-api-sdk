@@ -285,7 +285,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = "qwen-3-235b",
+            Model = "qwen3-235b",
             Messages = new List<ChatMessage>
             {
                 new UserMessage("What's the current weather like in New York?")
@@ -359,7 +359,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = "qwen-3-235b",
+            Model = "qwen3-235b",
             Messages = new List<ChatMessage>
             {
                 new UserMessage("Generate a JSON object with information about a cat. Include name, age, and breed.")

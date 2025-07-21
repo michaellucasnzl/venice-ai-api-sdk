@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 using VeniceAI.SDK.Models.Audio;
+using VeniceAI.SDK.Extensions;
 
 namespace VeniceAI.SDK.Services;
 
@@ -17,7 +18,7 @@ public class AudioService : BaseHttpService, IAudioService
     /// <param name="httpClient">The HTTP client.</param>
     /// <param name="apiKey">The API key.</param>
     /// <param name="logger">The logger.</param>
-    public AudioService(HttpClient httpClient, string apiKey, ILogger<BaseHttpService> logger) : base(httpClient, apiKey, logger)
+    public AudioService(HttpClient httpClient, string apiKey, ILogger<AudioService> logger) : base(httpClient, apiKey, logger)
     {
     }
 
@@ -35,6 +36,12 @@ public class AudioService : BaseHttpService, IAudioService
 
         if (string.IsNullOrEmpty(request.Input))
             throw new ArgumentException("Input text is required", nameof(request));
+
+        // Validate the model if provided
+        if (!string.IsNullOrEmpty(request.Model))
+        {
+            ModelEnumExtensions.ValidateTextToSpeechModel(request.Model);
+        }
 
         try
         {

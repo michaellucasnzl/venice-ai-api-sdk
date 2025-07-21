@@ -2,26 +2,22 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Serilog;
 using VeniceAI.SDK;
 using VeniceAI.SDK.Extensions;
 using VeniceAI.SDK.Models.Chat;
 
 namespace VeniceAI.SDK.Quickstart;
 
-class Program
+internal class ProgramLogger { }
+
+static class Program
 {
     static async Task Main(string[] args)
     {
-        // Configure Serilog
-        Log.Logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(GetConfiguration())
-            .CreateLogger();
-
         try
         {
-            Log.Information("🚀 Venice AI SDK Quickstart");
-            Log.Information("===========================");
+            Console.WriteLine("🚀 Venice AI SDK Quickstart");
+            Console.WriteLine("===========================");
 
             // Load configuration
             var config = GetConfiguration();
@@ -33,17 +29,22 @@ class Program
 
             if (string.IsNullOrEmpty(apiKey))
             {
-                Log.Error("❌ API key not found!");
-                Log.Information("Please set your API key using one of these methods:");
-                Log.Information("1. User secrets: dotnet user-secrets set \"VeniceAI:ApiKey\" \"your-api-key\"");
-                Log.Information("2. Environment variable: set VeniceAI__ApiKey=your-api-key");
-                Log.Information("3. appsettings.json: { \"VeniceAI\": { \"ApiKey\": \"your-api-key\" } }");
+                Console.WriteLine("❌ API key not found!");
+                Console.WriteLine("Please set your API key using one of these methods:");
+                Console.WriteLine("1. User secrets: dotnet user-secrets set \"VeniceAI:ApiKey\" \"your-api-key\"");
+                Console.WriteLine("2. Environment variable: set VeniceAI__ApiKey=your-api-key");
+                Console.WriteLine("3. appsettings.json: { \"VeniceAI\": { \"ApiKey\": \"your-api-key\" } }");
                 return;
             }
 
             // Create host with dependency injection
             var host = Host.CreateDefaultBuilder(args)
-                .UseSerilog()
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.AddConsole();
+                    logging.SetMinimumLevel(LogLevel.Information);
+                })
                 .ConfigureServices((context, services) =>
                 {
                     services.AddVeniceAI(apiKey);
@@ -52,7 +53,7 @@ class Program
 
             // Get the Venice AI client from DI
             var client = host.Services.GetRequiredService<IVeniceAIClient>();
-            var logger = host.Services.GetRequiredService<ILogger<Program>>();
+            var logger = host.Services.GetRequiredService<ILogger<ProgramLogger>>();
 
             try
             {
@@ -179,11 +180,7 @@ class Program
         }
         catch (Exception ex)
         {
-            Log.Fatal(ex, "Application terminated unexpectedly");
-        }
-        finally
-        {
-            Log.CloseAndFlush();
+            Console.WriteLine($"Application terminated unexpectedly: {ex.Message}");
         }
     }
 
@@ -191,7 +188,7 @@ class Program
     {
         return new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", optional: true)
-            .AddUserSecrets<Program>()
+            .AddUserSecrets<ProgramLogger>()
             .AddEnvironmentVariables()
             .Build();
     }

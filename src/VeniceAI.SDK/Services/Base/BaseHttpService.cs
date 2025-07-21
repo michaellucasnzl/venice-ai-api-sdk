@@ -15,7 +15,7 @@ public class BaseHttpService
 {
     private readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _jsonOptions;
-    private readonly ILogger<BaseHttpService> _logger;
+    private readonly ILogger _logger;
     private const string ApplicationJsonMediaType = "application/json";
 
     /// <summary>
@@ -24,7 +24,7 @@ public class BaseHttpService
     /// <param name="httpClient">The HTTP client.</param>
     /// <param name="apiKey">The API key.</param>
     /// <param name="logger">The logger.</param>
-    public BaseHttpService(HttpClient httpClient, string apiKey, ILogger<BaseHttpService> logger)
+    public BaseHttpService(HttpClient httpClient, string apiKey, ILogger logger)
     {
         _httpClient = httpClient;
         _logger = logger;

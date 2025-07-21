@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 using VeniceAI.SDK.Models.Images;
+using VeniceAI.SDK.Extensions;
 
 namespace VeniceAI.SDK.Services;
 
@@ -16,7 +17,7 @@ public class ImageService : BaseHttpService, IImageService
     /// <param name="httpClient">The HTTP client.</param>
     /// <param name="apiKey">The API key.</param>
     /// <param name="logger">The logger.</param>
-    public ImageService(HttpClient httpClient, string apiKey, ILogger<BaseHttpService> logger) : base(httpClient, apiKey, logger)
+    public ImageService(HttpClient httpClient, string apiKey, ILogger<ImageService> logger) : base(httpClient, apiKey, logger)
     {
     }
 
@@ -34,6 +35,18 @@ public class ImageService : BaseHttpService, IImageService
 
         if (string.IsNullOrEmpty(request.Prompt))
             throw new ArgumentException("Prompt is required", nameof(request));
+
+        // Validate the model if provided
+        if (!string.IsNullOrEmpty(request.Model))
+        {
+            ModelEnumExtensions.ValidateImageModel(request.Model);
+        }
+
+        // Validate the style preset if provided
+        if (!string.IsNullOrEmpty(request.StylePreset))
+        {
+            ModelEnumExtensions.ValidateImageStyle(request.StylePreset);
+        }
 
         try
         {
@@ -70,6 +83,12 @@ public class ImageService : BaseHttpService, IImageService
 
         if (string.IsNullOrEmpty(request.Prompt))
             throw new ArgumentException("Prompt is required", nameof(request));
+
+        // Validate the model if provided
+        if (!string.IsNullOrEmpty(request.Model))
+        {
+            ModelEnumExtensions.ValidateImageModel(request.Model);
+        }
 
         try
         {

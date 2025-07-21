@@ -164,7 +164,7 @@ public static class ServiceCollectionExtensions
     {
         var httpClient = GetHttpClient(serviceProvider, useProvidedHttpClient);
         var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-        var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
+        var logger = serviceProvider.GetRequiredService<ILogger<T>>();
 
         return (T)Activator.CreateInstance(typeof(T), httpClient, options.ApiKey, logger)!;
     }
@@ -175,7 +175,7 @@ public static class ServiceCollectionExtensions
         {
             return serviceProvider.GetRequiredService<HttpClient>();
         }
-        
+
         var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
         return httpClientFactory.CreateClient(VeniceAIHttpClientName);
     }    private static void ConfigureHttpClient(HttpClient client, VeniceAIOptions options)

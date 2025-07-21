@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
-using VeniceAI.SDK.Generated;
+using VeniceAI.SDK;
 using Xunit;
 
 namespace VeniceAI.SDK.Tests;
