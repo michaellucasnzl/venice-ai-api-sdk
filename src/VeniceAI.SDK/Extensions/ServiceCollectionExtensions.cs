@@ -14,28 +14,13 @@ namespace VeniceAI.SDK.Extensions;
 /// </summary>
 public static class ServiceCollectionExtensions
 {
-    /// <summary>
-    /// Adds Venice AI services to the service collection.
-    /// </summary>
-    /// <param name="services">The service collection.</param>
-    /// <param name="configureOptions">Action to configure Venice AI options.</param>
-    /// <returns>The service collection.</returns>
-    public static IServiceCollection AddVeniceAI(this IServiceCollection services, Action<VeniceAIOptions> configureOptions)
-    {
-        services.Configure<VeniceAIOptions>(options =>
-        {
-            configureOptions(options);
-            ValidateOptions(options);
-        });
-
-        return AddVeniceAIServices(services);
-    }
-
+    private const string VeniceAIHttpClientName = "VeniceAI";
     /// <summary>
     /// Adds Venice AI services to the service collection with configuration.
+    /// Only API key is configurable - all other settings are managed by the SDK.
     /// </summary>
     /// <param name="services">The service collection.</param>
-    /// <param name="configuration">The configuration section.</param>
+    /// <param name="configuration">The configuration section containing the API key.</param>
     /// <returns>The service collection.</returns>
     public static IServiceCollection AddVeniceAI(this IServiceCollection services, Microsoft.Extensions.Configuration.IConfiguration configuration)
     {
@@ -65,85 +50,139 @@ public static class ServiceCollectionExtensions
         return AddVeniceAIServices(services);
     }
 
+    /// <summary>
+    /// Adds Venice AI services to the service collection with API key and custom HttpClient configuration.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <param name="apiKey">The API key.</param>
+    /// <param name="configureHttpClient">Action to configure the HttpClient for additional settings like timeout and headers.</param>
+    /// <returns>The service collection.</returns>
+    public static IServiceCollection AddVeniceAI(this IServiceCollection services, string apiKey, Action<HttpClient> configureHttpClient)
+    {
+        if (string.IsNullOrWhiteSpace(apiKey))
+            throw new ArgumentException("API key cannot be null or empty.", nameof(apiKey));
+
+        services.Configure<VeniceAIOptions>(options =>
+        {
+            options.ApiKey = apiKey;
+            ValidateOptions(options);
+        });
+
+        return AddVeniceAIServices(services, configureHttpClient);
+    }
+
+    /// <summary>
+    /// Adds Venice AI services with a pre-configured HttpClient instance.
+    /// This allows users to provide their own HttpClient with custom configurations.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <param name="apiKey">The API key.</param>
+    /// <param name="httpClient">Pre-configured HttpClient instance.</param>
+    /// <returns>The service collection.</returns>
+    public static IServiceCollection AddVeniceAI(this IServiceCollection services, string apiKey, HttpClient httpClient)
+    {
+        if (string.IsNullOrWhiteSpace(apiKey))
+            throw new ArgumentException("API key cannot be null or empty.", nameof(apiKey));
+
+        ArgumentNullException.ThrowIfNull(httpClient);
+
+        services.Configure<VeniceAIOptions>(options =>
+        {
+            options.ApiKey = apiKey;
+            ValidateOptions(options);
+        });
+
+        // Register the provided HttpClient as a singleton
+        services.AddSingleton(httpClient);
+
+        return AddVeniceAIServicesWithProvidedHttpClient(services);
+    }
+
     private static IServiceCollection AddVeniceAIServices(IServiceCollection services)
     {
-        // Register HTTP client for making direct API calls
-        services.AddHttpClient("VeniceAI", (serviceProvider, client) =>
+        return AddVeniceAIServices(services, null);
+    }
+
+    private static IServiceCollection AddVeniceAIServices(IServiceCollection services, Action<HttpClient>? configureHttpClient)
+    {
+        // Register HTTP client for making direct API calls - use configurable name
+        services.AddHttpClient<IVeniceAIClient>((serviceProvider, client) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
             ConfigureHttpClient(client, options);
+
+            // Apply custom configuration if provided
+            configureHttpClient?.Invoke(client);
         });
 
-        // Register services with simplified HTTP client approach
-        services.AddTransient<IChatService>(serviceProvider =>
+        // Also register with default name for backward compatibility
+        services.AddHttpClient(VeniceAIHttpClientName, (serviceProvider, client) =>
         {
-            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-            var httpClient = httpClientFactory.CreateClient("VeniceAI");
             var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
-            return new ChatService(httpClient, options.ApiKey, logger);
+            ConfigureHttpClient(client, options);
+
+            // Apply custom configuration if provided
+            configureHttpClient?.Invoke(client);
         });
+
+        return RegisterVeniceAIServices(services, false);
+    }
+
+    private static IServiceCollection AddVeniceAIServicesWithProvidedHttpClient(IServiceCollection services)
+    {
+        return RegisterVeniceAIServices(services, true);
+    }
+
+    private static IServiceCollection RegisterVeniceAIServices(IServiceCollection services, bool useProvidedHttpClient)
+    {
+        // Register all services
+        services.AddTransient<IChatService>(serviceProvider =>
+            CreateService<ChatService>(serviceProvider, useProvidedHttpClient));
 
         services.AddTransient<IAudioService>(serviceProvider =>
-        {
-            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-            var httpClient = httpClientFactory.CreateClient("VeniceAI");
-            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
-            return new AudioService(httpClient, options.ApiKey, logger);
-        });
+            CreateService<AudioService>(serviceProvider, useProvidedHttpClient));
 
         services.AddTransient<IImageService>(serviceProvider =>
-        {
-            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-            var httpClient = httpClientFactory.CreateClient("VeniceAI");
-            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
-            return new ImageService(httpClient, options.ApiKey, logger);
-        });
+            CreateService<ImageService>(serviceProvider, useProvidedHttpClient));
 
         services.AddTransient<IEmbeddingService>(serviceProvider =>
-        {
-            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-            var httpClient = httpClientFactory.CreateClient("VeniceAI");
-            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
-            return new EmbeddingService(httpClient, options.ApiKey, logger);
-        });
+            CreateService<EmbeddingService>(serviceProvider, useProvidedHttpClient));
 
         services.AddTransient<IModelService>(serviceProvider =>
-        {
-            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-            var httpClient = httpClientFactory.CreateClient("VeniceAI");
-            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
-            return new ModelService(httpClient, options.ApiKey, logger);
-        });
+            CreateService<ModelService>(serviceProvider, useProvidedHttpClient));
 
         services.AddTransient<IBillingService>(serviceProvider =>
-        {
-            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-            var httpClient = httpClientFactory.CreateClient("VeniceAI");
-            var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
-            var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
-            return new BillingService(httpClient, options.ApiKey, logger);
-        });
+            CreateService<BillingService>(serviceProvider, useProvidedHttpClient));
 
         services.AddTransient<IVeniceAIClient, VeniceAIClient>();
 
         return services;
     }
 
-    private static void ConfigureHttpClient(HttpClient client, VeniceAIOptions options)
+    private static T CreateService<T>(IServiceProvider serviceProvider, bool useProvidedHttpClient)
+        where T : class
     {
-        client.BaseAddress = new Uri(options.BaseUrl);
-        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {options.ApiKey}");
-        client.Timeout = TimeSpan.FromSeconds(options.TimeoutSeconds);
+        var httpClient = GetHttpClient(serviceProvider, useProvidedHttpClient);
+        var options = serviceProvider.GetRequiredService<IOptions<VeniceAIOptions>>().Value;
+        var logger = serviceProvider.GetRequiredService<ILogger<BaseHttpService>>();
 
-        foreach (var header in options.CustomHeaders)
+        return (T)Activator.CreateInstance(typeof(T), httpClient, options.ApiKey, logger)!;
+    }
+
+    private static HttpClient GetHttpClient(IServiceProvider serviceProvider, bool useProvidedHttpClient)
+    {
+        if (useProvidedHttpClient)
         {
-            client.DefaultRequestHeaders.Add(header.Key, header.Value);
+            return serviceProvider.GetRequiredService<HttpClient>();
         }
+        
+        var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+        return httpClientFactory.CreateClient(VeniceAIHttpClientName);
+    }    private static void ConfigureHttpClient(HttpClient client, VeniceAIOptions options)
+    {
+        client.BaseAddress = new Uri(VeniceAIOptions.BaseUrl);
+        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {options.ApiKey}");
+        client.Timeout = TimeSpan.FromSeconds(VeniceAIOptions.DefaultTimeoutSeconds);
     }
 
     private static void ValidateOptions(VeniceAIOptions options)

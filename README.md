@@ -22,6 +22,15 @@ The unofficial .NET SDK for the Venice AI API, providing easy access to advanced
 - **Streaming Support** - Real-time streaming for chat, audio, and other responses
 - **Async/Await** - Full async support throughout the SDK
 - **Dependency Injection** - Built-in support for .NET DI container
+- **HttpClient Separation** - Complete isolation from your application's HttpClients
+
+## Key Principles
+
+🔐 **SDK Manages Venice AI Specifics**: The SDK automatically handles API endpoints, authentication, and Venice AI-specific configurations. You don't need to configure these manually.
+
+🔗 **Complete HttpClient Separation**: Your application's HttpClients and the Venice AI HttpClient are completely isolated - no configuration conflicts.
+
+⚙️ **Configure What Matters**: Focus on your application needs (timeouts, custom headers) while the SDK handles Venice AI requirements.
 
 ## Installation
 
@@ -92,11 +101,134 @@ var response = await client.Chat.CreateChatCompletionAsync(request);
 Console.WriteLine(response.Choices[0].Message.Content);
 ```
 
-**Try the quickstart sample:**
+## Getting Started
+
+### Running the Quickstart Sample
+
+Try the comprehensive quickstart example:
+
 ```bash
 cd samples/VeniceAI.SDK.Quickstart
 dotnet user-secrets set "VeniceAI:ApiKey" "your-api-key-here"
 dotnet run
+```
+
+**The quickstart demonstrates:**
+- Setting up the Venice AI client with dependency injection
+- Listing available models and their capabilities
+- Creating basic chat completions
+- Streaming chat responses in real-time
+- Getting detailed model information
+- Proper error handling
+
+## HttpClient Configuration & Separation
+
+The Venice AI SDK provides multiple options for HttpClient configuration to ensure complete separation from your application's other HttpClient instances. **The SDK automatically manages the Venice AI API endpoint (`https://api.venice.ai/api/v1/`) - you cannot and should not configure the base URL.**
+
+### Key Configuration Principles
+
+✅ **Only API Key Required**: The only setting you need to configure is your API key  
+✅ **SDK Handles Everything Else**: Endpoints, authentication, and Venice AI-specific settings are managed internally  
+❌ **No Base URL Override**: The Venice AI endpoint is fixed and cannot be changed  
+
+### Configuration Options
+
+The SDK accepts only these user-configurable options:
+
+| Option | Description | Default | Required |
+|--------|-------------|---------|----------|
+| `ApiKey` | Your Venice AI API key | - | ✅ Yes |
+
+All other settings (endpoints, timeouts, retry logic) are managed internally by the SDK.
+
+### ✅ Recommended Usage Patterns
+
+#### 1. Basic Setup (Recommended for Most Cases)
+```csharp
+services.AddVeniceAI("your-api-key");
+```
+**Benefits:**
+- Automatic HttpClient separation via named client
+- SDK manages all Venice AI-specific configuration
+- No interference with your other HttpClients
+- Only requires your API key
+
+#### 2. Configuration File Setup
+```csharp
+// appsettings.json
+{
+  "VeniceAI": {
+    "ApiKey": "your-api-key-here"
+  }
+}
+
+// Startup/Program.cs
+services.AddVeniceAI(context.Configuration);
+```
+
+#### 3. Multiple Services with Complete Separation
+```csharp
+// Your application's API service
+services.AddHttpClient("MyApiClient", client =>
+{
+    client.BaseAddress = new Uri("https://api.myservice.com/");
+    client.Timeout = TimeSpan.FromSeconds(30);
+    client.DefaultRequestHeaders.Add("User-Agent", "MyApp/1.0");
+});
+
+// Venice AI service - completely separate and automatic
+services.AddVeniceAI("your-api-key");
+// SDK automatically configures: BaseAddress, Authorization, Timeout, etc.
+```
+
+#### 4. Custom HttpClient Configuration (Advanced)
+```csharp
+services.AddVeniceAI("your-api-key", httpClient =>
+{
+    httpClient.Timeout = TimeSpan.FromMinutes(10); // Custom timeout
+    httpClient.DefaultRequestHeaders.Add("User-Agent", "MyApp/1.0");
+    // SDK automatically sets BaseAddress and Authorization
+});
+```
+
+**Note:** The SDK automatically handles all Venice AI-specific configuration. You only need to configure additional settings like timeout and custom headers.
+
+### ❌ What NOT to Do
+
+**Don't try to configure Venice AI endpoints:**
+```csharp
+// ❌ WRONG - SDK handles this automatically
+services.AddVeniceAI("your-api-key", httpClient =>
+{
+    httpClient.BaseAddress = new Uri("https://api.venice.ai/api/v1/"); // Unnecessary
+});
+
+// ❌ WRONG - SDK handles authorization automatically
+services.AddVeniceAI("your-api-key", httpClient =>
+{
+    httpClient.DefaultRequestHeaders.Authorization = 
+        new AuthenticationHeaderValue("Bearer", "api-key"); // Will conflict
+});
+```
+
+**Don't include extra settings in configuration:**
+```json
+// ❌ WRONG - These settings are ignored/overridden by SDK
+{
+  "VeniceAI": {
+    "ApiKey": "your-api-key",
+    "BaseUrl": "https://api.venice.ai/api/v1/",  // ❌ Ignored
+    "TimeoutSeconds": 300,                        // ❌ Ignored  
+    "EnableLogging": true                         // ❌ Ignored
+  }
+}
+
+// ✅ CORRECT - Only API key needed
+{
+  "VeniceAI": {
+    "ApiKey": "your-api-key"
+  }
+}
 ```
 
 ## Usage Examples
@@ -397,6 +529,51 @@ catch (HttpRequestException ex)
 }
 ```
 
+## Samples & Examples
+
+### 🚀 Quick Start Sample
+**Location:** `samples/VeniceAI.SDK.Quickstart/`
+
+A comprehensive console application demonstrating core SDK features:
+
+```bash
+cd samples/VeniceAI.SDK.Quickstart
+dotnet user-secrets set "VeniceAI:ApiKey" "your-api-key-here"
+dotnet run
+```
+
+**Features demonstrated:**
+- Setting up Venice AI client with dependency injection
+- Listing available models and capabilities
+- Basic chat completions with different models
+- Real-time streaming chat responses
+- Getting detailed model information and pricing
+- Proper error handling and logging
+
+### 🔧 HttpClient Separation Examples
+**Location:** `samples/VeniceAI.SDK.HttpClientExamples/`
+
+Advanced examples showing proper HttpClient configuration and separation:
+
+```bash
+cd samples/VeniceAI.SDK.HttpClientExamples
+export VeniceAI__ApiKey="your-api-key-here"  # Linux/Mac
+# or: set VeniceAI__ApiKey=your-api-key-here   # Windows
+dotnet run
+```
+
+**Scenarios covered:**
+1. Default HttpClient registration (simplest)
+2. Custom HttpClient configuration 
+3. Providing your own HttpClient instance
+4. Multiple HttpClients with different configurations
+
+**Benefits demonstrated:**
+- Complete separation between your HttpClients and Venice AI's
+- Flexible configuration for different application needs
+- No conflicts or configuration interference
+- Proper dependency injection patterns
+
 ## Testing
 
 ### Unit Tests
@@ -405,16 +582,20 @@ dotnet test tests/VeniceAI.SDK.Tests
 ```
 
 ### Integration Tests
+Set your API key and run comprehensive integration tests:
+
 ```bash
 dotnet user-secrets set "VeniceAI:ApiKey" "your-api-key" --project tests/VeniceAI.SDK.IntegrationTests
 dotnet test tests/VeniceAI.SDK.IntegrationTests
 ```
 
+**Note:** Integration tests only require your API key - all other settings are managed by the SDK.
+
 ## Support
 
-- [Documentation](https://docs.venice.ai)
+- [Venice AI Documentation](https://docs.venice.ai)
 - [GitHub Issues](https://github.com/michaellucasnzl/venice-ai-api-sdk/issues)
-- [Discord](https://discord.gg/veniceai)
+- [Venice AI Discord](https://discord.gg/veniceai)
 
 ## License
 

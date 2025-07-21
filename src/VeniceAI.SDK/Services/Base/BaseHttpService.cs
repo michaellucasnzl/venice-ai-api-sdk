@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Models.Chat;
+using VeniceAI.SDK.Configuration;
 
 namespace VeniceAI.SDK.Services.Base;
 
@@ -34,7 +35,7 @@ public class BaseHttpService
         // Set base address if not already configured
         if (_httpClient.BaseAddress == null)
         {
-            _httpClient.BaseAddress = new Uri("https://api.venice.ai/api/v1/");
+            _httpClient.BaseAddress = new Uri(VeniceAIOptions.BaseUrl);
         }
 
         // Configure JSON serialization

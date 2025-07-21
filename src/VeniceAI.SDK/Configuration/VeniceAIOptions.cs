@@ -4,6 +4,7 @@ namespace VeniceAI.SDK.Configuration;
 
 /// <summary>
 /// Configuration options for the Venice AI API client.
+/// Only the API key is required - all other settings are managed internally by the SDK.
 /// </summary>
 public class VeniceAIOptions
 {
@@ -13,38 +14,37 @@ public class VeniceAIOptions
     public const string SectionName = "VeniceAI";
 
     /// <summary>
+    /// The official Venice AI API base URL.
+    /// This is managed internally by the SDK and cannot be overridden.
+    /// </summary>
+    internal const string OfficialApiBaseUrl = "https://api.venice.ai/api/v1/";
+
+    /// <summary>
     /// The API key for authenticating with the Venice AI API.
+    /// This is the only required user configuration.
     /// </summary>
     [Required]
     public string ApiKey { get; set; } = string.Empty;
 
+    // All other settings are internal and managed by the SDK
+    
     /// <summary>
-    /// The base URL for the Venice AI API. Defaults to the official API endpoint.
+    /// Gets the Venice AI API base URL. This cannot be overridden.
     /// </summary>
-    public string BaseUrl { get; set; } = "https://api.venice.ai/api/v1/";
-
+    internal static string BaseUrl => OfficialApiBaseUrl;
+    
     /// <summary>
-    /// The timeout for HTTP requests in seconds. Defaults to 300 seconds (5 minutes).
+    /// Gets the default timeout for requests in seconds.
     /// </summary>
-    public int TimeoutSeconds { get; set; } = 300;
-
+    internal static int DefaultTimeoutSeconds => 300; // 5 minutes
+    
     /// <summary>
-    /// The maximum number of retry attempts for failed requests. Defaults to 3.
+    /// Gets the maximum retry attempts for failed requests.
     /// </summary>
-    public int MaxRetryAttempts { get; set; } = 3;
-
+    internal static int MaxRetryAttempts => 3;
+    
     /// <summary>
-    /// The delay between retry attempts in milliseconds. Defaults to 1000ms.
+    /// Gets the delay between retry attempts in milliseconds.
     /// </summary>
-    public int RetryDelayMs { get; set; } = 1000;
-
-    /// <summary>
-    /// Whether to enable request/response logging. Defaults to false.
-    /// </summary>
-    public bool EnableLogging { get; set; } = false;
-
-    /// <summary>
-    /// Custom HTTP headers to include with all requests.
-    /// </summary>
-    public Dictionary<string, string> CustomHeaders { get; set; } = new();
+    internal static int RetryDelayMs => 1000;
 }
