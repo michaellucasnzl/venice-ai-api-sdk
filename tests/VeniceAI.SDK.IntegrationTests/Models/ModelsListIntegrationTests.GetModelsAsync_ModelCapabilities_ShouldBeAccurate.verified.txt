@@ -2,7 +2,7 @@
   Object: list,
   Data: [
     {
-      Id: {Scrubbed},
+      Id: venice-uncensored,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -46,7 +46,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: qwen-2.5-qwq-32b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -90,7 +90,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: qwen3-4b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -134,7 +134,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: mistral-31-24b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -181,7 +181,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: mistral-32-24b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -228,7 +228,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: qwen3-235b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -272,7 +272,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: llama-3.2-3b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -319,7 +319,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: llama-3.3-70b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -367,7 +367,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: llama-3.1-405b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -414,7 +414,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: dolphin-2.9.2-qwen2-72b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -461,7 +461,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: qwen-2.5-vl,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -505,7 +505,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: qwen-2.5-coder-32b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -552,7 +552,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: deepseek-r1-671b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -599,7 +599,7 @@
       }
     },
     {
-      Id: {Scrubbed},
+      Id: deepseek-coder-v2-lite,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,

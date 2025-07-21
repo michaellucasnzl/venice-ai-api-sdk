@@ -1,0 +1,15 @@
+﻿{
+  Traits: {
+    default: llama-3.3-70b,
+    default_code: qwen-2.5-coder-32b,
+    default_reasoning: deepseek-r1-671b,
+    default_vision: mistral-32-24b,
+    fastest: llama-3.2-3b,
+    function_calling_default: llama-3.3-70b,
+    most_intelligent: llama-3.1-405b,
+    most_uncensored: dolphin-2.9.2-qwen2-72b
+  },
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

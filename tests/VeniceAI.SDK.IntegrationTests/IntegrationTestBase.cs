@@ -137,7 +137,6 @@ public abstract class IntegrationTestBase : IDisposable
         _verifySettings.ScrubMember("Time");
         _verifySettings.ScrubMember("Utc");
         _verifySettings.ScrubMember("Created");
-        _verifySettings.ScrubMember("Id");
 
         // Scrub raw API response content to prevent huge test output files
         _verifySettings.ScrubMember("RawContent");

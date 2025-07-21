@@ -1,0 +1,221 @@
+﻿{
+  Object: list,
+  Data: [
+    {
+      Id: venice-sd35,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Venice SD35,
+        ModelSource: https://huggingface.co/stabilityai/stable-diffusion-3.5-large,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 25,
+            Max: 30
+          },
+          WidthHeightDivisor: 16
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Vcu: 0.1,
+            Diem: 0.01
+          },
+          Upscale: {}
+        },
+        Traits: [
+          default,
+          eliza-default
+        ]
+      }
+    },
+    {
+      Id: hidream,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: HiDream,
+        ModelSource: https://huggingface.co/HiDream-ai/HiDream-I1-Dev,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Vcu: 0.1,
+            Diem: 0.01
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: flux-dev,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: FLUX Standard,
+        ModelSource: https://huggingface.co/black-forest-labs/FLUX.1-dev,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 2048,
+          Steps: {
+            Default: 25,
+            Max: 30
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Vcu: 0.1,
+            Diem: 0.01
+          },
+          Upscale: {}
+        },
+        Traits: [
+          highest_quality
+        ]
+      }
+    },
+    {
+      Id: flux-dev-uncensored,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: FLUX Custom,
+        ModelSource: https://huggingface.co/black-forest-labs/FLUX.1-dev,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 2048,
+          Steps: {
+            Default: 25,
+            Max: 30
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Vcu: 0.1,
+            Diem: 0.01
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: lustify-sdxl,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Lustify SDXL,
+        ModelSource: https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Vcu: 0.1,
+            Diem: 0.01
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: pony-realism,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Pony Realism,
+        ModelSource: https://civitai.com/models/372465,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Vcu: 0.1,
+            Diem: 0.01
+          },
+          Upscale: {}
+        },
+        Traits: [
+          most_uncensored
+        ]
+      }
+    },
+    {
+      Id: stable-diffusion-3.5,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Stable Diffusion 3.5,
+        ModelSource: https://huggingface.co/stabilityai/stable-diffusion-3.5-large,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 25,
+            Max: 30
+          },
+          WidthHeightDivisor: 16
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Vcu: 0.1,
+            Diem: 0.01
+          },
+          Upscale: {}
+        }
+      }
+    }
+  ],
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

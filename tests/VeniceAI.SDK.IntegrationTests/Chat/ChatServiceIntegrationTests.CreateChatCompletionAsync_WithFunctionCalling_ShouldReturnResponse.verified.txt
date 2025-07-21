@@ -1,15 +1,15 @@
 ﻿{
-  Id: chatcmpl-31f9581641da47e8802c8b33d8a4649e,
+  Id: chatcmpl-4c9a2ef501fb4fff97a477b48417b09a,
   Object: chat.completion,
   Created: {Scrubbed},
-  Model: llama-3.3-70b,
+  Model: qwen3-235b,
   Choices: [
     {
       Message: {
         Role: assistant,
         Content: {Scrubbed}
       },
-      FinishReason: stop
+      FinishReason: length
     }
   ],
   Usage: {Scrubbed},

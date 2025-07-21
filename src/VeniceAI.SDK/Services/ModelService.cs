@@ -3,6 +3,8 @@ using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 using VeniceAI.SDK.Models.Models;
+using VeniceAI.SDK.Models.Common;
+using VeniceAI.SDK.Extensions;
 
 namespace VeniceAI.SDK.Services;
 
@@ -28,9 +30,38 @@ public class ModelService : BaseHttpService, IModelService
     /// <returns>The models response.</returns>
     public async Task<ModelsResponse> GetModelsAsync(CancellationToken cancellationToken = default)
     {
+        return await GetModelsInternalAsync(null, cancellationToken);
+    }
+
+    /// <summary>
+    /// Gets the list of available models filtered by type.
+    /// </summary>
+    /// <param name="type">The model type filter.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The models response.</returns>
+    public async Task<ModelsResponse> GetModelsAsync(ModelType type, CancellationToken cancellationToken = default)
+    {
+        return await GetModelsInternalAsync(type, cancellationToken);
+    }
+
+    /// <summary>
+    /// Internal method to get models with optional type filtering.
+    /// </summary>
+    /// <param name="type">The optional model type filter.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The models response.</returns>
+    private async Task<ModelsResponse> GetModelsInternalAsync(ModelType? type, CancellationToken cancellationToken)
+    {
         try
         {
-            var apiResponse = await GetAsync<ModelsApiResponse>("models", cancellationToken);
+            var endpoint = "models";
+            if (type.HasValue)
+            {
+                var typeString = type.Value.ToModelString();
+                endpoint += $"?type={typeString}";
+            }
+
+            var apiResponse = await GetAsync<ModelsApiResponse>(endpoint, cancellationToken);
 
             return new ModelsResponse
             {
@@ -65,9 +96,38 @@ public class ModelService : BaseHttpService, IModelService
     /// <returns>The model traits response.</returns>
     public async Task<ModelTraitsResponse> GetModelTraitsAsync(CancellationToken cancellationToken = default)
     {
+        return await GetModelTraitsInternalAsync(null, cancellationToken);
+    }
+
+    /// <summary>
+    /// Gets model traits filtered by type.
+    /// </summary>
+    /// <param name="type">The model type filter.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The model traits response.</returns>
+    public async Task<ModelTraitsResponse> GetModelTraitsAsync(ModelType type, CancellationToken cancellationToken = default)
+    {
+        return await GetModelTraitsInternalAsync(type, cancellationToken);
+    }
+
+    /// <summary>
+    /// Internal method to get model traits with optional type filtering.
+    /// </summary>
+    /// <param name="type">The optional model type filter.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The model traits response.</returns>
+    private async Task<ModelTraitsResponse> GetModelTraitsInternalAsync(ModelType? type, CancellationToken cancellationToken)
+    {
         try
         {
-            var response = await GetAsync<Models.Models.ModelTraitsApiResponse>("models/traits", cancellationToken);
+            var endpoint = "models/traits";
+            if (type.HasValue)
+            {
+                var typeString = type.Value.ToModelString();
+                endpoint += $"?type={typeString}";
+            }
+
+            var response = await GetAsync<Models.Models.ModelTraitsApiResponse>(endpoint, cancellationToken);
 
             return new ModelTraitsResponse
             {
@@ -93,9 +153,38 @@ public class ModelService : BaseHttpService, IModelService
     /// <returns>The model compatibility response.</returns>
     public async Task<ModelCompatibilityResponse> GetModelCompatibilityAsync(CancellationToken cancellationToken = default)
     {
+        return await GetModelCompatibilityInternalAsync(null, cancellationToken);
+    }
+
+    /// <summary>
+    /// Gets model compatibility filtered by type.
+    /// </summary>
+    /// <param name="type">The model type filter.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The model compatibility response.</returns>
+    public async Task<ModelCompatibilityResponse> GetModelCompatibilityAsync(ModelType type, CancellationToken cancellationToken = default)
+    {
+        return await GetModelCompatibilityInternalAsync(type, cancellationToken);
+    }
+
+    /// <summary>
+    /// Internal method to get model compatibility with optional type filtering.
+    /// </summary>
+    /// <param name="type">The optional model type filter.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The model compatibility response.</returns>
+    private async Task<ModelCompatibilityResponse> GetModelCompatibilityInternalAsync(ModelType? type, CancellationToken cancellationToken)
+    {
         try
         {
-            var response = await GetAsync<Models.Models.ModelCompatibilityApiResponse>("models/compatibility_mapping", cancellationToken);
+            var endpoint = "models/compatibility_mapping";
+            if (type.HasValue)
+            {
+                var typeString = type.Value.ToModelString();
+                endpoint += $"?type={typeString}";
+            }
+
+            var response = await GetAsync<Models.Models.ModelCompatibilityApiResponse>(endpoint, cancellationToken);
 
             return new ModelCompatibilityResponse
             {

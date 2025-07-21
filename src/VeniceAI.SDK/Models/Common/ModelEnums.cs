@@ -3,6 +3,30 @@ using System.ComponentModel;
 namespace VeniceAI.SDK.Models.Common;
 
 /// <summary>
+/// Model type filter options for Venice AI API endpoints.
+/// </summary>
+public enum ModelType
+{
+    [Description("all")]
+    All,
+
+    [Description("text")]
+    Text,
+
+    [Description("code")]
+    Code,
+
+    [Description("image")]
+    Image,
+
+    [Description("tts")]
+    Tts,
+
+    [Description("audio")]
+    Audio
+}
+
+/// <summary>
 /// Available text models for chat and text generation.
 /// </summary>
 public enum TextModel
@@ -102,6 +126,15 @@ public enum UpscaleModel
 {
     [Description("upscaler")]
     Upscaler
+}
+
+/// <summary>
+/// Available inpaint models.
+/// </summary>
+public enum InpaintModel
+{
+    [Description("edit-image")]
+    EditImage
 }
 
 /// <summary>

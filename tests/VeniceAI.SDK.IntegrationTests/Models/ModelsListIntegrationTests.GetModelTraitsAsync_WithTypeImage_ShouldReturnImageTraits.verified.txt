@@ -1,0 +1,11 @@
+﻿{
+  Traits: {
+    default: venice-sd35,
+    eliza-default: venice-sd35,
+    highest_quality: flux-dev,
+    most_uncensored: pony-realism
+  },
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

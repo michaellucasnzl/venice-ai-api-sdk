@@ -1,6 +1,6 @@
 ﻿[
   {
-    Id: {Scrubbed},
+    Id: chatcmpl-85dfb71b7017410182f60a00bc65caaf,
     Object: chat.completion.chunk,
     Created: {Scrubbed},
     Model: llama-3.3-70b,
@@ -17,7 +17,7 @@
     RawContent: {Scrubbed}
   },
   {
-    Id: {Scrubbed},
+    Id: chatcmpl-85dfb71b7017410182f60a00bc65caaf,
     Object: chat.completion.chunk,
     Created: {Scrubbed},
     Model: llama-3.3-70b,
@@ -34,7 +34,7 @@
     RawContent: {Scrubbed}
   },
   {
-    Id: {Scrubbed},
+    Id: chatcmpl-85dfb71b7017410182f60a00bc65caaf,
     Object: chat.completion.chunk,
     Created: {Scrubbed},
     Model: llama-3.3-70b,
@@ -51,7 +51,7 @@
     RawContent: {Scrubbed}
   },
   {
-    Id: {Scrubbed},
+    Id: chatcmpl-85dfb71b7017410182f60a00bc65caaf,
     Object: chat.completion.chunk,
     Created: {Scrubbed},
     Model: llama-3.3-70b,
@@ -68,7 +68,7 @@
     RawContent: {Scrubbed}
   },
   {
-    Id: {Scrubbed},
+    Id: chatcmpl-85dfb71b7017410182f60a00bc65caaf,
     Object: chat.completion.chunk,
     Created: {Scrubbed},
     Model: llama-3.3-70b,

@@ -53,11 +53,31 @@ public static class ModelEnumExtensions
     }
 
     /// <summary>
+    /// Gets the string representation of a model type enum value.
+    /// </summary>
+    /// <param name="modelType">The model type enum value.</param>
+    /// <returns>The string representation.</returns>
+    public static string ToModelString(this ModelType modelType)
+    {
+        return GetEnumDescription(modelType);
+    }
+
+    /// <summary>
     /// Gets the string representation of an upscale model enum value.
     /// </summary>
     /// <param name="model">The upscale model enum value.</param>
     /// <returns>The string representation.</returns>
     public static string ToModelString(this UpscaleModel model)
+    {
+        return GetEnumDescription(model);
+    }
+
+    /// <summary>
+    /// Gets the string representation of an inpaint model enum value.
+    /// </summary>
+    /// <param name="model">The inpaint model enum value.</param>
+    /// <returns>The string representation.</returns>
+    public static string ToModelString(this InpaintModel model)
     {
         return GetEnumDescription(model);
     }
@@ -128,6 +148,17 @@ public static class ModelEnumExtensions
     }
 
     /// <summary>
+    /// Parses a string to an InpaintModel enum value.
+    /// </summary>
+    /// <param name="modelString">The model string.</param>
+    /// <returns>The InpaintModel enum value.</returns>
+    /// <exception cref="VeniceAIException">Thrown when the model string is not valid.</exception>
+    public static InpaintModel ParseInpaintModel(string modelString)
+    {
+        return ParseEnum<InpaintModel>(modelString, "inpaint model");
+    }
+
+    /// <summary>
     /// Parses a string to an ImageStyle enum value.
     /// </summary>
     /// <param name="styleString">The style string.</param>
@@ -189,6 +220,17 @@ public static class ModelEnumExtensions
     /// <param name="model">The parsed UpscaleModel enum value.</param>
     /// <returns>True if parsing was successful, false otherwise.</returns>
     public static bool TryParseUpscaleModel(string modelString, out UpscaleModel model)
+    {
+        return TryParseEnum(modelString, out model);
+    }
+
+    /// <summary>
+    /// Tries to parse a string to an InpaintModel enum value.
+    /// </summary>
+    /// <param name="modelString">The model string.</param>
+    /// <param name="model">The parsed InpaintModel enum value.</param>
+    /// <returns>True if parsing was successful, false otherwise.</returns>
+    public static bool TryParseInpaintModel(string modelString, out InpaintModel model)
     {
         return TryParseEnum(modelString, out model);
     }
@@ -296,6 +338,25 @@ public static class ModelEnumExtensions
         {
             var validModels = string.Join(", ", Enum.GetValues<UpscaleModel>().Select(m => m.ToModelString()));
             throw new VeniceAIException($"Invalid upscale model '{modelString}'. Valid models are: {validModels}", 400);
+        }
+    }
+
+    /// <summary>
+    /// Validates that a model string is a valid inpaint model.
+    /// </summary>
+    /// <param name="modelString">The model string to validate.</param>
+    /// <exception cref="VeniceAIException">Thrown when the model string is not valid.</exception>
+    public static void ValidateInpaintModel(string modelString)
+    {
+        if (string.IsNullOrWhiteSpace(modelString))
+        {
+            throw new VeniceAIException(ModelCannotBeNullOrEmpty, 400);
+        }
+
+        if (!TryParseInpaintModel(modelString, out _))
+        {
+            var validModels = string.Join(", ", Enum.GetValues<InpaintModel>().Select(m => m.ToModelString()));
+            throw new VeniceAIException($"Invalid inpaint model '{modelString}'. Valid models are: {validModels}", 400);
         }
     }
 

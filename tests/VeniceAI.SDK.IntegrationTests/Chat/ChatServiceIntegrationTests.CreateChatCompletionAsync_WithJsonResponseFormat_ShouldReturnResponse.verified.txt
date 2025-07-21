@@ -1,8 +1,8 @@
 ﻿{
-  Id: chatcmpl-31f9581641da47e8802c8b33d8a4649e,
+  Id: chatcmpl-b6d0958f1b36471986550dfb40f8d2d1,
   Object: chat.completion,
   Created: {Scrubbed},
-  Model: llama-3.3-70b,
+  Model: qwen3-235b,
   Choices: [
     {
       Message: {

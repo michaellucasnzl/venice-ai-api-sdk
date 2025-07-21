@@ -15,11 +15,12 @@ The unofficial .NET SDK for the Venice AI API, providing easy access to advanced
 - **Image Generation** - Create, edit, and upscale images from text descriptions
 - **Text-to-Speech** - Convert text to natural-sounding speech with multiple voices
 - **Embeddings** - Generate text embeddings for semantic search and analysis
-- **Model Management** - List and manage available models
+- **Model Management** - List and manage available models with type filtering and validation
 - **Billing Information** - Track API usage and costs
 - **Vision Support** - Analyze and understand images with multimodal models
 - **Function Calling** - Execute functions based on natural language requests
 - **Streaming Support** - Real-time streaming for chat, audio, and other responses
+- **Type Safety** - Comprehensive enum system with validation for models and parameters
 - **Async/Await** - Full async support throughout the SDK
 - **Dependency Injection** - Built-in support for .NET DI container
 - **HttpClient Separation** - Complete isolation from your application's HttpClients
@@ -193,43 +194,6 @@ services.AddVeniceAI("your-api-key", httpClient =>
 
 **Note:** The SDK automatically handles all Venice AI-specific configuration. You only need to configure additional settings like timeout and custom headers.
 
-### ❌ What NOT to Do
-
-**Don't try to configure Venice AI endpoints:**
-```csharp
-// ❌ WRONG - SDK handles this automatically
-services.AddVeniceAI("your-api-key", httpClient =>
-{
-    httpClient.BaseAddress = new Uri("https://api.venice.ai/api/v1/"); // Unnecessary
-});
-
-// ❌ WRONG - SDK handles authorization automatically
-services.AddVeniceAI("your-api-key", httpClient =>
-{
-    httpClient.DefaultRequestHeaders.Authorization = 
-        new AuthenticationHeaderValue("Bearer", "api-key"); // Will conflict
-});
-```
-
-**Don't include extra settings in configuration:**
-```json
-// ❌ WRONG - These settings are ignored/overridden by SDK
-{
-  "VeniceAI": {
-    "ApiKey": "your-api-key",
-    "BaseUrl": "https://api.venice.ai/api/v1/",  // ❌ Ignored
-    "TimeoutSeconds": 300,                        // ❌ Ignored  
-    "EnableLogging": true                         // ❌ Ignored
-  }
-}
-
-// ✅ CORRECT - Only API key needed
-{
-  "VeniceAI": {
-    "ApiKey": "your-api-key"
-  }
-}
-```
 
 ## Usage Examples
 
@@ -438,13 +402,25 @@ foreach (var model in modelsResponse.Data)
     Console.WriteLine($"{model.Id}: {model.ModelSpec.Name} ({model.Type})");
 }
 
+// List models by type (text, image, tts, embedding, upscale, inpaint)
+var textModels = await client.Models.GetModelsAsync(ModelType.Text);
+var imageModels = await client.Models.GetModelsAsync(ModelType.Image);
+var allModels = await client.Models.GetModelsAsync(ModelType.All);
+
 // Get specific model
 var model = await client.Models.GetModelAsync("llama-3.3-70b");
 Console.WriteLine($"Context length: {model.ModelSpec.AvailableContextTokens}");
 
-// Get model traits
+// Get model traits (with optional type filtering)
 var traitsResponse = await client.Models.GetModelTraitsAsync();
+var textTraits = await client.Models.GetModelTraitsAsync(ModelType.Text);
 var defaultModel = traitsResponse.Traits["default"];
+var fastestModel = traitsResponse.Traits["fastest"];
+
+// Get model compatibility mappings (with optional type filtering)
+var compatibilityResponse = await client.Models.GetModelCompatibilityAsync();
+var textCompatibility = await client.Models.GetModelCompatibilityAsync(ModelType.Text);
+// Maps alternative model names to Venice AI models (e.g., "gpt-4o" -> "llama-3.3-70b")
 ```
 
 ### Billing Information

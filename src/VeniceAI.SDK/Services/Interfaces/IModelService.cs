@@ -1,4 +1,5 @@
 using VeniceAI.SDK.Models.Models;
+using VeniceAI.SDK.Models.Common;
 
 namespace VeniceAI.SDK.Services.Interfaces;
 
@@ -13,6 +14,14 @@ public interface IModelService
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The list of available models.</returns>
     Task<ModelsResponse> GetModelsAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets a list of available models filtered by type.
+    /// </summary>
+    /// <param name="type">The model type filter.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The list of available models.</returns>
+    Task<ModelsResponse> GetModelsAsync(ModelType type, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a specific model by ID.
@@ -30,9 +39,25 @@ public interface IModelService
     Task<ModelTraitsResponse> GetModelTraitsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Gets model traits mapping filtered by type.
+    /// </summary>
+    /// <param name="type">The model type filter.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The model traits mapping.</returns>
+    Task<ModelTraitsResponse> GetModelTraitsAsync(ModelType type, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Gets model compatibility mapping.
     /// </summary>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The model compatibility mapping.</returns>
     Task<ModelCompatibilityResponse> GetModelCompatibilityAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets model compatibility mapping filtered by type.
+    /// </summary>
+    /// <param name="type">The model type filter.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The model compatibility mapping.</returns>
+    Task<ModelCompatibilityResponse> GetModelCompatibilityAsync(ModelType type, CancellationToken cancellationToken = default);
 }

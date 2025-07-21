@@ -1,5 +1,5 @@
 ﻿{
-  Id: {Scrubbed},
+  Id: chatcmpl-6cec8473d3e84dd5b7f37807252415e7,
   Object: chat.completion,
   Created: {Scrubbed},
   Model: qwen-2.5-vl,
