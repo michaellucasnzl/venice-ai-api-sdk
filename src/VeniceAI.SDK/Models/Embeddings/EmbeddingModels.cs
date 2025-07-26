@@ -15,10 +15,11 @@ public class CreateEmbeddingRequest
     public object Input { get; set; } = string.Empty;
 
     /// <summary>
-    /// ID of the model to use.
+    /// The embedding model to use.
     /// </summary>
     [JsonPropertyName("model")]
-    public string Model { get; set; } = string.Empty;
+    [JsonConverter(typeof(EmbeddingModelJsonConverter))]
+    public EmbeddingModel Model { get; set; }
 
     /// <summary>
     /// The format to return the embeddings in.

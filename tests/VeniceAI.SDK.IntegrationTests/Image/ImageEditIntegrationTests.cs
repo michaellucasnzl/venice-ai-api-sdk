@@ -1,5 +1,6 @@
 using Shouldly;
 using VeniceAI.SDK.Models.Images;
+using VeniceAI.SDK.Models.Common;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -30,7 +31,7 @@ public class ImageEditIntegrationTests : IntegrationTestBase
         // Arrange - First generate a base image to edit
         var generateRequest = new GenerateImageRequest
         {
-            Model = "flux-dev",
+            Model = ImageModel.FluxStandard,
             Prompt = "A simple landscape with a house",
             Width = 512,
             Height = 512,

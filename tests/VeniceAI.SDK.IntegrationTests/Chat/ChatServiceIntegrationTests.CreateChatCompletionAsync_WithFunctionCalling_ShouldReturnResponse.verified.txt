@@ -1,15 +1,25 @@
 ﻿{
-  Id: chatcmpl-b478d4d3e80949bdb2cafcaeb7cc6e98,
+  Id: chatcmpl-f5eedacf2aa944619ff1ea804373ce35,
   Object: chat.completion,
   Created: {Scrubbed},
   Model: qwen3-235b,
   Choices: [
     {
       Message: {
+        ToolCalls: [
+          {
+            Id: chatcmpl-tool-76ed7eb4d38f4751ae6a7dc06add7831,
+            Type: function,
+            Function: {
+              Name: get_current_weather,
+              Arguments: {"location": "New York, NY", "unit": "fahrenheit"}
+            }
+          }
+        ],
         Role: assistant,
         Content: {Scrubbed}
       },
-      FinishReason: length
+      FinishReason: tool_calls
     }
   ],
   Usage: {Scrubbed},

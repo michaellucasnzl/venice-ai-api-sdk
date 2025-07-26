@@ -12,7 +12,8 @@ public class GenerateImageRequest
     /// The model to use for image generation.
     /// </summary>
     [JsonPropertyName("model")]
-    public string Model { get; set; } = string.Empty;
+    [JsonConverter(typeof(ImageModelJsonConverter))]
+    public ImageModel Model { get; set; }
 
     /// <summary>
     /// The description for the image.
@@ -114,7 +115,8 @@ public class SimpleGenerateImageRequest
     /// The model to use for image generation.
     /// </summary>
     [JsonPropertyName("model")]
-    public string? Model { get; set; }
+    [JsonConverter(typeof(ImageModelJsonConverter))]
+    public ImageModel? Model { get; set; }
 
     /// <summary>
     /// Number of images to generate.
@@ -248,10 +250,10 @@ public class ImageGenerationResponse : BaseResponse
     /// List of generated images (base64 encoded).
     /// </summary>
     [JsonPropertyName("images")]
-    public List<string> Images 
-    { 
+    public List<string> Images
+    {
         get => _images;
-        set 
+        set
         {
             _images = value;
             // Populate Data property for backward compatibility

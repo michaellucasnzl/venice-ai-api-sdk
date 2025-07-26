@@ -15,10 +15,11 @@ public class CreateSpeechRequest
     public string Input { get; set; } = string.Empty;
 
     /// <summary>
-    /// The model ID of a Venice TTS model.
+    /// The TTS model to use for speech generation.
     /// </summary>
     [JsonPropertyName("model")]
-    public string? Model { get; set; }
+    [JsonConverter(typeof(TextToSpeechModelJsonConverter))]
+    public TextToSpeechModel? Model { get; set; }
 
     /// <summary>
     /// The voice to use when generating the audio.

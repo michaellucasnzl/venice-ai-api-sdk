@@ -1,5 +1,6 @@
 using Shouldly;
 using VeniceAI.SDK.Models.Embeddings;
+using VeniceAI.SDK.Models.Common;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -31,7 +32,7 @@ public class EmbeddingServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new CreateEmbeddingRequest
         {
-            Model = "text-embedding-bge-m3",
+            Model = EmbeddingModel.TextEmbeddingBGEM3,
             Input = "The quick brown fox jumps over the lazy dog",
             EncodingFormat = "float"
         };
@@ -66,7 +67,7 @@ public class EmbeddingServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new CreateEmbeddingRequest
         {
-            Model = "text-embedding-bge-m3",
+            Model = EmbeddingModel.TextEmbeddingBGEM3,
             Input = new[] { "Hello world", "This is a test", "Another sentence" },
             EncodingFormat = "float"
         };
@@ -104,7 +105,7 @@ public class EmbeddingServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new CreateEmbeddingRequest
         {
-            Model = "text-embedding-bge-m3",
+            Model = EmbeddingModel.TextEmbeddingBGEM3,
             Input = "Test input for base64 encoding",
             EncodingFormat = "base64"
         };
@@ -148,7 +149,7 @@ public class EmbeddingServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new CreateEmbeddingRequest
         {
-            Model = "text-embedding-bge-m3",
+            Model = EmbeddingModel.TextEmbeddingBGEM3,
             Input = "Test input for dimension specification",
             EncodingFormat = "float",
             Dimensions = 512

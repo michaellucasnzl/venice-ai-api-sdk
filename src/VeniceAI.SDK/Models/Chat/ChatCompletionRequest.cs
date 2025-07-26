@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using VeniceAI.SDK.Models.Common;
 
 namespace VeniceAI.SDK.Models.Chat;
 
@@ -14,10 +15,11 @@ public class ChatCompletionRequest
     public List<ChatMessage> Messages { get; set; } = new();
 
     /// <summary>
-    /// The ID of the model to use for the chat completion.
+    /// The model to use for the chat completion.
     /// </summary>
     [JsonPropertyName("model")]
-    public string Model { get; set; } = string.Empty;
+    [JsonConverter(typeof(TextModelJsonConverter))]
+    public TextModel Model { get; set; }
 
     /// <summary>
     /// The maximum number of tokens that can be generated in the chat completion.

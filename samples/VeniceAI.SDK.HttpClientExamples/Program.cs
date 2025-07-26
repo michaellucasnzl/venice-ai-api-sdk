@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using VeniceAI.SDK;
 using VeniceAI.SDK.Extensions;
 using VeniceAI.SDK.Models.Chat;
+using VeniceAI.SDK.Models.Common;
 using VeniceAI.SDK.Configuration;
 
 namespace VeniceAI.SDK.HttpClientExamples;
@@ -140,7 +141,7 @@ static class Program
         {
             var request = new ChatCompletionRequest
             {
-                Model = "llama-3.3-70b",
+                Model = TextModel.Llama33_70B,
                 Messages = new List<ChatMessage>
                 {
                     new UserMessage($"Say 'Hello from {scenario}!' in exactly those words.")

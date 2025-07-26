@@ -1,5 +1,6 @@
 using Shouldly;
 using VeniceAI.SDK.Models.Audio;
+using VeniceAI.SDK.Models.Common;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -30,7 +31,7 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new CreateSpeechRequest
         {
-            Model = "tts-kokoro",
+            Model = TextToSpeechModel.TtsKokoro,
             Input = "Hello, this is a test of the Venice AI text-to-speech system.",
             Voice = VoiceOptions.Female.Sky,
             ResponseFormat = AudioFormat.Mp3,
@@ -75,7 +76,7 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
             // Arrange
             var request = new CreateSpeechRequest
             {
-                Model = "tts-kokoro",
+                Model = TextToSpeechModel.TtsKokoro,
                 Input = $"Testing voice: {voice}",
                 Voice = voice,
                 ResponseFormat = AudioFormat.Mp3,
@@ -111,7 +112,7 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
             // Arrange
             var request = new CreateSpeechRequest
             {
-                Model = "tts-kokoro",
+                Model = TextToSpeechModel.TtsKokoro,
                 Input = $"Testing audio format: {format}",
                 Voice = VoiceOptions.Female.Sky,
                 ResponseFormat = format,
@@ -147,7 +148,7 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
             // Arrange
             var request = new CreateSpeechRequest
             {
-                Model = "tts-kokoro",
+                Model = TextToSpeechModel.TtsKokoro,
                 Input = $"Testing speech speed at {speed}x",
                 Voice = VoiceOptions.Female.Sky,
                 ResponseFormat = AudioFormat.Mp3,
@@ -179,7 +180,7 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new CreateSpeechRequest
         {
-            Model = "tts-kokoro",
+            Model = TextToSpeechModel.TtsKokoro,
             Input = "This is a streaming audio test with multiple sentences. Each sentence should be processed separately.",
             Voice = VoiceOptions.Female.Sky,
             ResponseFormat = AudioFormat.Mp3,
@@ -232,7 +233,7 @@ public class AudioServiceIntegrationTests : IntegrationTestBase
             // Arrange
             var request = new CreateSpeechRequest
             {
-                Model = "tts-kokoro",
+                Model = TextToSpeechModel.TtsKokoro,
                 Input = "Hello world in different languages",
                 Voice = voice,
                 ResponseFormat = AudioFormat.Mp3,

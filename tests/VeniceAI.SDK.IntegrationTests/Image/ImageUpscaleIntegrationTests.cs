@@ -1,5 +1,6 @@
 using Shouldly;
 using VeniceAI.SDK.Models.Images;
+using VeniceAI.SDK.Models.Common;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -30,7 +31,7 @@ public class ImageUpscaleIntegrationTests : IntegrationTestBase
         // Arrange - First generate a small image to upscale
         var generateRequest = new GenerateImageRequest
         {
-            Model = "flux-dev",
+            Model = ImageModel.FluxStandard,
             Prompt = "A simple red circle on white background",
             Width = 512,
             Height = 512,

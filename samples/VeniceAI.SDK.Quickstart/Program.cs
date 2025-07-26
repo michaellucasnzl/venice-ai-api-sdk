@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using VeniceAI.SDK;
 using VeniceAI.SDK.Extensions;
 using VeniceAI.SDK.Models.Chat;
+using VeniceAI.SDK.Models.Common;
 
 namespace VeniceAI.SDK.Quickstart;
 
@@ -80,7 +81,7 @@ static class Program
 
                 var chatRequest = new ChatCompletionRequest
                 {
-                    Model = "llama-3.3-70b",
+                    Model = TextModel.Llama33_70B,
                     Messages = new List<ChatMessage>
                     {
                         new SystemMessage("You are a helpful assistant that provides concise, friendly responses."),
@@ -110,7 +111,7 @@ static class Program
 
                 var streamingRequest = new ChatCompletionRequest
                 {
-                    Model = "llama-3.3-70b",
+                    Model = TextModel.Llama33_70B,
                     Messages = new List<ChatMessage>
                     {
                         new SystemMessage("You are a creative storyteller."),

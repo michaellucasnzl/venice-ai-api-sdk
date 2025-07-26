@@ -1,5 +1,6 @@
 using Shouldly;
 using VeniceAI.SDK.Models.Images;
+using VeniceAI.SDK.Models.Common;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -30,7 +31,7 @@ public class ImageGenerationIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new GenerateImageRequest
         {
-            Model = "flux-dev",
+            Model = ImageModel.FluxStandard,
             Prompt = "A beautiful sunset over the ocean with sailboats in the distance",
             Width = 1024,
             Height = 1024,
@@ -75,7 +76,7 @@ public class ImageGenerationIntegrationTests : IntegrationTestBase
         var request = new SimpleGenerateImageRequest
         {
             Prompt = "A majestic mountain landscape with snow-capped peaks",
-            Model = "flux-dev",
+            Model = ImageModel.FluxStandard,
             Size = "1024x1024",
             Quality = "standard",
             N = 1
@@ -118,7 +119,7 @@ public class ImageGenerationIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new GenerateImageRequest
         {
-            Model = "flux-dev",
+            Model = ImageModel.FluxStandard,
             Prompt = "A cyberpunk cityscape at night with neon lights",
             Width = 1024,
             Height = 1024,
@@ -165,7 +166,7 @@ public class ImageGenerationIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new GenerateImageRequest
         {
-            Model = "flux-dev",
+            Model = ImageModel.FluxStandard,
             Prompt = "A peaceful forest scene with wildlife",
             NegativePrompt = "dark, scary, horror, violence",
             Width = 1024,

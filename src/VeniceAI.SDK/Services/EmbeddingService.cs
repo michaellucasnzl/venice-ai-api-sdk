@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 using VeniceAI.SDK.Models.Embeddings;
+using VeniceAI.SDK.Models.Common;
 using VeniceAI.SDK.Extensions;
 
 namespace VeniceAI.SDK.Services;
@@ -32,12 +33,6 @@ public class EmbeddingService : BaseHttpService, IEmbeddingService
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
-
-        // Validate the model if provided
-        if (!string.IsNullOrEmpty(request.Model))
-        {
-            ModelEnumExtensions.ValidateEmbeddingModel(request.Model);
-        }
 
         try
         {

@@ -1,5 +1,6 @@
 using Shouldly;
 using VeniceAI.SDK.Models.Chat;
+using VeniceAI.SDK.Models.Common;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -30,7 +31,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = "llama-3.3-70b",
+            Model = TextModel.Llama33_70B,
             Messages = new List<ChatMessage>
             {
                 new UserMessage("Hello! How are you?")
@@ -66,7 +67,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = "llama-3.3-70b",
+            Model = TextModel.Llama33_70B,
             Messages = new List<ChatMessage>
             {
                 new UserMessage("Tell me a short joke.")
@@ -122,7 +123,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = "qwen-2.5-vl",
+            Model = TextModel.Qwen25VL,
             Messages = new List<ChatMessage>
             {
                 new UserMessage("What do you see in this image?")
@@ -167,7 +168,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = "llama-3.3-70b",
+            Model = TextModel.Llama33_70B,
             Messages = new List<ChatMessage>
             {
                 new SystemMessage("You are a helpful assistant that responds in haiku format."),
@@ -204,7 +205,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = "llama-3.3-70b",
+            Model = TextModel.Llama33_70B,
             Messages = new List<ChatMessage>
             {
                 new UserMessage("What's the weather like?")
@@ -245,7 +246,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = "llama-3.3-70b",
+            Model = TextModel.Llama33_70B,
             Messages = new List<ChatMessage>
             {
                 new UserMessage("What is the meaning of life?")
@@ -285,7 +286,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = "qwen3-235b",
+            Model = TextModel.VeniceLarge,
             Messages = new List<ChatMessage>
             {
                 new UserMessage("What's the current weather like in New York?")
@@ -359,7 +360,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = "qwen3-235b",
+            Model = TextModel.VeniceLarge,
             Messages = new List<ChatMessage>
             {
                 new UserMessage("Generate a JSON object with information about a cat. Include name, age, and breed.")

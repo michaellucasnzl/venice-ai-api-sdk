@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 using VeniceAI.SDK.Models.Audio;
+using VeniceAI.SDK.Models.Common;
 using VeniceAI.SDK.Extensions;
 
 namespace VeniceAI.SDK.Services;
@@ -37,19 +38,13 @@ public class AudioService : BaseHttpService, IAudioService
         if (string.IsNullOrEmpty(request.Input))
             throw new ArgumentException("Input text is required", nameof(request));
 
-        // Validate the model if provided
-        if (!string.IsNullOrEmpty(request.Model))
-        {
-            ModelEnumExtensions.ValidateTextToSpeechModel(request.Model);
-        }
-
         try
         {
             // Create request matching Venice AI API format
             var apiRequest = new
             {
                 input = request.Input,
-                model = request.Model ?? "tts-1",
+                model = request.Model?.ToModelString() ?? TextToSpeechModel.TtsKokoro.ToModelString(),
                 voice = request.Voice ?? "alloy",
                 response_format = request.ResponseFormat ?? "mp3",
                 speed = request.Speed ?? 1.0,

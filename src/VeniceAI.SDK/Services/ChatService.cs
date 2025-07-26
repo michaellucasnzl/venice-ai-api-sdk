@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using VeniceAI.SDK.Services.Base;
 using VeniceAI.SDK.Services.Interfaces;
 using VeniceAI.SDK.Models.Chat;
+using VeniceAI.SDK.Models.Common;
 using VeniceAI.SDK.Extensions;
 
 namespace VeniceAI.SDK.Services;
@@ -50,12 +51,6 @@ public class ChatService : BaseHttpService, IChatService
     {
         ArgumentNullException.ThrowIfNull(request);
 
-        if (string.IsNullOrEmpty(request.Model))
-            throw new ArgumentException("Model is required", nameof(request));
-
-        // Validate the model
-        ModelEnumExtensions.ValidateTextModel(request.Model);
-
         if (request.Messages == null || !request.Messages.Any())
             throw new ArgumentException("Messages are required", nameof(request));
 
@@ -64,7 +59,7 @@ public class ChatService : BaseHttpService, IChatService
             // Create API request with Venice-specific parameters
             var apiRequest = new
             {
-                model = request.Model,
+                model = request.Model.ToModelString(),
                 messages = request.Messages.Select(m => new
                 {
                     role = m.Role,
@@ -168,9 +163,6 @@ public class ChatService : BaseHttpService, IChatService
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
-
-        if (string.IsNullOrEmpty(request.Model))
-            throw new ArgumentException("Model is required", nameof(request));
 
         if (request.Messages == null || !request.Messages.Any())
             throw new ArgumentException("Messages are required", nameof(request));
