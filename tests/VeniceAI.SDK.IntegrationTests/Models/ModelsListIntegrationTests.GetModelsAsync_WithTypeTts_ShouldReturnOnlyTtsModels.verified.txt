@@ -15,7 +15,6 @@
         Pricing: {
           Input: {
             Usd: 3.5,
-            Vcu: 35.0,
             Diem: 3.5
           }
         },

@@ -45,7 +45,7 @@ public class ModelEnumSerializationTests
         // Arrange
         var request = new GenerateImageRequest
         {
-            Model = ImageModel.FluxStandard,
+            Model = ImageModel.VeniceSD35,
             Prompt = "Test prompt"
         };
 
@@ -53,7 +53,7 @@ public class ModelEnumSerializationTests
         var json = JsonSerializer.Serialize(request);
 
         // Assert
-        Assert.Contains("\"model\":\"flux-dev\"", json);
+        Assert.Contains("\"model\":\"venice-sd35\"", json);
     }
 
     [Fact]

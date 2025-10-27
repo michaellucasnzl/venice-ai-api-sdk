@@ -23,7 +23,6 @@
         Pricing: {
           Generation: {
             Usd: 0.01,
-            Vcu: 0.1,
             Diem: 0.01
           },
           Upscale: {}
@@ -56,68 +55,6 @@
         Pricing: {
           Generation: {
             Usd: 0.01,
-            Vcu: 0.1,
-            Diem: 0.01
-          },
-          Upscale: {}
-        }
-      }
-    },
-    {
-      Id: flux-dev,
-      Object: model,
-      Created: {Scrubbed},
-      OwnedBy: venice.ai,
-      Type: image,
-      ModelSpec: {
-        Name: FLUX Standard,
-        ModelSource: https://huggingface.co/black-forest-labs/FLUX.1-dev,
-        Offline: false,
-        Beta: false,
-        Constraints: {
-          PromptCharacterLimit: 2048,
-          Steps: {
-            Default: 25,
-            Max: 30
-          },
-          WidthHeightDivisor: 8
-        },
-        Pricing: {
-          Generation: {
-            Usd: 0.01,
-            Vcu: 0.1,
-            Diem: 0.01
-          },
-          Upscale: {}
-        },
-        Traits: [
-          highest_quality
-        ]
-      }
-    },
-    {
-      Id: flux-dev-uncensored,
-      Object: model,
-      Created: {Scrubbed},
-      OwnedBy: venice.ai,
-      Type: image,
-      ModelSpec: {
-        Name: FLUX Custom,
-        ModelSource: https://huggingface.co/black-forest-labs/FLUX.1-dev,
-        Offline: false,
-        Beta: false,
-        Constraints: {
-          PromptCharacterLimit: 2048,
-          Steps: {
-            Default: 25,
-            Max: 30
-          },
-          WidthHeightDivisor: 8
-        },
-        Pricing: {
-          Generation: {
-            Usd: 0.01,
-            Vcu: 0.1,
             Diem: 0.01
           },
           Upscale: {}
@@ -146,7 +83,6 @@
         Pricing: {
           Generation: {
             Usd: 0.01,
-            Vcu: 0.1,
             Diem: 0.01
           },
           Upscale: {}
@@ -154,14 +90,14 @@
       }
     },
     {
-      Id: pony-realism,
+      Id: lustify-v7,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: image,
       ModelSpec: {
-        Name: Pony Realism,
-        ModelSource: https://civitai.com/models/372465,
+        Name: Lustify v7,
+        ModelSource: https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -175,25 +111,52 @@
         Pricing: {
           Generation: {
             Usd: 0.01,
-            Vcu: 0.1,
             Diem: 0.01
           },
           Upscale: {}
-        },
-        Traits: [
-          most_uncensored
-        ]
+        }
       }
     },
     {
-      Id: stable-diffusion-3.5,
+      Id: qwen-image,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: image,
       ModelSpec: {
-        Name: Stable Diffusion 3.5,
-        ModelSource: https://huggingface.co/stabilityai/stable-diffusion-3.5-large,
+        Name: Qwen Image,
+        ModelSource: https://huggingface.co/Qwen/Qwen-Image,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 8,
+            Max: 8
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        },
+        Traits: [
+          highest_quality
+        ]
+      }
+    },
+    {
+      Id: wai-Illustrious,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Anime (WAI),
+        ModelSource: https://civitai.com/models/827184?modelVersionId=1761560,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -207,7 +170,6 @@
         Pricing: {
           Generation: {
             Usd: 0.01,
-            Vcu: 0.1,
             Diem: 0.01
           },
           Upscale: {}

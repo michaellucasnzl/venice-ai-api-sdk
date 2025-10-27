@@ -31,45 +31,74 @@ public enum ModelType
 /// </summary>
 public enum TextModel
 {
+    /// <summary>
+    /// Venice uncensored model - unrestricted content generation
+    /// </summary>
     [Description("venice-uncensored")]
     VeniceUncensored,
 
-    [Description("qwen-2.5-qwq-32b")]
-    QwenReasonning,
-
+    /// <summary>
+    /// Qwen3 4B - Small, efficient model (Venice Small)
+    /// </summary>
     [Description("qwen3-4b")]
     VeniceSmall,
 
+    /// <summary>
+    /// Mistral 31 24B - Medium-sized model with vision capabilities (Venice Medium)
+    /// </summary>
     [Description("mistral-31-24b")]
     VeniceMedium,
 
-    [Description("mistral-32-24b")]
-    VeniceMedium32,
-
+    /// <summary>
+    /// Qwen3 235B - Large, powerful model (Venice Large)
+    /// </summary>
     [Description("qwen3-235b")]
     VeniceLarge,
 
+    /// <summary>
+    /// Llama 3.2 3B - Compact Meta model
+    /// </summary>
     [Description("llama-3.2-3b")]
     Llama32_3B,
 
+    /// <summary>
+    /// Llama 3.3 70B - High-performance Meta model
+    /// </summary>
     [Description("llama-3.3-70b")]
     Llama33_70B,
 
-    [Description("llama-3.1-405b")]
-    Llama31_405B,
-
-    [Description("dolphin-2.9.2-qwen2-72b")]
-    Dolphin72B,
-
-    [Description("qwen-2.5-vl")]
-    Qwen25VL,
-
-    [Description("qwen-2.5-coder-32b")]
-    Qwen25Coder32B,
-
+    /// <summary>
+    /// DeepSeek R1 671B - Large reasoning model
+    /// </summary>
     [Description("deepseek-r1-671b")]
     DeepSeekR1_671B,
 
+    // Obsolete models - kept for backward compatibility
+    [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSmall (qwen3-4b) instead.")]
+    [Description("qwen-2.5-qwq-32b")]
+    QwenReasonning,
+
+    [Obsolete("This model is no longer available in the Venice AI API. Use VeniceMedium (mistral-31-24b) instead.")]
+    [Description("mistral-32-24b")]
+    VeniceMedium32,
+
+    [Obsolete("This model is no longer available in the Venice AI API. Use Llama33_70B instead.")]
+    [Description("llama-3.1-405b")]
+    Llama31_405B,
+
+    [Obsolete("This model is no longer available in the Venice AI API. Use VeniceLarge (qwen3-235b) instead.")]
+    [Description("dolphin-2.9.2-qwen2-72b")]
+    Dolphin72B,
+
+    [Obsolete("This model is no longer available in the Venice AI API. Use VeniceMedium (mistral-31-24b) for vision capabilities.")]
+    [Description("qwen-2.5-vl")]
+    Qwen25VL,
+
+    [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSmall (qwen3-4b) or VeniceLarge (qwen3-235b) instead.")]
+    [Description("qwen-2.5-coder-32b")]
+    Qwen25Coder32B,
+
+    [Obsolete("This model is no longer available in the Venice AI API. Use DeepSeekR1_671B instead.")]
     [Description("deepseek-coder-v2-lite")]
     DeepSeekCoderV2Lite
 }
@@ -79,24 +108,50 @@ public enum TextModel
 /// </summary>
 public enum ImageModel
 {
+    /// <summary>
+    /// Venice SD 3.5 - Venice's optimized Stable Diffusion 3.5 model
+    /// </summary>
     [Description("venice-sd35")]
     VeniceSD35,
 
+    /// <summary>
+    /// HiDream - High-quality image generation model
+    /// </summary>
     [Description("hidream")]
     HiDream,
 
-    [Description("flux-dev")]
-    FluxStandard,
-
-    [Description("flux-dev-uncensored")]
-    FluxCustom,
-
+    /// <summary>
+    /// Lustify SDXL - Uncensored SDXL model for adult content
+    /// </summary>
     [Description("lustify-sdxl")]
     LustifySDXL,
 
+    /// <summary>
+    /// Qwen Image - Fast image generation model
+    /// </summary>
+    [Description("qwen-image")]
+    QwenImage,
+
+    /// <summary>
+    /// WAI Illustrious - Anime-style image generation model
+    /// </summary>
+    [Description("wai-Illustrious")]
+    WaiIllustrious,
+
+    // Obsolete models - kept for backward compatibility
+    [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSD35 or HiDream instead.")]
+    [Description("flux-dev")]
+    FluxStandard,
+
+    [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSD35 or HiDream instead.")]
+    [Description("flux-dev-uncensored")]
+    FluxCustom,
+
+    [Obsolete("This model is no longer available in the Venice AI API. Use LustifySDXL or WaiIllustrious instead.")]
     [Description("pony-realism")]
     PonyRealism,
 
+    [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSD35 instead.")]
     [Description("stable-diffusion-3.5")]
     StableDiffusion35
 }

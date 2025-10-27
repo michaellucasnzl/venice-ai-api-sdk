@@ -1,8 +1,8 @@
 ﻿{
-  Id: chatcmpl-d27c7de0370044b4a4ae19422751acc0,
+  Id: chatcmpl-faee898d934844a9b74f8d65dfb45ede,
   Object: chat.completion,
   Created: {Scrubbed},
-  Model: qwen-2.5-vl,
+  Model: mistral-31-24b,
   Choices: [
     {
       Message: {

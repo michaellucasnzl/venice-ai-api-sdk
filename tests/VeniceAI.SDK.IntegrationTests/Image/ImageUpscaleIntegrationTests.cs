@@ -31,7 +31,7 @@ public class ImageUpscaleIntegrationTests : IntegrationTestBase
         // Arrange - First generate a small image to upscale
         var generateRequest = new GenerateImageRequest
         {
-            Model = ImageModel.FluxStandard,
+            Model = ImageModel.VeniceSD35,
             Prompt = "A simple red circle on white background",
             Width = 512,
             Height = 512,

@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- **BREAKING**: Updated model enums to reflect current Venice AI API model availability
+  - Text models: Removed obsolete models and marked them as `[Obsolete]` for backward compatibility
+  - Image models: Updated to current model lineup including `qwen-image` and `wai-Illustrious`
+- Updated test suite to use currently available models
+- Updated README and sample code examples with current model names
+
+### Added
+- New image models: `QwenImage` (qwen-image) and `WaiIllustrious` (wai-Illustrious) for anime-style generation
+- Comprehensive XML documentation comments for all model enum values
+
+### Deprecated
+- Text models: `QwenReasonning`, `VeniceMedium32`, `Llama31_405B`, `Dolphin72B`, `Qwen25VL`, `Qwen25Coder32B`, `DeepSeekCoderV2Lite`
+- Image models: `FluxStandard`, `FluxCustom`, `PonyRealism`, `StableDiffusion35`
+- All deprecated models are marked with `[Obsolete]` attributes and will be removed in a future version
+
+### Recommended Migrations
+- For vision tasks: Use `VeniceMedium` (mistral-31-24b) instead of `Qwen25VL`
+- For image generation: Use `HiDream`, `VeniceSD35`, or `QwenImage` instead of Flux models
+- For coding tasks: Use `VeniceSmall` (qwen3-4b) or `VeniceLarge` (qwen3-235b) instead of `Qwen25Coder32B`
+- For reasoning: Use `DeepSeekR1_671B` instead of `QwenReasonning`
+
 ## [1.0.0] - 2025-01-11
 
 ### Added

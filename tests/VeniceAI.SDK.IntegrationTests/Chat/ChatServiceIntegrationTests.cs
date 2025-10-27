@@ -123,7 +123,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = TextModel.Qwen25VL,
+            Model = TextModel.VeniceMedium, // mistral-31-24b has vision capabilities
             Messages = new List<ChatMessage>
             {
                 new UserMessage("What do you see in this image?")

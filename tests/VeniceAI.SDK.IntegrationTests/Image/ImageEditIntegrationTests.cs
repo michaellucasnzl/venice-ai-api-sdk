@@ -31,7 +31,7 @@ public class ImageEditIntegrationTests : IntegrationTestBase
         // Arrange - First generate a base image to edit
         var generateRequest = new GenerateImageRequest
         {
-            Model = ImageModel.FluxStandard,
+            Model = ImageModel.VeniceSD35,
             Prompt = "A simple landscape with a house",
             Width = 512,
             Height = 512,

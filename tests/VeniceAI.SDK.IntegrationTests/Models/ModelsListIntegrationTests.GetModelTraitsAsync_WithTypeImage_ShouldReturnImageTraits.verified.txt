@@ -2,8 +2,7 @@
   Traits: {
     default: venice-sd35,
     eliza-default: venice-sd35,
-    highest_quality: flux-dev,
-    most_uncensored: pony-realism
+    highest_quality: qwen-image
   },
   IsSuccess: true,
   StatusCode: 200,

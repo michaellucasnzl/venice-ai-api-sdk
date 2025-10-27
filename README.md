@@ -265,7 +265,7 @@ Console.WriteLine($"Vision analysis: {response.Choices[0].Message.Content}");
 // Basic image generation
 var imageRequest = new GenerateImageRequest
 {
-    Model = "flux-dev",
+    Model = "hidream",
     Prompt = "A beautiful sunset over mountains",
     Width = 1024,
     Height = 1024,
@@ -286,7 +286,7 @@ if (imageResponse.IsSuccess)
 // Simple image generation
 var simpleImageResponse = await client.Images.GenerateImageSimpleAsync(
     "A futuristic cityscape at night", 
-    model: "flux-dev",
+    model: "hidream",
     width: 1024,
     height: 1024
 );
@@ -294,7 +294,7 @@ var simpleImageResponse = await client.Images.GenerateImageSimpleAsync(
 // Image upscaling
 var upscaleRequest = new UpscaleImageRequest
 {
-    Model = "flux-dev",
+    Model = "venice-sd35",
     Image = Convert.ToBase64String(imageBytes),
     Scale = 2
 };

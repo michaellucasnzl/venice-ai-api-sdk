@@ -8,7 +8,7 @@ namespace VeniceAI.SDK.Tests;
 public class VeniceAIExceptionTests
 {
     [Fact]
-    public void FromApiException_WithValidationErrors_ShouldParseCorrectly()
+    public void FromHttpException_WithValidationErrors_ShouldParseCorrectly()
     {
         // Arrange
         var validationErrorResponse = """
@@ -20,15 +20,8 @@ public class VeniceAIExceptionTests
             }
             """;
 
-        var apiException = new ApiException(
-            "Validation failed",
-            400,
-            validationErrorResponse,
-            new Dictionary<string, IEnumerable<string>>(),
-            null);
-
         // Act
-        var veniceException = VeniceAIException.FromApiException(apiException);
+        var veniceException = VeniceAIException.FromHttpException(400, validationErrorResponse);
 
         // Assert
         Assert.Equal(400, veniceException.StatusCode);
@@ -41,7 +34,7 @@ public class VeniceAIExceptionTests
     }
 
     [Fact]
-    public void FromApiException_WithStandardError_ShouldParseCorrectly()
+    public void FromHttpException_WithStandardError_ShouldParseCorrectly()
     {
         // Arrange
         var standardErrorResponse = """
@@ -50,15 +43,8 @@ public class VeniceAIExceptionTests
             }
             """;
 
-        var apiException = new ApiException(
-            "Authentication failed",
-            401,
-            standardErrorResponse,
-            new Dictionary<string, IEnumerable<string>>(),
-            null);
-
         // Act
-        var veniceException = VeniceAIException.FromApiException(apiException);
+        var veniceException = VeniceAIException.FromHttpException(401, standardErrorResponse);
 
         // Assert
         Assert.Equal(401, veniceException.StatusCode);
@@ -68,7 +54,7 @@ public class VeniceAIExceptionTests
     }
 
     [Fact]
-    public void FromApiException_WithMultipleValidationErrors_ShouldParseCorrectly()
+    public void FromHttpException_WithMultipleValidationErrors_ShouldParseCorrectly()
     {
         // Arrange
         var multipleErrorResponse = """
@@ -83,15 +69,8 @@ public class VeniceAIExceptionTests
             }
             """;
 
-        var apiException = new ApiException(
-            "Validation failed",
-            400,
-            multipleErrorResponse,
-            new Dictionary<string, IEnumerable<string>>(),
-            null);
-
         // Act
-        var veniceException = VeniceAIException.FromApiException(apiException);
+        var veniceException = VeniceAIException.FromHttpException(400, multipleErrorResponse);
 
         // Assert
         Assert.Equal(400, veniceException.StatusCode);
@@ -109,20 +88,13 @@ public class VeniceAIExceptionTests
     }
 
     [Fact]
-    public void FromApiException_WithInvalidJson_ShouldHandleGracefully()
+    public void FromHttpException_WithInvalidJson_ShouldHandleGracefully()
     {
         // Arrange
         var invalidJsonResponse = "Invalid JSON response";
 
-        var apiException = new ApiException(
-            "Server error",
-            500,
-            invalidJsonResponse,
-            new Dictionary<string, IEnumerable<string>>(),
-            null);
-
         // Act
-        var veniceException = VeniceAIException.FromApiException(apiException);
+        var veniceException = VeniceAIException.FromHttpException(500, invalidJsonResponse);
 
         // Assert
         Assert.Equal(500, veniceException.StatusCode);
@@ -132,18 +104,13 @@ public class VeniceAIExceptionTests
     }
 
     [Fact]
-    public void FromApiException_WithEmptyResponse_ShouldHandleGracefully()
+    public void FromHttpException_WithEmptyResponse_ShouldHandleGracefully()
     {
         // Arrange
-        var apiException = new ApiException(
-            "Server error",
-            500,
-            "",
-            new Dictionary<string, IEnumerable<string>>(),
-            null);
+        var emptyResponse = "";
 
         // Act
-        var veniceException = VeniceAIException.FromApiException(apiException);
+        var veniceException = VeniceAIException.FromHttpException(500, emptyResponse);
 
         // Assert
         Assert.Equal(500, veniceException.StatusCode);

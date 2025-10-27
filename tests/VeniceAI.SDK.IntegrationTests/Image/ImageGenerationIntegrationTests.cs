@@ -31,7 +31,7 @@ public class ImageGenerationIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new GenerateImageRequest
         {
-            Model = ImageModel.FluxStandard,
+            Model = ImageModel.HiDream,
             Prompt = "A beautiful sunset over the ocean with sailboats in the distance",
             Width = 1024,
             Height = 1024,
@@ -76,7 +76,7 @@ public class ImageGenerationIntegrationTests : IntegrationTestBase
         var request = new SimpleGenerateImageRequest
         {
             Prompt = "A majestic mountain landscape with snow-capped peaks",
-            Model = ImageModel.FluxStandard,
+            Model = ImageModel.HiDream,
             Size = "1024x1024",
             Quality = "standard",
             N = 1
@@ -119,7 +119,7 @@ public class ImageGenerationIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new GenerateImageRequest
         {
-            Model = ImageModel.FluxStandard,
+            Model = ImageModel.VeniceSD35,
             Prompt = "A cyberpunk cityscape at night with neon lights",
             Width = 1024,
             Height = 1024,
@@ -166,7 +166,7 @@ public class ImageGenerationIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new GenerateImageRequest
         {
-            Model = ImageModel.FluxStandard,
+            Model = ImageModel.VeniceSD35,
             Prompt = "A peaceful forest scene with wildlife",
             NegativePrompt = "dark, scary, horror, violence",
             Width = 1024,
