@@ -165,3 +165,30 @@ public class InpaintModelJsonConverter : JsonConverter<InpaintModel>
         writer.WriteStringValue(value.ToModelString());
     }
 }
+
+/// <summary>
+/// JSON converter for VideoModel enum.
+/// </summary>
+public class VideoModelJsonConverter : JsonConverter<VideoModel>
+{
+    public override VideoModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        if (reader.TokenType != JsonTokenType.String)
+        {
+            throw new JsonException($"Expected string value for {nameof(VideoModel)}.");
+        }
+
+        var value = reader.GetString();
+        if (string.IsNullOrEmpty(value))
+        {
+            throw new JsonException($"{nameof(VideoModel)} cannot be null or empty.");
+        }
+
+        return ModelEnumExtensions.ParseVideoModel(value);
+    }
+
+    public override void Write(Utf8JsonWriter writer, VideoModel value, JsonSerializerOptions options)
+    {
+        writer.WriteStringValue(value.ToModelString());
+    }
+}

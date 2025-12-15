@@ -70,6 +70,12 @@ public class GenerateImageRequest
     public bool? ReturnBinary { get; set; }
 
     /// <summary>
+    /// Number of images to generate (1-4). Only supported when return_binary is false.
+    /// </summary>
+    [JsonPropertyName("variants")]
+    public int? Variants { get; set; }
+
+    /// <summary>
     /// Whether to use safe mode.
     /// </summary>
     [JsonPropertyName("safe_mode")]
@@ -98,6 +104,25 @@ public class GenerateImageRequest
     /// </summary>
     [JsonPropertyName("style_preset")]
     public string? StylePreset { get; set; }
+
+    /// <summary>
+    /// Aspect ratio (utilized by certain image models including Nano Banana). Examples: "1:1", "16:9".
+    /// </summary>
+    [JsonPropertyName("aspect_ratio")]
+    public string? AspectRatio { get; set; }
+
+    /// <summary>
+    /// Resolution (utilized by certain image models including Nano Banana). Examples: "1K", "2K", "4K".
+    /// </summary>
+    [JsonPropertyName("resolution")]
+    public string? Resolution { get; set; }
+
+    /// <summary>
+    /// Enable web search for the image generation task. Only supported by certain models.
+    /// Additional credits are charged if web search is used.
+    /// </summary>
+    [JsonPropertyName("enable_web_search")]
+    public bool? EnableWebSearch { get; set; }
 }
 
 /// <summary>

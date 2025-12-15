@@ -18,6 +18,11 @@ public interface IVeniceAIClient
     IImageService Images { get; }
 
     /// <summary>
+    /// Gets the video service.
+    /// </summary>
+    IVideoService Video { get; }
+
+    /// <summary>
     /// Gets the embedding service.
     /// </summary>
     IEmbeddingService Embeddings { get; }
@@ -36,4 +41,9 @@ public interface IVeniceAIClient
     /// Gets the billing service.
     /// </summary>
     IBillingService Billing { get; }
+
+    /// <summary>
+    /// Gets the character service.
+    /// </summary>
+    ICharacterService Characters { get; }
 }

@@ -83,6 +83,16 @@ public static class ModelEnumExtensions
     }
 
     /// <summary>
+    /// Gets the string representation of a video model enum value.
+    /// </summary>
+    /// <param name="model">The video model enum value.</param>
+    /// <returns>The string representation.</returns>
+    public static string ToModelString(this VideoModel model)
+    {
+        return GetEnumDescription(model);
+    }
+
+    /// <summary>
     /// Gets the string representation of an image style enum value.
     /// </summary>
     /// <param name="style">The image style enum value.</param>
@@ -159,6 +169,17 @@ public static class ModelEnumExtensions
     }
 
     /// <summary>
+    /// Parses a string to a VideoModel enum value.
+    /// </summary>
+    /// <param name="modelString">The model string.</param>
+    /// <returns>The VideoModel enum value.</returns>
+    /// <exception cref="VeniceAIException">Thrown when the model string is not valid.</exception>
+    public static VideoModel ParseVideoModel(string modelString)
+    {
+        return ParseEnum<VideoModel>(modelString, "video model");
+    }
+
+    /// <summary>
     /// Parses a string to an ImageStyle enum value.
     /// </summary>
     /// <param name="styleString">The style string.</param>
@@ -231,6 +252,17 @@ public static class ModelEnumExtensions
     /// <param name="model">The parsed InpaintModel enum value.</param>
     /// <returns>True if parsing was successful, false otherwise.</returns>
     public static bool TryParseInpaintModel(string modelString, out InpaintModel model)
+    {
+        return TryParseEnum(modelString, out model);
+    }
+
+    /// <summary>
+    /// Tries to parse a string to a VideoModel enum value.
+    /// </summary>
+    /// <param name="modelString">The model string.</param>
+    /// <param name="model">The parsed VideoModel enum value.</param>
+    /// <returns>True if parsing was successful, false otherwise.</returns>
+    public static bool TryParseVideoModel(string modelString, out VideoModel model)
     {
         return TryParseEnum(modelString, out model);
     }

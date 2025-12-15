@@ -5,7 +5,7 @@ info:
   description: The Venice.ai API.
   termsOfService: https://venice.ai/legal/tos
   title: Venice.ai API
-  version: "20250713.224148"
+  version: "20251212.081138"
 openapi: 3.0.0
 security:
   - BearerAuth: []
@@ -19,6 +19,10 @@ tags:
     name: Models
   - description: Generate and manipulate images using AI models.
     name: Image
+  - description: Generate videos using AI models.
+    name: Video
+  - description: List and retrieve character information for use in completions.
+    name: Characters
 components:
   securitySchemes:
     BearerAuth:
@@ -104,6 +108,26 @@ components:
                           oneOf:
                             - type: object
                               properties:
+                                cache_control:
+                                  type: object
+                                  properties:
+                                    ttl:
+                                      type: string
+                                      description: Optional TTL for extended cache duration. Beta feature requiring
+                                        special header.
+                                      example: 1h
+                                    type:
+                                      type: string
+                                      enum:
+                                        - ephemeral
+                                      description: The type of cache control. Currently only "ephemeral" is supported.
+                                      example: ephemeral
+                                  required:
+                                    - type
+                                  description: Optional cache control for prompt caching on supported providers.
+                                  example:
+                                    type: ephemeral
+                                  title: Cache Control
                                 text:
                                   type: string
                                   minLength: 1
@@ -119,14 +143,34 @@ components:
                               required:
                                 - text
                                 - type
-                              additionalProperties: false
-                              description: Text message type.
+                              description: Text message type. Supports optional cache_control for prompt
+                                caching on supported providers.
                               example:
                                 text: Why is the sky blue?
                                 type: text
                               title: text
                             - type: object
                               properties:
+                                cache_control:
+                                  type: object
+                                  properties:
+                                    ttl:
+                                      type: string
+                                      description: Optional TTL for extended cache duration. Beta feature requiring
+                                        special header.
+                                      example: 1h
+                                    type:
+                                      type: string
+                                      enum:
+                                        - ephemeral
+                                      description: The type of cache control. Currently only "ephemeral" is supported.
+                                      example: ephemeral
+                                  required:
+                                    - type
+                                  description: Optional cache control for prompt caching on supported providers.
+                                  example:
+                                    type: ephemeral
+                                  title: Cache Control
                                 image_url:
                                   type: object
                                   properties:
@@ -148,8 +192,8 @@ components:
                               required:
                                 - image_url
                                 - type
-                              additionalProperties: false
-                              description: image_url message type.
+                              description: Image URL message type. Supports optional cache_control for prompt
+                                caching on supported providers.
                               title: image_url
                         title: Objects
                   role:
@@ -172,6 +216,26 @@ components:
                         items:
                           type: object
                           properties:
+                            cache_control:
+                              type: object
+                              properties:
+                                ttl:
+                                  type: string
+                                  description: Optional TTL for extended cache duration. Beta feature requiring
+                                    special header.
+                                  example: 1h
+                                type:
+                                  type: string
+                                  enum:
+                                    - ephemeral
+                                  description: The type of cache control. Currently only "ephemeral" is supported.
+                                  example: ephemeral
+                              required:
+                                - type
+                              description: Optional cache control for prompt caching on supported providers.
+                              example:
+                                type: ephemeral
+                              title: Cache Control
                             text:
                               type: string
                               minLength: 1
@@ -187,8 +251,8 @@ components:
                           required:
                             - text
                             - type
-                          additionalProperties: false
-                          description: Text message type.
+                          description: Text message type. Supports optional cache_control for prompt
+                            caching on supported providers.
                           example:
                             text: Why is the sky blue?
                             type: text
@@ -198,21 +262,48 @@ components:
                         title: "null"
                   name:
                     type: string
+                    nullable: true
                   reasoning_content:
                     type: string
                     nullable: true
+                  reasoning_details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: string
+                        format:
+                          type: string
+                        id:
+                          type: string
+                        index:
+                          type: number
+                        text:
+                          type: string
+                        type:
+                          type: string
+                      required:
+                        - type
+                    description: Reasoning details returned by certain reasoning models that support
+                      this feature (e.g., Gemini 3 Pro). Not all reasoning
+                      models return this field. For multi-turn conversations
+                      with tool calls on supported models, pass back the
+                      reasoning_details exactly as received to preserve thought
+                      signatures.
                   role:
                     type: string
                     enum:
                       - assistant
                   tool_calls:
                     type: array
+                    nullable: true
                     items:
                       nullable: true
                 required:
-                  - content
                   - role
-                description: The assistant message contains the response from the LLM.
+                description: The assistant message contains the response from the LLM. Must have
+                  either content or tool_calls.
                 title: Assistant Message
               - type: object
                 properties:
@@ -220,6 +311,7 @@ components:
                     type: string
                   name:
                     type: string
+                    nullable: true
                   reasoning_content:
                     type: string
                     nullable: true
@@ -231,6 +323,7 @@ components:
                     type: string
                   tool_calls:
                     type: array
+                    nullable: true
                     items:
                       nullable: true
                 required:
@@ -251,6 +344,26 @@ components:
                         items:
                           type: object
                           properties:
+                            cache_control:
+                              type: object
+                              properties:
+                                ttl:
+                                  type: string
+                                  description: Optional TTL for extended cache duration. Beta feature requiring
+                                    special header.
+                                  example: 1h
+                                type:
+                                  type: string
+                                  enum:
+                                    - ephemeral
+                                  description: The type of cache control. Currently only "ephemeral" is supported.
+                                  example: ephemeral
+                              required:
+                                - type
+                              description: Optional cache control for prompt caching on supported providers.
+                              example:
+                                type: ephemeral
+                              title: Cache Control
                             text:
                               type: string
                               minLength: 1
@@ -266,8 +379,8 @@ components:
                           required:
                             - text
                             - type
-                          additionalProperties: false
-                          description: Text message type.
+                          description: Text message type. Supports optional cache_control for prompt
+                            caching on supported providers.
                           example:
                             text: Why is the sky blue?
                             type: text
@@ -275,6 +388,7 @@ components:
                         title: Objects
                   name:
                     type: string
+                    nullable: true
                   role:
                     type: string
                     enum:
@@ -313,7 +427,7 @@ components:
             of models available to you. You can use feature suffixes to enable
             features from the venice_parameters object. Please see "Model
             Feature Suffix" documentation for more details.
-          example: venice-uncensored
+          example: zai-org-glm-4.6
         n:
           type: integer
           default: 1
@@ -329,12 +443,41 @@ components:
           description: Number between -2.0 and 2.0. Positive values penalize new tokens
             based on whether they appear in the text so far, increasing the
             model's likelihood to talk about new topics.
+        prompt_cache_key:
+          type: string
+          description: When supplied, this field may be used to optimize conversation
+            routing to improve cache performance and thus reduce latency.
+          example: random-string
         repetition_penalty:
           type: number
           minimum: 0
           description: The parameter for repetition penalty. 1.0 means no penalty. Values
             > 1.0 discourage repetition.
           example: 1.2
+        reasoning:
+          type: object
+          properties:
+            effort:
+              type: string
+              enum:
+                - low
+                - medium
+                - high
+              description: Controls the reasoning effort level for supported models. Higher
+                effort means more thorough reasoning but increased token usage.
+                Defaults to the model configuration if not specified.
+              example: medium
+          description: Configuration for reasoning behavior on supported models.
+        reasoning_effort:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+          description: OpenAI-compatible parameter to control reasoning effort level for
+            supported models. Takes precedence over reasoning.effort if both are
+            provided.
+          example: medium
         seed:
           type: integer
           minimum: 0
@@ -409,8 +552,8 @@ components:
           properties:
             character_slug:
               type: string
-              description: The character slug of a public Venice character.
-              example: venice
+              description: The character slug of a public Venice character. Discoverable as
+                the "Public ID" on the published character page.
             strip_thinking_response:
               type: boolean
               default: false
@@ -436,26 +579,37 @@ components:
                 model's discretion. Citations will be returned either in the
                 first chunk of a streaming result, or in the non streaming
                 response.
-              example: auto
+              example: off
+            enable_web_scraping:
+              type: boolean
+              default: false
+              description: Enable Venice web scraping of URLs in the latest user message using
+                Firecrawl. Off by default.
+              example: false
             enable_web_citations:
               type: boolean
               default: false
               description: When web search is enabled, this will request that the LLM cite its
-                sources using a [REF]0[/REF] format. Defaults to false.
-              example: true
+                sources using a ^index^ or ^i,j^ superscript format (e.g., ^1^).
+                Defaults to false.
             include_search_results_in_stream:
               type: boolean
               default: false
               description: Experimental feature - When set to true, the LLM will include
                 search results in the stream as the first emitted chunk.
                 Defaults to false.
-              example: true
+            return_search_results_as_documents:
+              type: boolean
+              description: When set, search results are also surfaced in an OpenAI-compatible
+                tool call named "venice_web_search_documents" to ease LangChain
+                consumption.
             include_venice_system_prompt:
               type: boolean
               default: true
               description: Whether to include the Venice supplied system prompts along side
                 specified system prompts. Defaults to true.
-          description: Unique parameters to Venice's API implementation.
+          description: Unique parameters to Venice's API implementation. Customize these
+            to control the behavior of the model.
         parallel_tool_calls:
           type: boolean
           default: true
@@ -516,13 +670,11 @@ components:
                       type: string
                   required:
                     - name
-                  additionalProperties: false
                 type:
                   type: string
               required:
                 - function
                 - type
-              additionalProperties: false
             - type: string
         tools:
           type: array
@@ -541,9 +693,15 @@ components:
                     type: object
                     additionalProperties:
                       nullable: true
+                  strict:
+                    type: boolean
+                    default: false
+                    description: If set to true, the model will follow the exact schema defined in
+                      the parameters field. Only a subset of JSON Schema is
+                      supported when strict is true.
+                    example: false
                 required:
                   - name
-                additionalProperties: false
               id:
                 type: string
               type:
@@ -617,10 +775,10 @@ components:
         model:
           type: string
           description: The model to use for image generation.
-          example: hidream
+          example: z-image-turbo
         negative_prompt:
           type: string
-          maxLength: 1500
+          maxLength: 7500
           description: A description of what should not be in the image. Character limit
             is model specific and is listed in the promptCharacterLimit
             constraint in the model list endpoint.
@@ -628,7 +786,7 @@ components:
         prompt:
           type: string
           minLength: 1
-          maxLength: 1500
+          maxLength: 7500
           description: The description for the image. Character limit is model specific
             and is listed in the promptCharacterLimit setting in the model list
             endpoint.
@@ -638,6 +796,13 @@ components:
           default: false
           description: Whether to return binary image data instead of base64.
           example: false
+        variants:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Number of images to generate (1–4). Only supported when
+            return_binary is false.
+          example: 3
         safe_mode:
           type: boolean
           default: true
@@ -654,24 +819,33 @@ components:
           example: 123456789
         steps:
           type: integer
-          minimum: 0
-          exclusiveMinimum: true
-          maximum: 50
-          default: 20
-          description: "Number of inference steps. The following models have reduced max
-            steps from the global max: venice-sd35: 30 max steps, hidream: 50
-            max steps, fluently-xl: 50 max steps, flux-dev: 30 max steps,
-            flux-dev-uncensored: 30 max steps, lustify-sdxl: 50 max steps,
-            pony-realism: 50 max steps, stable-diffusion-3.5: 30 max steps.
-            These constraints are exposed in the model list endpoint for each
-            model."
-          example: 20
+          default: 0
+          description: Number of inference steps. This model does not support steps - this
+            field is ignored.
+          example: 0
         style_preset:
           type: string
           description: An image style to apply to the image. Visit
             https://docs.venice.ai/api-reference/endpoint/image/styles for more
             details.
           example: 3D Model
+        aspect_ratio:
+          type: string
+          description: 'Aspect ratio (utilized by certain image models including Nano
+            Banana). Examples: "1:1", "16:9".'
+          example: 1:1
+        resolution:
+          type: string
+          description: 'Resolution (utilized by certain image models including Nano
+            Banana). Examples: "1K", "2K", "4K".'
+          example: 1K
+        enable_web_search:
+          type: boolean
+          description: Enable web search for the image generation task. This will allow
+            the model to use the latest information from the web to generate the
+            image. Only supported by certain models. If web search is used,
+            additional credits are getting charged.
+          example: false
         width:
           type: integer
           minimum: 0
@@ -706,7 +880,7 @@ components:
           description: The model to use for image generation. Defaults to Venice's default
             image model. If a non-existent model is specified (ie an OpenAI
             model name), it will default to Venice's default image model.
-          example: hidream
+          example: z-image-turbo
         moderation:
           type: string
           nullable: true
@@ -894,7 +1068,7 @@ components:
           description: The image to edit. Can be either a file upload, a base64-encoded
             string, or a URL starting with http:// or https://. Image dimensions
             must be at least 65536 pixels and must not exceed 33177600 pixels.
-            Image URLs must be less than 5MB.
+            Image URLs must be less than 10MB.
       required:
         - prompt
         - image
@@ -1112,6 +1286,99 @@ components:
         speed: 1
         streaming: false
         voice: af_sky
+    QueueVideoRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: The model to use for image generation.
+          example: wan-2.5-preview-image-to-video
+        prompt:
+          type: string
+          minLength: 1
+          maxLength: 2500
+          description: The prompt to use for video generation. The maximum length is 2500
+            characters.
+          example: Commerce being conducted in the city of Venice, Italy.
+        negative_prompt:
+          type: string
+          maxLength: 2500
+          default: low resolution, error, worst quality, low quality, defects
+          description: The negative prompt to use for video generation. The maximum length
+            is 2500 characters.
+          example: low resolution, error, worst quality, low quality, defects
+        duration:
+          type: string
+          enum:
+            - 5s
+            - 10s
+          description: The duration of the video to generate.
+          example: 5s
+        aspect_ratio:
+          description: The aspect ratio of the video to generate.
+          example: 16:9
+        resolution:
+          type: string
+          enum:
+            - 1080p
+            - 720p
+            - 480p
+          default: 720p
+          description: The resolution of the video to generate.
+          example: 720p
+        audio:
+          description: For models which support audio generation and configuration,
+            indicates if audio should be generated. Defaults to true.
+          example: true
+        image_url:
+          type: string
+          description: For image to video models, the reference image to use for video
+            generation. Must be either a URL (starting with "http://" or
+            "https://") or a data URL (starting with "data:").
+          example: data:image/png;base64,iVBORw0K...
+      required:
+        - model
+        - prompt
+        - duration
+        - image_url
+      additionalProperties: false
+    CompleteVideoRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: The ID of the model used for video generation.
+          example: video-model-123
+        queue_id:
+          type: string
+          description: The ID of the video generation request.
+          example: 123e4567-e89b-12d3-a456-426614174000
+      required:
+        - model
+        - queue_id
+      additionalProperties: false
+    RetrieveVideoRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: The ID of the model used for video generation.
+          example: video-model-123
+        queue_id:
+          type: string
+          description: The ID of the video generation request.
+          example: 123e4567-e89b-12d3-a456-426614174000
+        delete_media_on_completion:
+          type: boolean
+          default: false
+          description: If true, the video media will be deleted from storage after the
+            request is completed. If false, you can use the complete endpoint to
+            remove the media once you have successfully downloaded the video.
+          example: false
+      required:
+        - model
+        - queue_id
+      additionalProperties: false
     BillingUsageRequest:
       type: object
       properties:
@@ -1159,6 +1426,10 @@ components:
     BillingUsageResponse:
       type: object
       properties:
+        warningMessage:
+          type: string
+          description: A warning message to disambiguate DIEM usage from legacy DIEM
+            (formerly VCU) usage
         data:
           type: array
           items:
@@ -1299,6 +1570,15 @@ components:
               type: boolean
               description: Is this model in beta?
               example: false
+            privacy:
+              type: string
+              enum:
+                - private
+                - anonymized
+              description: The privacy mode of the model. Private models have zero data
+                retention. Anonymized models Venice can not guarantee privacy
+                on, but requests are not affiliated with a user
+              example: private
             capabilities:
               type: object
               properties:
@@ -1309,8 +1589,12 @@ components:
                 quantization:
                   type: string
                   enum:
+                    - fp4
                     - fp8
                     - fp16
+                    - bf16
+                    - int8
+                    - int4
                     - not-available
                   description: The quantization type of the running model.
                   example: fp8
@@ -1408,6 +1692,64 @@ components:
                     - top_p
                   description: Constraints that apply to text models.
                   title: Text Model Constraints
+                - type: object
+                  properties:
+                    aspect_ratios:
+                      type: array
+                      items:
+                        type: string
+                      description: The aspect ratios supported by the model. Empty array means the
+                        model does not support a defined aspect ratio.
+                      example:
+                        - 16:9
+                        - 9:16
+                    resolutions:
+                      type: array
+                      items:
+                        type: string
+                      description: The resolutions supported by the model. Empty array means the model
+                        does not support a defined resolution.
+                      example:
+                        - 1080p
+                        - 720p
+                        - 480p
+                    durations:
+                      type: array
+                      items:
+                        type: string
+                      description: The durations supported by the model. Empty array means the model
+                        does not support a defined duration.
+                      example:
+                        - 5s
+                        - 10s
+                        - 15s
+                        - 20s
+                        - 30s
+                    model_type:
+                      type: string
+                      enum:
+                        - image-to-video
+                        - text-to-video
+                        - video
+                      description: The type of video model.
+                      example: image-to-video
+                    audio:
+                      type: boolean
+                      description: Does the model support audio generation?
+                      example: true
+                    audio_configurable:
+                      type: boolean
+                      description: Can audio be enabled or disabled for the video generation?
+                      example: true
+                  required:
+                    - aspect_ratios
+                    - resolutions
+                    - durations
+                    - model_type
+                    - audio
+                    - audio_configurable
+                  description: Constraints that apply to video models.
+                  title: Video Model Constraints
               description: Constraints that apply to this model.
             name:
               type: string
@@ -1433,18 +1775,12 @@ components:
                           type: number
                           description: USD cost per million input tokens
                           example: 0.7
-                        vcu:
-                          type: number
-                          description: VCU cost per million input tokens (deprecated - use Diem instead)
-                          deprecated: true
-                          example: 7
                         diem:
                           type: number
                           description: Diem cost per million input tokens
                           example: 7
                       required:
                         - usd
-                        - vcu
                         - diem
                     output:
                       type: object
@@ -1453,18 +1789,12 @@ components:
                           type: number
                           description: USD cost per million output tokens
                           example: 2.8
-                        vcu:
-                          type: number
-                          description: VCU cost per million output tokens (deprecated - use Diem instead)
-                          deprecated: true
-                          example: 28
                         diem:
                           type: number
                           description: Diem cost per million output tokens
                           example: 28
                       required:
                         - usd
-                        - vcu
                         - diem
                   required:
                     - input
@@ -1480,18 +1810,12 @@ components:
                           type: number
                           description: USD cost per image generation
                           example: 0.01
-                        vcu:
-                          type: number
-                          description: VCU cost per image generation (deprecated - use Diem instead)
-                          deprecated: true
-                          example: 0.1
                         diem:
                           type: number
                           description: Diem cost per image generation
                           example: 0.1
                       required:
                         - usd
-                        - vcu
                         - diem
                     upscale:
                       type: object
@@ -1503,18 +1827,12 @@ components:
                               type: number
                               description: USD cost for 2x upscale
                               example: 0.02
-                            vcu:
-                              type: number
-                              description: VCU cost for 2x upscale (deprecated - use Diem instead)
-                              deprecated: true
-                              example: 0.2
                             diem:
                               type: number
                               description: Diem cost for 2x upscale
                               example: 0.2
                           required:
                             - usd
-                            - vcu
                             - diem
                         4x:
                           type: object
@@ -1523,18 +1841,12 @@ components:
                               type: number
                               description: USD cost for 4x upscale
                               example: 0.08
-                            vcu:
-                              type: number
-                              description: VCU cost for 4x upscale (deprecated - use Diem instead)
-                              deprecated: true
-                              example: 0.8
                             diem:
                               type: number
                               description: Diem cost for 4x upscale
                               example: 0.8
                           required:
                             - usd
-                            - vcu
                             - diem
                       required:
                         - 2x
@@ -1553,19 +1865,12 @@ components:
                           type: number
                           description: USD cost per million input characters
                           example: 3.5
-                        vcu:
-                          type: number
-                          description: VCU cost per million input characters (deprecated - use Diem
-                            instead)
-                          deprecated: true
-                          example: 35
                         diem:
                           type: number
                           description: Diem cost per million input characters
                           example: 35
                       required:
                         - usd
-                        - vcu
                         - diem
                   required:
                     - input
@@ -1608,12 +1913,14 @@ components:
         type:
           type: string
           enum:
+            - asr
             - embedding
             - image
             - text
             - tts
             - upscale
             - inpaint
+            - video
           description: Model type
           example: text
       required:
@@ -1648,11 +1955,9 @@ components:
           pricing:
             input:
               usd: 0.15
-              vcu: 1.5
               diem: 0.15
             output:
               usd: 0.6
-              vcu: 6
               diem: 0.6
           traits:
             - fastest
@@ -1786,6 +2091,26 @@ paths:
                                       items:
                                         type: object
                                         properties:
+                                          cache_control:
+                                            type: object
+                                            properties:
+                                              ttl:
+                                                type: string
+                                                description: Optional TTL for extended cache duration. Beta feature requiring
+                                                  special header.
+                                                example: 1h
+                                              type:
+                                                type: string
+                                                enum:
+                                                  - ephemeral
+                                                description: The type of cache control. Currently only "ephemeral" is supported.
+                                                example: ephemeral
+                                            required:
+                                              - type
+                                            description: Optional cache control for prompt caching on supported providers.
+                                            example:
+                                              type: ephemeral
+                                            title: Cache Control
                                           text:
                                             type: string
                                             minLength: 1
@@ -1801,8 +2126,8 @@ paths:
                                         required:
                                           - text
                                           - type
-                                        additionalProperties: false
-                                        description: Text message type.
+                                        description: Text message type. Supports optional cache_control for prompt
+                                          caching on supported providers.
                                         example:
                                           text: Why is the sky blue?
                                           type: text
@@ -1812,21 +2137,49 @@ paths:
                                       title: "null"
                                 name:
                                   type: string
+                                  nullable: true
                                 reasoning_content:
                                   type: string
                                   nullable: true
+                                reasoning_details:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      data:
+                                        type: string
+                                      format:
+                                        type: string
+                                      id:
+                                        type: string
+                                      index:
+                                        type: number
+                                      text:
+                                        type: string
+                                      type:
+                                        type: string
+                                    required:
+                                      - type
+                                  description: Reasoning details returned by certain reasoning models that support
+                                    this feature (e.g., Gemini 3 Pro). Not all
+                                    reasoning models return this field. For
+                                    multi-turn conversations with tool calls on
+                                    supported models, pass back the
+                                    reasoning_details exactly as received to
+                                    preserve thought signatures.
                                 role:
                                   type: string
                                   enum:
                                     - assistant
                                 tool_calls:
                                   type: array
+                                  nullable: true
                                   items:
                                     nullable: true
                               required:
-                                - content
                                 - role
-                              description: The assistant message contains the response from the LLM.
+                              description: The assistant message contains the response from the LLM. Must have
+                                either content or tool_calls.
                               title: Assistant Message
                             - type: object
                               properties:
@@ -1834,6 +2187,7 @@ paths:
                                   type: string
                                 name:
                                   type: string
+                                  nullable: true
                                 reasoning_content:
                                   type: string
                                   nullable: true
@@ -1845,6 +2199,7 @@ paths:
                                   type: string
                                 tool_calls:
                                   type: array
+                                  nullable: true
                                   items:
                                     nullable: true
                               required:
@@ -1905,7 +2260,7 @@ paths:
                   model:
                     type: string
                     description: The model id used for the request.
-                    example: venice-uncensored
+                    example: zai-org-glm-4.6
                   object:
                     type: string
                     enum:
@@ -1962,6 +2317,10 @@ paths:
                         type: boolean
                         description: Did the request enable web citations?
                         example: true
+                      enable_web_scraping:
+                        type: boolean
+                        description: Did the request enable web scraping of URLs via Firecrawl?
+                        example: false
                       include_venice_system_prompt:
                         type: boolean
                         description: Did the request include the Venice system prompt?
@@ -1970,6 +2329,11 @@ paths:
                         type: boolean
                         description: Did the request include search results in the stream?
                         example: false
+                      return_search_results_as_documents:
+                        type: boolean
+                        description: Did the request also return search results as a tool-call documents
+                          block?
+                        example: true
                       character_slug:
                         type: string
                         description: The character slug of a public Venice character.
@@ -2063,8 +2427,10 @@ paths:
                     required:
                       - enable_web_search
                       - enable_web_citations
+                      - enable_web_scraping
                       - include_venice_system_prompt
                       - include_search_results_in_stream
+                      - return_search_results_as_documents
                       - strip_thinking_response
                       - disable_thinking
                     description: Unique parameters to Venice's API implementation.
@@ -2112,8 +2478,10 @@ paths:
                   venice_parameters:
                     include_venice_system_prompt: true
                     include_search_results_in_stream: false
+                    return_search_results_as_documents: false
                     web_search_citations: []
                     enable_web_search: auto
+                    enable_web_scraping: false
                     enable_web_citations: true
                     strip_thinking_response: true
                     disable_thinking: true
@@ -2212,6 +2580,17 @@ paths:
               required: false
               schema:
                 type: boolean
+            x-venice-model-deprecation-warning:
+              description: A warning that the model is scheduled for deprecation
+              required: false
+              schema:
+                type: string
+            x-venice-model-deprecation-date:
+              description: The date the model is scheduled for deprecation
+              required: false
+              schema:
+                type: string
+                format: date-time
           content:
             application/json:
               schema:
@@ -2356,6 +2735,17 @@ paths:
               required: false
               schema:
                 type: boolean
+            x-venice-model-deprecation-warning:
+              description: A warning that the model is scheduled for deprecation
+              required: false
+              schema:
+                type: string
+            x-venice-model-deprecation-date:
+              description: The date the model is scheduled for deprecation
+              required: false
+              schema:
+                type: string
+                format: date-time
           content:
             application/json:
               schema:
@@ -2566,6 +2956,18 @@ paths:
       responses:
         "200":
           description: OK
+          headers:
+            x-venice-model-deprecation-warning:
+              description: A warning that the model is scheduled for deprecation
+              required: false
+              schema:
+                type: string
+            x-venice-model-deprecation-date:
+              description: The date the model is scheduled for deprecation
+              required: false
+              schema:
+                type: string
+                format: date-time
           content:
             image/png:
               schema:
@@ -2629,12 +3031,14 @@ paths:
             anyOf:
               - type: string
                 enum:
+                  - asr
                   - embedding
                   - image
                   - text
                   - tts
                   - upscale
                   - inpaint
+                  - video
               - type: string
                 enum:
                   - all
@@ -2665,12 +3069,14 @@ paths:
                     anyOf:
                       - type: string
                         enum:
+                          - asr
                           - embedding
                           - image
                           - text
                           - tts
                           - upscale
                           - inpaint
+                          - video
                       - type: string
                         enum:
                           - all
@@ -2701,12 +3107,14 @@ paths:
         - schema:
             type: string
             enum:
+              - asr
               - embedding
               - image
               - text
               - tts
               - upscale
               - inpaint
+              - video
             default: text
             description: Filter models by type.
             example: text
@@ -2731,12 +3139,14 @@ paths:
                     anyOf:
                       - type: string
                         enum:
+                          - asr
                           - embedding
                           - image
                           - text
                           - tts
                           - upscale
                           - inpaint
+                          - video
                       - type: string
                         enum:
                           - all
@@ -2773,12 +3183,14 @@ paths:
         - schema:
             type: string
             enum:
+              - asr
               - embedding
               - image
               - text
               - tts
               - upscale
               - inpaint
+              - video
             default: text
             description: Filter models by type.
             example: text
@@ -2803,12 +3215,14 @@ paths:
                     anyOf:
                       - type: string
                         enum:
+                          - asr
                           - embedding
                           - image
                           - text
                           - tts
                           - upscale
                           - inpaint
+                          - video
                       - type: string
                         enum:
                           - all
@@ -2896,6 +3310,7 @@ paths:
                           example:
                             usd: 50
                             diem: 10
+                            vcu: 30
                         createdAt:
                           type: string
                           nullable: true
@@ -3080,6 +3495,7 @@ paths:
                   example:
                     usd: 50
                     diem: 10
+                    vcu: 30
                 description:
                   type: string
                   description: The API Key description
@@ -3102,8 +3518,9 @@ paths:
               additionalProperties: false
               description: The request body for creating a new API key. API key creation is
                 rate limited to 20 requests per minute and a maximum of 500
-                active API keys per user. VCU is being deprecated in favor of
-                Diem. Please update your API calls to use Diem instead.
+                active API keys per user. VCU (Legacy Diem) is being deprecated
+                in favor of tokenized Diem. Please update your API calls to use
+                Diem instead.
       responses:
         "200":
           description: OK
@@ -3164,6 +3581,7 @@ paths:
                         example:
                           usd: 50
                           diem: 10
+                          vcu: 30
                       description:
                         type: string
                         description: The API Key description
@@ -3204,6 +3622,172 @@ paths:
                 $ref: "#/components/schemas/StandardError"
         "429":
           description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+        "500":
+          description: An unknown error occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+  /api_keys/{id}:
+    get:
+      description: Return details about a specific API key, including rate limits and
+        balance data.
+      operationId: getApiKeyById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the API key to retrieve
+      summary: Get API key details by ID
+      tags:
+        - API Keys
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      apiKeyType:
+                        type: string
+                        enum:
+                          - INFERENCE
+                          - ADMIN
+                        description: API Key type
+                        example: ADMIN
+                      consumptionLimits:
+                        type: object
+                        properties:
+                          usd:
+                            anyOf:
+                              - type: number
+                                minimum: 0
+                              - nullable: true
+                                title: "null"
+                              - nullable: true
+                                title: "null"
+                            description: USD limit
+                            example: 50
+                          diem:
+                            anyOf:
+                              - type: number
+                                minimum: 0
+                              - nullable: true
+                                title: "null"
+                              - nullable: true
+                                title: "null"
+                            description: Diem limit
+                            example: 10
+                          vcu:
+                            anyOf:
+                              - type: number
+                                minimum: 0
+                              - nullable: true
+                                title: "null"
+                              - nullable: true
+                                title: "null"
+                            description: VCU limit (deprecated - use Diem instead)
+                            deprecated: true
+                            example: 100
+                        description: The API Key consumption limits for each epoch.
+                        example:
+                          usd: 50
+                          diem: 10
+                          vcu: 30
+                      createdAt:
+                        type: string
+                        nullable: true
+                        description: API Key creation date
+                        example: 2023-10-01T12:00:00Z
+                      description:
+                        type: string
+                        description: API Key description
+                        example: Example API Key
+                      expiresAt:
+                        type: string
+                        nullable: true
+                        description: API Key expiration date
+                        example: 2023-10-01T12:00:00Z
+                      id:
+                        type: string
+                        description: API Key ID
+                        example: e28e82dc-9df2-4b47-b726-d0a222ef2ab5
+                      last6Chars:
+                        type: string
+                        description: Last 6 characters of the API Key
+                        example: 2V2jNW
+                      lastUsedAt:
+                        type: string
+                        nullable: true
+                        description: API Key last used date
+                        example: 2023-10-01T12:00:00Z
+                      usage:
+                        type: object
+                        properties:
+                          trailingSevenDays:
+                            type: object
+                            properties:
+                              usd:
+                                type: string
+                                description: USD usage in the trailing 7 days
+                                example: "10.2424"
+                              vcu:
+                                type: string
+                                description: VCU usage in the trailing 7 days (deprecated - use Diem instead)
+                                deprecated: true
+                                example: "42.2315"
+                              diem:
+                                type: string
+                                description: Diem usage in the trailing 7 days
+                                example: "4.2231"
+                            required:
+                              - usd
+                              - vcu
+                              - diem
+                        required:
+                          - trailingSevenDays
+                    required:
+                      - apiKeyType
+                      - consumptionLimits
+                      - createdAt
+                      - expiresAt
+                      - id
+                      - last6Chars
+                      - lastUsedAt
+                    additionalProperties: false
+                    description: API key details
+                required:
+                  - data
+                additionalProperties: false
+                example:
+                  data:
+                    apiKeyType: ADMIN
+                    consumptionLimits:
+                      usd: 50
+                      diem: 10
+                    createdAt: {}
+                    description: Example API Key
+                    expiresAt: {}
+                    id: e28e82dc-9df2-4b47-b726-d0a222ef2ab5
+                    last6Chars: 2V2jNW
+                    lastUsedAt: {}
+                    usage:
+                      trailingSevenDays:
+                        usd: "10.2424"
+                        vcu: "42.2315"
+                        diem: "4.2231"
+        "401":
+          description: Authentication failed
           content:
             application/json:
               schema:
@@ -3257,11 +3841,6 @@ paths:
                             type: number
                             description: The USD balance of the key.
                             example: 50.23
-                          VCU:
-                            type: number
-                            description: The VCU balance of the key. VCU is being deprecated in favor of
-                              Diem.
-                            example: 100.023
                           DIEM:
                             type: number
                             description: The Diem balance of the key.
@@ -3284,7 +3863,7 @@ paths:
                             apiModelId:
                               type: string
                               description: The ID of the API model.
-                              example: venice-uncensored
+                              example: zai-org-glm-4.6
                             rateLimits:
                               type: array
                               items:
@@ -3351,7 +3930,7 @@ paths:
                           description: The ID of the API key that exceeded the limit.
                         modelId:
                           type: string
-                          default: venice-uncensored
+                          default: zai-org-glm-4.6
                           description: The ID of the model that was used when the rate limit was exceeded.
                         rateLimitTier:
                           type: string
@@ -3482,6 +4061,7 @@ paths:
                   example:
                     usd: 50
                     diem: 10
+                    vcu: 30
                 description:
                   type: string
                   default: Web3 API Key
@@ -3580,6 +4160,7 @@ paths:
                         example:
                           usd: 50
                           diem: 10
+                          vcu: 30
                       description:
                         type: string
                         description: The API Key description
@@ -3654,6 +4235,11 @@ paths:
                           nullable: true
                           description: Share URL of the character
                           example: https://venice.ai/c/alan-watts
+                        photoUrl:
+                          type: string
+                          nullable: true
+                          description: URL of the character photo
+                          example: https://outerface.venice.ai/api/characters/2f460055-7595-4640-9cb6-c442c4c869b0/photo
                         slug:
                           type: string
                           description: Slug of the character to be used in the completions API
@@ -3686,17 +4272,23 @@ paths:
                           type: boolean
                           description: Whether the character is enabled for web use
                           example: true
+                        modelId:
+                          type: string
+                          description: API model ID for the character
+                          example: venice-uncensored
                       required:
                         - adult
                         - createdAt
                         - description
                         - name
                         - shareUrl
+                        - photoUrl
                         - slug
                         - stats
                         - tags
                         - updatedAt
                         - webEnabled
+                        - modelId
                   object:
                     type: string
                     enum:
@@ -3706,6 +4298,139 @@ paths:
                   - object
         "401":
           description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+        "500":
+          description: An unknown error occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+  /characters/{slug}:
+    get:
+      description: This is a preview API and may change. Returns a single character by
+        its slug.
+      operationId: getCharacterBySlug
+      parameters:
+        - description: The slug of the character to retrieve
+          in: path
+          name: slug
+          required: true
+          schema:
+            example: alan-watts
+            type: string
+      summary: /api/v1/characters/{slug}
+      tags:
+        - Characters
+        - Preview
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      adult:
+                        type: boolean
+                        description: Whether the character is considered adult content
+                        example: false
+                      createdAt:
+                        type: string
+                        description: Date when the character was created
+                        example: 2024-12-20T21:28:08.934Z
+                      description:
+                        type: string
+                        nullable: true
+                        description: Description of the character
+                        example: Alan Watts (6 January 1915 – 16 November 1973) was a British and
+                          American writer, speaker, and self-styled
+                          "philosophical entertainer", known for interpreting
+                          and popularizing Buddhist, Taoist, and Hindu
+                          philosophy for a Western audience.
+                      name:
+                        type: string
+                        description: Name of the character
+                        example: Alan Watts
+                      shareUrl:
+                        type: string
+                        nullable: true
+                        description: Share URL of the character
+                        example: https://venice.ai/c/alan-watts
+                      photoUrl:
+                        type: string
+                        nullable: true
+                        description: URL of the character photo
+                        example: https://outerface.venice.ai/api/characters/2f460055-7595-4640-9cb6-c442c4c869b0/photo
+                      slug:
+                        type: string
+                        description: Slug of the character to be used in the completions API
+                        example: alan-watts
+                      stats:
+                        type: object
+                        properties:
+                          imports:
+                            type: number
+                            description: Number of imports for the character
+                            example: 112
+                        required:
+                          - imports
+                      tags:
+                        type: array
+                        items:
+                          type: string
+                        description: Tags associated with the character
+                        example:
+                          - AlanWatts
+                          - Philosophy
+                          - Buddhism
+                          - Taoist
+                          - Hindu
+                      updatedAt:
+                        type: string
+                        description: Date when the character was last updated
+                        example: 2025-02-09T03:23:53.708Z
+                      webEnabled:
+                        type: boolean
+                        description: Whether the character is enabled for web use
+                        example: true
+                      modelId:
+                        type: string
+                        description: API model ID for the character
+                        example: venice-uncensored
+                    required:
+                      - adult
+                      - createdAt
+                      - description
+                      - name
+                      - shareUrl
+                      - photoUrl
+                      - slug
+                      - stats
+                      - tags
+                      - updatedAt
+                      - webEnabled
+                      - modelId
+                  object:
+                    type: string
+                    enum:
+                      - character
+                required:
+                  - data
+                  - object
+        "401":
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+        "404":
+          description: Character not found
           content:
             application/json:
               schema:
@@ -3946,6 +4671,231 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/StandardError"
+  /video/complete:
+    post:
+      description: Delete a video generation request from storage after it has been
+        successfully downloaded. Videos can be automatically deleted after
+        retrieval by setting the `delete_media_on_completion` flag to true when
+        calling the retrieve API.
+      operationId: completeVideo
+      summary: /api/v1/video/complete
+      tags:
+        - Video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CompleteVideoRequest"
+      responses:
+        "200":
+          description: Video generation request completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indicates whether the video cleanup was successful.
+                    example: true
+                required:
+                  - success
+        "400":
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailedError"
+        "401":
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+        "500":
+          description: Inference processing failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+  /video/queue:
+    post:
+      description: Queue a new video generation request.
+      operationId: queueVideo
+      summary: /api/v1/video/queue
+      tags:
+        - Video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueueVideoRequest"
+      responses:
+        "200":
+          description: Video generation request queued successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  model:
+                    type: string
+                    description: The ID of the model used for video generation.
+                    example: video-model-123
+                  queue_id:
+                    type: string
+                    description: The ID of the video generation request.
+                    example: 123e4567-e89b-12d3-a456-426614174000
+                required:
+                  - model
+                  - queue_id
+                additionalProperties: false
+        "400":
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailedError"
+        "401":
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+        "402":
+          description: Insufficient USD or Diem balance to complete request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+        "413":
+          description: The request payload is too large. Please reduce the size of your
+            request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+        "422":
+          description: Your prompt violates the content policy of Venice.ai or the model
+            provider
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+        "500":
+          description: Inference processing failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+  /video/quote:
+    post:
+      description: Quote a video generation request. Utilizes the same parameters as
+        the queue API and will return the price in USD for the request.
+      operationId: quoteVideo
+      summary: /api/v1/video/quote
+      tags:
+        - Video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueueVideoRequest"
+      responses:
+        "200":
+          description: Video generation price quote
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quote:
+                    type: number
+                required:
+                  - quote
+        "400":
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailedError"
+  /video/retrieve:
+    post:
+      description: Retrieve a video generation result. Returns the video file if
+        completed, or a status if the request is still processing.
+      operationId: retrieveVideo
+      summary: /api/v1/video/retrieve
+      tags:
+        - Video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RetrieveVideoRequest"
+      responses:
+        "200":
+          description: Video file if completed, or processing status if still in progress
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - PROCESSING
+                    description: The status of the video generation request.
+                    example: PROCESSING
+                  average_execution_time:
+                    type: number
+                    description: The average execution time of the video generation request in
+                      milliseconds.
+                    example: 145000
+                  execution_duration:
+                    type: number
+                    description: The current duration of the video generation request in
+                      milliseconds.
+                    example: 53200
+                required:
+                  - status
+                  - average_execution_time
+                  - execution_duration
+            video/mp4:
+              schema:
+                format: binary
+                type: string
+        "400":
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailedError"
+        "401":
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+        "404":
+          description: Media could not be found. Request may may be invalid, expired, or
+            deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+        "422":
+          description: Your prompt violates the content policy of Venice.ai or the model
+            provider
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+        "500":
+          description: Inference processing failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
   /billing/usage:
     get:
       description: "Get paginated billing usage data for the authenticated user. NOTE:
@@ -4054,6 +5004,10 @@ paths:
               schema:
                 type: object
                 properties:
+                  warningMessage:
+                    type: string
+                    description: A warning message to disambiguate DIEM usage from legacy DIEM
+                      (formerly VCU) usage
                   data:
                     type: array
                     items:

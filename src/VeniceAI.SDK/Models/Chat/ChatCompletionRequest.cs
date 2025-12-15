@@ -136,6 +136,25 @@ public class ChatCompletionRequest
     public double? MaxTemp { get; set; }
 
     /// <summary>
+    /// Configuration for reasoning behavior on supported models.
+    /// </summary>
+    [JsonPropertyName("reasoning")]
+    public ReasoningConfig? Reasoning { get; set; }
+
+    /// <summary>
+    /// OpenAI-compatible parameter to control reasoning effort level for supported models (low, medium, high).
+    /// Takes precedence over reasoning.effort if both are provided.
+    /// </summary>
+    [JsonPropertyName("reasoning_effort")]
+    public string? ReasoningEffort { get; set; }
+
+    /// <summary>
+    /// When supplied, this field may be used to optimize conversation routing to improve cache performance.
+    /// </summary>
+    [JsonPropertyName("prompt_cache_key")]
+    public string? PromptCacheKey { get; set; }
+
+    /// <summary>
     /// Format in which the response should be returned.
     /// </summary>
     [JsonPropertyName("response_format")]
@@ -262,38 +281,64 @@ public class VeniceParameters
     public string? CharacterSlug { get; set; }
 
     /// <summary>
-    /// Strip thinking blocks from the response.
+    /// Strip thinking blocks from the response (for models using legacy think tag format).
     /// </summary>
     [JsonPropertyName("strip_thinking_response")]
     public bool? StripThinkingResponse { get; set; }
 
     /// <summary>
-    /// On supported reasoning models, will disable thinking.
+    /// On supported reasoning models, will disable thinking and strip the think blocks.
     /// </summary>
     [JsonPropertyName("disable_thinking")]
     public bool? DisableThinking { get; set; }
 
     /// <summary>
-    /// Enable web search for this request.
+    /// Enable web search for this request (off, on, auto). Auto enables based on model's discretion.
+    /// Additional usage-based pricing applies.
     /// </summary>
     [JsonPropertyName("enable_web_search")]
     public string? EnableWebSearch { get; set; }
 
     /// <summary>
-    /// When web search is enabled, this will request that the LLM cite its sources.
+    /// Enable web scraping of URLs detected in the user message. Scraped content augments responses.
+    /// Additional usage-based pricing applies.
+    /// </summary>
+    [JsonPropertyName("enable_web_scraping")]
+    public bool? EnableWebScraping { get; set; }
+
+    /// <summary>
+    /// When web search is enabled, request that the LLM cite its sources using [REF]0[/REF] format.
     /// </summary>
     [JsonPropertyName("enable_web_citations")]
     public bool? EnableWebCitations { get; set; }
 
     /// <summary>
-    /// When set to true, the LLM will include search results in the stream.
+    /// Experimental: Include search results in the stream as the first emitted chunk.
     /// </summary>
     [JsonPropertyName("include_search_results_in_stream")]
     public bool? IncludeSearchResultsInStream { get; set; }
 
     /// <summary>
-    /// Whether to include the Venice supplied system prompts.
+    /// Surface search results in an OpenAI-compatible tool call named venice_web_search_documents for LangChain integration.
+    /// </summary>
+    [JsonPropertyName("return_search_results_as_documents")]
+    public bool? ReturnSearchResultsAsDocuments { get; set; }
+
+    /// <summary>
+    /// Whether to include Venice's default system prompts alongside specified system prompts.
     /// </summary>
     [JsonPropertyName("include_venice_system_prompt")]
     public bool? IncludeVeniceSystemPrompt { get; set; }
+}
+
+/// <summary>
+/// Configuration for reasoning behavior on supported models.
+/// </summary>
+public class ReasoningConfig
+{
+    /// <summary>
+    /// The effort level for reasoning (low, medium, high).
+    /// </summary>
+    [JsonPropertyName("effort")]
+    public string? Effort { get; set; }
 }

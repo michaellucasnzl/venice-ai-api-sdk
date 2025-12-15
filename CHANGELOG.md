@@ -7,16 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-- **BREAKING**: Updated model enums to reflect current Venice AI API model availability
-  - Text models: Removed obsolete models and marked them as `[Obsolete]` for backward compatibility
-  - Image models: Updated to current model lineup including `qwen-image` and `wai-Illustrious`
-- Updated test suite to use currently available models
-- Updated README and sample code examples with current model names
+## [1.2.0] - 2025-07-18
 
 ### Added
-- New image models: `QwenImage` (qwen-image) and `WaiIllustrious` (wai-Illustrious) for anime-style generation
-- Comprehensive XML documentation comments for all model enum values
+- **Video Generation API**: Full support for Venice AI's video generation capabilities
+  - New `IVideoService` interface and `VideoService` implementation
+  - Queue-based video generation workflow with `QueueVideoAsync`, `RetrieveVideoAsync`, `CompleteVideoAsync`
+  - Video generation quotes with `QuoteVideoAsync`
+  - New `VideoModel` enum with 30+ video models (Wan, LTX, Kling, Veo, Sora families)
+- **Characters API**: Access to Venice AI character definitions
+  - New `ICharacterService` interface and `CharacterService` implementation
+  - List all characters and get character by slug
+- **New Text Models**: Added latest Venice AI text models
+  - `Qwen3_235B_Thinking` (qwen3-235b-a22b-thinking-2507)
+  - `Qwen3_235B_Instruct` (qwen3-235b-a22b-instruct-2507)
+  - `Qwen3_Next_80B` (qwen3-next-80b)
+  - `Qwen3Coder_480B` (qwen3-coder-480b-a35b-instruct)
+  - `Grok41Fast` (grok-41-fast)
+  - `Gemini3ProPreview` (gemini-3-pro-preview)
+  - `ClaudeOpus45` (claude-opus-45)
+  - `OpenAIGptOss120B` (openai-gpt-oss-120b)
+  - `KimiK2Thinking` (kimi-k2-thinking)
+  - `Glm46` (zai-org-glm-4.6)
+  - `DeepSeekV32` (deepseek-v3.2)
+- **New Image Models**: Added latest Venice AI image models
+  - `NanoBananaPro` (nano-banana-pro)
+  - `LustifyV7` (lustify-v7)
+  - `ZImageTurbo` (z-image-turbo)
+- **Reasoning Support**: Added reasoning configuration for chat completions
+  - New `ReasoningConfig` class with `Effort` property
+  - `Reasoning` and `ReasoningEffort` properties on `ChatCompletionRequest`
+  - Support for "low", "medium", "high" reasoning effort levels
+- **Enhanced Image Generation**: New parameters for image requests
+  - `Variants` (1-4) for generating multiple images
+  - `AspectRatio` for controlling output dimensions
+  - `Resolution` for explicit resolution control
+  - `EnableWebSearch` for web-assisted generation
+- **Enhanced VeniceParameters**: New web scraping options
+  - `EnableWebScraping` for web content extraction
+  - `ReturnSearchResultsAsDocuments` for document-style search results
+- **Prompt Caching**: New `PromptCacheKey` property for caching prompts
+- **ModelType Enum**: Added new model types: `asr`, `video`, `embedding`, `upscale`, `inpaint`
+
+### Changed
+- Updated to Venice AI API version 20251212.081138
+- Updated `IVeniceAIClient` interface with `Video` and `Characters` service properties
+- Updated dependency injection registration for new services
 
 ### Deprecated
 - Text models: `QwenReasonning`, `VeniceMedium32`, `Llama31_405B`, `Dolphin72B`, `Qwen25VL`, `Qwen25Coder32B`, `DeepSeekCoderV2Lite`
@@ -24,10 +60,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - All deprecated models are marked with `[Obsolete]` attributes and will be removed in a future version
 
 ### Recommended Migrations
+- For video generation: Use the new `IVideoService` with appropriate `VideoModel` enum values
+- For reasoning tasks: Use `Qwen3_235B_Thinking` or `KimiK2Thinking` with `ReasoningConfig`
 - For vision tasks: Use `VeniceMedium` (mistral-31-24b) instead of `Qwen25VL`
-- For image generation: Use `HiDream`, `VeniceSD35`, or `QwenImage` instead of Flux models
-- For coding tasks: Use `VeniceSmall` (qwen3-4b) or `VeniceLarge` (qwen3-235b) instead of `Qwen25Coder32B`
-- For reasoning: Use `DeepSeekR1_671B` instead of `QwenReasonning`
+- For image generation: Use `HiDream`, `VeniceSD35`, `QwenImage`, or `NanoBananaPro`
+- For coding tasks: Use `Qwen3Coder_480B` for best code generation results
 
 ## [1.0.0] - 2025-01-11
 

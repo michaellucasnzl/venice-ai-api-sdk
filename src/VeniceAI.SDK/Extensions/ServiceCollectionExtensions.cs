@@ -145,6 +145,9 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IImageService>(serviceProvider =>
             CreateService<ImageService>(serviceProvider, useProvidedHttpClient));
 
+        services.AddTransient<IVideoService>(serviceProvider =>
+            CreateService<VideoService>(serviceProvider, useProvidedHttpClient));
+
         services.AddTransient<IEmbeddingService>(serviceProvider =>
             CreateService<EmbeddingService>(serviceProvider, useProvidedHttpClient));
 
@@ -153,6 +156,9 @@ public static class ServiceCollectionExtensions
 
         services.AddTransient<IBillingService>(serviceProvider =>
             CreateService<BillingService>(serviceProvider, useProvidedHttpClient));
+
+        services.AddTransient<ICharacterService>(serviceProvider =>
+            CreateService<CharacterService>(serviceProvider, useProvidedHttpClient));
 
         services.AddTransient<IVeniceAIClient, VeniceAIClient>();
 
