@@ -165,17 +165,98 @@
         },
         Pricing: {
           Input: {
-            Usd: 0.9,
-            Diem: 0.9
+            Usd: 0.45,
+            Diem: 0.45
           },
           Output: {
-            Usd: 4.5,
-            Diem: 4.5
+            Usd: 3.5,
+            Diem: 3.5
+          }
+        }
+      }
+    },
+    {
+      Id: qwen3-235b-a22b-thinking-2507,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Qwen 3 235B A22B Thinking 2507,
+        ModelSource: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507-FP8,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 131072,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: fp8,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: true
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.6
+          },
+          TopP: {
+            Default: 0.95
           }
         },
-        Traits: [
-          default_code
-        ]
+        Pricing: {
+          Input: {
+            Usd: 0.45,
+            Diem: 0.45
+          },
+          Output: {
+            Usd: 3.5,
+            Diem: 3.5
+          }
+        }
+      }
+    },
+    {
+      Id: qwen3-235b-a22b-instruct-2507,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Qwen 3 235B A22B Instruct 2507,
+        ModelSource: https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507-FP8,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 131072,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: fp8,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: false,
+          SupportsResponseSchema: true,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: true
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.7
+          },
+          TopP: {
+            Default: 0.8
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.15,
+            Diem: 0.15
+          },
+          Output: {
+            Usd: 0.75,
+            Diem: 0.75
+          }
+        }
       }
     },
     {
@@ -259,7 +340,10 @@
             Usd: 3.0,
             Diem: 3.0
           }
-        }
+        },
+        Traits: [
+          default_code
+        ]
       }
     },
     {
@@ -305,6 +389,258 @@
       }
     },
     {
+      Id: google-gemma-3-27b-it,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Google Gemma 3 27B Instruct,
+        ModelSource: https://huggingface.co/google/gemma-3-27b-it,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 202752,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: fp8,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: false,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.7
+          },
+          TopP: {
+            Default: 0.9
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.12,
+            Diem: 0.12
+          },
+          Output: {
+            Usd: 0.2,
+            Diem: 0.2
+          }
+        }
+      }
+    },
+    {
+      Id: grok-41-fast,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Grok 4.1 Fast,
+        ModelSource: ,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 262144,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: true
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.7
+          },
+          TopP: {
+            Default: 0.8
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.5,
+            Diem: 0.5
+          },
+          Output: {
+            Usd: 1.25,
+            Diem: 1.25
+          }
+        }
+      }
+    },
+    {
+      Id: gemini-3-pro-preview,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Gemini 3 Pro Preview,
+        ModelSource: https://deepmind.google/models/gemini/pro/,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 202752,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: true
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.7
+          },
+          TopP: {
+            Default: 0.8
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 2.5,
+            Diem: 2.5
+          },
+          Output: {
+            Usd: 15.0,
+            Diem: 15.0
+          }
+        }
+      }
+    },
+    {
+      Id: claude-opus-45,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Claude Opus 4.5,
+        ModelSource: ,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 202752,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.7
+          },
+          TopP: {
+            Default: 0.9
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 6.0,
+            Diem: 6.0
+          },
+          Output: {
+            Usd: 30.0,
+            Diem: 30.0
+          }
+        }
+      }
+    },
+    {
+      Id: openai-gpt-oss-120b,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: OpenAI GPT OSS 120B,
+        ModelSource: https://huggingface.co/openai/gpt-oss-120b,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 131072,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: false,
+          SupportsResponseSchema: false,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.7
+          },
+          TopP: {
+            Default: 0.9
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.07,
+            Diem: 0.07
+          },
+          Output: {
+            Usd: 0.3,
+            Diem: 0.3
+          }
+        }
+      }
+    },
+    {
+      Id: kimi-k2-thinking,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Kimi K2 Thinking,
+        ModelSource: https://huggingface.co/moonshotai/Kimi-K2-Thinking,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 262144,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: int4,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: true
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.7
+          },
+          TopP: {
+            Default: 0.8
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.75,
+            Diem: 0.75
+          },
+          Output: {
+            Usd: 3.2,
+            Diem: 3.2
+          }
+        }
+      }
+    },
+    {
       Id: zai-org-glm-4.6,
       Object: model,
       Created: {Scrubbed},
@@ -314,7 +650,7 @@
         Name: GLM 4.6,
         ModelSource: https://huggingface.co/zai-org/GLM-4.6,
         Offline: false,
-        Beta: true,
+        Beta: false,
         AvailableContextTokens: 202752,
         Capabilities: {
           OptimizedForCode: false,
@@ -342,6 +678,90 @@
           Output: {
             Usd: 2.75,
             Diem: 2.75
+          }
+        }
+      }
+    },
+    {
+      Id: zai-org-glm-4.6v,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: GLM 4.6V,
+        ModelSource: https://huggingface.co/zai-org/GLM-4.6V,
+        Offline: false,
+        Beta: true,
+        AvailableContextTokens: 131072,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: fp8,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: false,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: false,
+          SupportsLogProbs: false
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.8
+          },
+          TopP: {
+            Default: 0.6
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.39,
+            Diem: 0.39
+          },
+          Output: {
+            Usd: 1.13,
+            Diem: 1.13
+          }
+        }
+      }
+    },
+    {
+      Id: deepseek-v3.2,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: DeepSeek V3.2,
+        ModelSource: https://huggingface.co/deepseek-ai/DeepSeek-V3.2,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 163840,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: not-available,
+          SupportsFunctionCalling: false,
+          SupportsReasoning: false,
+          SupportsResponseSchema: false,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Constraints: {
+          Temperature: {
+            Default: 1.0
+          },
+          TopP: {
+            Default: 0.95
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.4,
+            Diem: 0.4
+          },
+          Output: {
+            Usd: 1.0,
+            Diem: 1.0
           }
         }
       }
@@ -438,6 +858,90 @@
       }
     },
     {
+      Id: devstral-2-2512,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Devstral 2,
+        ModelSource: https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512,
+        Offline: false,
+        Beta: true,
+        AvailableContextTokens: 262144,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: false,
+          SupportsResponseSchema: true,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.7
+          },
+          TopP: {
+            Default: 0.9
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.25,
+            Diem: 0.25
+          },
+          Output: {
+            Usd: 0.25,
+            Diem: 0.25
+          }
+        }
+      }
+    },
+    {
+      Id: openai-gpt-52,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: GPT-5.2,
+        ModelSource: ,
+        Offline: false,
+        Beta: true,
+        AvailableContextTokens: 262144,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: true
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.7
+          },
+          TopP: {
+            Default: 0.9
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 2.19,
+            Diem: 2.19
+          },
+          Output: {
+            Usd: 17.5,
+            Diem: 17.5
+          }
+        }
+      }
+    },
+    {
       Id: venice-sd35,
       Object: model,
       Created: {Scrubbed},
@@ -492,6 +996,33 @@
           Generation: {
             Usd: 0.01,
             Diem: 0.01
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: nano-banana-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Nano Banana Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 32768,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.18,
+            Diem: 0.18
           },
           Upscale: {}
         }
@@ -613,6 +1144,416 @@
       }
     },
     {
+      Id: z-image-turbo,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Z-Image Turbo,
+        ModelSource: https://huggingface.co/Tongyi-MAI/Z-Image-Turbo,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 7500,
+          Steps: {
+            Default: 8,
+            Max: 8
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: wan-2.5-preview-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Wan 2.5 Preview,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: wan-2.5-preview-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Wan 2.5 Preview,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: wan-2.2-a14b-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Wan 2.2 A14B,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: wan-2.1-pro-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Wan 2.1 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: ltx-2-fast-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: LTX Video 2.0 Fast,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: ltx-2-fast-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: LTX Video 2.0 Fast,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: ltx-2-full-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: LTX Video 2.0 Full Quality,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: ltx-2-full-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: LTX Video 2.0 Full Quality,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: ovi-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Ovi,
+        ModelSource: https://huggingface.co/chetwinlow1/Ovi,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: kling-2.6-pro-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Kling 2.6 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: kling-2.6-pro-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Kling 2.6 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: kling-2.5-turbo-pro-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Kling 2.5 Turbo Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: kling-2.5-turbo-pro-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Kling 2.5 Turbo Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: longcat-distilled-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Longcat Distilled,
+        ModelSource: https://huggingface.co/meituan-longcat/LongCat-Video,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: longcat-distilled-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Longcat Distilled,
+        ModelSource: https://huggingface.co/meituan-longcat/LongCat-Video,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: longcat-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Longcat Full Quality,
+        ModelSource: https://huggingface.co/meituan-longcat/LongCat-Video,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: longcat-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Longcat Full Quality,
+        ModelSource: https://huggingface.co/meituan-longcat/LongCat-Video,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: veo3-fast-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Veo 3 Fast,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: veo3-fast-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Veo 3 Fast,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: veo3-full-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Veo 3 Full Quality,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: veo3-full-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Veo 3 Full Quality,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: veo3.1-fast-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Veo 3.1 Fast,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: veo3.1-fast-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Veo 3.1 Fast,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: veo3.1-full-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Veo 3.1 Full Quality,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: veo3.1-full-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Veo 3.1 Full Quality,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: sora-2-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Sora 2,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: sora-2-pro-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Sora 2 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: sora-2-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Sora 2,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: sora-2-pro-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Sora 2 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
       Id: text-embedding-bge-m3,
       Object: model,
       Created: {Scrubbed},
@@ -727,6 +1668,18 @@
           },
           Upscale: {}
         }
+      }
+    },
+    {
+      Id: qwen-edit-v2,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: inpaint,
+      ModelSpec: {
+        Name: Qwen Image Edit V2,
+        Offline: false,
+        Beta: true
       }
     },
     {

@@ -1,5 +1,5 @@
 ﻿{
-  Id: chatcmpl-RZPYeQYq38aipbJdAHGKbt8n,
+  Id: chatcmpl-RJv4MUQezk2mpD3XbFDDR9Vb,
   Object: chat.completion,
   Created: {Scrubbed},
   Model: llama-3.3-70b,
@@ -9,7 +9,7 @@
         Role: assistant,
         Content: {Scrubbed}
       },
-      FinishReason: length
+      FinishReason: stop
     }
   ],
   Usage: {Scrubbed},

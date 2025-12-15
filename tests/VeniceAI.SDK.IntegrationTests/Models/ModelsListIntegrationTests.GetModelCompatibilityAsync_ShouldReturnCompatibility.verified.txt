@@ -14,7 +14,7 @@
     gpt-3.5-turbo-16k: llama-3.3-70b,
     gpt-3.5-turbo-instruct: llama-3.3-70b,
     gpt-3.5-turbo-instruct-0914: llama-3.3-70b,
-    gpt-4.1: qwen3-235b,
+    gpt-4.1: qwen3-235b-a22b-instruct-2507,
     gpt-4o: llama-3.3-70b,
     gpt-4o-2024-05-13: llama-3.3-70b,
     gpt-4o-2024-08-06: llama-3.3-70b,
@@ -24,7 +24,7 @@
     o1-mini: llama-3.3-70b,
     o1-mini-2024-09-12: llama-3.3-70b,
     o3-mini: llama-3.3-70b,
-    venice-large-1.1: qwen3-235b
+    venice-large-1.1: qwen3-235b-a22b-instruct-2507
   },
   IsSuccess: true,
   StatusCode: 200,

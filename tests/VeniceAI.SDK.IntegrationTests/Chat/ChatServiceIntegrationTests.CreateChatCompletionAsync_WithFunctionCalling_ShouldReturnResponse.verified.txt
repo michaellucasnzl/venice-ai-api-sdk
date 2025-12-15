@@ -1,5 +1,5 @@
 ﻿{
-  Id: chatcmpl-c965282f04644f4aa56183fa86966fee,
+  Id: chatcmpl-900c76aa0a3a4d66bc4c717b3ca3bcdd,
   Object: chat.completion,
   Created: {Scrubbed},
   Model: qwen3-235b,
@@ -8,7 +8,7 @@
       Message: {
         ToolCalls: [
           {
-            Id: chatcmpl-tool-8965495075104f81a6f812fcafaf90dc,
+            Id: chatcmpl-tool-baf27d8d8436457a8676fcf7808fb4d2,
             Type: function,
             Function: {
               Name: get_current_weather,

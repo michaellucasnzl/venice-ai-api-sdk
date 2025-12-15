@@ -62,6 +62,33 @@
       }
     },
     {
+      Id: nano-banana-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Nano Banana Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 32768,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.18,
+            Diem: 0.18
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: lustify-sdxl,
       Object: model,
       Created: {Scrubbed},
@@ -166,6 +193,34 @@
             Max: 30
           },
           WidthHeightDivisor: 16
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: z-image-turbo,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Z-Image Turbo,
+        ModelSource: https://huggingface.co/Tongyi-MAI/Z-Image-Turbo,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 7500,
+          Steps: {
+            Default: 8,
+            Max: 8
+          },
+          WidthHeightDivisor: 8
         },
         Pricing: {
           Generation: {

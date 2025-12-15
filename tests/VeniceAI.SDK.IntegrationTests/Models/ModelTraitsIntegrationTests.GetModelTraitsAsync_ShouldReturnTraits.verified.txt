@@ -1,7 +1,7 @@
 ﻿{
   Traits: {
     default: llama-3.3-70b,
-    default_code: qwen3-235b,
+    default_code: qwen3-coder-480b-a35b-instruct,
     default_vision: mistral-31-24b,
     fastest: llama-3.2-3b,
     function_calling_default: llama-3.3-70b,
