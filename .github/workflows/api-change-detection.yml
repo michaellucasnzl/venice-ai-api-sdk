@@ -1,9 +1,11 @@
 name: Venice AI API Change Detection
 
 on:
-  schedule:
-    # Run daily at 2 AM UTC
-    - cron: '0 2 * * *'
+  # Scheduled runs disabled to conserve GitHub Actions minutes
+  # To re-enable daily checks, uncomment the schedule section below:
+  # schedule:
+  #   # Run daily at 2 AM UTC
+  #   - cron: '0 2 * * *'
   workflow_dispatch:
     inputs:
       force_update:
