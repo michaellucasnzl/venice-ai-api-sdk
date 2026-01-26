@@ -9,6 +9,8 @@ The unofficial .NET SDK for the Venice AI API, providing easy access to advanced
 
 **Status:** Beta - under active development with continuous improvements and new features.
 
+**Requirements:** .NET 10.0 or later
+
 ## Features
 
 - **Chat Completions** - Text generation with streaming support

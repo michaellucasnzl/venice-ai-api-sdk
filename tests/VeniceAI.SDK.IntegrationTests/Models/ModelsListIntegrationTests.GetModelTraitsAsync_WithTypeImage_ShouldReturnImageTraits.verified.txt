@@ -1,8 +1,10 @@
 ﻿{
   Traits: {
-    default: venice-sd35,
+    default: z-image-turbo,
     eliza-default: venice-sd35,
-    highest_quality: qwen-image
+    fastest: z-image-turbo,
+    highest_quality: qwen-image,
+    most_uncensored: lustify-v7
   },
   IsSuccess: true,
   StatusCode: 200,

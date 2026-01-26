@@ -9,7 +9,7 @@
 | Item | Value |
 |------|-------|
 | **SDK Location** | `src/VeniceAI.SDK/` |
-| **Target Framework** | .NET 8.0 |
+| **Target Framework** | .NET 10.0 |
 | **Test Command** | `dotnet test` |
 | **Build Command** | `dotnet build src/VeniceAI.SDK/VeniceAI.SDK.csproj` |
 | **OpenAPI Spec URL** | `https://api.venice.ai/doc/openapi.json` |
@@ -22,7 +22,7 @@
 Run these commands to verify your environment before starting:
 
 ```bash
-# Verify .NET 8.0 SDK is installed
+# Verify .NET 10.0 SDK is installed
 dotnet --version
 
 # Verify the project builds successfully

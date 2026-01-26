@@ -28,7 +28,6 @@
           Upscale: {}
         },
         Traits: [
-          default,
           eliza-default
         ]
       }
@@ -62,6 +61,87 @@
       }
     },
     {
+      Id: flux-2-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Flux 2 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 3000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.04,
+            Diem: 0.04
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: flux-2-max,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Flux 2 Max,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 3000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.09,
+            Diem: 0.09
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: gpt-image-1-5,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: GPT Image 1.5,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 32768,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.23,
+            Diem: 0.23
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: nano-banana-pro,
       Object: model,
       Created: {Scrubbed},
@@ -80,9 +160,32 @@
           WidthHeightDivisor: 1
         },
         Pricing: {
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: seedream-v4,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: SeedreamV4.5,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
           Generation: {
-            Usd: 0.18,
-            Diem: 0.18
+            Usd: 0.05,
+            Diem: 0.05
           },
           Upscale: {}
         }
@@ -141,7 +244,10 @@
             Diem: 0.01
           },
           Upscale: {}
-        }
+        },
+        Traits: [
+          most_uncensored
+        ]
       }
     },
     {
@@ -226,6 +332,37 @@
           Generation: {
             Usd: 0.01,
             Diem: 0.01
+          },
+          Upscale: {}
+        },
+        Traits: [
+          default,
+          fastest
+        ]
+      }
+    },
+    {
+      Id: bg-remover,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Background Remover,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.02,
+            Diem: 0.02
           },
           Upscale: {}
         }

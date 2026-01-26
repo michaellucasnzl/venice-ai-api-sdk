@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-01-26
+
+### Changed
+- **Upgraded to .NET 10**: Updated target framework from .NET 8.0 to .NET 10.0 (LTS)
+  - All projects now target `net10.0`
+  - Updated Microsoft.Extensions.* packages to version 10.0.1
+  - Updated System.Text.Json to version 10.0.1
+  - Updated Microsoft.SourceLink.GitHub to version 10.0.102
+  - Removed System.ComponentModel.Annotations as it's now included in .NET 10 runtime
+
+### Notes
+- System.Text.Json warning (NU1510) is expected in .NET 10 due to new package pruning feature
+- All unit tests pass successfully on .NET 10.0.1
+
 ## [1.3.0] - 2026-01-26
 
 ### Added

@@ -1,10 +1,12 @@
 ﻿{
   Traits: {
-    default: llama-3.3-70b,
+    default: zai-org-glm-4.7,
     default_code: qwen3-coder-480b-a35b-instruct,
+    default_reasoning: qwen3-235b-a22b-thinking-2507,
     default_vision: mistral-31-24b,
-    fastest: llama-3.2-3b,
-    function_calling_default: llama-3.3-70b,
+    fastest: qwen3-4b,
+    function_calling_default: mistral-31-24b,
+    most_intelligent: zai-org-glm-4.7,
     most_uncensored: venice-uncensored
   },
   IsSuccess: true,

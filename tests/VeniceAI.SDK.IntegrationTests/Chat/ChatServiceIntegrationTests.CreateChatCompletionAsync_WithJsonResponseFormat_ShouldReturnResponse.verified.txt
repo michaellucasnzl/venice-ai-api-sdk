@@ -1,15 +1,15 @@
 ﻿{
-  Id: chatcmpl-9f01e1751bf0438e8d308f4f3d90cfa1,
+  Id: chatcmpl-RgFXoS8NywmMg1rL8CbBnPBf,
   Object: chat.completion,
   Created: {Scrubbed},
-  Model: qwen3-235b,
+  Model: qwen3-235b-a22b-thinking-2507,
   Choices: [
     {
       Message: {
         Role: assistant,
         Content: {Scrubbed}
       },
-      FinishReason: stop
+      FinishReason: length
     }
   ],
   Usage: {Scrubbed},
