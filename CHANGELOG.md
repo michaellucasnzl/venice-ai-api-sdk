@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-01-26
+
+### Added
+- **New Text Models**: Added latest Venice AI text models
+  - `Glm47` (zai-org-glm-4.7) - Zhiyuan AI's model with strong reasoning and largest context window
+  - `Gemini3FlashPreview` (gemini-3-flash-preview) - Google's high-speed thinking model
+  - `ClaudeSonnet45` (claude-sonnet-45) - Anthropic's balanced model with strong coding
+  - `OpenAIGpt52` (openai-gpt-52) - OpenAI's latest frontier model with adaptive reasoning
+  - `OpenAIGpt52Codex` (openai-gpt-52-codex) - OpenAI specialized coding model
+  - `MinimaxM21` (minimax-m21) - Lightweight model optimized for coding
+  - `GrokCodeFast1` (grok-code-fast-1) - xAI's speedy reasoning model for coding
+  - `Qwen3VL235B` (qwen3-vl-235b-a22b) - Vision-language model with superior visual perception
+- **New Image Models**: Added latest Venice AI image models
+  - `Flux2Pro` (flux-2-pro) - High-quality image generation
+  - `Flux2Max` (flux-2-max) - Premium quality image generation
+  - `GptImage15` (gpt-image-1-5) - OpenAI's image generation with 32K prompt limit
+  - `SeedreamV4` (seedream-v4) - Advanced image generation model
+  - `BgRemover` (bg-remover) - Tool for removing backgrounds from images
+- **New Video Models**: Added latest Venice AI video models
+  - `Wan26ImageToVideo` (wan-2.6-image-to-video) - Wan 2.6 with audio support
+  - `Wan26FlashImageToVideo` (wan-2.6-flash-image-to-video) - Fast Wan 2.6 with audio
+  - `Wan26TextToVideo` (wan-2.6-text-to-video) - Wan 2.6 text-to-video with audio
+  - `Ltx2_19BFullTextToVideo` (ltx-2-19b-full-text-to-video) - LTX 2.0 19B full quality
+  - `Ltx2_19BFullImageToVideo` (ltx-2-19b-full-image-to-video) - LTX 2.0 19B image-to-video
+  - `Ltx2_19BDistilledTextToVideo` (ltx-2-19b-distilled-text-to-video) - LTX 2.0 19B distilled
+  - `Ltx2_19BDistilledImageToVideo` (ltx-2-19b-distilled-image-to-video) - LTX 2.0 19B distilled
+
+### Changed
+- Updated to Venice AI API version as of 2026-01-26
+
+### Deprecated
+- `Glm46` (zai-org-glm-4.6) - Use `Glm47` (zai-org-glm-4.7) instead
+
+### Recommended Migrations
+- For GLM models: Migrate from `Glm46` to `Glm47` for improved performance
+- For frontier reasoning: Use `OpenAIGpt52` for general tasks or `OpenAIGpt52Codex` for coding
+- For fast thinking: Use `Gemini3FlashPreview` for high-speed reasoning
+- For vision tasks: Use `Qwen3VL235B` for superior visual perception and OCR
+- For video generation: Use Wan 2.6 models for latest audio-enabled generation
+
 ## [1.2.0] - 2025-07-18
 
 ### Added

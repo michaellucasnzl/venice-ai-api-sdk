@@ -149,10 +149,60 @@ public enum TextModel
     KimiK2Thinking,
 
     /// <summary>
-    /// GLM 4.6 - ZhipuAI's large language model
+    /// GLM 4.7 - Zhiyuan AI's large language model with strong reasoning capabilities and largest context window
+    /// Model ID: zai-org-glm-4.7
     /// </summary>
-    [Description("zai-org-glm-4.6")]
-    Glm46,
+    [Description("zai-org-glm-4.7")]
+    Glm47,
+
+    /// <summary>
+    /// Gemini 3 Flash Preview - Google's high-speed thinking model with near Pro-level reasoning
+    /// Model ID: gemini-3-flash-preview
+    /// </summary>
+    [Description("gemini-3-flash-preview")]
+    Gemini3FlashPreview,
+
+    /// <summary>
+    /// Claude Sonnet 4.5 - Anthropic's balanced model with strong coding and reasoning capabilities
+    /// Model ID: claude-sonnet-45
+    /// </summary>
+    [Description("claude-sonnet-45")]
+    ClaudeSonnet45,
+
+    /// <summary>
+    /// GPT-5.2 - OpenAI's latest frontier model with adaptive reasoning and strong agentic performance
+    /// Model ID: openai-gpt-52
+    /// </summary>
+    [Description("openai-gpt-52")]
+    OpenAIGpt52,
+
+    /// <summary>
+    /// GPT-5.2 Codex - OpenAI specialized coding model optimized for advanced software development
+    /// Model ID: openai-gpt-52-codex
+    /// </summary>
+    [Description("openai-gpt-52-codex")]
+    OpenAIGpt52Codex,
+
+    /// <summary>
+    /// MiniMax M2.1 - Lightweight model optimized for coding and agentic workflows
+    /// Model ID: minimax-m21
+    /// </summary>
+    [Description("minimax-m21")]
+    MinimaxM21,
+
+    /// <summary>
+    /// Grok Code Fast 1 - xAI's speedy and economical reasoning model that excels at agentic coding
+    /// Model ID: grok-code-fast-1
+    /// </summary>
+    [Description("grok-code-fast-1")]
+    GrokCodeFast1,
+
+    /// <summary>
+    /// Qwen3 VL 235B - Vision-language model with MoE architecture, superior visual perception and OCR
+    /// Model ID: qwen3-vl-235b-a22b
+    /// </summary>
+    [Description("qwen3-vl-235b-a22b")]
+    Qwen3VL235B,
 
     /// <summary>
     /// DeepSeek V3.2 - DeepSeek's latest model
@@ -161,6 +211,9 @@ public enum TextModel
     DeepSeekV32,
 
     // Obsolete models - kept for backward compatibility
+    [Obsolete("This model is no longer available in the Venice AI API. Use Glm47 (zai-org-glm-4.7) instead.")]
+    [Description("zai-org-glm-4.6")]
+    Glm46,
     [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSmall (qwen3-4b) instead.")]
     [Description("qwen-2.5-qwq-32b")]
     QwenReasonning,
@@ -247,6 +300,41 @@ public enum ImageModel
     [Description("z-image-turbo")]
     ZImageTurbo,
 
+    /// <summary>
+    /// Flux 2 Pro - High-quality image generation model
+    /// Model ID: flux-2-pro
+    /// </summary>
+    [Description("flux-2-pro")]
+    Flux2Pro,
+
+    /// <summary>
+    /// Flux 2 Max - Premium quality image generation model
+    /// Model ID: flux-2-max
+    /// </summary>
+    [Description("flux-2-max")]
+    Flux2Max,
+
+    /// <summary>
+    /// GPT Image 1.5 - OpenAI's image generation model with 32K prompt limit
+    /// Model ID: gpt-image-1-5
+    /// </summary>
+    [Description("gpt-image-1-5")]
+    GptImage15,
+
+    /// <summary>
+    /// SeedreamV4.5 - Advanced image generation model
+    /// Model ID: seedream-v4
+    /// </summary>
+    [Description("seedream-v4")]
+    SeedreamV4,
+
+    /// <summary>
+    /// Background Remover - Tool for removing backgrounds from images
+    /// Model ID: bg-remover
+    /// </summary>
+    [Description("bg-remover")]
+    BgRemover,
+
     // Obsolete models - kept for backward compatibility
     [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSD35 or HiDream instead.")]
     [Description("flux-dev")]
@@ -317,6 +405,55 @@ public enum VideoModel
     /// </summary>
     [Description("ltx-2-full-text-to-video")]
     Ltx2FullTextToVideo,
+
+    /// <summary>
+    /// LTX Video 2.0 19B - Text to Video generation with multiple aspect ratios
+    /// Model ID: ltx-2-19b-full-text-to-video
+    /// </summary>
+    [Description("ltx-2-19b-full-text-to-video")]
+    Ltx2_19BFullTextToVideo,
+
+    /// <summary>
+    /// LTX Video 2.0 19B - Image to Video generation with multiple aspect ratios
+    /// Model ID: ltx-2-19b-full-image-to-video
+    /// </summary>
+    [Description("ltx-2-19b-full-image-to-video")]
+    Ltx2_19BFullImageToVideo,
+
+    /// <summary>
+    /// LTX Video 2.0 19B Distilled - Text to Video generation with multiple aspect ratios
+    /// Model ID: ltx-2-19b-distilled-text-to-video
+    /// </summary>
+    [Description("ltx-2-19b-distilled-text-to-video")]
+    Ltx2_19BDistilledTextToVideo,
+
+    /// <summary>
+    /// LTX Video 2.0 19B Distilled - Image to Video generation with multiple aspect ratios
+    /// Model ID: ltx-2-19b-distilled-image-to-video
+    /// </summary>
+    [Description("ltx-2-19b-distilled-image-to-video")]
+    Ltx2_19BDistilledImageToVideo,
+
+    /// <summary>
+    /// Wan 2.6 - Image to Video generation with audio support
+    /// Model ID: wan-2.6-image-to-video
+    /// </summary>
+    [Description("wan-2.6-image-to-video")]
+    Wan26ImageToVideo,
+
+    /// <summary>
+    /// Wan 2.6 Flash - Fast Image to Video generation with audio support
+    /// Model ID: wan-2.6-flash-image-to-video
+    /// </summary>
+    [Description("wan-2.6-flash-image-to-video")]
+    Wan26FlashImageToVideo,
+
+    /// <summary>
+    /// Wan 2.6 - Text to Video generation with audio support
+    /// Model ID: wan-2.6-text-to-video
+    /// </summary>
+    [Description("wan-2.6-text-to-video")]
+    Wan26TextToVideo,
 
     /// <summary>
     /// Ovi - Image to Video generation

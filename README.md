@@ -197,6 +197,32 @@ services.AddVeniceAI("your-api-key", httpClient =>
 
 ## Usage Examples
 
+### Popular Models
+
+The SDK includes strongly-typed enums for all Venice AI models. Here are some popular choices:
+
+**Text Models:**
+- `TextModel.OpenAIGpt52` - OpenAI's latest frontier model with adaptive reasoning
+- `TextModel.ClaudeSonnet45` - Anthropic's balanced model with strong coding
+- `TextModel.Glm47` - Zhiyuan AI's model with 200K+ context window
+- `TextModel.Gemini3FlashPreview` - Google's high-speed thinking model
+- `TextModel.Qwen3VL235B` - Vision-language model with superior OCR
+- `TextModel.GrokCodeFast1` - xAI's fast reasoning model for coding
+- `TextModel.VeniceMedium` - Balanced model with vision support
+
+**Image Models:**
+- `ImageModel.GptImage15` - OpenAI's image generation (32K prompt limit)
+- `ImageModel.Flux2Max` - Premium quality image generation
+- `ImageModel.HiDream` - High-quality image generation
+- `ImageModel.VeniceSD35` - Venice's optimized Stable Diffusion
+- `ImageModel.NanoBananaPro` - Premium with web search support
+
+**Video Models:**
+- `VideoModel.Wan26TextToVideo` - Latest Wan with audio support
+- `VideoModel.Veo3FullTextToVideo` - Google's Veo 3 full quality
+- `VideoModel.Sora2ProTextToVideo` - OpenAI's Sora 2 Pro (1080p)
+- `VideoModel.Ltx2_19BFullTextToVideo` - LTX 2.0 19B multi-aspect ratio
+
 ### Chat Completions
 
 ```csharp
