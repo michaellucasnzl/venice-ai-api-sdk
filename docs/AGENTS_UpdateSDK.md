@@ -49,7 +49,8 @@ Execute these steps **in order**. Each step has a validation checkpoint.
 7. [Update Client Interface](#step-7-update-client-interface)
 8. [Update Dependency Injection](#step-8-update-dependency-injection)
 9. [Build and Test](#step-9-build-and-test)
-10. [Update Documentation](#step-10-update-documentation)
+10. [Update Version Number](#step-10-update-version-number)
+11. [Update Documentation](#step-11-update-documentation)
 
 ---
 
@@ -528,9 +529,63 @@ dotnet test tests/VeniceAI.SDK.IntegrationTests/VeniceAI.SDK.IntegrationTests.cs
 
 ---
 
-## Step 10: Update Documentation
+## Step 10: Update Version Number
 
-### 10.1 Update CHANGELOG.md
+### File to Edit
+```
+src/VeniceAI.SDK/VeniceAI.SDK.csproj
+```
+
+### 10.1 Determine New Version Number
+
+Follow [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH):
+
+- **MAJOR** (X.0.0): Breaking changes to public API
+- **MINOR** (0.X.0): New features added in backward-compatible manner
+  - New models added
+  - New API endpoints/services added
+  - New optional parameters added
+- **PATCH** (0.0.X): Backward-compatible bug fixes
+  - Bug fixes only
+  - Documentation updates
+  - Internal refactoring
+
+**Examples:**
+- Added new video generation API → Increment MINOR (0.2.1 → 0.3.0)
+- Added 5 new text models → Increment MINOR (0.2.1 → 0.3.0)
+- Fixed JSON serialization bug → Increment PATCH (0.2.1 → 0.2.2)
+- Changed method signature → Increment MAJOR (0.2.1 → 1.0.0)
+
+### 10.2 Update Version in Project File
+
+Edit `src/VeniceAI.SDK/VeniceAI.SDK.csproj` and update the `<Version>` element:
+
+```xml
+<PropertyGroup>
+  <Version>X.Y.Z</Version>
+  <!-- other properties -->
+</PropertyGroup>
+```
+
+**Example:**
+```xml
+<!-- Before -->
+<Version>0.2.1</Version>
+
+<!-- After (adding new models) -->
+<Version>0.3.0</Version>
+```
+
+### ✅ Checkpoint 10
+- [ ] Version number updated in `VeniceAI.SDK.csproj`
+- [ ] Version follows semantic versioning rules
+- [ ] Project builds successfully after version change
+
+---
+
+## Step 11: Update Documentation
+
+### 11.1 Update CHANGELOG.md
 
 **File:** `CHANGELOG.md`
 
@@ -556,7 +611,7 @@ Add a new version section at the top:
 - [List any bug fixes]
 ```
 
-### 10.2 Update README.md
+### 11.2 Update README.md
 
 **File:** `README.md`
 
@@ -572,7 +627,7 @@ var videoRequest = new QueueVideoRequest
 var response = await client.Video.QueueVideoAsync(videoRequest);
 ```
 
-### ✅ Checkpoint 10
+### ✅ Checkpoint 11
 - [ ] CHANGELOG.md has new version entry
 - [ ] README.md includes examples for new features
 
@@ -639,6 +694,10 @@ Mark each item as complete:
 - [ ] SDK builds successfully
 - [ ] Unit tests pass
 - [ ] Integration tests pass (if API key available)
+
+### Version Number
+- [ ] Version number incremented in `VeniceAI.SDK.csproj`
+- [ ] Version follows semantic versioning rules
 
 ### Documentation
 - [ ] `CHANGELOG.md` updated with new version
