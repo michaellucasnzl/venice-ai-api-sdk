@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-02-14
+
+### Added
+- **New Text Models**: Added latest Venice AI text models (February 2026 update)
+  - `Glm47Flash` (zai-org-glm-4.7-flash) - Fast inference variant of GLM 4.7 with strong reasoning
+  - `Glm5` (zai-org-glm-5) - Next-generation Zhiyuan AI model with enhanced reasoning
+  - `ClaudeOpus46` (claude-opus-4-6) - Anthropic's most capable model with 1M token context
+  - `KimiK25` (kimi-k2-5) - Moonshot AI's advanced reasoning model with trillion-parameter MoE
+  - `MinimaxM25` (minimax-m25) - Enhanced state-of-the-art coding model with improved reasoning
+- **New Image Models**: Added latest Venice AI image models
+  - `ImagineArt15Pro` (imagineart-1.5-pro) - Advanced image generation with 10K prompt limit
+  - `Chroma` (chroma) - Fast image generation model
+- **New Video Models**: Added latest Venice AI video models
+  - `KlingO3ProTextToVideo` (kling-o3-pro-text-to-video) - Kling O3 Pro cinematic text-to-video
+  - `KlingO3ProImageToVideo` (kling-o3-pro-image-to-video) - Kling O3 Pro cinematic image-to-video
+  - `PixVerseV56TextToVideo` (pixverse-v5.6-text-to-video) - PixVerse v5.6 cinematic text-to-video
+  - `PixVerseV56ImageToVideo` (pixverse-v5.6-image-to-video) - PixVerse v5.6 cinematic image-to-video
+  - `PixVerseV56Transition` (pixverse-v5.6-transition) - PixVerse v5.6 image transition effects
+  - `ViduQ3TextToVideo` (vidu-q3-text-to-video) - Vidu Q3 cinematic text-to-video
+  - `ViduQ3ImageToVideo` (vidu-q3-image-to-video) - Vidu Q3 cinematic image-to-video
+
+### Notes
+- All new models support the existing SDK interfaces and require no code changes
+- Unit tests updated and passing with all new model additions
+
 ## [1.4.0] - 2026-01-26
 
 ### Changed

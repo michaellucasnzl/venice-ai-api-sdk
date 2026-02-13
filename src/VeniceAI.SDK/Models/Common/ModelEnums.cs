@@ -137,6 +137,13 @@ public enum TextModel
     ClaudeOpus45,
 
     /// <summary>
+    /// Claude Opus 4.6 - Anthropic's most capable reasoning model with 1M token context window
+    /// Model ID: claude-opus-4-6
+    /// </summary>
+    [Description("claude-opus-4-6")]
+    ClaudeOpus46,
+
+    /// <summary>
     /// OpenAI GPT OSS 120B - OpenAI's open-source model
     /// </summary>
     [Description("openai-gpt-oss-120b")]
@@ -149,11 +156,32 @@ public enum TextModel
     KimiK2Thinking,
 
     /// <summary>
+    /// Kimi K2.5 - Moonshot AI's most advanced open reasoning model with trillion-parameter MoE architecture
+    /// Model ID: kimi-k2-5
+    /// </summary>
+    [Description("kimi-k2-5")]
+    KimiK25,
+
+    /// <summary>
     /// GLM 4.7 - Zhiyuan AI's large language model with strong reasoning capabilities and largest context window
     /// Model ID: zai-org-glm-4.7
     /// </summary>
     [Description("zai-org-glm-4.7")]
     Glm47,
+
+    /// <summary>
+    /// GLM 4.7 Flash - Fast inference variant of GLM 4.7, optimized for speed while maintaining strong reasoning
+    /// Model ID: zai-org-glm-4.7-flash
+    /// </summary>
+    [Description("zai-org-glm-4.7-flash")]
+    Glm47Flash,
+
+    /// <summary>
+    /// GLM 5 - Next-generation model from Zhiyuan AI with enhanced reasoning and instruction following
+    /// Model ID: zai-org-glm-5
+    /// </summary>
+    [Description("zai-org-glm-5")]
+    Glm5,
 
     /// <summary>
     /// Gemini 3 Flash Preview - Google's high-speed thinking model with near Pro-level reasoning
@@ -189,6 +217,13 @@ public enum TextModel
     /// </summary>
     [Description("minimax-m21")]
     MinimaxM21,
+
+    /// <summary>
+    /// MiniMax M2.5 - State-of-the-art model optimized for coding with enhanced reasoning capabilities
+    /// Model ID: minimax-m25
+    /// </summary>
+    [Description("minimax-m25")]
+    MinimaxM25,
 
     /// <summary>
     /// Grok Code Fast 1 - xAI's speedy and economical reasoning model that excels at agentic coding
@@ -334,6 +369,20 @@ public enum ImageModel
     /// </summary>
     [Description("bg-remover")]
     BgRemover,
+
+    /// <summary>
+    /// ImagineArt 1.5 Pro - Advanced image generation model with 10K prompt limit
+    /// Model ID: imagineart-1.5-pro
+    /// </summary>
+    [Description("imagineart-1.5-pro")]
+    ImagineArt15Pro,
+
+    /// <summary>
+    /// Chroma - Fast image generation model
+    /// Model ID: chroma
+    /// </summary>
+    [Description("chroma")]
+    Chroma,
 
     // Obsolete models - kept for backward compatibility
     [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSD35 or HiDream instead.")]
@@ -486,6 +535,20 @@ public enum VideoModel
     Kling25TurboProImageToVideo,
 
     /// <summary>
+    /// Kling O3 Pro - Text to Video generation with cinematic quality
+    /// Model ID: kling-o3-pro-text-to-video
+    /// </summary>
+    [Description("kling-o3-pro-text-to-video")]
+    KlingO3ProTextToVideo,
+
+    /// <summary>
+    /// Kling O3 Pro - Image to Video generation with cinematic quality
+    /// Model ID: kling-o3-pro-image-to-video
+    /// </summary>
+    [Description("kling-o3-pro-image-to-video")]
+    KlingO3ProImageToVideo,
+
+    /// <summary>
     /// Longcat Distilled - Image to Video generation (up to 30s)
     /// </summary>
     [Description("longcat-distilled-image-to-video")]
@@ -579,7 +642,42 @@ public enum VideoModel
     /// Sora 2 Pro - Text to Video generation with audio (up to 1080p)
     /// </summary>
     [Description("sora-2-pro-text-to-video")]
-    Sora2ProTextToVideo
+    Sora2ProTextToVideo,
+
+    /// <summary>
+    /// PixVerse v5.6 - Text to Video generation with cinematic quality
+    /// Model ID: pixverse-v5.6-text-to-video
+    /// </summary>
+    [Description("pixverse-v5.6-text-to-video")]
+    PixVerseV56TextToVideo,
+
+    /// <summary>
+    /// PixVerse v5.6 - Image to Video generation with cinematic quality
+    /// Model ID: pixverse-v5.6-image-to-video
+    /// </summary>
+    [Description("pixverse-v5.6-image-to-video")]
+    PixVerseV56ImageToVideo,
+
+    /// <summary>
+    /// PixVerse v5.6 Transition - Image transition effects
+    /// Model ID: pixverse-v5.6-transition
+    /// </summary>
+    [Description("pixverse-v5.6-transition")]
+    PixVerseV56Transition,
+
+    /// <summary>
+    /// Vidu Q3 - Text to Video generation with cinematic quality
+    /// Model ID: vidu-q3-text-to-video
+    /// </summary>
+    [Description("vidu-q3-text-to-video")]
+    ViduQ3TextToVideo,
+
+    /// <summary>
+    /// Vidu Q3 - Image to Video generation with cinematic quality
+    /// Model ID: vidu-q3-image-to-video
+    /// </summary>
+    [Description("vidu-q3-image-to-video")]
+    ViduQ3ImageToVideo
 }
 
 /// <summary>
