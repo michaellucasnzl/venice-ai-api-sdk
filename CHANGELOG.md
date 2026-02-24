@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-02-24
+
+### Added
+- **New Text Models**: Added latest Venice AI text models (February 2026 update)
+  - `Glm47FlashHeretic` (olafangensan-glm-4.7-flash-heretic) - Uncensored experimental variant of GLM 4.7-Flash optimized for creative freedom
+  - `Gemini31ProPreview` (gemini-3-1-pro-preview) - Google's Gemini 3.1 Pro with 1M token context window and enhanced multimodal reasoning
+  - `ClaudeSonnet46` (claude-sonnet-4-6) - Anthropic's Claude Sonnet 4.6 with 1M token context and 64K max output tokens
+- **New Image Models**: Added latest Venice AI image models
+  - `RecraftV4` (recraft-v4) - Advanced image generation model with 10K prompt limit
+  - `RecraftV4Pro` (recraft-v4-pro) - Premium quality Recraft V4 image generation model
+
+### Deprecated
+- `VeniceLarge` (qwen3-235b) - Model is no longer available in the Venice AI API. Use `Qwen3_235B_Instruct` (qwen3-235b-a22b-instruct-2507) or `Qwen3_235B_Thinking` (qwen3-235b-a22b-thinking-2507) instead.
+
+### Notes
+- Version synchronized from 0.2.1 to 1.6.0 to match changelog versioning
+- All new models support the existing SDK interfaces and require no code changes
+
 ## [1.5.0] - 2026-02-14
 
 ### Added

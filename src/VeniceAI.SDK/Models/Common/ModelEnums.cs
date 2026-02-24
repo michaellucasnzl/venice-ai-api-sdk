@@ -65,8 +65,10 @@ public enum TextModel
     VeniceMedium,
 
     /// <summary>
-    /// Qwen3 235B - Large, powerful model (Venice Large 1.1) with reasoning support
+    /// Qwen3 235B - Large, powerful model (Venice Large 1.1) with reasoning support.
+    /// DEPRECATED: This model is no longer available. Use <see cref="Qwen3_235B_Instruct"/> or <see cref="Qwen3_235B_Thinking"/> instead.
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Qwen3_235B_Instruct (qwen3-235b-a22b-instruct-2507) or Qwen3_235B_Thinking (qwen3-235b-a22b-thinking-2507) instead.")]
     [Description("qwen3-235b")]
     VeniceLarge,
 
@@ -131,6 +133,14 @@ public enum TextModel
     Gemini3ProPreview,
 
     /// <summary>
+    /// Gemini 3.1 Pro Preview - Google's latest flagship frontier model with 1M context window,
+    /// advancing high-precision multimodal reasoning across text, image, and code.
+    /// Model ID: gemini-3-1-pro-preview
+    /// </summary>
+    [Description("gemini-3-1-pro-preview")]
+    Gemini31ProPreview,
+
+    /// <summary>
     /// Claude Opus 4.5 - Anthropic's premium coding and reasoning model
     /// </summary>
     [Description("claude-opus-45")]
@@ -177,6 +187,14 @@ public enum TextModel
     Glm47Flash,
 
     /// <summary>
+    /// GLM 4.7 Flash Heretic - Uncensored experimental variant of GLM 4.7-Flash, optimized for creative freedom
+    /// and unfiltered dialogue with fast inference speed.
+    /// Model ID: olafangensan-glm-4.7-flash-heretic
+    /// </summary>
+    [Description("olafangensan-glm-4.7-flash-heretic")]
+    Glm47FlashHeretic,
+
+    /// <summary>
     /// GLM 5 - Next-generation model from Zhiyuan AI with enhanced reasoning and instruction following
     /// Model ID: zai-org-glm-5
     /// </summary>
@@ -196,6 +214,14 @@ public enum TextModel
     /// </summary>
     [Description("claude-sonnet-45")]
     ClaudeSonnet45,
+
+    /// <summary>
+    /// Claude Sonnet 4.6 - Anthropic's best combination of speed and intelligence with strong performance
+    /// on coding, reasoning, and general tasks. Features a 1M token context window and 64K max output tokens.
+    /// Model ID: claude-sonnet-4-6
+    /// </summary>
+    [Description("claude-sonnet-4-6")]
+    ClaudeSonnet46,
 
     /// <summary>
     /// GPT-5.2 - OpenAI's latest frontier model with adaptive reasoning and strong agentic performance
@@ -383,6 +409,20 @@ public enum ImageModel
     /// </summary>
     [Description("chroma")]
     Chroma,
+
+    /// <summary>
+    /// Recraft V4 - Advanced image generation model with 10K prompt limit
+    /// Model ID: recraft-v4
+    /// </summary>
+    [Description("recraft-v4")]
+    RecraftV4,
+
+    /// <summary>
+    /// Recraft V4 Pro - Premium quality image generation model with 10K prompt limit
+    /// Model ID: recraft-v4-pro
+    /// </summary>
+    [Description("recraft-v4-pro")]
+    RecraftV4Pro,
 
     // Obsolete models - kept for backward compatibility
     [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSD35 or HiDream instead.")]
