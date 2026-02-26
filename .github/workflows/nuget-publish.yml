@@ -21,14 +21,11 @@ on:
 
 permissions:
   contents: write
-  actions: read
   checks: write
   pull-requests: write
-  id-token: write
-  packages: write
 
 env:
-  DOTNET_VERSION: '8.0.x'
+  DOTNET_VERSION: '10.0.x'
   PROJECT_PATH: 'src/VeniceAI.SDK/VeniceAI.SDK.csproj'
   SOLUTION_PATH: 'VeniceAI.sln'
   DOTNET_NOLOGO: true
@@ -88,7 +85,7 @@ jobs:
           -- RunConfiguration.DisableAppDomain=true
 
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
       continue-on-error: true
       with:
         directory: ./TestResults

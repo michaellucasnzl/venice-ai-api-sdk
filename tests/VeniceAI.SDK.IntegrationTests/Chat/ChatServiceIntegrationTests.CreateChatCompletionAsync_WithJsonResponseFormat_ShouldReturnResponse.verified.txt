@@ -1,5 +1,5 @@
 ﻿{
-  Id: chatcmpl-RgFXoS8NywmMg1rL8CbBnPBf,
+  Id: chatcmpl-RydnjcSlYJKTMvhV6Ytlv0uC,
   Object: chat.completion,
   Created: {Scrubbed},
   Model: qwen3-235b-a22b-thinking-2507,
@@ -9,7 +9,7 @@
         Role: assistant,
         Content: {Scrubbed}
       },
-      FinishReason: length
+      FinishReason: stop
     }
   ],
   Usage: {Scrubbed},

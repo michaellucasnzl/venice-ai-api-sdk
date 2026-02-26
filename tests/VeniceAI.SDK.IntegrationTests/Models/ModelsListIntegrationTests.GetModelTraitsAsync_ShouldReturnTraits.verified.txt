@@ -3,9 +3,9 @@
     default: zai-org-glm-4.7,
     default_code: qwen3-coder-480b-a35b-instruct,
     default_reasoning: qwen3-235b-a22b-thinking-2507,
-    default_vision: mistral-31-24b,
+    default_vision: qwen3-vl-235b-a22b,
     fastest: qwen3-4b,
-    function_calling_default: mistral-31-24b,
+    function_calling_default: zai-org-glm-4.7,
     most_intelligent: zai-org-glm-4.7,
     most_uncensored: venice-uncensored
   },

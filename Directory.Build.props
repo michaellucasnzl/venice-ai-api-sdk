@@ -1,9 +1,9 @@
 <Project>
   <PropertyGroup>
     <!-- Centralized versioning for all projects -->
-    <VersionMajor>1</VersionMajor>
+    <VersionMajor>2</VersionMajor>
     <VersionMinor>0</VersionMinor>
-    <VersionPatch>1</VersionPatch>
+    <VersionPatch>0</VersionPatch>
     <VersionBuild Condition="'$(VersionBuild)' == ''">0</VersionBuild>
 
     <!-- Construct the full version -->
@@ -14,12 +14,12 @@
     <InformationalVersion>$(Version)</InformationalVersion>
 
     <!-- Common package properties -->
-    <Authors>Venice AI Team</Authors>
-    <Company>Venice AI</Company>
-    <Copyright>Copyright © Venice AI 2025</Copyright>
+    <Authors>Venice AI Contributors</Authors>
+    <Company>Venice AI Contributors</Company>
+    <Copyright>Copyright © 2025-2026 Venice AI Contributors</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/veniceai/venice-ai-api-sdk</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/veniceai/venice-ai-api-sdk</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/michaellucasnzl/venice-ai-api-sdk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/michaellucasnzl/venice-ai-api-sdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryBranch Condition="'$(RepositoryBranch)' == ''">main</RepositoryBranch>
     <RepositoryCommit Condition="'$(RepositoryCommit)' == ''">unknown</RepositoryCommit>

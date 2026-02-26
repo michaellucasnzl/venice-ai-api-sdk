@@ -27,22 +27,22 @@ public class VeniceAIOptions
     public string ApiKey { get; set; } = string.Empty;
 
     // All other settings are internal and managed by the SDK
-    
+
     /// <summary>
     /// Gets the Venice AI API base URL. This cannot be overridden.
     /// </summary>
     internal static string BaseUrl => OfficialApiBaseUrl;
-    
+
     /// <summary>
     /// Gets the default timeout for requests in seconds.
     /// </summary>
-    internal static int DefaultTimeoutSeconds => 300; // 5 minutes
-    
+    internal static int DefaultTimeoutSeconds => 600; // 10 minutes
+
     /// <summary>
     /// Gets the maximum retry attempts for failed requests.
     /// </summary>
     internal static int MaxRetryAttempts => 3;
-    
+
     /// <summary>
     /// Gets the delay between retry attempts in milliseconds.
     /// </summary>

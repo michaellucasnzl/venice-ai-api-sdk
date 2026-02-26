@@ -142,6 +142,33 @@
       }
     },
     {
+      Id: imagineart-1.5-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: ImagineArt 1.5 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.05,
+            Diem: 0.05
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: nano-banana-pro,
       Object: model,
       Created: {Scrubbed},
@@ -165,6 +192,60 @@
       }
     },
     {
+      Id: recraft-v4,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Recraft V4,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.06,
+            Diem: 0.06
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: recraft-v4-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Recraft V4 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.29,
+            Diem: 0.29
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: seedream-v4,
       Object: model,
       Created: {Scrubbed},
@@ -172,6 +253,33 @@
       Type: image,
       ModelSpec: {
         Name: SeedreamV4.5,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.05,
+            Diem: 0.05
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: seedream-v5-lite,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: SeedreamV5 Lite,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -339,6 +447,34 @@
           default,
           fastest
         ]
+      }
+    },
+    {
+      Id: chroma,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Chroma,
+        ModelSource: https://huggingface.co/lodestones/Chroma1-HD,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 7500,
+          Steps: {
+            Default: 10,
+            Max: 10
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        }
       }
     },
     {
