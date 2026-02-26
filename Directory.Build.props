@@ -3,7 +3,7 @@
     <!-- Centralized versioning for all projects -->
     <VersionMajor>2</VersionMajor>
     <VersionMinor>0</VersionMinor>
-    <VersionPatch>0</VersionPatch>
+    <VersionPatch>2</VersionPatch>
     <VersionBuild Condition="'$(VersionBuild)' == ''">0</VersionBuild>
 
     <!-- Construct the full version -->

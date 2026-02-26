@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>2.0.1</Version>
     <TargetFramework>net10.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>VeniceAI.SDK</PackageId>
@@ -10,6 +9,7 @@
     <PackageTags>AI;Venice;OpenAI;ChatGPT;GPT;LLM;Image;Generation;TTS;Embeddings;API;SDK</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <PackageIcon>VeniceLogo.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="VeniceLogo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
