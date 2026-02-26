@@ -1,0 +1,60 @@
+<Project>
+  <PropertyGroup>
+    <!-- Centralized versioning for all projects -->
+    <VersionMajor>2</VersionMajor>
+    <VersionMinor>0</VersionMinor>
+    <VersionPatch>0</VersionPatch>
+    <VersionBuild Condition="'$(VersionBuild)' == ''">0</VersionBuild>
+
+    <!-- Construct the full version -->
+    <VersionPrefix>$(VersionMajor).$(VersionMinor).$(VersionPatch)</VersionPrefix>
+    <Version>$(VersionPrefix).$(VersionBuild)</Version>
+    <AssemblyVersion>$(VersionMajor).$(VersionMinor).0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <InformationalVersion>$(Version)</InformationalVersion>
+
+    <!-- Common package properties -->
+    <Authors>Venice AI Contributors</Authors>
+    <Company>Venice AI Contributors</Company>
+    <Copyright>Copyright © 2025-2026 Venice AI Contributors</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/michaellucasnzl/venice-ai-api-sdk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/michaellucasnzl/venice-ai-api-sdk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryBranch Condition="'$(RepositoryBranch)' == ''">main</RepositoryBranch>
+    <RepositoryCommit Condition="'$(RepositoryCommit)' == ''">unknown</RepositoryCommit>
+
+    <!-- Build configuration -->
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- Set VersionBuild from environment variable if available (for CI/CD) -->
+    <VersionBuild Condition="'$(GITHUB_RUN_NUMBER)' != ''">$(GITHUB_RUN_NUMBER)</VersionBuild>
+    <VersionBuild Condition="'$(BUILD_NUMBER)' != ''">$(BUILD_NUMBER)</VersionBuild>
+  </PropertyGroup>
+
+  <!-- Development version suffix for non-release builds -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <VersionSuffix>dev</VersionSuffix>
+    <Version Condition="'$(VersionSuffix)' != ''">$(VersionPrefix).$(VersionBuild)-$(VersionSuffix)</Version>
+  </PropertyGroup>
+
+  <!-- Include git information in package metadata when available -->
+  <PropertyGroup Condition="'$(GITHUB_SHA)' != ''">
+    <RepositoryCommit>$(GITHUB_SHA)</RepositoryCommit>
+    <InformationalVersion>$(Version)+$(GITHUB_SHA.Substring(0, 7))</InformationalVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_REF_NAME)' != ''">
+    <RepositoryBranch>$(GITHUB_REF_NAME)</RepositoryBranch>
+  </PropertyGroup>
+</Project>

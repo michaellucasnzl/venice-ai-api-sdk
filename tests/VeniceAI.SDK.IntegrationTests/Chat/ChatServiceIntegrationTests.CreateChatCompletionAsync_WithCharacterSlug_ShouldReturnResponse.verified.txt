@@ -1,0 +1,18 @@
+﻿{
+  Id: chatcmpl-RfR4wIyfG9ta3oukkn7Fsd5Y,
+  Object: chat.completion,
+  Created: {Scrubbed},
+  Model: llama-3.3-70b,
+  Choices: [
+    {
+      Message: {
+        Role: assistant,
+        Content: {Scrubbed}
+      },
+      FinishReason: length
+    }
+  ],
+  Usage: {Scrubbed},
+  IsSuccess: true,
+  RawContent: {Scrubbed}
+}

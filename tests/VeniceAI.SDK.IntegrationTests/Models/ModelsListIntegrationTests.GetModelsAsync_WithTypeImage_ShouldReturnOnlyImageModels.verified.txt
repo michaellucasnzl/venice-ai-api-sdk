@@ -1,0 +1,511 @@
+﻿{
+  Object: list,
+  Data: [
+    {
+      Id: venice-sd35,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Venice SD35,
+        ModelSource: https://huggingface.co/stabilityai/stable-diffusion-3.5-large,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 25,
+            Max: 30
+          },
+          WidthHeightDivisor: 16
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        },
+        Traits: [
+          eliza-default
+        ]
+      }
+    },
+    {
+      Id: hidream,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: HiDream,
+        ModelSource: https://huggingface.co/HiDream-ai/HiDream-I1-Dev,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: flux-2-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Flux 2 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 3000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.04,
+            Diem: 0.04
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: flux-2-max,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Flux 2 Max,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 3000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.09,
+            Diem: 0.09
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: gpt-image-1-5,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: GPT Image 1.5,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 32768,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.23,
+            Diem: 0.23
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: imagineart-1.5-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: ImagineArt 1.5 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.05,
+            Diem: 0.05
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: nano-banana-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Nano Banana Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 32768,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: recraft-v4,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Recraft V4,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.06,
+            Diem: 0.06
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: recraft-v4-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Recraft V4 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.29,
+            Diem: 0.29
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: seedream-v4,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: SeedreamV4.5,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.05,
+            Diem: 0.05
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: seedream-v5-lite,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: SeedreamV5 Lite,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.05,
+            Diem: 0.05
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: lustify-sdxl,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Lustify SDXL,
+        ModelSource: https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: lustify-v7,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Lustify v7,
+        ModelSource: https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        },
+        Traits: [
+          most_uncensored
+        ]
+      }
+    },
+    {
+      Id: qwen-image,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Qwen Image,
+        ModelSource: https://huggingface.co/Qwen/Qwen-Image,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 8,
+            Max: 8
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        },
+        Traits: [
+          highest_quality
+        ]
+      }
+    },
+    {
+      Id: wai-Illustrious,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Anime (WAI),
+        ModelSource: https://civitai.com/models/827184?modelVersionId=1761560,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 25,
+            Max: 30
+          },
+          WidthHeightDivisor: 16
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: z-image-turbo,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Z-Image Turbo,
+        ModelSource: https://huggingface.co/Tongyi-MAI/Z-Image-Turbo,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 7500,
+          Steps: {
+            Default: 8,
+            Max: 8
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        },
+        Traits: [
+          default,
+          fastest
+        ]
+      }
+    },
+    {
+      Id: chroma,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Chroma,
+        ModelSource: https://huggingface.co/lodestones/Chroma1-HD,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 7500,
+          Steps: {
+            Default: 10,
+            Max: 10
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: bg-remover,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Background Remover,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.02,
+            Diem: 0.02
+          },
+          Upscale: {}
+        }
+      }
+    }
+  ],
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

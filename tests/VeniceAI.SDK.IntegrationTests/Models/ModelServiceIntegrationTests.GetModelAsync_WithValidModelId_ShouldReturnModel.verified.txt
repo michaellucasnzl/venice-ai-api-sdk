@@ -1,0 +1,12 @@
+﻿{
+  Id: {Scrubbed},
+  Object: model,
+  Created: {Scrubbed},
+  OwnedBy: venice.ai,
+  Type: text,
+  ModelSpec: {
+    Name: ,
+    Offline: false,
+    Beta: false
+  }
+}

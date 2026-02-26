@@ -1,0 +1,12 @@
+﻿{
+  Images: {Scrubbed},
+  Data: [
+    {
+      B64Json: {Scrubbed}
+    }
+  ],
+  Created: {Scrubbed},
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

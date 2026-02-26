@@ -1,0 +1,18 @@
+﻿{
+  Id: chatcmpl-RydnjcSlYJKTMvhV6Ytlv0uC,
+  Object: chat.completion,
+  Created: {Scrubbed},
+  Model: qwen3-235b-a22b-thinking-2507,
+  Choices: [
+    {
+      Message: {
+        Role: assistant,
+        Content: {Scrubbed}
+      },
+      FinishReason: stop
+    }
+  ],
+  Usage: {Scrubbed},
+  IsSuccess: true,
+  RawContent: {Scrubbed}
+}

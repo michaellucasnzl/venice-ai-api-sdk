@@ -1,0 +1,176 @@
+﻿{
+  Object: list,
+  Data: [
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    },
+    {
+      Id: {Scrubbed},
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: ,
+        Offline: false,
+        Beta: false
+      }
+    }
+  ],
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

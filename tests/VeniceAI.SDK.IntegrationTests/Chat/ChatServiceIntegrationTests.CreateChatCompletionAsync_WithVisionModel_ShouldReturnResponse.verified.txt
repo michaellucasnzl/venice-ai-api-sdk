@@ -1,0 +1,18 @@
+﻿{
+  Id: chatcmpl-c60de9395b444eb28a5da908be578176,
+  Object: chat.completion,
+  Created: {Scrubbed},
+  Model: mistral-31-24b,
+  Choices: [
+    {
+      Message: {
+        Role: assistant,
+        Content: {Scrubbed}
+      },
+      FinishReason: stop
+    }
+  ],
+  Usage: {Scrubbed},
+  IsSuccess: true,
+  RawContent: {Scrubbed}
+}

@@ -1,0 +1,87 @@
+﻿[
+  {
+    Id: chatcmpl-RjT3fsJS4yEUD433YAH5Brvh,
+    Object: chat.completion.chunk,
+    Created: {Scrubbed},
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant,
+          Content: {Scrubbed}
+        }
+      }
+    ],
+    Usage: {Scrubbed},
+    IsSuccess: false,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-RjT3fsJS4yEUD433YAH5Brvh,
+    Object: chat.completion.chunk,
+    Created: {Scrubbed},
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant,
+          Content: {Scrubbed}
+        }
+      }
+    ],
+    Usage: {Scrubbed},
+    IsSuccess: false,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-RjT3fsJS4yEUD433YAH5Brvh,
+    Object: chat.completion.chunk,
+    Created: {Scrubbed},
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant,
+          Content: {Scrubbed}
+        }
+      }
+    ],
+    Usage: {Scrubbed},
+    IsSuccess: false,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-RjT3fsJS4yEUD433YAH5Brvh,
+    Object: chat.completion.chunk,
+    Created: {Scrubbed},
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant,
+          Content: {Scrubbed}
+        }
+      }
+    ],
+    Usage: {Scrubbed},
+    IsSuccess: false,
+    RawContent: {Scrubbed}
+  },
+  {
+    Id: chatcmpl-RjT3fsJS4yEUD433YAH5Brvh,
+    Object: chat.completion.chunk,
+    Created: {Scrubbed},
+    Model: llama-3.3-70b,
+    Choices: [
+      {
+        Message: {
+          Role: assistant,
+          Content: {Scrubbed}
+        }
+      }
+    ],
+    Usage: {Scrubbed},
+    IsSuccess: false,
+    RawContent: {Scrubbed}
+  }
+]

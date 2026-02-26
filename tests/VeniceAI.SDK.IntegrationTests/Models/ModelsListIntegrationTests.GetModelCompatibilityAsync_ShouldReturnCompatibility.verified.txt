@@ -1,0 +1,33 @@
+﻿{
+  Compatibility: {
+    chatgpt-4o-latest: llama-3.3-70b,
+    claude-3-5-haiku-20241022: llama-3.3-70b,
+    claude-3-5-sonnet-20240620: llama-3.3-70b,
+    claude-3-5-sonnet-20241022: llama-3.3-70b,
+    claude-3-haiku-20240307: llama-3.3-70b,
+    eliza-large: mistral-31-24b,
+    eliza-medium: mistral-31-24b,
+    eliza-small: mistral-31-24b,
+    gpt-3.5-turbo: llama-3.3-70b,
+    gpt-3.5-turbo-0125: llama-3.3-70b,
+    gpt-3.5-turbo-1106: llama-3.3-70b,
+    gpt-3.5-turbo-16k: llama-3.3-70b,
+    gpt-3.5-turbo-instruct: llama-3.3-70b,
+    gpt-3.5-turbo-instruct-0914: llama-3.3-70b,
+    gpt-4.1: qwen3-235b-a22b-instruct-2507,
+    gpt-4o: llama-3.3-70b,
+    gpt-4o-2024-05-13: llama-3.3-70b,
+    gpt-4o-2024-08-06: llama-3.3-70b,
+    gpt-4o-2024-11-20: llama-3.3-70b,
+    gpt-4o-mini: llama-3.3-70b,
+    gpt-4o-mini-2024-07-18: llama-3.3-70b,
+    o1-mini: llama-3.3-70b,
+    o1-mini-2024-09-12: llama-3.3-70b,
+    o3-mini: llama-3.3-70b,
+    qwen3-235b: qwen3-235b-a22b-thinking-2507,
+    venice-large-1.1: qwen3-235b-a22b-instruct-2507
+  },
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}

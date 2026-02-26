@@ -1,0 +1,28 @@
+﻿{
+  Id: chatcmpl-RaweFGUVrwjxSjujOSgxDE8P,
+  Object: chat.completion,
+  Created: {Scrubbed},
+  Model: qwen3-235b-a22b-thinking-2507,
+  Choices: [
+    {
+      Message: {
+        ToolCalls: [
+          {
+            Id: call_0172,
+            Type: function,
+            Function: {
+              Name: get_current_weather,
+              Arguments: {"location": "New York, NY", "unit": "fahrenheit"}
+            }
+          }
+        ],
+        Role: assistant,
+        Content: {Scrubbed}
+      },
+      FinishReason: tool_calls
+    }
+  ],
+  Usage: {Scrubbed},
+  IsSuccess: true,
+  RawContent: {Scrubbed}
+}

@@ -1,0 +1,24 @@
+﻿{
+  Images: {Scrubbed},
+  Data: [
+    {
+      B64Json: {Scrubbed}
+    }
+  ],
+  Created: {Scrubbed},
+  Request: {
+    Success: true,
+    Data: {
+      ValueKind: Object
+    }
+  },
+  Timing: {
+    InferenceDuration: 6659,
+    InferencePreprocessingTime: 6691,
+    InferenceQueueTime: 8989,
+    Total: 15680
+  },
+  IsSuccess: true,
+  StatusCode: 200,
+  RawContent: {Scrubbed}
+}
