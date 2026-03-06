@@ -142,8 +142,9 @@ public enum TextModel
 
     /// <summary>
     /// Claude Opus 4.5 - Anthropic's premium coding and reasoning model
+    /// Model ID: claude-opus-4-5
     /// </summary>
-    [Description("claude-opus-45")]
+    [Description("claude-opus-4-5")]
     ClaudeOpus45,
 
     /// <summary>
@@ -210,9 +211,9 @@ public enum TextModel
 
     /// <summary>
     /// Claude Sonnet 4.5 - Anthropic's balanced model with strong coding and reasoning capabilities
-    /// Model ID: claude-sonnet-45
+    /// Model ID: claude-sonnet-4-5
     /// </summary>
-    [Description("claude-sonnet-45")]
+    [Description("claude-sonnet-4-5")]
     ClaudeSonnet45,
 
     /// <summary>
@@ -271,8 +272,60 @@ public enum TextModel
     [Description("deepseek-v3.2")]
     DeepSeekV32,
 
+    /// <summary>
+    /// GPT-5.3 Codex (beta) - OpenAI's specialized coding model built on GPT-5.3, optimized for advanced software development.
+    /// Model ID: openai-gpt-53-codex
+    /// </summary>
+    [Description("openai-gpt-53-codex")]
+    OpenAIGpt53Codex,
+
+    /// <summary>
+    /// GPT-5.4 (beta) - OpenAI's latest frontier model with 1M+ context window and adaptive reasoning.
+    /// Model ID: openai-gpt-54
+    /// </summary>
+    [Description("openai-gpt-54")]
+    OpenAIGpt54,
+
+    /// <summary>
+    /// GPT-4o - OpenAI's multimodal flagship model with vision capabilities. Version: 2024-11-20.
+    /// Model ID: openai-gpt-4o-2024-11-20
+    /// </summary>
+    [Description("openai-gpt-4o-2024-11-20")]
+    OpenAIGpt4o,
+
+    /// <summary>
+    /// GPT-4o Mini - OpenAI's cost-efficient small model delivering GPT-4 level intelligence. Version: 2024-07-18.
+    /// Model ID: openai-gpt-4o-mini-2024-07-18
+    /// </summary>
+    [Description("openai-gpt-4o-mini-2024-07-18")]
+    OpenAIGpt4oMini,
+
+    /// <summary>
+    /// Qwen 3.5 35B A3B (beta) - Highly efficient MoE model with 35B total/3B active parameters, surpasses Qwen3-235B-A22B.
+    /// Model ID: qwen3-5-35b-a3b
+    /// </summary>
+    [Description("qwen3-5-35b-a3b")]
+    Qwen35_35BA3B,
+
+    /// <summary>
+    /// Qwen 3 Coder 480B Turbo (beta) - Turbo variant of Qwen3 Coder 480B, optimized for faster inference on code tasks.
+    /// Model ID: qwen3-coder-480b-a35b-instruct-turbo
+    /// </summary>
+    [Description("qwen3-coder-480b-a35b-instruct-turbo")]
+    Qwen3Coder480BTurbo,
+
+    /// <summary>
+    /// NVIDIA Nemotron 3 Nano 30B (beta) - Compact and efficient model from NVIDIA, optimized for fast inference.
+    /// Model ID: nvidia-nemotron-3-nano-30b-a3b
+    /// </summary>
+    [Description("nvidia-nemotron-3-nano-30b-a3b")]
+    NvidiaNemotron3Nano30B,
+
     // Obsolete models - kept for backward compatibility
-    [Obsolete("This model is no longer available in the Venice AI API. Use Glm47 (zai-org-glm-4.7) instead.")]
+    /// <summary>
+    /// GLM 4.6 - Zhiyuan AI's large language model with 198K context window.
+    /// Model ID: zai-org-glm-4.6
+    /// </summary>
     [Description("zai-org-glm-4.6")]
     Glm46,
     [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSmall (qwen3-4b) instead.")]
@@ -390,9 +443,9 @@ public enum ImageModel
     SeedreamV4,
 
     /// <summary>
-    /// Background Remover - Tool for removing backgrounds from images
-    /// Model ID: bg-remover
+    /// DEPRECATED: The bg-remover model has been replaced by bria-bg-remover. Use <see cref="BriaBgRemover"/> instead.
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use BriaBgRemover (bria-bg-remover) instead.")]
     [Description("bg-remover")]
     BgRemover,
 
@@ -409,6 +462,55 @@ public enum ImageModel
     /// </summary>
     [Description("chroma")]
     Chroma,
+
+    /// <summary>
+    /// Grok Imagine - xAI's image generation model
+    /// Model ID: grok-imagine
+    /// </summary>
+    [Description("grok-imagine")]
+    GrokImagine,
+
+    /// <summary>
+    /// Hunyuan Image 3.0 (beta) - Tencent's advanced image generation model
+    /// Model ID: hunyuan-image-v3
+    /// </summary>
+    [Description("hunyuan-image-v3")]
+    HunyuanImageV3,
+
+    /// <summary>
+    /// Nano Banana 2 - Image generation with web search support and 32K prompt limit
+    /// Model ID: nano-banana-2
+    /// </summary>
+    [Description("nano-banana-2")]
+    NanaBanana2,
+
+    /// <summary>
+    /// SeedreamV5 Lite - Lightweight advanced image generation model
+    /// Model ID: seedream-v5-lite
+    /// </summary>
+    [Description("seedream-v5-lite")]
+    SeedreamV5Lite,
+
+    /// <summary>
+    /// Qwen Image 2 - Alibaba's image generation model
+    /// Model ID: qwen-image-2
+    /// </summary>
+    [Description("qwen-image-2")]
+    QwenImage2,
+
+    /// <summary>
+    /// Qwen Image 2 Pro - Premium variant of Alibaba's image generation model
+    /// Model ID: qwen-image-2-pro
+    /// </summary>
+    [Description("qwen-image-2-pro")]
+    QwenImage2Pro,
+
+    /// <summary>
+    /// Background Remover (BRIA) - Tool for removing backgrounds from images
+    /// Model ID: bria-bg-remover
+    /// </summary>
+    [Description("bria-bg-remover")]
+    BriaBgRemover,
 
     /// <summary>
     /// Recraft V4 - Advanced image generation model with 10K prompt limit
@@ -717,7 +819,49 @@ public enum VideoModel
     /// Model ID: vidu-q3-image-to-video
     /// </summary>
     [Description("vidu-q3-image-to-video")]
-    ViduQ3ImageToVideo
+    ViduQ3ImageToVideo,
+
+    /// <summary>
+    /// Grok Imagine - Text to Video generation
+    /// Model ID: grok-imagine-text-to-video
+    /// </summary>
+    [Description("grok-imagine-text-to-video")]
+    GrokImagineTextToVideo,
+
+    /// <summary>
+    /// Grok Imagine - Image to Video generation
+    /// Model ID: grok-imagine-image-to-video
+    /// </summary>
+    [Description("grok-imagine-image-to-video")]
+    GrokImagineImageToVideo,
+
+    /// <summary>
+    /// LTX Video 2.3 Fast - Image to Video generation (up to 2160p)
+    /// Model ID: ltx-2-v2-3-fast-image-to-video
+    /// </summary>
+    [Description("ltx-2-v2-3-fast-image-to-video")]
+    Ltx2V23FastImageToVideo,
+
+    /// <summary>
+    /// LTX Video 2.3 Fast - Text to Video generation (up to 2160p)
+    /// Model ID: ltx-2-v2-3-fast-text-to-video
+    /// </summary>
+    [Description("ltx-2-v2-3-fast-text-to-video")]
+    Ltx2V23FastTextToVideo,
+
+    /// <summary>
+    /// LTX Video 2.3 Full Quality - Image to Video generation (up to 2160p)
+    /// Model ID: ltx-2-v2-3-full-image-to-video
+    /// </summary>
+    [Description("ltx-2-v2-3-full-image-to-video")]
+    Ltx2V23FullImageToVideo,
+
+    /// <summary>
+    /// LTX Video 2.3 Full Quality - Text to Video generation (up to 2160p)
+    /// Model ID: ltx-2-v2-3-full-text-to-video
+    /// </summary>
+    [Description("ltx-2-v2-3-full-text-to-video")]
+    Ltx2V23FullTextToVideo
 }
 
 /// <summary>

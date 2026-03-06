@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-04-01
+
+### Added
+- New text models: GPT-5.3 Codex (`openai-gpt-53-codex`), GPT-5.4 (`openai-gpt-54`), GPT-4o (`openai-gpt-4o-2024-11-20`), GPT-4o Mini (`openai-gpt-4o-mini-2024-07-18`), Qwen 3.5 35B A3B (`qwen3-5-35b-a3b`), Qwen 3 Coder 480B Turbo (`qwen3-coder-480b-a35b-instruct-turbo`), NVIDIA Nemotron 3 Nano 30B (`nvidia-nemotron-3-nano-30b-a3b`)
+- New image models: Grok Imagine (`grok-imagine`), Hunyuan Image V3 (`hunyuan-image-v3`), Nano Banana 2 (`nano-banana-2`), Seedream V5 Lite (`seedream-v5-lite`), Qwen Image 2 (`qwen-image-2`), Qwen Image 2 Pro (`qwen-image-2-pro`), BRIA Background Remover (`bria-bg-remover`)
+- New video models: Grok Imagine Text-to-Video (`grok-imagine-text-to-video`), Grok Imagine Image-to-Video (`grok-imagine-image-to-video`), LTX Video 2.3 Fast Image-to-Video (`ltx-2-v2-3-fast-image-to-video`), LTX Video 2.3 Fast Text-to-Video (`ltx-2-v2-3-fast-text-to-video`), LTX Video 2.3 Full Image-to-Video (`ltx-2-v2-3-full-image-to-video`), LTX Video 2.3 Full Text-to-Video (`ltx-2-v2-3-full-text-to-video`)
+- Un-deprecated `Glm46` (`zai-org-glm-4.6`) — model has returned to the Venice AI API
+
+### Fixed
+- Corrected model ID for `ClaudeOpus45`: was `claude-opus-45`, now correctly `claude-opus-4-5`
+- Corrected model ID for `ClaudeSonnet45`: was `claude-sonnet-45`, now correctly `claude-sonnet-4-5`
+
+### Deprecated
+- `BgRemover` (`bg-remover`) marked as obsolete; use `BriaBgRemover` (`bria-bg-remover`) instead
+
 ## [2.0.0] - 2026-02-26
 
 ### Initial Public Release
