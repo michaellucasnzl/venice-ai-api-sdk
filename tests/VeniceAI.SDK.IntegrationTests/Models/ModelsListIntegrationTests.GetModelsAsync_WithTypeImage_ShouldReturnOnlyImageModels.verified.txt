@@ -125,7 +125,7 @@
         Offline: false,
         Beta: false,
         Constraints: {
-          PromptCharacterLimit: 32768,
+          PromptCharacterLimit: 5000,
           Steps: {
             Default: 20,
             Max: 50
@@ -134,8 +134,35 @@
         },
         Pricing: {
           Generation: {
-            Usd: 0.23,
-            Diem: 0.23
+            Usd: 0.26,
+            Diem: 0.26
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: hunyuan-image-v3,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Hunyuan Image 3.0,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 3000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.09,
+            Diem: 0.09
           },
           Upscale: {}
         }
@@ -161,9 +188,32 @@
         },
         Pricing: {
           Generation: {
-            Usd: 0.05,
-            Diem: 0.05
+            Usd: 0.06,
+            Diem: 0.06
           },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: nano-banana-2,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Nano Banana 2,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 32768,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
           Upscale: {}
         }
       }
@@ -211,8 +261,8 @@
         },
         Pricing: {
           Generation: {
-            Usd: 0.06,
-            Diem: 0.06
+            Usd: 0.05,
+            Diem: 0.05
           },
           Upscale: {}
         }
@@ -300,6 +350,168 @@
       }
     },
     {
+      Id: qwen-image-2,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Qwen Image 2,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.05,
+            Diem: 0.05
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: qwen-image-2-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Qwen Image 2 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.1,
+            Diem: 0.1
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: wan-2-7-text-to-image,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Wan 2.7,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 3000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.0375,
+            Diem: 0.0375
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: wan-2-7-pro-text-to-image,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Wan 2.7 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 3000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.09375,
+            Diem: 0.09375
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: grok-imagine-image,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Grok Imagine (SOTA),
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 7500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.0325,
+            Diem: 0.0325
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: grok-imagine-image-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Grok Imagine Pro (20260207),
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 7500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.085,
+            Diem: 0.085
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: lustify-sdxl,
       Object: model,
       Created: {Scrubbed},
@@ -335,6 +547,37 @@
       Type: image,
       ModelSpec: {
         Name: Lustify v7,
+        ModelSource: https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 1500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 8
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.01,
+            Diem: 0.01
+          },
+          Upscale: {}
+        },
+        Traits: [
+          most_uncensored
+        ]
+      }
+    },
+    {
+      Id: lustify-v8,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Lustify v8,
         ModelSource: https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint,
         Offline: false,
         Beta: false,
@@ -478,7 +721,7 @@
       }
     },
     {
-      Id: bg-remover,
+      Id: bria-bg-remover,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -497,8 +740,8 @@
         },
         Pricing: {
           Generation: {
-            Usd: 0.02,
-            Diem: 0.02
+            Usd: 0.03,
+            Diem: 0.03
           },
           Upscale: {}
         }

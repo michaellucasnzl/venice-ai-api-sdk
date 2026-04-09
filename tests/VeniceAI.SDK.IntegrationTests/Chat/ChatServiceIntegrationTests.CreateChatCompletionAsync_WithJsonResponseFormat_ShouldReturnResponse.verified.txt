@@ -1,8 +1,8 @@
 ﻿{
-  Id: chatcmpl-RydnjcSlYJKTMvhV6Ytlv0uC,
+  Id: chatcmpl-R3SDLzzUWPgWIm56dDNno7qq,
   Object: chat.completion,
   Created: {Scrubbed},
-  Model: qwen3-235b-a22b-thinking-2507,
+  Model: qwen3-235b-a22b-instruct-2507,
   Choices: [
     {
       Message: {

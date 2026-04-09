@@ -123,7 +123,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = TextModel.VeniceMedium, // mistral-31-24b has vision capabilities
+            Model = TextModel.GoogleGemma3_27B, // vision-capable model
             Messages = new List<ChatMessage>
             {
                 new UserMessage("What do you see in this image?")
@@ -286,7 +286,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = TextModel.VeniceLarge,
+            Model = TextModel.Qwen3_235B_Instruct,
             Messages = new List<ChatMessage>
             {
                 new UserMessage("What's the current weather like in New York?")
@@ -360,7 +360,7 @@ public class ChatServiceIntegrationTests : IntegrationTestBase
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = TextModel.VeniceLarge,
+            Model = TextModel.Qwen3_235B_Instruct,
             Messages = new List<ChatMessage>
             {
                 new UserMessage("Generate a JSON object with information about a cat. Include name, age, and breed.")
