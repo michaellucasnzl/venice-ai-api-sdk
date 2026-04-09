@@ -15,14 +15,14 @@ public class ModelEnumSerializationTests
         // Arrange
         var request = new ChatCompletionRequest
         {
-            Model = TextModel.VeniceUncensored
+            Model = TextModel.VeniceUncensoredRolePlay
         };
 
         // Act
         var json = JsonSerializer.Serialize(request);
 
         // Assert
-        Assert.Contains("\"model\":\"venice-uncensored\"", json);
+        Assert.Contains("\"model\":\"venice-uncensored-role-play\"", json);
     }
 
     [Fact]

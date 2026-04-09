@@ -94,7 +94,8 @@ public abstract class IntegrationTestBase : IDisposable
             ex.Message.Contains("Invalid request") ||
             ex.Message.Contains("API Error (Status: 404)") ||
             ex.Message.Contains("API Error (Status: 401)") ||
-            ex.Message.Contains("API Error (Status: 403)"))
+            ex.Message.Contains("API Error (Status: 403)") ||
+            ex.Message.Contains("API Error (Status: 429)"))
         {
             Output.WriteLine($"{testName} passed - Expected API configuration issue");
             return null;

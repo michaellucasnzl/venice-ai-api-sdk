@@ -1,8 +1,8 @@
 ﻿{
-  Id: chatcmpl-c60de9395b444eb28a5da908be578176,
+  Id: chatcmpl-Rll62jwOQKL7lbDIWavIw0UG,
   Object: chat.completion,
   Created: {Scrubbed},
-  Model: mistral-31-24b,
+  Model: google-gemma-3-27b-it,
   Choices: [
     {
       Message: {

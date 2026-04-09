@@ -75,6 +75,66 @@
           zm_yunyang
         ]
       }
+    },
+    {
+      Id: tts-qwen3-0-6b,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: Qwen 3 TTS 0.6B,
+        ModelSource: https://huggingface.co/Qwen/Qwen3-TTS,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 87.5,
+            Diem: 87.5
+          }
+        },
+        Voices: [
+          Aiden,
+          Dylan,
+          Eric,
+          Ono_Anna,
+          Ryan,
+          Serena,
+          Sohee,
+          Uncle_Fu,
+          Vivian
+        ]
+      }
+    },
+    {
+      Id: tts-qwen3-1-7b,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: Qwen 3 TTS 1.7B,
+        ModelSource: https://huggingface.co/Qwen/Qwen3-TTS,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 112.5,
+            Diem: 112.5
+          }
+        },
+        Voices: [
+          Aiden,
+          Dylan,
+          Eric,
+          Ono_Anna,
+          Ryan,
+          Serena,
+          Sohee,
+          Uncle_Fu,
+          Vivian
+        ]
+      }
     }
   ],
   IsSuccess: true,
