@@ -127,22 +127,28 @@ public enum TextModel
     GoogleGemma3_27B,
 
     /// <summary>
-    /// Grok 4.1 Fast - xAI's fast reasoning model with vision support
+    /// Grok 4.1 Fast - xAI's fast reasoning model with vision support.
+    /// DEPRECATED: This model is no longer available. Use <see cref="Grok4_3"/> instead.
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Grok4_3 instead.")]
     [Description("grok-41-fast")]
     Grok41Fast,
 
     /// <summary>
     /// Grok 4.20 Beta - xAI's latest multimodal reasoning model with strong tool use and 2M-token context window.
+    /// DEPRECATED: This model has been renamed. Use <see cref="Grok4_20"/> instead.
     /// Model ID: grok-4-20-beta
     /// </summary>
+    [Obsolete("This model has been renamed. Use Grok4_20 (grok-4-20) instead.")]
     [Description("grok-4-20-beta")]
     Grok4_20Beta,
 
     /// <summary>
     /// Grok 4.20 Multi-Agent Beta - A variant of Grok 4.20 designed for collaborative, agent-based workflows.
+    /// DEPRECATED: This model has been renamed. Use <see cref="Grok4_20MultiAgent"/> instead.
     /// Model ID: grok-4-20-multi-agent-beta
     /// </summary>
+    [Obsolete("This model has been renamed. Use Grok4_20MultiAgent (grok-4-20-multi-agent) instead.")]
     [Description("grok-4-20-multi-agent-beta")]
     Grok4_20MultiAgentBeta,
 
@@ -328,9 +334,11 @@ public enum TextModel
     OpenAIGpt4oMini_Jul2024,
 
     /// <summary>
-    /// MiniMax M2.1 - Lightweight model optimized for coding and agentic workflows
+    /// MiniMax M2.1 - Lightweight model optimized for coding and agentic workflows.
+    /// DEPRECATED: This model is no longer available. Use <see cref="MinimaxM3"/> instead.
     /// Model ID: minimax-m21
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use MinimaxM3 instead.")]
     [Description("minimax-m21")]
     MinimaxM21,
 
@@ -374,7 +382,7 @@ public enum TextModel
     /// Handles text, image, and video input. Supports 256K context, function calling, and reasoning.
     /// Model ID: google.gemma-4-26b-a4b-it
     /// </summary>
-    [Description("google.gemma-4-26b-a4b-it")]
+    [Description("google-gemma-4-26b-a4b-it")]
     GoogleGemma4_26B_A4B,
 
     /// <summary>
@@ -382,7 +390,7 @@ public enum TextModel
     /// Handles text, image, and video input. Supports 256K context, function calling, and thinking modes.
     /// Model ID: google.gemma-4-31b-it
     /// </summary>
-    [Description("google.gemma-4-31b-it")]
+    [Description("google-gemma-4-31b-it")]
     GoogleGemma4_31B,
 
     /// <summary>
@@ -478,7 +486,7 @@ public enum TextModel
     /// Aion 2.0 - DeepSeek V3.2-based model fine-tuned for immersive roleplaying and long-form storytelling.
     /// Model ID: aion-labs.aion-2-0
     /// </summary>
-    [Description("aion-labs.aion-2-0")]
+    [Description("aion-labs-aion-2-0")]
     AionLabs2_0,
 
     /// <summary>
@@ -534,8 +542,10 @@ public enum TextModel
 
     /// <summary>
     /// GLM 5 (E2EE TEE) - GLM 5 running in a Trusted Execution Environment.
+    /// DEPRECATED: This model is no longer available. Use <see cref="E2EEGlm51"/> instead.
     /// Model ID: e2ee-glm-5
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use E2EEGlm51 instead.")]
     [Description("e2ee-glm-5")]
     E2EEGlm5,
 
@@ -576,10 +586,187 @@ public enum TextModel
 
     /// <summary>
     /// Qwen3.5 122B A10B (E2EE TEE) - Qwen3.5 122B A10B running in a Trusted Execution Environment.
+    /// DEPRECATED: This model is no longer available.
     /// Model ID: e2ee-qwen3-5-122b-a10b
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API.")]
     [Description("e2ee-qwen3-5-122b-a10b")]
     E2EEQwen35_122B_A10B,
+
+    /// <summary>
+    /// Venice Uncensored 1.2 - Updated Venice uncensored model for unrestricted content generation.
+    /// Model ID: venice-uncensored-1-2
+    /// </summary>
+    [Description("venice-uncensored-1-2")]
+    VeniceUncensored12,
+
+    /// <summary>
+    /// Qwen 3.7 Max - Alibaba's premium flagship model optimized for maximum quality reasoning.
+    /// Model ID: qwen-3-7-max
+    /// </summary>
+    [Description("qwen-3-7-max")]
+    Qwen3_7Max,
+
+    /// <summary>
+    /// Qwen 3.7 Plus - Alibaba's advanced model with strong reasoning and coding capabilities.
+    /// Model ID: qwen-3-7-plus
+    /// </summary>
+    [Description("qwen-3-7-plus")]
+    Qwen3_7Plus,
+
+    /// <summary>
+    /// Qwen 3.6 27B - Dense model from Alibaba with 27B parameters.
+    /// Model ID: qwen3-6-27b
+    /// </summary>
+    [Description("qwen3-6-27b")]
+    Qwen36_27B,
+
+    /// <summary>
+    /// Gemma 4 Uncensored - Uncensored variant of Google's Gemma 4 model.
+    /// Model ID: gemma-4-uncensored
+    /// </summary>
+    [Description("gemma-4-uncensored")]
+    Gemma4Uncensored,
+
+    /// <summary>
+    /// Grok 4.3 - xAI's fast reasoning model.
+    /// Model ID: grok-4-3
+    /// </summary>
+    [Description("grok-4-3")]
+    Grok4_3,
+
+    /// <summary>
+    /// Grok 4.20 - xAI's multimodal reasoning model with strong tool use and 2M-token context window.
+    /// Model ID: grok-4-20
+    /// </summary>
+    [Description("grok-4-20")]
+    Grok4_20,
+
+    /// <summary>
+    /// Grok 4.20 Multi-Agent - xAI's variant of Grok 4.20 designed for collaborative, agent-based workflows.
+    /// Model ID: grok-4-20-multi-agent
+    /// </summary>
+    [Description("grok-4-20-multi-agent")]
+    Grok4_20MultiAgent,
+
+    /// <summary>
+    /// Grok Build 0.1 - xAI's experimental build model.
+    /// Model ID: grok-build-0-1
+    /// </summary>
+    [Description("grok-build-0-1")]
+    GrokBuild0_1,
+
+    /// <summary>
+    /// Gemini 3.5 Flash - Google's high-speed model with strong performance.
+    /// Model ID: gemini-3-5-flash
+    /// </summary>
+    [Description("gemini-3-5-flash")]
+    Gemini35Flash,
+
+    /// <summary>
+    /// Claude Opus 4.7 - Anthropic's advanced reasoning model.
+    /// Model ID: claude-opus-4-7
+    /// </summary>
+    [Description("claude-opus-4-7")]
+    ClaudeOpus4_7,
+
+    /// <summary>
+    /// Claude Opus 4.7 Fast - Speed-optimized variant of Claude Opus 4.7 with lower latency.
+    /// Model ID: claude-opus-4-7-fast
+    /// </summary>
+    [Description("claude-opus-4-7-fast")]
+    ClaudeOpus4_7Fast,
+
+    /// <summary>
+    /// Claude Opus 4.8 - Anthropic's latest frontier reasoning model.
+    /// Model ID: claude-opus-4-8
+    /// </summary>
+    [Description("claude-opus-4-8")]
+    ClaudeOpus4_8,
+
+    /// <summary>
+    /// Claude Opus 4.8 Fast - Speed-optimized variant of Claude Opus 4.8 with lower latency.
+    /// Model ID: claude-opus-4-8-fast
+    /// </summary>
+    [Description("claude-opus-4-8-fast")]
+    ClaudeOpus4_8Fast,
+
+    /// <summary>
+    /// Kimi K2.6 - Moonshot AI's latest advanced open reasoning model.
+    /// Model ID: kimi-k2-6
+    /// </summary>
+    [Description("kimi-k2-6")]
+    KimiK26,
+
+    /// <summary>
+    /// DeepSeek V4 Pro - DeepSeek's premium flagship model.
+    /// Model ID: deepseek-v4-pro
+    /// </summary>
+    [Description("deepseek-v4-pro")]
+    DeepSeekV4Pro,
+
+    /// <summary>
+    /// DeepSeek V4 Flash - DeepSeek's fast inference model.
+    /// Model ID: deepseek-v4-flash
+    /// </summary>
+    [Description("deepseek-v4-flash")]
+    DeepSeekV4Flash,
+
+    /// <summary>
+    /// GPT-5.5 - OpenAI's next-generation frontier model.
+    /// Model ID: openai-gpt-55
+    /// </summary>
+    [Description("openai-gpt-55")]
+    OpenAIGpt55,
+
+    /// <summary>
+    /// GPT-5.5 Pro - OpenAI's premium next-generation frontier model.
+    /// Model ID: openai-gpt-55-pro
+    /// </summary>
+    [Description("openai-gpt-55-pro")]
+    OpenAIGpt55Pro,
+
+    /// <summary>
+    /// MiniMax M3 - MiniMax's latest model.
+    /// Model ID: minimax-m3
+    /// </summary>
+    [Description("minimax-m3")]
+    MinimaxM3,
+
+    /// <summary>
+    /// Gemma 4 26B A4B Uncensored (E2EE TEE) - Uncensored Gemma 4 26B model running in a Trusted Execution Environment.
+    /// Model ID: e2ee-gemma-4-26b-a4b-uncensored-p
+    /// </summary>
+    [Description("e2ee-gemma-4-26b-a4b-uncensored-p")]
+    E2EEGemma4_26B_A4B_Uncensored,
+
+    /// <summary>
+    /// Qwen3.6 35B A3B Uncensored (E2EE TEE) - Uncensored Qwen3.6 model running in a Trusted Execution Environment.
+    /// Model ID: e2ee-qwen3-6-35b-a3b-uncensored-p
+    /// </summary>
+    [Description("e2ee-qwen3-6-35b-a3b-uncensored-p")]
+    E2EEQwen36_35B_A3B_Uncensored,
+
+    /// <summary>
+    /// GLM 5.1 (E2EE TEE) - GLM 5.1 running in a Trusted Execution Environment.
+    /// Model ID: e2ee-glm-5-1
+    /// </summary>
+    [Description("e2ee-glm-5-1")]
+    E2EEGlm51,
+
+    /// <summary>
+    /// Qwen3.6 35B A3B (E2EE TEE) - Qwen3.6 35B A3B model running in a Trusted Execution Environment.
+    /// Model ID: e2ee-qwen3-6-35b-a3b
+    /// </summary>
+    [Description("e2ee-qwen3-6-35b-a3b")]
+    E2EEQwen36_35B_A3B,
+
+    /// <summary>
+    /// Gemma 4 31B (E2EE TEE) - Google's Gemma 4 31B model running in a Trusted Execution Environment.
+    /// Model ID: e2ee-gemma-4-31b
+    /// </summary>
+    [Description("e2ee-gemma-4-31b")]
+    E2EEGemma4_31B,
 
     // Obsolete models - kept for backward compatibility
     [Obsolete("This model is no longer available in the Venice AI API. Use Glm47 (zai-org-glm-4.7) instead.")]
@@ -630,8 +817,10 @@ public enum ImageModel
     VeniceSD35,
 
     /// <summary>
-    /// HiDream - High-quality image generation model
+    /// HiDream - High-quality image generation model.
+    /// DEPRECATED: This model is no longer available in the Venice AI API.
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSD35 or another image model instead.")]
     [Description("hidream")]
     HiDream,
 
@@ -793,8 +982,10 @@ public enum ImageModel
 
     /// <summary>
     /// Grok Imagine Image Pro - xAI premium image generation model.
+    /// DEPRECATED: This model is no longer available in the Venice AI API. Use <see cref="GrokImagineImageQuality"/> instead.
     /// Model ID: grok-imagine-image-pro
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use GrokImagineImageQuality instead.")]
     [Description("grok-imagine-image-pro")]
     GrokImagineImagePro,
 
@@ -811,6 +1002,41 @@ public enum ImageModel
     /// </summary>
     [Description("wan-2-7-pro-text-to-image")]
     Wan27ProTextToImage,
+
+    /// <summary>
+    /// Grok Imagine Image Quality - xAI high-quality image generation model.
+    /// Model ID: grok-imagine-image-quality
+    /// </summary>
+    [Description("grok-imagine-image-quality")]
+    GrokImagineImageQuality,
+
+    /// <summary>
+    /// GPT Image 2 - OpenAI's latest image generation model.
+    /// Model ID: gpt-image-2
+    /// </summary>
+    [Description("gpt-image-2")]
+    GptImage2,
+
+    /// <summary>
+    /// Ideogram V4 - Advanced image generation model from Ideogram.
+    /// Model ID: ideogram-v4
+    /// </summary>
+    [Description("ideogram-v4")]
+    IdeogramV4,
+
+    /// <summary>
+    /// Krea V2 Large - Large image generation model from Krea.
+    /// Model ID: krea-v2-large
+    /// </summary>
+    [Description("krea-v2-large")]
+    KreaV2Large,
+
+    /// <summary>
+    /// Krea V2 Medium - Medium image generation model from Krea.
+    /// Model ID: krea-v2-medium
+    /// </summary>
+    [Description("krea-v2-medium")]
+    KreaV2Medium,
 
     // Obsolete models - kept for backward compatibility
     [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSD35 or HiDream instead.")]
@@ -1294,7 +1520,196 @@ public enum VideoModel
     /// Model ID: wan-2-7-reference-to-video
     /// </summary>
     [Description("wan-2-7-reference-to-video")]
-    Wan27ReferenceToVideo
+    Wan27ReferenceToVideo,
+
+    /// <summary>
+    /// Wan 2.7 - Video to Video generation.
+    /// Model ID: wan-2-7-video-to-video
+    /// </summary>
+    [Description("wan-2-7-video-to-video")]
+    Wan27VideoToVideo,
+
+    /// <summary>
+    /// Wan 2.7 Uncensored - Image to Video generation (uncensored).
+    /// Model ID: wan-2-7-uncensored-image-to-video
+    /// </summary>
+    [Description("wan-2-7-uncensored-image-to-video")]
+    Wan27UncensoredImageToVideo,
+
+    /// <summary>
+    /// HappyHorse 1.0 - Text to Video generation.
+    /// Model ID: happyhorse-1-0-text-to-video
+    /// </summary>
+    [Description("happyhorse-1-0-text-to-video")]
+    HappyHorse10TextToVideo,
+
+    /// <summary>
+    /// HappyHorse 1.0 - Image to Video generation.
+    /// Model ID: happyhorse-1-0-image-to-video
+    /// </summary>
+    [Description("happyhorse-1-0-image-to-video")]
+    HappyHorse10ImageToVideo,
+
+    /// <summary>
+    /// HappyHorse 1.0 - Reference to Video generation.
+    /// Model ID: happyhorse-1-0-reference-to-video
+    /// </summary>
+    [Description("happyhorse-1-0-reference-to-video")]
+    HappyHorse10ReferenceToVideo,
+
+    /// <summary>
+    /// HappyHorse 1.0 - Video to Video generation.
+    /// Model ID: happyhorse-1-0-video-to-video
+    /// </summary>
+    [Description("happyhorse-1-0-video-to-video")]
+    HappyHorse10VideoToVideo,
+
+    /// <summary>
+    /// Grok Imagine - Text to Video generation (private).
+    /// Model ID: grok-imagine-text-to-video-private
+    /// </summary>
+    [Description("grok-imagine-text-to-video-private")]
+    GrokImagineTextToVideoPrivate,
+
+    /// <summary>
+    /// Grok Imagine - Image to Video generation (private).
+    /// Model ID: grok-imagine-image-to-video-private
+    /// </summary>
+    [Description("grok-imagine-image-to-video-private")]
+    GrokImagineImageToVideoPrivate,
+
+    /// <summary>
+    /// Grok Imagine - Reference to Video generation (private).
+    /// Model ID: grok-imagine-reference-to-video-private
+    /// </summary>
+    [Description("grok-imagine-reference-to-video-private")]
+    GrokImagineReferenceToVideoPrivate,
+
+    /// <summary>
+    /// Grok Imagine - Video to Video generation (private).
+    /// Model ID: grok-imagine-video-to-video-private
+    /// </summary>
+    [Description("grok-imagine-video-to-video-private")]
+    GrokImagineVideoToVideoPrivate,
+
+    /// <summary>
+    /// Grok Imagine 1.5 - Image to Video generation (private).
+    /// Model ID: grok-imagine-1-5-image-to-video-private
+    /// </summary>
+    [Description("grok-imagine-1-5-image-to-video-private")]
+    GrokImagine15ImageToVideoPrivate,
+
+    /// <summary>
+    /// Kling V3 4K - Text to Video generation in 4K.
+    /// Model ID: kling-v3-4k-text-to-video
+    /// </summary>
+    [Description("kling-v3-4k-text-to-video")]
+    KlingV3_4KTextToVideo,
+
+    /// <summary>
+    /// Kling V3 4K - Reference to Video generation in 4K.
+    /// Model ID: kling-v3-4k-reference-to-video
+    /// </summary>
+    [Description("kling-v3-4k-reference-to-video")]
+    KlingV3_4KReferenceToVideo,
+
+    /// <summary>
+    /// Kling O3 4K - Text to Video generation in 4K.
+    /// Model ID: kling-o3-4k-text-to-video
+    /// </summary>
+    [Description("kling-o3-4k-text-to-video")]
+    KlingO3_4KTextToVideo,
+
+    /// <summary>
+    /// Kling O3 4K - Image to Video generation in 4K.
+    /// Model ID: kling-o3-4k-image-to-video
+    /// </summary>
+    [Description("kling-o3-4k-image-to-video")]
+    KlingO3_4KImageToVideo,
+
+    /// <summary>
+    /// Kling O3 4K - Reference to Video generation in 4K.
+    /// Model ID: kling-o3-4k-reference-to-video
+    /// </summary>
+    [Description("kling-o3-4k-reference-to-video")]
+    KlingO3_4KReferenceToVideo,
+
+    /// <summary>
+    /// Kling O3 Standard - Motion Control video generation.
+    /// Model ID: kling-o3-standard-motion-control
+    /// </summary>
+    [Description("kling-o3-standard-motion-control")]
+    KlingO3StandardMotionControl,
+
+    /// <summary>
+    /// Kling V3 Pro - Motion Control video generation.
+    /// Model ID: kling-v3-pro-motion-control
+    /// </summary>
+    [Description("kling-v3-pro-motion-control")]
+    KlingV3ProMotionControl,
+
+    /// <summary>
+    /// Kling V3 Standard - Motion Control video generation.
+    /// Model ID: kling-v3-standard-motion-control
+    /// </summary>
+    [Description("kling-v3-standard-motion-control")]
+    KlingV3StandardMotionControl,
+
+    /// <summary>
+    /// PixVerse C1 - Text to Video generation.
+    /// Model ID: pixverse-c1-text-to-video
+    /// </summary>
+    [Description("pixverse-c1-text-to-video")]
+    PixVerseC1TextToVideo,
+
+    /// <summary>
+    /// PixVerse C1 - Image to Video generation.
+    /// Model ID: pixverse-c1-image-to-video
+    /// </summary>
+    [Description("pixverse-c1-image-to-video")]
+    PixVerseC1ImageToVideo,
+
+    /// <summary>
+    /// PixVerse C1 - Reference to Video generation.
+    /// Model ID: pixverse-c1-reference-to-video
+    /// </summary>
+    [Description("pixverse-c1-reference-to-video")]
+    PixVerseC1ReferenceToVideo,
+
+    /// <summary>
+    /// PixVerse C1 - Transition effects.
+    /// Model ID: pixverse-c1-transition
+    /// </summary>
+    [Description("pixverse-c1-transition")]
+    PixVerseC1Transition,
+
+    /// <summary>
+    /// Runway Gen4.5 - Image to Video generation.
+    /// Model ID: runway-gen4-5
+    /// </summary>
+    [Description("runway-gen4-5")]
+    RunwayGen45,
+
+    /// <summary>
+    /// Runway Gen4.5 Text - Text to Video generation.
+    /// Model ID: runway-gen4-5-text
+    /// </summary>
+    [Description("runway-gen4-5-text")]
+    RunwayGen45Text,
+
+    /// <summary>
+    /// Runway Gen4 Turbo - Fast video generation.
+    /// Model ID: runway-gen4-turbo
+    /// </summary>
+    [Description("runway-gen4-turbo")]
+    RunwayGen4Turbo,
+
+    /// <summary>
+    /// Runway Gen4 Aleph - Advanced video generation.
+    /// Model ID: runway-gen4-aleph
+    /// </summary>
+    [Description("runway-gen4-aleph")]
+    RunwayGen4Aleph
 }
 
 /// <summary>

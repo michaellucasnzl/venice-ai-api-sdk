@@ -135,6 +135,249 @@
           Vivian
         ]
       }
+    },
+    {
+      Id: tts-xai-v1,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: xAI TTS v1,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 18.75,
+            Diem: 18.75
+          }
+        },
+        Voices: [
+          ara,
+          eve,
+          leo,
+          rex,
+          sal
+        ]
+      }
+    },
+    {
+      Id: tts-inworld-1-5-max,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: Inworld TTS-1.5 Max,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 12.5,
+            Diem: 12.5
+          }
+        },
+        Voices: [
+          Alex,
+          Ashley,
+          Craig,
+          Edward,
+          Elizabeth,
+          Hades,
+          Luna,
+          Mark,
+          Olivia,
+          Pixie,
+          Priya,
+          Ronald,
+          Sarah,
+          Theodore
+        ]
+      }
+    },
+    {
+      Id: tts-chatterbox-hd,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: Chatterbox HD (Resemble AI),
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 50.0,
+            Diem: 50.0
+          }
+        },
+        Voices: [
+          Aurora,
+          Blade,
+          Britney,
+          Carl,
+          Cliff,
+          Richard,
+          Rico,
+          Siobhan,
+          Vicky
+        ]
+      }
+    },
+    {
+      Id: tts-orpheus,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: Orpheus TTS,
+        ModelSource: https://huggingface.co/canopylabs/orpheus-3b-0.1-ft,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 62.5,
+            Diem: 62.5
+          }
+        },
+        Voices: [
+          dan,
+          jess,
+          leah,
+          leo,
+          mia,
+          tara,
+          zac,
+          zoe
+        ]
+      }
+    },
+    {
+      Id: tts-elevenlabs-turbo-v2-5,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: ElevenLabs Turbo v2.5,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 62.5,
+            Diem: 62.5
+          }
+        },
+        Voices: [
+          Alice,
+          Aria,
+          Bill,
+          Brian,
+          Callum,
+          Charlie,
+          Charlotte,
+          Chris,
+          Daniel,
+          Eric,
+          George,
+          Jessica,
+          Laura,
+          Liam,
+          Lily,
+          Matilda,
+          Rachel,
+          River,
+          Roger,
+          Sarah,
+          Will
+        ]
+      }
+    },
+    {
+      Id: tts-minimax-speech-02-hd,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: MiniMax Speech-02 HD,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 125.0,
+            Diem: 125.0
+          }
+        },
+        Voices: [
+          CalmWoman,
+          CasualGuy,
+          DeepVoiceMan,
+          DeterminedMan,
+          ElegantMan,
+          ExuberantGirl,
+          FriendlyPerson,
+          ImposingManner,
+          InspirationalGirl,
+          LivelyGirl,
+          LovelyGirl,
+          PatientMan,
+          SweetGirl,
+          WiseWoman,
+          YoungKnight
+        ]
+      }
+    },
+    {
+      Id: tts-gemini-3-1-flash,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: Gemini 3.1 Flash TTS,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 187.5,
+            Diem: 187.5
+          }
+        },
+        Voices: [
+          Achernar,
+          Achird,
+          Algenib,
+          Algieba,
+          Alnilam,
+          Aoede,
+          Autonoe,
+          Callirrhoe,
+          Charon,
+          Despina,
+          Enceladus,
+          Erinome,
+          Fenrir,
+          Gacrux,
+          Iapetus,
+          Kore,
+          Laomedeia,
+          Leda,
+          Orus,
+          Puck,
+          Pulcherrima,
+          Rasalgethi,
+          Sadachbia,
+          Sadaltager,
+          Schedar,
+          Sulafat,
+          Umbriel,
+          Vindemiatrix,
+          Zephyr,
+          Zubenelgenubi
+        ]
+      }
     }
   ],
   IsSuccess: true,

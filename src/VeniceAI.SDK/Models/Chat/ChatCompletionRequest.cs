@@ -155,6 +155,25 @@ public class ChatCompletionRequest
     public string? PromptCacheKey { get; set; }
 
     /// <summary>
+    /// OpenAI-compatible parameter to control prompt cache retention.
+    /// "extended" or "24h" extends retention to 24 hours for supported providers.
+    /// </summary>
+    [JsonPropertyName("prompt_cache_retention")]
+    public string? PromptCacheRetention { get; set; }
+
+    /// <summary>
+    /// Controls the verbosity of the text response (low, medium, high, auto).
+    /// </summary>
+    [JsonPropertyName("verbosity")]
+    public string? Verbosity { get; set; }
+
+    /// <summary>
+    /// OpenAI-compatible metadata parameter for request tracking.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, string>? Metadata { get; set; }
+
+    /// <summary>
     /// Format in which the response should be returned.
     /// </summary>
     [JsonPropertyName("response_format")]
@@ -329,6 +348,23 @@ public class VeniceParameters
     /// </summary>
     [JsonPropertyName("include_venice_system_prompt")]
     public bool? IncludeVeniceSystemPrompt { get; set; }
+
+    /// <summary>
+    /// Enable end-to-end encryption for E2EE-capable models. When true (default), E2EE is used if E2EE headers
+    /// are present. When false, the model runs in TEE-only mode even if E2EE headers are present.
+    /// Only applicable to models with E2EE capability.
+    /// </summary>
+    [JsonPropertyName("enable_e2ee")]
+    public bool? EnableE2ee { get; set; }
+
+    /// <summary>
+    /// Enable xAI native search (web + X/Twitter) for supported models. When enabled, the model performs
+    /// web and X searches server-side instead of Venice search augmentation.
+    /// Only available on models with supportsXSearch capability (e.g., grok-4-20).
+    /// Additional per-search charges apply (~$0.01/search).
+    /// </summary>
+    [JsonPropertyName("enable_x_search")]
+    public bool? EnableXSearch { get; set; }
 }
 
 /// <summary>

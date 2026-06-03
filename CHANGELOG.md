@@ -5,7 +5,116 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.1.0] - 2026-04-10
+## [2.2.0] - 2026-07-19
+
+### Added
+
+#### New Text Models
+- `VeniceUncensored12` (`venice-uncensored-1-2`) — Updated Venice uncensored model for unrestricted content generation
+- `Qwen3_7Max` (`qwen-3-7-max`) — Alibaba Qwen 3.7 Max, premium flagship model optimized for maximum quality reasoning
+- `Qwen3_7Plus` (`qwen-3-7-plus`) — Alibaba Qwen 3.7 Plus with strong reasoning and coding capabilities
+- `Qwen36_27B` (`qwen3-6-27b`) — Alibaba Qwen3.6 27B dense model
+- `Gemma4Uncensored` (`gemma-4-uncensored`) — Uncensored variant of Google's Gemma 4 model
+- `Grok4_3` (`grok-4-3`) — xAI Grok 4.3 fast reasoning model
+- `Grok4_20` (`grok-4-20`) — xAI Grok 4.20 multimodal reasoning model with 2M-token context window
+- `Grok4_20MultiAgent` (`grok-4-20-multi-agent`) — xAI Grok 4.20 Multi-Agent for collaborative workflows
+- `GrokBuild0_1` (`grok-build-0-1`) — xAI Grok Build 0.1 experimental model
+- `Gemini35Flash` (`gemini-3-5-flash`) — Google Gemini 3.5 Flash high-speed model
+- `ClaudeOpus4_7` (`claude-opus-4-7`) — Anthropic Claude Opus 4.7 advanced reasoning model
+- `ClaudeOpus4_7Fast` (`claude-opus-4-7-fast`) — Speed-optimized Claude Opus 4.7
+- `ClaudeOpus4_8` (`claude-opus-4-8`) — Anthropic Claude Opus 4.8 latest frontier reasoning model
+- `ClaudeOpus4_8Fast` (`claude-opus-4-8-fast`) — Speed-optimized Claude Opus 4.8
+- `KimiK26` (`kimi-k2-6`) — Moonshot AI Kimi K2.6 advanced open reasoning model
+- `DeepSeekV4Pro` (`deepseek-v4-pro`) — DeepSeek V4 Pro premium flagship model
+- `DeepSeekV4Flash` (`deepseek-v4-flash`) — DeepSeek V4 Flash fast inference model
+- `OpenAIGpt55` (`openai-gpt-55`) — OpenAI GPT-5.5 next-generation frontier model
+- `OpenAIGpt55Pro` (`openai-gpt-55-pro`) — OpenAI GPT-5.5 Pro premium next-generation model
+- `MinimaxM3` (`minimax-m3`) — MiniMax M3 latest model
+- `E2EEGemma4_26B_A4B_Uncensored` (`e2ee-gemma-4-26b-a4b-uncensored-p`) — Uncensored Gemma 4 26B in E2EE TEE
+- `E2EEQwen36_35B_A3B_Uncensored` (`e2ee-qwen3-6-35b-a3b-uncensored-p`) — Uncensored Qwen3.6 in E2EE TEE
+- `E2EEGlm51` (`e2ee-glm-5-1`) — GLM 5.1 in E2EE TEE
+- `E2EEQwen36_35B_A3B` (`e2ee-qwen3-6-35b-a3b`) — Qwen3.6 35B A3B in E2EE TEE
+- `E2EEGemma4_31B` (`e2ee-gemma-4-31b`) — Google Gemma 4 31B in E2EE TEE
+
+#### New Image Models
+- `GrokImagineImageQuality` (`grok-imagine-image-quality`) — xAI high-quality image generation model
+- `GptImage2` (`gpt-image-2`) — OpenAI GPT Image 2 latest image generation model
+- `IdeogramV4` (`ideogram-v4`) — Ideogram V4 advanced image generation
+- `KreaV2Large` (`krea-v2-large`) — Krea V2 Large image generation model
+- `KreaV2Medium` (`krea-v2-medium`) — Krea V2 Medium image generation model
+
+#### New Video Models
+- `Wan27VideoToVideo` (`wan-2-7-video-to-video`) — Wan 2.7 video-to-video generation
+- `Wan27UncensoredImageToVideo` (`wan-2-7-uncensored-image-to-video`) — Wan 2.7 uncensored image-to-video
+- `HappyHorse10TextToVideo` (`happyhorse-1-0-text-to-video`) — HappyHorse 1.0 text-to-video
+- `HappyHorse10ImageToVideo` (`happyhorse-1-0-image-to-video`) — HappyHorse 1.0 image-to-video
+- `HappyHorse10ReferenceToVideo` (`happyhorse-1-0-reference-to-video`) — HappyHorse 1.0 reference-to-video
+- `HappyHorse10VideoToVideo` (`happyhorse-1-0-video-to-video`) — HappyHorse 1.0 video-to-video
+- `GrokImagineTextToVideoPrivate` (`grok-imagine-text-to-video-private`) — Grok Imagine private text-to-video
+- `GrokImagineImageToVideoPrivate` (`grok-imagine-image-to-video-private`) — Grok Imagine private image-to-video
+- `GrokImagineReferenceToVideoPrivate` (`grok-imagine-reference-to-video-private`) — Grok Imagine private reference-to-video
+- `GrokImagineVideoToVideoPrivate` (`grok-imagine-video-to-video-private`) — Grok Imagine private video-to-video
+- `GrokImagine15ImageToVideoPrivate` (`grok-imagine-1-5-image-to-video-private`) — Grok Imagine 1.5 private image-to-video
+- `KlingV3_4KTextToVideo` (`kling-v3-4k-text-to-video`) — Kling V3 4K text-to-video
+- `KlingV3_4KReferenceToVideo` (`kling-v3-4k-reference-to-video`) — Kling V3 4K reference-to-video
+- `KlingO3_4KTextToVideo` (`kling-o3-4k-text-to-video`) — Kling O3 4K text-to-video
+- `KlingO3_4KImageToVideo` (`kling-o3-4k-image-to-video`) — Kling O3 4K image-to-video
+- `KlingO3_4KReferenceToVideo` (`kling-o3-4k-reference-to-video`) — Kling O3 4K reference-to-video
+- `KlingO3StandardMotionControl` (`kling-o3-standard-motion-control`) — Kling O3 Standard motion control
+- `KlingV3ProMotionControl` (`kling-v3-pro-motion-control`) — Kling V3 Pro motion control
+- `KlingV3StandardMotionControl` (`kling-v3-standard-motion-control`) — Kling V3 Standard motion control
+- `PixVerseC1TextToVideo` (`pixverse-c1-text-to-video`) — PixVerse C1 text-to-video
+- `PixVerseC1ImageToVideo` (`pixverse-c1-image-to-video`) — PixVerse C1 image-to-video
+- `PixVerseC1ReferenceToVideo` (`pixverse-c1-reference-to-video`) — PixVerse C1 reference-to-video
+- `PixVerseC1Transition` (`pixverse-c1-transition`) — PixVerse C1 transition effects
+- `RunwayGen45` (`runway-gen4-5`) — Runway Gen4.5 image-to-video
+- `RunwayGen45Text` (`runway-gen4-5-text`) — Runway Gen4.5 Text text-to-video
+- `RunwayGen4Turbo` (`runway-gen4-turbo`) — Runway Gen4 Turbo fast video generation
+- `RunwayGen4Aleph` (`runway-gen4-aleph`) — Runway Gen4 Aleph advanced video generation
+
+#### New Request Parameters
+- `VeniceParameters.EnableE2ee` — Enable E2EE for E2EE-capable models (when combined with E2EE headers)
+- `VeniceParameters.EnableXSearch` — Enable xAI native web + X/Twitter search for supported models (e.g. `grok-4-20`)
+- `ChatCompletionRequest.PromptCacheRetention` — Control prompt cache retention duration (`"extended"`, `"24h"`)
+- `ChatCompletionRequest.Verbosity` — Control text response verbosity (`"low"`, `"medium"`, `"high"`, `"auto"`)
+- `ChatCompletionRequest.Metadata` — Request tracking metadata dictionary
+- `QueueVideoRequest.EndImageUrl` — End frame image for transition models
+- `QueueVideoRequest.AudioUrl` — Background music input (WAV/MP3, max 30s, 15MB)
+- `QueueVideoRequest.VideoUrl` — Video input for video-to-video and upscale models
+- `QueueVideoRequest.UpscaleFactor` — Upscale factor: 1 (quality), 2 (2× res), 4 (4× res)
+- `QueueVideoRequest.ReferenceImageUrls` — Up to 9 reference images for character/style consistency
+- `QueueVideoRequest.ReferenceVideoUrls` — Up to 3 reference video URLs
+- `QueueVideoRequest.ReferenceAudioUrls` — Up to 3 reference audio URLs
+- `QueueVideoRequest.SceneImageUrls` — Up to 4 scene reference images (referenced as @Image1…@Image4 in prompt)
+- `EditImageRequest.Model` — Explicit model selection for image editing
+- `EditImageRequest.AspectRatio` — Output aspect ratio (e.g. `"16:9"`)
+- `EditImageRequest.Resolution` — Output resolution (e.g. `"1024x1024"`)
+- `EditImageRequest.OutputFormat` — Output format (`"png"`, `"jpeg"`, `"webp"`)
+- `EditImageRequest.SafeMode` — Safe mode filtering for edited images
+
+#### New Classes
+- `QuoteVideoRequest` — Dedicated request type for `QuoteVideoAsync` (separate from `QueueVideoRequest`)
+
+### Changed
+- `IVideoService.QuoteVideoAsync` now accepts `QuoteVideoRequest` instead of `QueueVideoRequest`
+- `VideoService.QuoteVideoAsync` now accepts `QuoteVideoRequest` instead of `QueueVideoRequest`
+
+### Fixed
+- `GoogleGemma4_26B_A4B`: corrected model ID from `google.gemma-4-26b-a4b-it` → `google-gemma-4-26b-a4b-it`
+- `GoogleGemma4_31B`: corrected model ID from `google.gemma-4-31b-it` → `google-gemma-4-31b-it`
+- `AionLabs2_0`: corrected model ID from `aion-labs.aion-2-0` → `aion-labs-aion-2-0`
+
+### Deprecated
+- `TextModel.Grok41Fast` — Use `Grok4_3` instead
+- `TextModel.Grok4_20Beta` — Use `Grok4_20` instead
+- `TextModel.Grok4_20MultiAgentBeta` — Use `Grok4_20MultiAgent` instead
+- `TextModel.MinimaxM21` — Use `MinimaxM3` instead
+- `TextModel.E2EEQwen35_122B_A10B` — No longer available in the API
+- `TextModel.E2EEGlm5` — Use `E2EEGlm51` instead
+- `ImageModel.HiDream` — No longer available in the API; use `VeniceSD35` or another model
+- `ImageModel.GrokImagineImagePro` — No longer available in the API; use `GrokImagineImageQuality` instead
+
+
 
 ### Added
 

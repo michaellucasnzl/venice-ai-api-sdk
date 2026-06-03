@@ -258,10 +258,41 @@ public class EditImageRequest
     public string Prompt { get; set; } = string.Empty;
 
     /// <summary>
-    /// The image to edit.
+    /// The image to edit. Must be a URL or a data URL.
     /// </summary>
     [JsonPropertyName("image")]
     public string Image { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The model to use for image editing.
+    /// </summary>
+    [JsonPropertyName("model")]
+    [JsonConverter(typeof(ImageModelJsonConverter))]
+    public ImageModel? Model { get; set; }
+
+    /// <summary>
+    /// The aspect ratio of the output image (e.g. "16:9", "1:1", "9:16").
+    /// </summary>
+    [JsonPropertyName("aspect_ratio")]
+    public string? AspectRatio { get; set; }
+
+    /// <summary>
+    /// The resolution of the output image (e.g. "1024x1024").
+    /// </summary>
+    [JsonPropertyName("resolution")]
+    public string? Resolution { get; set; }
+
+    /// <summary>
+    /// The output format of the generated image (e.g. "png", "jpeg", "webp").
+    /// </summary>
+    [JsonPropertyName("output_format")]
+    public string? OutputFormat { get; set; }
+
+    /// <summary>
+    /// Whether to apply safe mode filtering to the output image.
+    /// </summary>
+    [JsonPropertyName("safe_mode")]
+    public bool? SafeMode { get; set; }
 }
 
 /// <summary>

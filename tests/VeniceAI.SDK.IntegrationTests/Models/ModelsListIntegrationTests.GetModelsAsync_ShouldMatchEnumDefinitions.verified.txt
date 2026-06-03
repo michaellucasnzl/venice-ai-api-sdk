@@ -111,7 +111,7 @@
       Type: text,
       ModelSpec: {
         Name: GLM 5V Turbo,
-        ModelSource: ,
+        ModelSource: https://docs.z.ai/guides/vlm/glm-5v-turbo,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 200000,
@@ -279,24 +279,24 @@
       }
     },
     {
-      Id: venice-uncensored,
+      Id: venice-uncensored-1-2,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
-        Name: Venice Uncensored 1.1,
+        Name: Venice Uncensored 1.2,
         ModelSource: https://huggingface.co/cognitivecomputations/Dolphin-Mistral-24B-Venice-Edition,
         Offline: false,
         Beta: false,
-        AvailableContextTokens: 32000,
+        AvailableContextTokens: 128000,
         Capabilities: {
           OptimizedForCode: false,
           Quantization: fp16,
-          SupportsFunctionCalling: false,
+          SupportsFunctionCalling: true,
           SupportsReasoning: false,
           SupportsResponseSchema: true,
-          SupportsVision: false,
+          SupportsVision: true,
           SupportsWebSearch: true,
           SupportsLogProbs: false
         },
@@ -350,6 +350,124 @@
       }
     },
     {
+      Id: qwen-3-7-max,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Qwen 3.7 Max,
+        ModelSource: https://www.alibabacloud.com/help/en/model-studio/models,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: false,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 2.7,
+            Diem: 2.7
+          },
+          Output: {
+            Usd: 8.05,
+            Diem: 8.05
+          }
+        }
+      }
+    },
+    {
+      Id: qwen-3-7-plus,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Qwen 3.7 Plus,
+        ModelSource: https://www.alibabacloud.com/help/en/model-studio/models,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.7
+          },
+          TopP: {
+            Default: 0.8
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.5,
+            Diem: 0.5
+          },
+          Output: {
+            Usd: 2.0,
+            Diem: 2.0
+          }
+        }
+      }
+    },
+    {
+      Id: qwen-3-6-max-preview,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Qwen 3.6 Max Preview,
+        ModelSource: https://www.alibabacloud.com/help/en/model-studio/models,
+        Offline: false,
+        Beta: true,
+        AvailableContextTokens: 256000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Constraints: {
+          Temperature: {
+            Default: 0.7
+          },
+          TopP: {
+            Default: 0.8
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 1.625,
+            Diem: 1.625
+          },
+          Output: {
+            Usd: 9.75,
+            Diem: 9.75
+          }
+        }
+      }
+    },
+    {
       Id: qwen-3-6-plus,
       Object: model,
       Created: {Scrubbed},
@@ -357,7 +475,7 @@
       Type: text,
       ModelSpec: {
         Name: Qwen 3.6 Plus Uncensored,
-        ModelSource: ,
+        ModelSource: https://www.alibabacloud.com/blog/qwen3-6-plus-towards-real-world-agents_603005,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 1000000,
@@ -392,6 +510,48 @@
       }
     },
     {
+      Id: qwen3-6-27b,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Qwen 3.6 27B,
+        ModelSource: https://qwen.ai/blog?id=qwen3.6-27b,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 256000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: fp8,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Constraints: {
+          Temperature: {
+            Default: 1.0
+          },
+          TopP: {
+            Default: 0.95
+          }
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.325,
+            Diem: 0.325
+          },
+          Output: {
+            Usd: 3.25,
+            Diem: 3.25
+          }
+        }
+      }
+    },
+    {
       Id: qwen3-5-9b,
       Object: model,
       Created: {Scrubbed},
@@ -415,8 +575,8 @@
         },
         Pricing: {
           Input: {
-            Usd: 0.05,
-            Diem: 0.05
+            Usd: 0.1,
+            Diem: 0.1
           },
           Output: {
             Usd: 0.15,
@@ -433,7 +593,7 @@
       Type: text,
       ModelSpec: {
         Name: Qwen 3.5 397B,
-        ModelSource: ,
+        ModelSource: https://huggingface.co/Qwen/Qwen3.5-397B-A17B,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 128000,
@@ -467,7 +627,7 @@
       Type: text,
       ModelSpec: {
         Name: Qwen 3.5 35B A3B,
-        ModelSource: ,
+        ModelSource: https://huggingface.co/Qwen/Qwen3.5-35B-A3B,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 256000,
@@ -607,43 +767,6 @@
       }
     },
     {
-      Id: qwen3-coder-480b-a35b-instruct,
-      Object: model,
-      Created: {Scrubbed},
-      OwnedBy: venice.ai,
-      Type: text,
-      ModelSpec: {
-        Name: Qwen 3 Coder 480b,
-        ModelSource: https://huggingface.co/Qwen/Qwen3-Coder-480B-A35B-Instruct,
-        Offline: false,
-        Beta: false,
-        AvailableContextTokens: 256000,
-        Capabilities: {
-          OptimizedForCode: true,
-          Quantization: fp8,
-          SupportsFunctionCalling: true,
-          SupportsReasoning: false,
-          SupportsResponseSchema: true,
-          SupportsVision: false,
-          SupportsWebSearch: true,
-          SupportsLogProbs: false
-        },
-        Pricing: {
-          Input: {
-            Usd: 0.75,
-            Diem: 0.75
-          },
-          Output: {
-            Usd: 3.0,
-            Diem: 3.0
-          }
-        },
-        Traits: [
-          default_code
-        ]
-      }
-    },
-    {
       Id: qwen3-vl-235b-a22b,
       Object: model,
       Created: {Scrubbed},
@@ -711,11 +834,14 @@
             Usd: 1.5,
             Diem: 1.5
           }
-        }
+        },
+        Traits: [
+          default_code
+        ]
       }
     },
     {
-      Id: google.gemma-4-26b-a4b-it,
+      Id: google-gemma-4-26b-a4b-it,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -749,7 +875,7 @@
       }
     },
     {
-      Id: google.gemma-4-31b-it,
+      Id: google-gemma-4-31b-it,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
@@ -772,8 +898,42 @@
         },
         Pricing: {
           Input: {
-            Usd: 0.175,
-            Diem: 0.175
+            Usd: 0.155,
+            Diem: 0.155
+          },
+          Output: {
+            Usd: 0.44,
+            Diem: 0.44
+          }
+        }
+      }
+    },
+    {
+      Id: gemma-4-uncensored,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Gemma 4 Uncensored,
+        ModelSource: https://huggingface.co/Jiunsong/supergemma4-26b-uncensored-gguf-v2,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 256000,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: int4,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: false,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: true
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.1625,
+            Diem: 0.1625
           },
           Output: {
             Usd: 0.5,
@@ -851,14 +1011,14 @@
       }
     },
     {
-      Id: grok-41-fast,
+      Id: grok-4-3,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
-        Name: Grok 4.1 Fast,
-        ModelSource: ,
+        Name: Grok 4.3,
+        ModelSource: https://docs.x.ai/developers/models,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 1000000,
@@ -874,25 +1034,25 @@
         },
         Pricing: {
           Input: {
-            Usd: 0.23,
-            Diem: 0.23
+            Usd: 1.42,
+            Diem: 1.42
           },
           Output: {
-            Usd: 0.57,
-            Diem: 0.57
+            Usd: 2.83,
+            Diem: 2.83
           }
         }
       }
     },
     {
-      Id: grok-4-20-beta,
+      Id: grok-4-20,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
-        Name: Grok 4.20 Beta,
-        ModelSource: ,
+        Name: Grok 4.20,
+        ModelSource: https://docs.x.ai/developers/models,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 2000000,
@@ -908,25 +1068,25 @@
         },
         Pricing: {
           Input: {
-            Usd: 2.27,
-            Diem: 2.27
+            Usd: 1.42,
+            Diem: 1.42
           },
           Output: {
-            Usd: 6.8,
-            Diem: 6.8
+            Usd: 2.83,
+            Diem: 2.83
           }
         }
       }
     },
     {
-      Id: grok-4-20-multi-agent-beta,
+      Id: grok-4-20-multi-agent,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
-        Name: Grok 4.20 Multi-Agent Beta,
-        ModelSource: ,
+        Name: Grok 4.20 Multi-Agent,
+        ModelSource: https://x.ai/api,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 2000000,
@@ -942,12 +1102,46 @@
         },
         Pricing: {
           Input: {
-            Usd: 2.27,
-            Diem: 2.27
+            Usd: 1.42,
+            Diem: 1.42
           },
           Output: {
-            Usd: 6.8,
-            Diem: 6.8
+            Usd: 2.83,
+            Diem: 2.83
+          }
+        }
+      }
+    },
+    {
+      Id: grok-build-0-1,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Grok Build 0.1,
+        ModelSource: https://docs.x.ai/developers/models/grok-build-0.1,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 256000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 1.0,
+            Diem: 1.0
+          },
+          Output: {
+            Usd: 2.0,
+            Diem: 2.0
           }
         }
       }
@@ -1089,6 +1283,40 @@
       }
     },
     {
+      Id: gemini-3-5-flash,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Gemini 3.5 Flash,
+        ModelSource: https://deepmind.google/models/gemini/flash/,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 1.55,
+            Diem: 1.55
+          },
+          Output: {
+            Usd: 9.45,
+            Diem: 9.45
+          }
+        }
+      }
+    },
+    {
       Id: gemini-3-flash-preview,
       Object: model,
       Created: {Scrubbed},
@@ -1118,6 +1346,142 @@
           Output: {
             Usd: 3.75,
             Diem: 3.75
+          }
+        }
+      }
+    },
+    {
+      Id: claude-opus-4-8,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Claude Opus 4.8,
+        ModelSource: ,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 6.0,
+            Diem: 6.0
+          },
+          Output: {
+            Usd: 30.0,
+            Diem: 30.0
+          }
+        }
+      }
+    },
+    {
+      Id: claude-opus-4-8-fast,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Claude Opus 4.8 Fast,
+        ModelSource: ,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 12.0,
+            Diem: 12.0
+          },
+          Output: {
+            Usd: 60.0,
+            Diem: 60.0
+          }
+        }
+      }
+    },
+    {
+      Id: claude-opus-4-7,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Claude Opus 4.7,
+        ModelSource: ,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 6.0,
+            Diem: 6.0
+          },
+          Output: {
+            Usd: 30.0,
+            Diem: 30.0
+          }
+        }
+      }
+    },
+    {
+      Id: claude-opus-4-7-fast,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Claude Opus 4.7 Fast,
+        ModelSource: ,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 36.0,
+            Diem: 36.0
+          },
+          Output: {
+            Usd: 180.0,
+            Diem: 180.0
           }
         }
       }
@@ -1308,7 +1672,7 @@
           OptimizedForCode: false,
           Quantization: not-available,
           SupportsFunctionCalling: true,
-          SupportsReasoning: false,
+          SupportsReasoning: true,
           SupportsResponseSchema: false,
           SupportsVision: false,
           SupportsWebSearch: true,
@@ -1327,14 +1691,14 @@
       }
     },
     {
-      Id: kimi-k2-thinking,
+      Id: kimi-k2-6,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
-        Name: Kimi K2 Thinking,
-        ModelSource: https://huggingface.co/moonshotai/Kimi-K2-Thinking,
+        Name: Kimi K2.6,
+        ModelSource: https://huggingface.co/moonshotai/Kimi-K2.6,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 256000,
@@ -1344,18 +1708,18 @@
           SupportsFunctionCalling: true,
           SupportsReasoning: true,
           SupportsResponseSchema: true,
-          SupportsVision: false,
+          SupportsVision: true,
           SupportsWebSearch: true,
           SupportsLogProbs: false
         },
         Pricing: {
           Input: {
-            Usd: 0.75,
-            Diem: 0.75
+            Usd: 0.85,
+            Diem: 0.85
           },
           Output: {
-            Usd: 3.2,
-            Diem: 3.2
+            Usd: 4.655,
+            Diem: 4.655
           }
         }
       }
@@ -1368,7 +1732,7 @@
       Type: text,
       ModelSpec: {
         Name: Kimi K2.5,
-        ModelSource: ,
+        ModelSource: https://github.com/MoonshotAI/Kimi-K2.5,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 256000,
@@ -1380,7 +1744,7 @@
           SupportsResponseSchema: true,
           SupportsVision: true,
           SupportsWebSearch: true,
-          SupportsLogProbs: false
+          SupportsLogProbs: true
         },
         Pricing: {
           Input: {
@@ -1402,7 +1766,7 @@
       Type: text,
       ModelSpec: {
         Name: MiMo-V2-Omni,
-        ModelSource: ,
+        ModelSource: https://mimo.xiaomi.com/mimo-v2-omni,
         Offline: false,
         Beta: true,
         AvailableContextTokens: 256000,
@@ -1424,6 +1788,74 @@
           Output: {
             Usd: 2.5,
             Diem: 2.5
+          }
+        }
+      }
+    },
+    {
+      Id: deepseek-v4-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: DeepSeek V4 Pro,
+        ModelSource: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 1.73,
+            Diem: 1.73
+          },
+          Output: {
+            Usd: 3.796,
+            Diem: 3.796
+          }
+        }
+      }
+    },
+    {
+      Id: deepseek-v4-flash,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: DeepSeek V4 Flash,
+        ModelSource: https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.17,
+            Diem: 0.17
+          },
+          Output: {
+            Usd: 0.35,
+            Diem: 0.35
           }
         }
       }
@@ -1463,14 +1895,14 @@
       }
     },
     {
-      Id: aion-labs.aion-2-0,
+      Id: aion-labs-aion-2-0,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
         Name: Aion 2.0,
-        ModelSource: ,
+        ModelSource: https://www.aionlabs.ai/documentation/,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 128000,
@@ -1572,7 +2004,7 @@
       Type: text,
       ModelSpec: {
         Name: GPT-5.2,
-        ModelSource: ,
+        ModelSource: https://developers.openai.com/api/docs/models/gpt-5.2,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 256000,
@@ -1606,7 +2038,7 @@
       Type: text,
       ModelSpec: {
         Name: GPT-5.2 Codex,
-        ModelSource: ,
+        ModelSource: https://developers.openai.com/api/docs/models/gpt-5.2-codex,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 256000,
@@ -1640,7 +2072,7 @@
       Type: text,
       ModelSpec: {
         Name: GPT-5.3 Codex,
-        ModelSource: ,
+        ModelSource: https://developers.openai.com/api/docs/models/gpt-5.3-codex,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 400000,
@@ -1674,7 +2106,7 @@
       Type: text,
       ModelSpec: {
         Name: GPT-5.4,
-        ModelSource: ,
+        ModelSource: https://developers.openai.com/api/docs/models/gpt-5.4,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 1000000,
@@ -1708,7 +2140,7 @@
       Type: text,
       ModelSpec: {
         Name: GPT-5.4 Pro,
-        ModelSource: ,
+        ModelSource: https://developers.openai.com/api/docs/models/gpt-5.4-pro,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 1000000,
@@ -1742,7 +2174,7 @@
       Type: text,
       ModelSpec: {
         Name: GPT-5.4 Mini,
-        ModelSource: ,
+        ModelSource: https://developers.openai.com/api/docs/models/gpt-5.4-mini,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 400000,
@@ -1769,6 +2201,74 @@
       }
     },
     {
+      Id: openai-gpt-55,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: GPT-5.5,
+        ModelSource: https://developers.openai.com/api/docs/models/gpt-5.5,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 6.25,
+            Diem: 6.25
+          },
+          Output: {
+            Usd: 37.5,
+            Diem: 37.5
+          }
+        }
+      }
+    },
+    {
+      Id: openai-gpt-55-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: GPT-5.5 Pro,
+        ModelSource: https://developers.openai.com/api/docs/models/gpt-5.5-pro,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 37.5,
+            Diem: 37.5
+          },
+          Output: {
+            Usd: 225.0,
+            Diem: 225.0
+          }
+        }
+      }
+    },
+    {
       Id: openai-gpt-4o-2024-11-20,
       Object: model,
       Created: {Scrubbed},
@@ -1776,7 +2276,7 @@
       Type: text,
       ModelSpec: {
         Name: GPT-4o,
-        ModelSource: ,
+        ModelSource: https://developers.openai.com/api/docs/models/gpt-4o,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 128000,
@@ -1810,7 +2310,7 @@
       Type: text,
       ModelSpec: {
         Name: GPT-4o Mini,
-        ModelSource: ,
+        ModelSource: https://developers.openai.com/api/docs/models/gpt-4o-mini,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 128000,
@@ -1837,35 +2337,34 @@
       }
     },
     {
-      Id: minimax-m21,
+      Id: minimax-m3,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
-        Name: MiniMax M2.1,
-        ModelSource: https://huggingface.co/MiniMaxAI/MiniMax-M2.1,
+        Name: MiniMax M3,
         Offline: false,
         Beta: false,
-        AvailableContextTokens: 198000,
+        AvailableContextTokens: 500000,
         Capabilities: {
           OptimizedForCode: true,
           Quantization: not-available,
           SupportsFunctionCalling: true,
           SupportsReasoning: true,
-          SupportsResponseSchema: true,
-          SupportsVision: false,
+          SupportsResponseSchema: false,
+          SupportsVision: true,
           SupportsWebSearch: true,
-          SupportsLogProbs: true
+          SupportsLogProbs: false
         },
         Pricing: {
           Input: {
-            Usd: 0.35,
-            Diem: 0.35
+            Usd: 0.3,
+            Diem: 0.3
           },
           Output: {
-            Usd: 1.5,
-            Diem: 1.5
+            Usd: 1.2,
+            Diem: 1.2
           }
         }
       }
@@ -1944,7 +2443,7 @@
       Type: text,
       ModelSpec: {
         Name: Mercury 2,
-        ModelSource: ,
+        ModelSource: https://www.inceptionlabs.ai/models,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 128000,
@@ -2141,6 +2640,40 @@
       }
     },
     {
+      Id: e2ee-gemma-4-26b-a4b-uncensored-p,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Gemma 4 26B A4B Uncensored,
+        ModelSource: https://www.redpill.ai/models/phala/gemma-4-26b-a4b-uncensored,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 64000,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: fp8,
+          SupportsFunctionCalling: false,
+          SupportsReasoning: false,
+          SupportsResponseSchema: false,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.19,
+            Diem: 0.19
+          },
+          Output: {
+            Usd: 0.88,
+            Diem: 0.88
+          }
+        }
+      }
+    },
+    {
       Id: e2ee-glm-4-7-p,
       Object: model,
       Created: {Scrubbed},
@@ -2148,7 +2681,7 @@
       Type: text,
       ModelSpec: {
         Name: GLM 4.7,
-        ModelSource: ,
+        ModelSource: https://huggingface.co/zai-org/GLM-4.7,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 128000,
@@ -2182,7 +2715,7 @@
       Type: text,
       ModelSpec: {
         Name: GLM 4.7 Flash,
-        ModelSource: ,
+        ModelSource: https://huggingface.co/zai-org/GLM-4.7-Flash,
         Offline: false,
         Beta: false,
         AvailableContextTokens: 198000,
@@ -2190,7 +2723,7 @@
           OptimizedForCode: true,
           Quantization: not-available,
           SupportsFunctionCalling: false,
-          SupportsReasoning: false,
+          SupportsReasoning: true,
           SupportsResponseSchema: false,
           SupportsVision: false,
           SupportsWebSearch: true,
@@ -2311,6 +2844,40 @@
       }
     },
     {
+      Id: e2ee-qwen3-6-35b-a3b-uncensored-p,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Qwen3.6 35B A3B Uncensored,
+        ModelSource: https://www.redpill.ai/models/phala/qwen3.6-35b-a3b-uncensored,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 128000,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: fp8,
+          SupportsFunctionCalling: false,
+          SupportsReasoning: false,
+          SupportsResponseSchema: false,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.38,
+            Diem: 0.38
+          },
+          Output: {
+            Usd: 1.88,
+            Diem: 1.88
+          }
+        }
+      }
+    },
+    {
       Id: e2ee-qwen3-30b-a3b-p,
       Object: model,
       Created: {Scrubbed},
@@ -2379,17 +2946,17 @@
       }
     },
     {
-      Id: e2ee-glm-5,
+      Id: e2ee-glm-5-1,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
-        Name: GLM 5,
-        ModelSource: https://huggingface.co/zai-org/GLM-5,
+        Name: GLM 5.1,
+        ModelSource: https://huggingface.co/zai-org/GLM-5.1,
         Offline: false,
         Beta: false,
-        AvailableContextTokens: 198000,
+        AvailableContextTokens: 200000,
         Capabilities: {
           OptimizedForCode: false,
           Quantization: fp8,
@@ -2413,35 +2980,69 @@
       }
     },
     {
-      Id: e2ee-qwen3-5-122b-a10b,
+      Id: e2ee-qwen3-6-35b-a3b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
-        Name: Qwen3.5 122B A10B,
-        ModelSource: https://huggingface.co/Qwen/Qwen3.5-122B-A10B,
+        Name: Qwen 3.6 35B A3B FP8,
+        ModelSource: https://huggingface.co/Qwen/Qwen3.6-35B-A3B-FP8,
         Offline: false,
         Beta: false,
-        AvailableContextTokens: 128000,
+        AvailableContextTokens: 32000,
         Capabilities: {
-          OptimizedForCode: false,
-          Quantization: not-available,
+          OptimizedForCode: true,
+          Quantization: fp8,
           SupportsFunctionCalling: true,
           SupportsReasoning: true,
           SupportsResponseSchema: false,
-          SupportsVision: true,
+          SupportsVision: false,
           SupportsWebSearch: true,
           SupportsLogProbs: false
         },
         Pricing: {
           Input: {
-            Usd: 0.5,
-            Diem: 0.5
+            Usd: 0.182,
+            Diem: 0.182
           },
           Output: {
-            Usd: 4.0,
-            Diem: 4.0
+            Usd: 1.18,
+            Diem: 1.18
+          }
+        }
+      }
+    },
+    {
+      Id: e2ee-gemma-4-31b,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Gemma 4 31B Instruct,
+        ModelSource: https://huggingface.co/google/gemma-4-31B-it,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 32000,
+        Capabilities: {
+          OptimizedForCode: false,
+          Quantization: not-available,
+          SupportsFunctionCalling: false,
+          SupportsReasoning: true,
+          SupportsResponseSchema: false,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.139,
+            Diem: 0.139
+          },
+          Output: {
+            Usd: 0.43,
+            Diem: 0.43
           }
         }
       }
@@ -2478,29 +3079,24 @@
       }
     },
     {
-      Id: hidream,
+      Id: grok-imagine-image-quality,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: image,
       ModelSpec: {
-        Name: HiDream,
-        ModelSource: https://huggingface.co/HiDream-ai/HiDream-I1-Dev,
+        Name: Grok Imagine High Quality (SOTA),
         Offline: false,
         Beta: false,
         Constraints: {
-          PromptCharacterLimit: 1500,
+          PromptCharacterLimit: 7500,
           Steps: {
             Default: 20,
             Max: 50
           },
-          WidthHeightDivisor: 8
+          WidthHeightDivisor: 1
         },
         Pricing: {
-          Generation: {
-            Usd: 0.01,
-            Diem: 0.01
-          },
           Upscale: {}
         }
       }
@@ -2560,6 +3156,29 @@
       }
     },
     {
+      Id: gpt-image-2,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: GPT Image 2,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: gpt-image-1-5,
       Object: model,
       Created: {Scrubbed},
@@ -2614,6 +3233,33 @@
       }
     },
     {
+      Id: ideogram-v4,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Ideogram V4,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.15,
+            Diem: 0.15
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: imagineart-1.5-pro,
       Object: model,
       Created: {Scrubbed},
@@ -2635,6 +3281,60 @@
           Generation: {
             Usd: 0.06,
             Diem: 0.06
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: krea-v2-large,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Krea v2 Large,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 5000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.07,
+            Diem: 0.07
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: krea-v2-medium,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Krea v2 Medium,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 5000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.04,
+            Diem: 0.04
           },
           Upscale: {}
         }
@@ -2747,7 +3447,7 @@
       OwnedBy: venice.ai,
       Type: image,
       ModelSpec: {
-        Name: SeedreamV4.5,
+        Name: Seedream V4.5,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -2774,7 +3474,7 @@
       OwnedBy: venice.ai,
       Type: image,
       ModelSpec: {
-        Name: SeedreamV5 Lite,
+        Name: Seedream V5 Lite,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -2909,7 +3609,7 @@
       OwnedBy: venice.ai,
       Type: image,
       ModelSpec: {
-        Name: Grok Imagine (SOTA),
+        Name: Grok Imagine,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -2921,37 +3621,6 @@
           WidthHeightDivisor: 1
         },
         Pricing: {
-          Generation: {
-            Usd: 0.0325,
-            Diem: 0.0325
-          },
-          Upscale: {}
-        }
-      }
-    },
-    {
-      Id: grok-imagine-image-pro,
-      Object: model,
-      Created: {Scrubbed},
-      OwnedBy: venice.ai,
-      Type: image,
-      ModelSpec: {
-        Name: Grok Imagine Pro (20260207),
-        Offline: false,
-        Beta: false,
-        Constraints: {
-          PromptCharacterLimit: 7500,
-          Steps: {
-            Default: 20,
-            Max: 50
-          },
-          WidthHeightDivisor: 1
-        },
-        Pricing: {
-          Generation: {
-            Usd: 0.085,
-            Diem: 0.085
-          },
           Upscale: {}
         }
       }
@@ -3029,7 +3698,7 @@
         Constraints: {
           PromptCharacterLimit: 1500,
           Steps: {
-            Default: 20,
+            Default: 30,
             Max: 50
           },
           WidthHeightDivisor: 8
@@ -3058,17 +3727,17 @@
         Offline: false,
         Beta: false,
         Constraints: {
-          PromptCharacterLimit: 1500,
+          PromptCharacterLimit: 2048,
           Steps: {
-            Default: 8,
-            Max: 8
+            Default: 20,
+            Max: 50
           },
-          WidthHeightDivisor: 8
+          WidthHeightDivisor: 1
         },
         Pricing: {
           Generation: {
-            Usd: 0.01,
-            Diem: 0.01
+            Usd: 0.03,
+            Diem: 0.03
           },
           Upscale: {}
         },
@@ -3309,6 +3978,84 @@
       }
     },
     {
+      Id: wan-2-7-video-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Wan 2.7 Edit,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: wan-2-7-uncensored-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Wan 2.7 Uncensored,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: happyhorse-1-0-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: HappyHorse 1.0,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: happyhorse-1-0-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: HappyHorse 1.0,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: happyhorse-1-0-reference-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: HappyHorse 1.0 Reference,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: happyhorse-1-0-video-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: HappyHorse 1.0 Edit,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
       Id: wan-2.6-image-to-video,
       Object: model,
       Created: {Scrubbed},
@@ -3407,6 +4154,71 @@
       Type: video,
       ModelSpec: {
         Name: Grok Imagine R2V,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: grok-imagine-text-to-video-private,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Grok Imagine Private,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: grok-imagine-image-to-video-private,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Grok Imagine Private,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: grok-imagine-reference-to-video-private,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Grok Imagine R2V Private,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: grok-imagine-video-to-video-private,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Grok Imagine Private,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: grok-imagine-1-5-image-to-video-private,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Grok Imagine 1.5 Private,
         Offline: false,
         Beta: false,
         Constraints: {}
@@ -3661,6 +4473,71 @@
       }
     },
     {
+      Id: kling-v3-4k-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Kling V3 4K,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: kling-v3-4k-reference-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Kling V3 4K R2V,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: kling-o3-4k-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Kling O3 4K,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: kling-o3-4k-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Kling O3 4K,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: kling-o3-4k-reference-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Kling O3 4K R2V,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
       Id: kling-o3-pro-text-to-video,
       Object: model,
       Created: {Scrubbed},
@@ -3739,6 +4616,19 @@
       }
     },
     {
+      Id: kling-v3-pro-motion-control,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Kling V3 Pro Motion Control,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
       Id: kling-v3-pro-text-to-video,
       Object: model,
       Created: {Scrubbed},
@@ -3759,6 +4649,19 @@
       Type: video,
       ModelSpec: {
         Name: Kling V3 Pro,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: kling-v3-standard-motion-control,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Kling V3 Standard Motion Control,
         Offline: false,
         Beta: false,
         Constraints: {}
@@ -4042,6 +4945,58 @@
       }
     },
     {
+      Id: pixverse-c1-text-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: PixVerse C1,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: pixverse-c1-image-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: PixVerse C1,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: pixverse-c1-reference-to-video,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: PixVerse C1 R2V,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: pixverse-c1-transition,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: PixVerse C1 Transition,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
       Id: vidu-q3-text-to-video,
       Object: model,
       Created: {Scrubbed},
@@ -4068,6 +5023,32 @@
       }
     },
     {
+      Id: runway-gen4-5,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Runway Gen-4.5,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
+      Id: runway-gen4-5-text,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: video,
+      ModelSpec: {
+        Name: Runway Gen-4.5,
+        Offline: false,
+        Beta: false,
+        Constraints: {}
+      }
+    },
+    {
       Id: runway-gen4-turbo,
       Object: model,
       Created: {Scrubbed},
@@ -4076,7 +5057,7 @@
       ModelSpec: {
         Name: Runway Gen-4 Turbo,
         Offline: false,
-        Beta: true,
+        Beta: false,
         Constraints: {}
       }
     },
@@ -4089,7 +5070,7 @@
       ModelSpec: {
         Name: Runway Gen-4 Aleph,
         Offline: false,
-        Beta: true,
+        Beta: false,
         Constraints: {}
       }
     },
@@ -4149,6 +5130,63 @@
           Generation: {
             Usd: 0.04,
             Diem: 0.04
+          }
+        }
+      }
+    },
+    {
+      Id: minimax-music-v25,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: music,
+      ModelSpec: {
+        Name: MiniMax Music 2.5,
+        ModelSource: ,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Generation: {
+            Usd: 0.24,
+            Diem: 0.24
+          }
+        }
+      }
+    },
+    {
+      Id: minimax-music-v26,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: music,
+      ModelSpec: {
+        Name: MiniMax Music 2.6,
+        ModelSource: ,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Generation: {
+            Usd: 0.24,
+            Diem: 0.24
+          }
+        }
+      }
+    },
+    {
+      Id: lyria-3-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: music,
+      ModelSpec: {
+        Name: Lyria 3 Pro,
+        ModelSource: ,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Generation: {
+            Usd: 0.1,
+            Diem: 0.1
           }
         }
       }
@@ -4296,6 +5334,187 @@
       }
     },
     {
+      Id: text-embedding-bge-en-icl,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: embedding,
+      ModelSpec: {
+        Name: BGE-EN-ICL,
+        ModelSource: https://huggingface.co/BAAI/bge-en-icl,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 0.0125,
+            Diem: 0.0125
+          },
+          Output: {
+            Usd: 0.0125,
+            Diem: 0.0125
+          }
+        }
+      }
+    },
+    {
+      Id: text-embedding-qwen3-8b,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: embedding,
+      ModelSpec: {
+        Name: Qwen3 Embedding 8B,
+        ModelSource: https://huggingface.co/Qwen/Qwen3-Embedding-8B,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 0.0125,
+            Diem: 0.0125
+          },
+          Output: {
+            Usd: 0.0125,
+            Diem: 0.0125
+          }
+        }
+      }
+    },
+    {
+      Id: text-embedding-qwen3-0-6b,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: embedding,
+      ModelSpec: {
+        Name: Qwen3 Embedding 0.6B,
+        ModelSource: https://huggingface.co/Qwen/Qwen3-Embedding-0.6B,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 0.0125,
+            Diem: 0.0125
+          },
+          Output: {
+            Usd: 0.0125,
+            Diem: 0.0125
+          }
+        }
+      }
+    },
+    {
+      Id: text-embedding-multilingual-e5-large-instruct,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: embedding,
+      ModelSpec: {
+        Name: Multilingual E5 Large Instruct,
+        ModelSource: https://huggingface.co/intfloat/multilingual-e5-large-instruct,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 0.0125,
+            Diem: 0.0125
+          },
+          Output: {
+            Usd: 0.0125,
+            Diem: 0.0125
+          }
+        }
+      }
+    },
+    {
+      Id: text-embedding-3-small,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: embedding,
+      ModelSpec: {
+        Name: Text Embedding 3 Small,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 0.025,
+            Diem: 0.025
+          },
+          Output: {
+            Usd: 0.025,
+            Diem: 0.025
+          }
+        }
+      }
+    },
+    {
+      Id: text-embedding-3-large,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: embedding,
+      ModelSpec: {
+        Name: Text Embedding 3 Large,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 0.1625,
+            Diem: 0.1625
+          },
+          Output: {
+            Usd: 0.1625,
+            Diem: 0.1625
+          }
+        }
+      }
+    },
+    {
+      Id: gemini-embedding-2-preview,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: embedding,
+      ModelSpec: {
+        Name: Gemini Embedding 2 Preview,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 0.25,
+            Diem: 0.25
+          },
+          Output: {
+            Usd: 0.25,
+            Diem: 0.25
+          }
+        }
+      }
+    },
+    {
+      Id: text-embedding-nemotron-embed-vl-1b-v2,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: embedding,
+      ModelSpec: {
+        Name: Nemotron Embed VL 1B v2,
+        ModelSource: https://huggingface.co/nvidia/llama-nemotron-embed-vl-1b-v2,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 0.0125,
+            Diem: 0.0125
+          },
+          Output: {
+            Usd: 0.0125,
+            Diem: 0.0125
+          }
+        }
+      }
+    },
+    {
       Id: tts-kokoro,
       Object: model,
       Created: {Scrubbed},
@@ -4431,6 +5650,249 @@
       }
     },
     {
+      Id: tts-xai-v1,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: xAI TTS v1,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 18.75,
+            Diem: 18.75
+          }
+        },
+        Voices: [
+          ara,
+          eve,
+          leo,
+          rex,
+          sal
+        ]
+      }
+    },
+    {
+      Id: tts-inworld-1-5-max,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: Inworld TTS-1.5 Max,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 12.5,
+            Diem: 12.5
+          }
+        },
+        Voices: [
+          Alex,
+          Ashley,
+          Craig,
+          Edward,
+          Elizabeth,
+          Hades,
+          Luna,
+          Mark,
+          Olivia,
+          Pixie,
+          Priya,
+          Ronald,
+          Sarah,
+          Theodore
+        ]
+      }
+    },
+    {
+      Id: tts-chatterbox-hd,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: Chatterbox HD (Resemble AI),
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 50.0,
+            Diem: 50.0
+          }
+        },
+        Voices: [
+          Aurora,
+          Blade,
+          Britney,
+          Carl,
+          Cliff,
+          Richard,
+          Rico,
+          Siobhan,
+          Vicky
+        ]
+      }
+    },
+    {
+      Id: tts-orpheus,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: Orpheus TTS,
+        ModelSource: https://huggingface.co/canopylabs/orpheus-3b-0.1-ft,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 62.5,
+            Diem: 62.5
+          }
+        },
+        Voices: [
+          dan,
+          jess,
+          leah,
+          leo,
+          mia,
+          tara,
+          zac,
+          zoe
+        ]
+      }
+    },
+    {
+      Id: tts-elevenlabs-turbo-v2-5,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: ElevenLabs Turbo v2.5,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 62.5,
+            Diem: 62.5
+          }
+        },
+        Voices: [
+          Alice,
+          Aria,
+          Bill,
+          Brian,
+          Callum,
+          Charlie,
+          Charlotte,
+          Chris,
+          Daniel,
+          Eric,
+          George,
+          Jessica,
+          Laura,
+          Liam,
+          Lily,
+          Matilda,
+          Rachel,
+          River,
+          Roger,
+          Sarah,
+          Will
+        ]
+      }
+    },
+    {
+      Id: tts-minimax-speech-02-hd,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: MiniMax Speech-02 HD,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 125.0,
+            Diem: 125.0
+          }
+        },
+        Voices: [
+          CalmWoman,
+          CasualGuy,
+          DeepVoiceMan,
+          DeterminedMan,
+          ElegantMan,
+          ExuberantGirl,
+          FriendlyPerson,
+          ImposingManner,
+          InspirationalGirl,
+          LivelyGirl,
+          LovelyGirl,
+          PatientMan,
+          SweetGirl,
+          WiseWoman,
+          YoungKnight
+        ]
+      }
+    },
+    {
+      Id: tts-gemini-3-1-flash,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: Gemini 3.1 Flash TTS,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 187.5,
+            Diem: 187.5
+          }
+        },
+        Voices: [
+          Achernar,
+          Achird,
+          Algenib,
+          Algieba,
+          Alnilam,
+          Aoede,
+          Autonoe,
+          Callirrhoe,
+          Charon,
+          Despina,
+          Enceladus,
+          Erinome,
+          Fenrir,
+          Gacrux,
+          Iapetus,
+          Kore,
+          Laomedeia,
+          Leda,
+          Orus,
+          Puck,
+          Pulcherrima,
+          Rasalgethi,
+          Sadachbia,
+          Sadaltager,
+          Schedar,
+          Sulafat,
+          Umbriel,
+          Vindemiatrix,
+          Zephyr,
+          Zubenelgenubi
+        ]
+      }
+    },
+    {
       Id: upscaler,
       Object: model,
       Created: {Scrubbed},
@@ -4477,6 +5939,22 @@
       }
     },
     {
+      Id: firered-image-edit,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: inpaint,
+      ModelSpec: {
+        Name: FireRed Edit,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 5000
+        },
+        Pricing: {}
+      }
+    },
+    {
       Id: qwen-edit,
       Object: model,
       Created: {Scrubbed},
@@ -4493,22 +5971,6 @@
       }
     },
     {
-      Id: firered-image-edit,
-      Object: model,
-      Created: {Scrubbed},
-      OwnedBy: venice.ai,
-      Type: inpaint,
-      ModelSpec: {
-        Name: FireRed Image Edit 1.1,
-        Offline: false,
-        Beta: false,
-        Constraints: {
-          PromptCharacterLimit: 5000
-        },
-        Pricing: {}
-      }
-    },
-    {
       Id: grok-imagine-edit,
       Object: model,
       Created: {Scrubbed},
@@ -4516,6 +5978,22 @@
       Type: inpaint,
       ModelSpec: {
         Name: Grok Imagine,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 7500
+        },
+        Pricing: {}
+      }
+    },
+    {
+      Id: grok-imagine-quality-edit,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: inpaint,
+      ModelSpec: {
+        Name: Grok Imagine High Quality,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -4557,6 +6035,22 @@
       }
     },
     {
+      Id: wan-2-7-pro-edit,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: inpaint,
+      ModelSpec: {
+        Name: Wan 2.7 Pro Edit,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 5000
+        },
+        Pricing: {}
+      }
+    },
+    {
       Id: flux-2-max-edit,
       Object: model,
       Created: {Scrubbed},
@@ -4568,6 +6062,22 @@
         Beta: false,
         Constraints: {
           PromptCharacterLimit: 3000
+        },
+        Pricing: {}
+      }
+    },
+    {
+      Id: gpt-image-2-edit,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: inpaint,
+      ModelSpec: {
+        Name: GPT Image 2,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000
         },
         Pricing: {}
       }
@@ -4621,13 +6131,13 @@
       }
     },
     {
-      Id: seedream-v4-edit,
+      Id: seedream-v5-lite-edit,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: inpaint,
       ModelSpec: {
-        Name: SeedreamV4.5,
+        Name: Seedream V5 Lite,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -4637,13 +6147,13 @@
       }
     },
     {
-      Id: seedream-v5-lite-edit,
+      Id: seedream-v4-edit,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: inpaint,
       ModelSpec: {
-        Name: SeedreamV5 Lite,
+        Name: Seedream V4.5,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -4674,6 +6184,45 @@
       Type: asr,
       ModelSpec: {
         Name: Whisper Large V3,
+        Offline: false,
+        Beta: false,
+        Pricing: {}
+      }
+    },
+    {
+      Id: fal-ai/wizper,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: asr,
+      ModelSpec: {
+        Name: Wizper (Whisper v3),
+        Offline: false,
+        Beta: false,
+        Pricing: {}
+      }
+    },
+    {
+      Id: elevenlabs/scribe-v2,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: asr,
+      ModelSpec: {
+        Name: ElevenLabs Scribe V2,
+        Offline: false,
+        Beta: false,
+        Pricing: {}
+      }
+    },
+    {
+      Id: stt-xai-v1,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: asr,
+      ModelSpec: {
+        Name: xAI Speech to Text v1,
         Offline: false,
         Beta: false,
         Pricing: {}

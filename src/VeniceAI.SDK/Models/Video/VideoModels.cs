@@ -57,6 +57,59 @@ public class QueueVideoRequest
     /// </summary>
     [JsonPropertyName("image_url")]
     public string? ImageUrl { get; set; }
+
+    /// <summary>
+    /// For models that support end images or transitions, the end frame image.
+    /// Must be a URL or data URL.
+    /// </summary>
+    [JsonPropertyName("end_image_url")]
+    public string? EndImageUrl { get; set; }
+
+    /// <summary>
+    /// For models that support audio input, background music.
+    /// Must be a URL or data URL. Supported: WAV, MP3. Max: 30s, 15MB.
+    /// </summary>
+    [JsonPropertyName("audio_url")]
+    public string? AudioUrl { get; set; }
+
+    /// <summary>
+    /// For models that support video input (video-to-video, upscale). Must be a URL or data URL.
+    /// Supported: MP4, MOV, WebM.
+    /// </summary>
+    [JsonPropertyName("video_url")]
+    public string? VideoUrl { get; set; }
+
+    /// <summary>
+    /// For upscale models only. 1 = quality enhancement, 2 = double resolution (default), 4 = quadruple.
+    /// </summary>
+    [JsonPropertyName("upscale_factor")]
+    public int? UpscaleFactor { get; set; }
+
+    /// <summary>
+    /// For models with reference image support, up to 9 images for character/style consistency.
+    /// Each must be a URL or data URL.
+    /// </summary>
+    [JsonPropertyName("reference_image_urls")]
+    public List<string>? ReferenceImageUrls { get; set; }
+
+    /// <summary>
+    /// For models with reference video support, up to 3 reference video URLs.
+    /// </summary>
+    [JsonPropertyName("reference_video_urls")]
+    public List<string>? ReferenceVideoUrls { get; set; }
+
+    /// <summary>
+    /// For models with reference audio support, up to 3 reference audio URLs.
+    /// </summary>
+    [JsonPropertyName("reference_audio_urls")]
+    public List<string>? ReferenceAudioUrls { get; set; }
+
+    /// <summary>
+    /// For models with advanced element support. Up to 4 scene reference images.
+    /// Reference in prompt as @Image1, @Image2, etc.
+    /// </summary>
+    [JsonPropertyName("scene_image_urls")]
+    public List<string>? SceneImageUrls { get; set; }
 }
 
 /// <summary>
@@ -201,6 +254,61 @@ public class CompleteVideoResponse : BaseResponse
     /// </summary>
     [JsonPropertyName("message")]
     public string? Message { get; set; }
+}
+
+/// <summary>
+/// Request to get a price quote for a video generation.
+/// </summary>
+public class QuoteVideoRequest
+{
+    /// <summary>
+    /// The model to use for video generation.
+    /// </summary>
+    [JsonPropertyName("model")]
+    [JsonConverter(typeof(VideoModelJsonConverter))]
+    public VideoModel Model { get; set; }
+
+    /// <summary>
+    /// The duration of the video (e.g., "5s", "10s").
+    /// </summary>
+    [JsonPropertyName("duration")]
+    public string? Duration { get; set; }
+
+    /// <summary>
+    /// The aspect ratio of the video (e.g., "16:9", "9:16", "1:1").
+    /// </summary>
+    [JsonPropertyName("aspect_ratio")]
+    public string? AspectRatio { get; set; }
+
+    /// <summary>
+    /// The resolution of the video (e.g., "1080p", "720p").
+    /// </summary>
+    [JsonPropertyName("resolution")]
+    public string? Resolution { get; set; }
+
+    /// <summary>
+    /// For upscale models only. 1 = quality enhancement, 2 = double resolution (default), 4 = quadruple.
+    /// </summary>
+    [JsonPropertyName("upscale_factor")]
+    public int? UpscaleFactor { get; set; }
+
+    /// <summary>
+    /// Whether audio generation is enabled.
+    /// </summary>
+    [JsonPropertyName("audio")]
+    public bool? Audio { get; set; }
+
+    /// <summary>
+    /// For video-to-video or upscale models, the source video URL or data URL.
+    /// </summary>
+    [JsonPropertyName("video_url")]
+    public string? VideoUrl { get; set; }
+
+    /// <summary>
+    /// For reference-based models, the total duration of reference videos in seconds.
+    /// </summary>
+    [JsonPropertyName("reference_video_total_duration")]
+    public double? ReferenceVideoTotalDuration { get; set; }
 }
 
 /// <summary>
