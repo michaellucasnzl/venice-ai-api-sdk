@@ -1,5 +1,5 @@
 ﻿{
-  Id: chatcmpl-Rll62jwOQKL7lbDIWavIw0UG,
+  Id: chatcmpl-RHpJvURmtXWVRh4aD7HFyujH,
   Object: chat.completion,
   Created: {Scrubbed},
   Model: google-gemma-3-27b-it,
@@ -9,7 +9,7 @@
         Role: assistant,
         Content: {Scrubbed}
       },
-      FinishReason: stop
+      FinishReason: length
     }
   ],
   Usage: {Scrubbed},

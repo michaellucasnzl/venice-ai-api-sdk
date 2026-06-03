@@ -181,18 +181,18 @@ public class VideoService : BaseHttpService, IVideoService
     /// <summary>
     /// Gets a price quote for a video generation request.
     /// </summary>
-    /// <param name="request">The video generation request to quote.</param>
+    /// <param name="request">The quote request.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The price quote.</returns>
     public async Task<QuoteVideoResponse> QuoteVideoAsync(
-        QueueVideoRequest request,
+        QuoteVideoRequest request,
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
 
         try
         {
-            var response = await PostAsync<QueueVideoRequest, QuoteVideoResponse>(
+            var response = await PostAsync<QuoteVideoRequest, QuoteVideoResponse>(
                 "video/quote",
                 request,
                 cancellationToken);

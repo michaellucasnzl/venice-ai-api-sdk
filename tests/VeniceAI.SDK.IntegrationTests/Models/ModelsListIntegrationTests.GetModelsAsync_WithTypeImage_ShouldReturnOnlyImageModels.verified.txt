@@ -33,29 +33,24 @@
       }
     },
     {
-      Id: hidream,
+      Id: grok-imagine-image-quality,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: image,
       ModelSpec: {
-        Name: HiDream,
-        ModelSource: https://huggingface.co/HiDream-ai/HiDream-I1-Dev,
+        Name: Grok Imagine High Quality (SOTA),
         Offline: false,
         Beta: false,
         Constraints: {
-          PromptCharacterLimit: 1500,
+          PromptCharacterLimit: 7500,
           Steps: {
             Default: 20,
             Max: 50
           },
-          WidthHeightDivisor: 8
+          WidthHeightDivisor: 1
         },
         Pricing: {
-          Generation: {
-            Usd: 0.01,
-            Diem: 0.01
-          },
           Upscale: {}
         }
       }
@@ -115,6 +110,29 @@
       }
     },
     {
+      Id: gpt-image-2,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: GPT Image 2,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: gpt-image-1-5,
       Object: model,
       Created: {Scrubbed},
@@ -169,6 +187,33 @@
       }
     },
     {
+      Id: ideogram-v4,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Ideogram V4,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.15,
+            Diem: 0.15
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: imagineart-1.5-pro,
       Object: model,
       Created: {Scrubbed},
@@ -190,6 +235,60 @@
           Generation: {
             Usd: 0.06,
             Diem: 0.06
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: krea-v2-large,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Krea v2 Large,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 5000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.07,
+            Diem: 0.07
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: krea-v2-medium,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Krea v2 Medium,
+        Offline: false,
+        Beta: false,
+        Constraints: {
+          PromptCharacterLimit: 5000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.04,
+            Diem: 0.04
           },
           Upscale: {}
         }
@@ -302,7 +401,7 @@
       OwnedBy: venice.ai,
       Type: image,
       ModelSpec: {
-        Name: SeedreamV4.5,
+        Name: Seedream V4.5,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -329,7 +428,7 @@
       OwnedBy: venice.ai,
       Type: image,
       ModelSpec: {
-        Name: SeedreamV5 Lite,
+        Name: Seedream V5 Lite,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -464,7 +563,7 @@
       OwnedBy: venice.ai,
       Type: image,
       ModelSpec: {
-        Name: Grok Imagine (SOTA),
+        Name: Grok Imagine,
         Offline: false,
         Beta: false,
         Constraints: {
@@ -476,37 +575,6 @@
           WidthHeightDivisor: 1
         },
         Pricing: {
-          Generation: {
-            Usd: 0.0325,
-            Diem: 0.0325
-          },
-          Upscale: {}
-        }
-      }
-    },
-    {
-      Id: grok-imagine-image-pro,
-      Object: model,
-      Created: {Scrubbed},
-      OwnedBy: venice.ai,
-      Type: image,
-      ModelSpec: {
-        Name: Grok Imagine Pro (20260207),
-        Offline: false,
-        Beta: false,
-        Constraints: {
-          PromptCharacterLimit: 7500,
-          Steps: {
-            Default: 20,
-            Max: 50
-          },
-          WidthHeightDivisor: 1
-        },
-        Pricing: {
-          Generation: {
-            Usd: 0.085,
-            Diem: 0.085
-          },
           Upscale: {}
         }
       }
@@ -584,7 +652,7 @@
         Constraints: {
           PromptCharacterLimit: 1500,
           Steps: {
-            Default: 20,
+            Default: 30,
             Max: 50
           },
           WidthHeightDivisor: 8
@@ -613,17 +681,17 @@
         Offline: false,
         Beta: false,
         Constraints: {
-          PromptCharacterLimit: 1500,
+          PromptCharacterLimit: 2048,
           Steps: {
-            Default: 8,
-            Max: 8
+            Default: 20,
+            Max: 50
           },
-          WidthHeightDivisor: 8
+          WidthHeightDivisor: 1
         },
         Pricing: {
           Generation: {
-            Usd: 0.01,
-            Diem: 0.01
+            Usd: 0.03,
+            Diem: 0.03
           },
           Upscale: {}
         },

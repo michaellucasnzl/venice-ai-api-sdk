@@ -1,5 +1,5 @@
 ﻿{
-  Id: chatcmpl-RPzwMu5nfrFCj6yMyYfzDds0,
+  Id: chatcmpl-RcBLIjcoHjVyk14xoi9H8f3w,
   Object: chat.completion,
   Created: {Scrubbed},
   Model: qwen3-235b-a22b-instruct-2507,
@@ -8,7 +8,7 @@
       Message: {
         ToolCalls: [
           {
-            Id: call_d00b,
+            Id: call_dd53,
             Type: function,
             Function: {
               Name: get_current_weather,

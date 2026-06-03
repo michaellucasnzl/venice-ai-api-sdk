@@ -53,8 +53,8 @@ public interface IVideoService
     /// <summary>
     /// Gets a price quote for a video generation request.
     /// </summary>
-    /// <param name="request">The video generation request to quote.</param>
+    /// <param name="request">The quote request.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The price quote.</returns>
-    Task<QuoteVideoResponse> QuoteVideoAsync(QueueVideoRequest request, CancellationToken cancellationToken = default);
+    Task<QuoteVideoResponse> QuoteVideoAsync(QuoteVideoRequest request, CancellationToken cancellationToken = default);
 }
