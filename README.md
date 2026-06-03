@@ -1,5 +1,7 @@
 # Venice AI .NET SDK
 
+[![Built in Venice](docs/assets/built-in-venice-light.png)](https://builtinvenice.ai)
+
 [![NuGet](https://img.shields.io/nuget/v/VeniceAI.SDK.svg)](https://www.nuget.org/packages/VeniceAI.SDK/)
 [![Build and Publish](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/nuget-publish.yml/badge.svg)](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/nuget-publish.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -378,9 +380,11 @@ All PRs will be reviewed and merged by the maintainer. See [CONTRIBUTING.md](.gi
 
 ## Venice AI
 
+Venice is a privacy-first AI platform providing unrestricted access to the world's leading AI models across text, image, video, code, and audio generation. Learn more at [venice.ai](https://venice.ai).
+
 - [Venice AI](https://venice.ai) — The Venice AI platform
 - [Venice AI API Docs](https://docs.venice.ai) — Official API documentation
-- [Venice AI Discord](https://discord.gg/veniceai) — Community support
+- [Venice AI Discord](https://discord.gg/askvenice) — Community support
 
 ## Support
 
