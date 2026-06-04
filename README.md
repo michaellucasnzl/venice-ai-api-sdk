@@ -5,6 +5,7 @@
 [![NuGet](https://img.shields.io/nuget/v/VeniceAI.SDK.svg)](https://www.nuget.org/packages/VeniceAI.SDK/)
 [![Build and Publish](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/nuget-publish.yml/badge.svg)](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/nuget-publish.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Context7](https://img.shields.io/badge/Context7-Docs-blue)](https://context7.com/michaellucasnzl/venice-ai-api-sdk)
 
 A .NET SDK for the [Venice AI API](https://venice.ai), providing typed access to chat completions, image generation, video generation, text-to-speech, embeddings, and more.
 
@@ -385,6 +386,16 @@ Venice is a privacy-first AI platform providing unrestricted access to the world
 - [Venice AI](https://venice.ai) — The Venice AI platform
 - [Venice AI API Docs](https://docs.venice.ai) — Official API documentation
 - [Venice AI Discord](https://discord.gg/askvenice) — Community support
+
+## AI Coding Assistant Docs (Context7)
+
+This SDK is indexed on [Context7](https://context7.com/michaellucasnzl/venice-ai-api-sdk), which provides up-to-date documentation and code examples directly to AI coding assistants such as GitHub Copilot, Cursor, and Claude Code.
+
+To use it, add `use context7` to your prompt or reference the library ID explicitly:
+
+```
+How do I stream a chat completion with the Venice AI .NET SDK? use library /michaellucasnzl/venice-ai-api-sdk
+```
 
 ## Support
 
