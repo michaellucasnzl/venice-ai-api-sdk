@@ -1,6 +1,6 @@
 # Venice AI .NET SDK
 
-[![Built in Venice](docs/assets/built-in-venice-light.png)](https://builtinvenice.ai)
+![Built in Venice](https://camo.githubusercontent.com/0b92f651701f98ff0df46106545c0fb03a4c5ed77ef2a0348ea3b1691f702c5e/68747470733a2f2f692e6962622e636f2f56635768663232502f626c6f622e706e67)
 
 [![NuGet](https://img.shields.io/nuget/v/VeniceAI.SDK.svg)](https://www.nuget.org/packages/VeniceAI.SDK/)
 [![Build and Publish](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/nuget-publish.yml/badge.svg)](https://github.com/michaellucasnzl/venice-ai-api-sdk/actions/workflows/nuget-publish.yml)
