@@ -1,4 +1,36 @@
 {
+  "$schema": "https://context7.com/schema/context7.json",
   "url": "https://context7.com/michaellucasnzl/venice-ai-api-sdk",
-  "public_key": "pk_GdiRIX2S2TTbZgkYLZs8A"
+  "public_key": "pk_GdiRIX2S2TTbZgkYLZs8A",
+  "projectTitle": "Venice AI .NET SDK",
+  "description": "A .NET SDK for the Venice AI API, providing typed C# access to chat completions (streaming, vision, function calling, reasoning), image generation, video generation (queue-based), text-to-speech, embeddings, billing, model management, and Venice-specific parameters such as web search and citations. Supports ASP.NET Core dependency injection, full async/await, and targets .NET 10.0+.",
+  "folders": [
+    "src/VeniceAI.SDK",
+    "samples/VeniceAI.SDK.Quickstart"
+  ],
+  "excludeFolders": [
+    "src/VeniceAI.SDK/bin",
+    "src/VeniceAI.SDK/obj",
+    "samples/VeniceAI.SDK.Quickstart/bin",
+    "samples/VeniceAI.SDK.Quickstart/obj",
+    "tests",
+    "openapi"
+  ],
+  "excludeFiles": [
+    "CHANGELOG.md",
+    "AGENTS_UpdateSDK.md"
+  ],
+  "rules": [
+    "Register the SDK with dependency injection using services.AddVeniceAI(configuration) or services.AddVeniceAI(\"api-key\") — do not instantiate VeniceAIClient directly.",
+    "Access all API services via IVeniceAIClient properties: client.Chat, client.Images, client.Audio, client.Video, client.Embeddings, client.Models, client.Billing, and client.Characters.",
+    "All API methods are async — always use await and the Async suffix methods.",
+    "Check response.IsSuccess before accessing response data; handle SDK-level errors via VeniceAIException which exposes StatusCode and the full error message.",
+    "Use strongly-typed model enums (TextModel, ImageModel, VideoModel) or pass model name strings directly to model fields on request objects.",
+    "Requires .NET 10.0 or later.",
+    "Store API keys in dotnet user-secrets for development (dotnet user-secrets set \"VeniceAI:ApiKey\" \"your-key\") or environment variables (VeniceAI__ApiKey) in production — never hardcode or commit API keys.",
+    "Enable web search, citations, or thinking mode via VeniceParameters on ChatCompletionRequest: set EnableWebSearch = \"on\", EnableWebCitations = true, or CharacterSlug for Venice characters.",
+    "For streaming chat responses, use CreateChatCompletionStreamAsync which returns IAsyncEnumerable<ChatCompletionChunk> — iterate with await foreach.",
+    "For video generation, use a queue-based workflow: submit with CreateVideoGenerationAsync, then poll GetVideoGenerationAsync until TaskStatus is 'completed', then download the video URL."
+  ]
 }
+
