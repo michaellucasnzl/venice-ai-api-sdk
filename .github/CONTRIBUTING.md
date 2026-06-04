@@ -5,7 +5,10 @@ Thank you for your interest in contributing to the Venice AI .NET SDK!
 ## How to Contribute
 
 1. **Fork** the repository
-2. **Create a branch** for your change (`git checkout -b feature/my-feature`)
+2. **Create a branch** for your change using the appropriate prefix:
+   - `feature/` — new functionality (e.g. `feature/add-rerank-endpoint`)
+   - `fix/` — bug fixes (e.g. `fix/streaming-timeout`)
+   - `docs/` — documentation only (e.g. `docs/update-readme`)
 3. **Make your changes** following the existing code style and conventions
 4. **Add or update tests** for any new or changed functionality
 5. **Run all tests** to ensure nothing is broken:
@@ -27,6 +30,10 @@ Thank you for your interest in contributing to the Venice AI .NET SDK!
 - Use meaningful names for variables, methods, and classes
 - Include XML documentation comments on public APIs
 - Keep methods focused and reasonably sized
+
+## Adding Models or API Endpoints
+
+For structured guidance on adding new models or API endpoints, refer to [`docs/AGENTS_UpdateSDK.md`](../docs/AGENTS_UpdateSDK.md). It describes the exact files to update, naming conventions, and the verification steps required.
 
 ## Reporting Issues
 

@@ -6,7 +6,7 @@
     <PackageId>VeniceAI.SDK</PackageId>
     <Description>.NET SDK for the Venice AI API. Provides access to advanced AI models for chat completions, image generation, video generation, text-to-speech, embeddings, and more.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>AI;Venice;OpenAI;ChatGPT;GPT;LLM;Image;Generation;TTS;Embeddings;API;SDK</PackageTags>
+    <PackageTags>AI;Venice;VeniceAI;SDK;dotnet;CSharp;LLM;Chat;ImageGeneration;VideoGeneration;TTS;Embeddings;API;PrivacyFirst</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <PackageIcon>VeniceLogo.png</PackageIcon>
