@@ -426,48 +426,6 @@
       }
     },
     {
-      Id: qwen-3-6-max-preview,
-      Object: model,
-      Created: {Scrubbed},
-      OwnedBy: venice.ai,
-      Type: text,
-      ModelSpec: {
-        Name: Qwen 3.6 Max Preview,
-        ModelSource: https://www.alibabacloud.com/help/en/model-studio/models,
-        Offline: false,
-        Beta: true,
-        AvailableContextTokens: 256000,
-        Capabilities: {
-          OptimizedForCode: true,
-          Quantization: not-available,
-          SupportsFunctionCalling: true,
-          SupportsReasoning: true,
-          SupportsResponseSchema: true,
-          SupportsVision: false,
-          SupportsWebSearch: true,
-          SupportsLogProbs: false
-        },
-        Constraints: {
-          Temperature: {
-            Default: 0.7
-          },
-          TopP: {
-            Default: 0.8
-          }
-        },
-        Pricing: {
-          Input: {
-            Usd: 1.625,
-            Diem: 1.625
-          },
-          Output: {
-            Usd: 9.75,
-            Diem: 9.75
-          }
-        }
-      }
-    },
-    {
       Id: qwen-3-6-plus,
       Object: model,
       Created: {Scrubbed},
@@ -898,12 +856,12 @@
         },
         Pricing: {
           Input: {
-            Usd: 0.155,
-            Diem: 0.155
+            Usd: 0.12,
+            Diem: 0.12
           },
           Output: {
-            Usd: 0.44,
-            Diem: 0.44
+            Usd: 0.36,
+            Diem: 0.36
           }
         }
       }
@@ -1351,6 +1309,40 @@
       }
     },
     {
+      Id: claude-fable-5,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Claude Fable 5,
+        ModelSource: ,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 1000000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: not-available,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 12.0,
+            Diem: 12.0
+          },
+          Output: {
+            Usd: 60.0,
+            Diem: 60.0
+          }
+        }
+      }
+    },
+    {
       Id: claude-opus-4-8,
       Object: model,
       Created: {Scrubbed},
@@ -1691,6 +1683,40 @@
       }
     },
     {
+      Id: tencent-hy3-preview,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Hy3 Preview,
+        ModelSource: https://huggingface.co/tencent/Hy3-preview,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 256000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: int4,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.063,
+            Diem: 0.063
+          },
+          Output: {
+            Usd: 0.21,
+            Diem: 0.21
+          }
+        }
+      }
+    },
+    {
       Id: kimi-k2-6,
       Object: model,
       Created: {Scrubbed},
@@ -1720,6 +1746,40 @@
           Output: {
             Usd: 4.655,
             Diem: 4.655
+          }
+        }
+      }
+    },
+    {
+      Id: kimi-k2-7-code,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: Kimi K2.7 Code,
+        ModelSource: https://huggingface.co/moonshotai/Kimi-K2.7-Code,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 256000,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: int4,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
+          SupportsVision: true,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.9,
+            Diem: 0.9
+          },
+          Output: {
+            Usd: 4.3,
+            Diem: 4.3
           }
         }
       }
@@ -1759,35 +1819,35 @@
       }
     },
     {
-      Id: xiaomi-mimo-v2-omni,
+      Id: xiaomi-mimo-v2-5,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
-        Name: MiMo-V2-Omni,
-        ModelSource: https://mimo.xiaomi.com/mimo-v2-omni,
+        Name: MiMo-V2.5,
+        ModelSource: https://huggingface.co/XiaomiMiMo/MiMo-V2.5,
         Offline: false,
-        Beta: true,
-        AvailableContextTokens: 256000,
+        Beta: false,
+        AvailableContextTokens: 1000000,
         Capabilities: {
-          OptimizedForCode: false,
-          Quantization: not-available,
+          OptimizedForCode: true,
+          Quantization: fp8,
           SupportsFunctionCalling: true,
-          SupportsReasoning: false,
-          SupportsResponseSchema: false,
+          SupportsReasoning: true,
+          SupportsResponseSchema: true,
           SupportsVision: true,
           SupportsWebSearch: true,
           SupportsLogProbs: false
         },
         Pricing: {
           Input: {
-            Usd: 0.5,
-            Diem: 0.5
+            Usd: 0.175,
+            Diem: 0.175
           },
           Output: {
-            Usd: 2.5,
-            Diem: 2.5
+            Usd: 0.35,
+            Diem: 0.35
           }
         }
       }
@@ -2370,6 +2430,40 @@
       }
     },
     {
+      Id: minimax-m3-preview,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: text,
+      ModelSpec: {
+        Name: MiniMax M3 Preview,
+        ModelSource: https://huggingface.co/MiniMaxAI/Minimax-M3-preview,
+        Offline: false,
+        Beta: false,
+        AvailableContextTokens: 524288,
+        Capabilities: {
+          OptimizedForCode: true,
+          Quantization: fp8,
+          SupportsFunctionCalling: true,
+          SupportsReasoning: true,
+          SupportsResponseSchema: false,
+          SupportsVision: false,
+          SupportsWebSearch: true,
+          SupportsLogProbs: false
+        },
+        Pricing: {
+          Input: {
+            Usd: 0.3,
+            Diem: 0.3
+          },
+          Output: {
+            Usd: 1.2,
+            Diem: 1.2
+          }
+        }
+      }
+    },
+    {
       Id: minimax-m25,
       Object: model,
       Created: {Scrubbed},
@@ -2504,20 +2598,20 @@
       }
     },
     {
-      Id: nvidia-nemotron-3-super-120b-a12b,
+      Id: nvidia-nemotron-3-ultra-550b-a55b,
       Object: model,
       Created: {Scrubbed},
       OwnedBy: venice.ai,
       Type: text,
       ModelSpec: {
-        Name: NVIDIA Nemotron 3 Super 120B,
-        ModelSource: https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B,
+        Name: NVIDIA Nemotron 3 Ultra,
+        ModelSource: https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B,
         Offline: false,
-        Beta: true,
+        Beta: false,
         AvailableContextTokens: 256000,
         Capabilities: {
           OptimizedForCode: false,
-          Quantization: bf16,
+          Quantization: fp8,
           SupportsFunctionCalling: true,
           SupportsReasoning: true,
           SupportsResponseSchema: true,
@@ -2527,12 +2621,12 @@
         },
         Pricing: {
           Input: {
-            Usd: 0.125,
-            Diem: 0.125
-          },
-          Output: {
             Usd: 0.625,
             Diem: 0.625
+          },
+          Output: {
+            Usd: 3.125,
+            Diem: 3.125
           }
         }
       }
@@ -2703,40 +2797,6 @@
           Output: {
             Usd: 4.15,
             Diem: 4.15
-          }
-        }
-      }
-    },
-    {
-      Id: e2ee-glm-4-7-flash-p,
-      Object: model,
-      Created: {Scrubbed},
-      OwnedBy: venice.ai,
-      Type: text,
-      ModelSpec: {
-        Name: GLM 4.7 Flash,
-        ModelSource: https://huggingface.co/zai-org/GLM-4.7-Flash,
-        Offline: false,
-        Beta: false,
-        AvailableContextTokens: 198000,
-        Capabilities: {
-          OptimizedForCode: true,
-          Quantization: not-available,
-          SupportsFunctionCalling: false,
-          SupportsReasoning: true,
-          SupportsResponseSchema: false,
-          SupportsVision: false,
-          SupportsWebSearch: true,
-          SupportsLogProbs: false
-        },
-        Pricing: {
-          Input: {
-            Usd: 0.13,
-            Diem: 0.13
-          },
-          Output: {
-            Usd: 0.55,
-            Diem: 0.55
           }
         }
       }

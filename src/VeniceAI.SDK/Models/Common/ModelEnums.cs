@@ -768,6 +768,58 @@ public enum TextModel
     [Description("e2ee-gemma-4-31b")]
     E2EEGemma4_31B,
 
+    /// <summary>
+    /// Claude Fable 5 - Anthropic's most capable widely released model, designed for demanding reasoning
+    /// and long-horizon agentic work with a 1M token context window and always-on adaptive thinking.
+    /// Model ID: claude-fable-5
+    /// </summary>
+    [Description("claude-fable-5")]
+    ClaudeFable5,
+
+    /// <summary>
+    /// Kimi K2.7 Code - Moonshot AI's coding-focused agentic model built on Kimi K2.6 with 1T total
+    /// parameters and 32B active parameters. Always operates in thinking mode and supports text and
+    /// image input with 256K context.
+    /// Model ID: kimi-k2-7-code
+    /// </summary>
+    [Description("kimi-k2-7-code")]
+    KimiK27Code,
+
+    /// <summary>
+    /// MiniMax M3 Preview - MiniMax's 1.4T-parameter frontier model preview for coding, agentic workflows,
+    /// and complex reasoning, served at fp8 with a 512K context window.
+    /// Model ID: minimax-m3-preview
+    /// </summary>
+    [Description("minimax-m3-preview")]
+    MinimaxM3Preview,
+
+    /// <summary>
+    /// NVIDIA Nemotron 3 Ultra 550B A55B - Built for frontier reasoning, orchestration, coding agents,
+    /// deep research, and complex enterprise workflows. Up to 5x faster inference with up to 1M token
+    /// context support.
+    /// Model ID: nvidia-nemotron-3-ultra-550b-a55b
+    /// </summary>
+    [Description("nvidia-nemotron-3-ultra-550b-a55b")]
+    NvidiaNemotron3Ultra550B,
+
+    /// <summary>
+    /// Hy3 Preview - Tencent Hy Team's 295B-parameter Mixture-of-Experts model with 21B active parameters.
+    /// Excels at complex reasoning, instruction following, context learning, coding, and agent tasks
+    /// with 256K context.
+    /// Model ID: tencent-hy3-preview
+    /// </summary>
+    [Description("tencent-hy3-preview")]
+    TencentHy3Preview,
+
+    /// <summary>
+    /// MiMo V2.5 - Xiaomi's native omnimodal model with strong agentic capabilities, supporting text,
+    /// image, video, and audio understanding. Sparse Mixture-of-Experts backbone with 310B total and
+    /// 15B active parameters and up to 1M token context.
+    /// Model ID: xiaomi-mimo-v2-5
+    /// </summary>
+    [Description("xiaomi-mimo-v2-5")]
+    XiaomiMimoV25,
+
     // Obsolete models - kept for backward compatibility
     [Obsolete("This model is no longer available in the Venice AI API. Use Glm47 (zai-org-glm-4.7) instead.")]
     [Description("zai-org-glm-4.6")]
@@ -1709,7 +1761,28 @@ public enum VideoModel
     /// Model ID: runway-gen4-aleph
     /// </summary>
     [Description("runway-gen4-aleph")]
-    RunwayGen4Aleph
+    RunwayGen4Aleph,
+
+    /// <summary>
+    /// Seedance 2.0 Enhanced - Text to Video generation with enhanced quality.
+    /// Model ID: seedance-2-0-enhanced-text-to-video
+    /// </summary>
+    [Description("seedance-2-0-enhanced-text-to-video")]
+    Seedance20EnhancedTextToVideo,
+
+    /// <summary>
+    /// Seedance 2.0 Enhanced - Reference to Video generation with enhanced quality.
+    /// Model ID: seedance-2-0-enhanced-reference-to-video
+    /// </summary>
+    [Description("seedance-2-0-enhanced-reference-to-video")]
+    Seedance20EnhancedReferenceToVideo,
+
+    /// <summary>
+    /// Wan 2.7 Uncensored - Text to Video generation (uncensored).
+    /// Model ID: wan-2-7-uncensored-text-to-video
+    /// </summary>
+    [Description("wan-2-7-uncensored-text-to-video")]
+    Wan27UncensoredTextToVideo
 }
 
 /// <summary>

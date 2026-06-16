@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-06-16
+
+### Added
+
+#### New Text Models
+- `ClaudeFable5` (`claude-fable-5`) — Anthropic Claude Fable 5 with 1M token context and always-on adaptive thinking
+- `KimiK27Code` (`kimi-k2-7-code`) — Moonshot AI Kimi K2.7 Code, coding-focused agentic model with 1T parameters
+- `MinimaxM3Preview` (`minimax-m3-preview`) — MiniMax M3 preview, 1.4T-parameter frontier model
+- `NvidiaNemotron3Ultra550B` (`nvidia-nemotron-3-ultra-550b-a55b`) — NVIDIA Nemotron 3 Ultra for frontier reasoning
+- `TencentHy3Preview` (`tencent-hy3-preview`) — Tencent Hy Team 295B MoE preview
+- `XiaomiMimoV25` (`xiaomi-mimo-v2-5`) — Xiaomi MiMo V2.5 omnimodal model
+
+#### New Video Models
+- `Seedance20EnhancedTextToVideo` (`seedance-2-0-enhanced-text-to-video`) — Seedance 2.0 Enhanced text-to-video
+- `Seedance20EnhancedReferenceToVideo` (`seedance-2-0-enhanced-reference-to-video`) — Seedance 2.0 Enhanced reference-to-video
+- `Wan27UncensoredTextToVideo` (`wan-2-7-uncensored-text-to-video`) — Wan 2.7 Uncensored text-to-video
+
 ## [2.2.0] - 2026-07-19
 
 ### Added

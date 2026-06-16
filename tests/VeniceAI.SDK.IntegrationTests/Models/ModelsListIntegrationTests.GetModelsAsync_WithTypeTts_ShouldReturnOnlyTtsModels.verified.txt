@@ -378,6 +378,38 @@
           Zubenelgenubi
         ]
       }
+    },
+    {
+      Id: tts-gradium-v1,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: tts,
+      ModelSpec: {
+        Name: Gradium TTS,
+        Offline: false,
+        Beta: false,
+        Pricing: {
+          Input: {
+            Usd: 47.5,
+            Diem: 47.5
+          }
+        },
+        Voices: [
+          Alice,
+          Davi,
+          Elise,
+          Emma,
+          Eva,
+          Jack,
+          Kent,
+          Leo,
+          Maximilian,
+          Mia,
+          Sergio,
+          Valentina
+        ]
+      }
     }
   ],
   IsSuccess: true,
