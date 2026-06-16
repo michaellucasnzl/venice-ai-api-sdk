@@ -94,7 +94,22 @@ public class ModelEnumExtensionsTests
     [InlineData(VideoModel.TopazVideoUpscale,         "topaz-video-upscale")]
     [InlineData(VideoModel.Wan27ImageToVideo,         "wan-2-7-image-to-video")]
     [InlineData(VideoModel.Wan27ReferenceToVideo,     "wan-2-7-reference-to-video")]
+    [InlineData(VideoModel.Seedance20EnhancedTextToVideo, "seedance-2-0-enhanced-text-to-video")]
+    [InlineData(VideoModel.Seedance20EnhancedReferenceToVideo, "seedance-2-0-enhanced-reference-to-video")]
+    [InlineData(VideoModel.Wan27UncensoredTextToVideo, "wan-2-7-uncensored-text-to-video")]
     public void VideoModel_ToModelString_ReturnsExpectedId(VideoModel model, string expectedId)
+    {
+        Assert.Equal(expectedId, model.ToModelString());
+    }
+
+    [Theory]
+    [InlineData(TextModel.ClaudeFable5,           "claude-fable-5")]
+    [InlineData(TextModel.KimiK27Code,            "kimi-k2-7-code")]
+    [InlineData(TextModel.MinimaxM3Preview,       "minimax-m3-preview")]
+    [InlineData(TextModel.NvidiaNemotron3Ultra550B, "nvidia-nemotron-3-ultra-550b-a55b")]
+    [InlineData(TextModel.TencentHy3Preview,      "tencent-hy3-preview")]
+    [InlineData(TextModel.XiaomiMimoV25,          "xiaomi-mimo-v2-5")]
+    public void TextModel_New2_3_ReturnsExpectedId(TextModel model, string expectedId)
     {
         Assert.Equal(expectedId, model.ToModelString());
     }
@@ -176,9 +191,24 @@ public class ModelEnumExtensionsTests
     [InlineData("grok-imagine-reference-to-video",  VideoModel.GrokImagineReferenceToVideo)]
     [InlineData("topaz-video-upscale",               VideoModel.TopazVideoUpscale)]
     [InlineData("wan-2-7-reference-to-video",        VideoModel.Wan27ReferenceToVideo)]
+    [InlineData("seedance-2-0-enhanced-text-to-video", VideoModel.Seedance20EnhancedTextToVideo)]
+    [InlineData("seedance-2-0-enhanced-reference-to-video", VideoModel.Seedance20EnhancedReferenceToVideo)]
+    [InlineData("wan-2-7-uncensored-text-to-video", VideoModel.Wan27UncensoredTextToVideo)]
     public void ParseVideoModel_WithNewModelId_ReturnsCorrectEnum(string modelId, VideoModel expected)
     {
         Assert.Equal(expected, ModelEnumExtensions.ParseVideoModel(modelId));
+    }
+
+    [Theory]
+    [InlineData("claude-fable-5",                  TextModel.ClaudeFable5)]
+    [InlineData("kimi-k2-7-code",                  TextModel.KimiK27Code)]
+    [InlineData("minimax-m3-preview",              TextModel.MinimaxM3Preview)]
+    [InlineData("nvidia-nemotron-3-ultra-550b-a55b", TextModel.NvidiaNemotron3Ultra550B)]
+    [InlineData("tencent-hy3-preview",             TextModel.TencentHy3Preview)]
+    [InlineData("xiaomi-mimo-v2-5",                TextModel.XiaomiMimoV25)]
+    public void ParseTextModel_New2_3_ReturnsCorrectEnum(string modelId, TextModel expected)
+    {
+        Assert.Equal(expected, ModelEnumExtensions.ParseTextModel(modelId));
     }
 
     // -------------------------------------------------------------------------
