@@ -99,6 +99,216 @@ public class ModelSpec
     public int? AvailableContextTokens { get; set; }
 
     /// <summary>
+    /// The maximum number of completion tokens the model can generate.
+    /// </summary>
+    [JsonPropertyName("maxCompletionTokens")]
+    public int? MaxCompletionTokens { get; set; }
+
+    /// <summary>
+    /// The maximum number of input tokens supported by the model.
+    /// </summary>
+    [JsonPropertyName("maxInputTokens")]
+    public int? MaxInputTokens { get; set; }
+
+    /// <summary>
+    /// The embedding dimensions for embedding models.
+    /// </summary>
+    [JsonPropertyName("embeddingDimensions")]
+    public int? EmbeddingDimensions { get; set; }
+
+    /// <summary>
+    /// Whether the model supports custom embedding dimensions.
+    /// </summary>
+    [JsonPropertyName("supportsCustomDimensions")]
+    public bool? SupportsCustomDimensions { get; set; }
+
+    /// <summary>
+    /// Whether the model supports style references.
+    /// </summary>
+    [JsonPropertyName("supportsStyleReferences")]
+    public bool? SupportsStyleReferences { get; set; }
+
+    /// <summary>
+    /// The privacy mode of the model (private, anonymized).
+    /// </summary>
+    [JsonPropertyName("privacy")]
+    public string? Privacy { get; set; }
+
+    /// <summary>
+    /// The description of the model.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; set; }
+
+    /// <summary>
+    /// Whether this model is uncensored.
+    /// </summary>
+    [JsonPropertyName("uncensored")]
+    public bool? Uncensored { get; set; }
+
+    /// <summary>
+    /// Deprecation details for models being retired.
+    /// </summary>
+    [JsonPropertyName("deprecation")]
+    public ModelDeprecation? Deprecation { get; set; }
+
+    /// <summary>
+    /// Country codes where this model is intended to be available.
+    /// </summary>
+    [JsonPropertyName("regionRestrictions")]
+    public List<string>? RegionRestrictions { get; set; }
+
+    /// <summary>
+    /// The default voice for TTS models.
+    /// </summary>
+    [JsonPropertyName("default_voice")]
+    public string? DefaultVoice { get; set; }
+
+    /// <summary>
+    /// The default format for the model.
+    /// </summary>
+    [JsonPropertyName("default_format")]
+    public string? DefaultFormat { get; set; }
+
+    /// <summary>
+    /// The default duration for audio/video models.
+    /// </summary>
+    [JsonPropertyName("default_duration")]
+    public double? DefaultDuration { get; set; }
+
+    /// <summary>
+    /// The default speed for audio models.
+    /// </summary>
+    [JsonPropertyName("default_speed")]
+    public double? DefaultSpeed { get; set; }
+
+    /// <summary>
+    /// The minimum prompt length required by the model.
+    /// </summary>
+    [JsonPropertyName("min_prompt_length")]
+    public int? MinPromptLength { get; set; }
+
+    /// <summary>
+    /// The prompt character limit for the model.
+    /// </summary>
+    [JsonPropertyName("prompt_character_limit")]
+    public int? PromptCharacterLimit { get; set; }
+
+    /// <summary>
+    /// The lyrics character limit for lyric-capable music models.
+    /// </summary>
+    [JsonPropertyName("lyrics_character_limit")]
+    public int? LyricsCharacterLimit { get; set; }
+
+    /// <summary>
+    /// Whether lyrics are required for this music model.
+    /// </summary>
+    [JsonPropertyName("lyrics_required")]
+    public bool? LyricsRequired { get; set; }
+
+    /// <summary>
+    /// Whether the model supports lyrics.
+    /// </summary>
+    [JsonPropertyName("supports_lyrics")]
+    public bool? SupportsLyrics { get; set; }
+
+    /// <summary>
+    /// Whether the model supports force instrumental mode.
+    /// </summary>
+    [JsonPropertyName("supports_force_instrumental")]
+    public bool? SupportsForceInstrumental { get; set; }
+
+    /// <summary>
+    /// Whether the model supports a language code.
+    /// </summary>
+    [JsonPropertyName("supports_language_code")]
+    public bool? SupportsLanguageCode { get; set; }
+
+    /// <summary>
+    /// Whether the model supports looping.
+    /// </summary>
+    [JsonPropertyName("supports_loop")]
+    public bool? SupportsLoop { get; set; }
+
+    /// <summary>
+    /// Whether the model supports speed adjustment.
+    /// </summary>
+    [JsonPropertyName("supports_speed")]
+    public bool? SupportsSpeed { get; set; }
+
+    /// <summary>
+    /// The minimum duration supported by the model.
+    /// </summary>
+    [JsonPropertyName("min_duration")]
+    public double? MinDuration { get; set; }
+
+    /// <summary>
+    /// The maximum duration supported by the model.
+    /// </summary>
+    [JsonPropertyName("max_duration")]
+    public double? MaxDuration { get; set; }
+
+    /// <summary>
+    /// The minimum speed supported by the model.
+    /// </summary>
+    [JsonPropertyName("min_speed")]
+    public double? MinSpeed { get; set; }
+
+    /// <summary>
+    /// The maximum speed supported by the model.
+    /// </summary>
+    [JsonPropertyName("max_speed")]
+    public double? MaxSpeed { get; set; }
+
+    /// <summary>
+    /// The available duration options for the model.
+    /// </summary>
+    [JsonPropertyName("duration_options")]
+    public List<double>? DurationOptions { get; set; }
+
+    /// <summary>
+    /// The supported formats for the model.
+    /// </summary>
+    [JsonPropertyName("supported_formats")]
+    public List<string>? SupportedFormats { get; set; }
+
+    /// <summary>
+    /// Whether the model supports custom voice ID.
+    /// </summary>
+    [JsonPropertyName("supports_custom_voice_id")]
+    public bool? SupportsCustomVoiceId { get; set; }
+
+    /// <summary>
+    /// Whether the model supports voice cloning.
+    /// </summary>
+    [JsonPropertyName("voice_cloning")]
+    public VoiceCloning? VoiceCloning { get; set; }
+
+    /// <summary>
+    /// The model sets this model belongs to (e.g., "venice_recommendations").
+    /// </summary>
+    [JsonPropertyName("model_sets")]
+    public List<string>? ModelSets { get; set; }
+
+    /// <summary>
+    /// Whether the model supports web search.
+    /// </summary>
+    [JsonPropertyName("supportsWebSearch")]
+    public bool? SupportsWebSearch { get; set; }
+
+    /// <summary>
+    /// Whether the model supports prompt optimization thinking.
+    /// </summary>
+    [JsonPropertyName("supportsOptimizePromptThinking")]
+    public bool? SupportsOptimizePromptThinking { get; set; }
+
+    /// <summary>
+    /// Whether the model supports a lyrics optimizer.
+    /// </summary>
+    [JsonPropertyName("supports_lyrics_optimizer")]
+    public bool? SupportsLyricsOptimizer { get; set; }
+
+    /// <summary>
     /// Text model specific capabilities.
     /// </summary>
     [JsonPropertyName("capabilities")]
@@ -181,6 +391,132 @@ public class ModelCapabilities
     /// </summary>
     [JsonPropertyName("supportsLogProbs")]
     public bool SupportsLogProbs { get; set; }
+
+    /// <summary>
+    /// Does the LLM model support audio input?
+    /// </summary>
+    [JsonPropertyName("supportsAudioInput")]
+    public bool SupportsAudioInput { get; set; }
+
+    /// <summary>
+    /// Does the model support multiple images per request?
+    /// </summary>
+    [JsonPropertyName("supportsMultipleImages")]
+    public bool SupportsMultipleImages { get; set; }
+
+    /// <summary>
+    /// Does the model support video input?
+    /// </summary>
+    [JsonPropertyName("supportsVideoInput")]
+    public bool SupportsVideoInput { get; set; }
+
+    /// <summary>
+    /// Does the model support end-to-end encryption?
+    /// </summary>
+    [JsonPropertyName("supportsE2EE")]
+    public bool SupportsE2EE { get; set; }
+
+    /// <summary>
+    /// Does the model support TEE attestation?
+    /// </summary>
+    [JsonPropertyName("supportsTeeAttestation")]
+    public bool SupportsTeeAttestation { get; set; }
+
+    /// <summary>
+    /// Does the model support configurable reasoning effort?
+    /// </summary>
+    [JsonPropertyName("supportsReasoningEffort")]
+    public bool SupportsReasoningEffort { get; set; }
+
+    /// <summary>
+    /// The default reasoning effort for models that support it.
+    /// </summary>
+    [JsonPropertyName("defaultReasoningEffort")]
+    public string? DefaultReasoningEffort { get; set; }
+
+    /// <summary>
+    /// The available reasoning effort options for the model.
+    /// </summary>
+    [JsonPropertyName("reasoningEffortOptions")]
+    public List<string>? ReasoningEffortOptions { get; set; }
+
+    /// <summary>
+    /// Does the model support xAI native search?
+    /// </summary>
+    [JsonPropertyName("supportsXSearch")]
+    public bool SupportsXSearch { get; set; }
+
+    /// <summary>
+    /// The maximum number of images supported per request.
+    /// </summary>
+    [JsonPropertyName("maxImages")]
+    public int? MaxImages { get; set; }
+
+    /// <summary>
+    /// The maximum number of videos supported per request.
+    /// </summary>
+    [JsonPropertyName("maxVideos")]
+    public int? MaxVideos { get; set; }
+}
+
+/// <summary>
+/// Model deprecation details.
+/// </summary>
+public class ModelDeprecation
+{
+    /// <summary>
+    /// Legacy ISO 8601 instant aligned with the deprecation sunset used in response headers.
+    /// </summary>
+    [JsonPropertyName("date")]
+    public string? Date { get; set; }
+
+    /// <summary>
+    /// ISO 8601 instant when this model ID is omitted from public GET /models listings.
+    /// </summary>
+    [JsonPropertyName("removesAt")]
+    public string? RemovesAt { get; set; }
+
+    /// <summary>
+    /// Suggested public API model ID to migrate to, when one exists.
+    /// </summary>
+    [JsonPropertyName("replacementModelId")]
+    public string? ReplacementModelId { get; set; }
+
+    /// <summary>
+    /// When true, Venice may automatically remap API requests for this model ID to the replacement model.
+    /// </summary>
+    [JsonPropertyName("autoRemap")]
+    public bool AutoRemap { get; set; }
+}
+
+/// <summary>
+/// Voice cloning configuration for TTS models.
+/// </summary>
+public class VoiceCloning
+{
+    /// <summary>
+    /// The voice cloning mode (e.g., "zero_shot").
+    /// </summary>
+    [JsonPropertyName("mode")]
+    public string? Mode { get; set; }
+
+    /// <summary>
+    /// The accepted audio formats for voice samples.
+    /// </summary>
+    [JsonPropertyName("accepted_formats")]
+    public List<string>? AcceptedFormats { get; set; }
+
+    /// <summary>
+    /// The minimum voice sample length in seconds.
+    /// </summary>
+    [JsonPropertyName("min_sample_seconds")]
+    public int? MinSampleSeconds { get; set; }
+
+    /// <summary>
+    /// The retention period for cloned voices in days.
+    /// </summary>
+    [JsonPropertyName("retention_days")]
+    public int? RetentionDays { get; set; }
 }
 
 /// <summary>
@@ -271,6 +607,12 @@ public class ModelPricing
     /// </summary>
     [JsonPropertyName("input")]
     public PricingDetails? Input { get; set; }
+
+    /// <summary>
+    /// Cached input pricing for LLM models.
+    /// </summary>
+    [JsonPropertyName("cache_input")]
+    public PricingDetails? CacheInput { get; set; }
 
     /// <summary>
     /// Output pricing for LLM models.

@@ -57,4 +57,12 @@ public interface IVideoService
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The price quote.</returns>
     Task<QuoteVideoResponse> QuoteVideoAsync(QuoteVideoRequest request, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Transcribes a YouTube video URL to text.
+    /// </summary>
+    /// <param name="request">The video transcription request.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The video transcription response.</returns>
+    Task<VideoTranscriptionResponse> TranscribeVideoAsync(VideoTranscriptionRequest request, CancellationToken cancellationToken = default);
 }

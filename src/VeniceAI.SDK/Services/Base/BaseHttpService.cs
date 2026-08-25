@@ -260,6 +260,55 @@ public class BaseHttpService
         }
     }
 
+    /// <summary>
+    /// Makes a POST request with multipart/form-data payload (e.g., file uploads).
+    /// </summary>
+    /// <typeparam name="TResponse">The response type.</typeparam>
+    /// <param name="endpoint">The API endpoint.</param>
+    /// <param name="fileData">The file data (binary) to upload.</param>
+    /// <param name="filename">The filename of the uploaded file.</param>
+    /// <param name="fileFieldName">The multipart field name for the file.</param>
+    /// <param name="additionalFields">Additional form fields to include.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The response object.</returns>
+    protected async Task<TResponse> PostMultipartAsync<TResponse>(
+        string endpoint,
+        byte[] fileData,
+        string filename,
+        string fileFieldName,
+        Dictionary<string, string>? additionalFields = null,
+        CancellationToken cancellationToken = default)
+    {
+        using var content = new MultipartFormDataContent();
+
+        var fileContent = new ByteArrayContent(fileData);
+        fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+        content.Add(fileContent, fileFieldName, filename);
+
+        if (additionalFields != null)
+        {
+            foreach (var kvp in additionalFields)
+            {
+                content.Add(new StringContent(kvp.Value), kvp.Key);
+            }
+        }
+
+        _logger.LogDebug("POST {Endpoint} (Multipart)", endpoint);
+
+        using var response = await _httpClient.PostAsync(endpoint, content, cancellationToken);
+        var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
+
+        _logger.LogDebug("Response Status: {StatusCode}", response.StatusCode);
+        _logger.LogDebug("Response: {Response}", responseContent);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new VeniceAIException($"API Error (Status: {(int)response.StatusCode}): {responseContent}");
+        }
+
+        return JsonSerializer.Deserialize<TResponse>(responseContent, _jsonOptions)!;
+    }
+
     private ChatCompletionStreamResponse? TryDeserializeStreamResponse(string jsonData)
     {
         try

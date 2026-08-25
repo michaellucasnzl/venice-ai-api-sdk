@@ -20,10 +20,13 @@ This SDK is community-maintained and **not yet officially affiliated with Venice
 ## Features
 
 - **Chat Completions** — Text generation with streaming, vision, function calling, and reasoning
-- **Image Generation** — Create, upscale, and edit images with multiple models and styles
-- **Video Generation** — Queue-based workflow with 30+ models (Wan, LTX, Kling, Veo, Sora)
+- **Responses API (Alpha)** — Create responses using the OpenAI-compatible `/api/v1/responses` endpoint
+- **Image Generation** — Create, upscale, edit, multi-edit, and background-remove images with multiple models and styles
+- **Video Generation** — Queue-based workflow with 100+ models (Wan, LTX, Kling, Veo, Sora, Seedance, Flux) plus YouTube transcription
+- **Audio Generation** — Queue-based music/audio generation, text-to-speech with streaming, transcription, and voice cloning
 - **Text-to-Speech** — Multiple voices with streaming audio support
 - **Embeddings** — Generate text embeddings for semantic search
+- **Web Search & Scraping** — Privacy-preserving web search, page scraping, and document text parsing
 - **Model Management** — List, filter, and inspect available models
 - **Billing** — Track API usage and costs
 - **Characters** — Access Venice AI character definitions
@@ -193,6 +196,144 @@ var response = await client.Audio.CreateSpeechAsync(request);
 await File.WriteAllBytesAsync("output.mp3", response.AudioContent);
 ```
 
+### Audio Generation (Queue-based)
+
+```csharp
+var queueRequest = new QueueAudioRequest
+{
+    Model = MusicModel.ElevenlabsMusic,
+    Prompt = "A warm ambient track for a product launch",
+    DurationSeconds = 60
+};
+
+var queued = await client.Audio.QueueAudioAsync(queueRequest);
+
+// Poll for the result
+var result = await client.Audio.RetrieveAudioAsync(new RetrieveAudioRequest
+{
+    Model = "elevenlabs-music",
+    QueueId = queued.QueueId
+});
+
+if (result.Status == "completed" && result.AudioUrl != null)
+{
+    Console.WriteLine($"Audio ready: {result.AudioUrl}");
+}
+```
+
+### Audio Transcription
+
+```csharp
+var request = new CreateTranscriptionRequest
+{
+    Model = AsrModel.WhisperLargeV3,
+    File = await File.ReadAllBytesAsync("meeting.mp3"),
+    Filename = "meeting.mp3"
+};
+
+var response = await client.Audio.TranscribeAudioAsync(request);
+Console.WriteLine(response.Text);
+```
+
+### Video Generation (Queue-based)
+
+```csharp
+var queueRequest = new QueueVideoRequest
+{
+    Model = VideoModel.Wan30TextToVideo,
+    Prompt = "A cat walking on the beach at sunset",
+    Duration = "5s"
+};
+
+var queued = await client.Video.QueueVideoAsync(queueRequest);
+
+var result = await client.Video.RetrieveVideoAsync(new RetrieveVideoRequest
+{
+    Model = "wan-3-0-text-to-video",
+    QueueId = queued.QueueId
+});
+```
+
+### Video Transcription
+
+```csharp
+var response = await client.Video.TranscribeVideoAsync(new VideoTranscriptionRequest
+{
+    Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+});
+Console.WriteLine(response.Text);
+```
+
+### Image Editing & Background Removal
+
+```csharp
+// Edit an image
+var editResponse = await client.Images.EditImageAsync(new EditImageRequest
+{
+    Image = "https://example.com/image.jpg",
+    Prompt = "Change the sky to a sunrise"
+});
+
+// Multi-image editing
+var multiEditResponse = await client.Images.MultiEditImageAsync(new MultiEditImageRequest
+{
+    Images = new List<string> { baseImageBase64, layerBase64 },
+    Prompt = "Add the object from the second image to the first"
+});
+
+// Remove background
+var bgResponse = await client.Images.RemoveBackgroundAsync(new BackgroundRemoveImageRequest
+{
+    ImageUrl = "https://example.com/photo.jpg"
+});
+```
+
+### Web Search & Scraping
+
+```csharp
+var search = await client.Augment.SearchWebAsync(new WebSearchRequest
+{
+    Query = "latest AI news",
+    Limit = 10
+});
+
+foreach (var result in search.Results)
+{
+    Console.WriteLine($"{result.Title} - {result.Url}");
+}
+
+var scraped = await client.Augment.ScrapeWebAsync(new WebScrapeRequest
+{
+    Url = "https://example.com"
+});
+Console.WriteLine(scraped.Content);
+
+var parsed = await client.Augment.ParseTextAsync(new TextParserRequest
+{
+    File = await File.ReadAllBytesAsync("document.pdf"),
+    Filename = "document.pdf"
+});
+Console.WriteLine(parsed.Text);
+```
+
+### Responses API (Alpha)
+
+```csharp
+var request = new ResponsesRequest
+{
+    Model = TextModel.Glm51,
+    Input = "Hello! What can you do?"
+};
+
+var response = await client.Responses.CreateResponseAsync(request);
+
+foreach (var item in response.Output.Where(o => o.Type == "message"))
+{
+    var text = item.Content?.FirstOrDefault(c => c.Type == "output_text")?.Text;
+    Console.WriteLine(text);
+}
+```
+
 ### Embeddings
 
 ```csharp
@@ -336,11 +477,14 @@ The SDK provides strongly-typed enums for all Venice AI models:
 
 | Category | Examples | Enum |
 |----------|----------|------|
-| **Text** | `llama-3.3-70b`, `claude-sonnet-4-6`, `openai-gpt-52`, `gemini-3-flash-preview` | `TextModel` |
-| **Image** | `hidream`, `flux-2-max`, `gpt-image-1-5`, `venice-sd35` | `ImageModel` |
-| **Video** | `wan-2.6-text-to-video`, `veo3-full-text-to-video`, `sora-2-pro-text-to-video` | `VideoModel` |
-| **Audio** | `tts-kokoro` | — |
-| **Embedding** | `text-embedding-bge-m3` | — |
+| **Text** | `llama-3.3-70b`, `claude-opus-5`, `openai-gpt-56-sol`, `gemini-3-7-flash` | `TextModel` |
+| **Image** | `venice-sd35`, `flux-2-pro`, `qwen-image-3`, `nano-banana-pro` | `ImageModel` |
+| **Video** | `wan-3-0-text-to-video`, `seedance-2-5-text-to-video-basic`, `kling-v3-turbo-pro-text-to-video` | `VideoModel` |
+| **Music/Audio** | `elevenlabs-music`, `minimax-music-v26`, `lyria-3-pro` | `MusicModel` |
+| **Speech-to-Text** | `openai/whisper-large-v3`, `nvidia/parakeet-tdt-0.6b-v3` | `AsrModel` |
+| **Text-to-Speech** | `tts-kokoro`, `tts-elevenlabs-turbo-v2-5` | `TextToSpeechModel` |
+| **Embedding** | `text-embedding-bge-m3`, `text-embedding-3-large` | `EmbeddingModel` |
+| **Image Edit** | `firered-image-edit`, `gpt-image-2-edit` | `InpaintModel` |
 
 Use `client.Models.GetModelsAsync()` for the full, up-to-date list of available models.
 

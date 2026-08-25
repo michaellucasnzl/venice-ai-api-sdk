@@ -46,4 +46,14 @@ public interface IVeniceAIClient
     /// Gets the character service.
     /// </summary>
     ICharacterService Characters { get; }
+
+    /// <summary>
+    /// Gets the augment service (web search, web scraping, and text parsing).
+    /// </summary>
+    IAugmentService Augment { get; }
+
+    /// <summary>
+    /// Gets the Responses API service (Alpha).
+    /// </summary>
+    IResponsesService Responses { get; }
 }

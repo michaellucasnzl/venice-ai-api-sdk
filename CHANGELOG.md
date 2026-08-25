@@ -5,6 +5,106 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-08-26
+
+### Added
+
+#### New Text Models
+- `Gemini36Flash` (`gemini-3-6-flash`) — Google Gemini 3.6 Flash, high speed high value thinking model with 1M context
+- `Gemini37Flash` (`gemini-3-7-flash`) — Google Gemini 3.7 Flash, most capable Flash model for complex coding
+- `Gemini35FlashLite` (`gemini-3-5-flash-lite`) — Fastest, most cost-efficient Gemini 3.5 model
+- `ClaudeOpus5` (`claude-opus-5`) — Anthropic Claude Opus 5, most capable Opus model with 1M context
+- `ClaudeOpus5Fast` (`claude-opus-5-fast`) — Speed-optimized Claude Opus 5 variant
+- `ClaudeSonnet5` (`claude-sonnet-5`) — Anthropic Claude Sonnet 5 with near-Opus quality
+- `Grok4_5` (`grok-4-5`) — xAI Grok 4.5 intelligent coding model
+- `Grok4_6` (`grok-4-6`) — xAI Grok 4.6 multimodal chat and reasoning model
+- `KimiK3` (`kimi-k3`) — Moonshot AI Kimi K3 ultra-large multimodal reasoning model
+- `KimiK3FastApi` (`kimi-k3-fast-api`) — Fast API variant of Kimi K3
+- `OpenAIGpt56Luna` (`openai-gpt-56-luna`) — OpenAI GPT-5.6 Luna, fast cost-efficient model
+- `OpenAIGpt56LunaPro` (`openai-gpt-56-luna-pro`) — GPT-5.6 Luna Pro with pro reasoning
+- `OpenAIGpt56Sol` (`openai-gpt-56-sol`) — OpenAI GPT-5.6 Sol flagship model
+- `OpenAIGpt56SolPro` (`openai-gpt-56-sol-pro`) — GPT-5.6 Sol Pro with pro reasoning
+- `OpenAIGpt56Terra` (`openai-gpt-56-terra`) — OpenAI GPT-5.6 Terra balanced model
+- `OpenAIGpt56TerraPro` (`openai-gpt-56-terra-pro`) — GPT-5.6 Terra Pro with pro reasoning
+- `Qwen38Max` (`qwen-3-8-max`) — Alibaba Qwen 3.8 Max, 2.4T-parameter flagship MoE
+- `Qwen38_27B` (`qwen-3-8-27b`) — Alibaba Qwen 3.8 27B vision-language model
+- `Qwen38_2_4T_A95B` (`qwen-3-8-2-4t-a95b`) — Qwen 3.8 2.4T text-only MoE model
+- `Qwen36_35B_A3B` (`qwen3-6-35b-a3b`) — Fast Qwen 3.6 35B A3B MoE model
+- `Glm52` (`zai-org-glm-5-2`) — Z.AI GLM-5.2 next-generation model
+- `ZAIGlm53` (`z-ai-glm-5-3`) — Z.AI GLM-5.3 large-scale reasoning model
+- `DeepSeekV4Flash0731` (`deepseek-v4-flash-0731`) — DeepSeek V4 Flash 284B MoE
+- `DeepSeekV4Flash0731Fast` (`deepseek-v4-flash-0731-fast`) — Fast DeepSeek V4 Flash variant
+- `DeepSeekV4Pro0813` (`deepseek-v4-pro-0813`) — DeepSeek V4 Pro 1.6T MoE model
+- `E2EEDeepSeekV4Flash` (`e2ee-deepseek-v4-flash`) — DeepSeek V4 Flash in TEE
+- `E2EEGlm52` (`e2ee-glm-5-2-p`) — GLM 5.2 in TEE
+- `E2EEQwen36_27B` (`e2ee-qwen3-6-27b`) — Qwen 3.6 27B FP8 in TEE
+- `AionLabs3_0` (`aion-labs-aion-3-0`) — AionLabs 3.0 multi-model roleplaying system
+- `AionLabs3_0Mini` (`aion-labs-aion-3-0-mini`) — AionLabs 3.0 Mini
+- `Inkling` (`inkling`) — Thinking Machines Lab multimodal model
+- `Seed21Turbo` (`seed-2-1-turbo`) — ByteDance Seed 2.1 Turbo multimodal model
+- `StealthOxAlpha` (`stealth-ox-alpha`) — Ox Alpha reasoning model
+
+#### New Image Models
+- `GrokImagineImage2_0` (`grok-imagine-image-2-0`) — xAI Grok Imagine 2.0
+- `Krea2Turbo` (`krea-2-turbo`) — Krea 2 Turbo image generation
+- `LumaUni1` (`luma-uni-1`) — Luma Uni-1 image generation
+- `LumaUni1Max` (`luma-uni-1-max`) — Luma Uni-1 Max image generation
+- `NanoBanana2Lite` (`nano-banana-2-lite`) — Nano Banana 2 Lite
+- `QwenImage3` (`qwen-image-3`) — Alibaba Qwen Image 3
+- `QwenImage3Pro` (`qwen-image-3-pro`) — Qwen Image 3 Pro
+- `SeedreamV5Pro` (`seedream-v5-pro`) — Seedream V5 Pro
+
+#### New Video Models
+- `Flux3TextToVideo` / `Flux3ImageToVideo` / `Flux3FirstLastFrameToVideo` — Flux 3 video models
+- `GeminiOmniFlashTextToVideo` / `GeminiOmniFlashImageToVideo` / `GeminiOmniFlashReferenceToVideo` — Gemini Omni Flash video models
+- `KlingV3TurboProTextToVideo` / `KlingV3TurboProImageToVideo` — Kling V3 Turbo Pro
+- `KlingV3TurboStandardTextToVideo` / `KlingV3TurboStandardImageToVideo` — Kling V3 Turbo Standard
+- `Ltx2_5FastTextToVideo` / `Ltx2_5FastImageToVideo` / `Ltx2_5ProTextToVideo` / `Ltx2_5ProImageToVideo` — LTX Video 2.5 models
+- `MinimaxH3TextToVideo` / `MinimaxH3ImageToVideo` / `MinimaxH3ReferenceToVideo` / `MinimaxH3EnhancedTextToVideo` / `MinimaxH3EnhancedReferenceToVideo` — MiniMax H3 video models
+- `Seedance15ProTextToVideoBasic` / `Seedance15ProImageToVideoBasic` — Seedance 1.5 Pro basic
+- `Seedance20*Basic` — Seedance 2.0 basic text/image/reference/fast/mini variants
+- `Seedance25TextToVideoBasic` / `Seedance25ImageToVideoBasic` / `Seedance25ReferenceToVideoBasic` — Seedance 2.5 basic
+- `Wan22EnhancedImageToVideo` — Wan 2.2 Enhanced
+- `Wan27EnhancedTextToVideo` / `Wan27EnhancedImageToVideo` — Wan 2.7 Enhanced
+- `Wan30TextToVideo` / `Wan30ImageToVideo` / `Wan30ReferenceToVideo` — Wan 3.0
+- `Wan30PrimeTextToVideo` / `Wan30PrimeImageToVideo` / `Wan30PrimeReferenceToVideo` — Wan 3.0 Prime
+- `HappyHorse11TextToVideo` / `HappyHorse11ImageToVideo` / `HappyHorse11ReferenceToVideo` — HappyHorse 1.1
+- `GrokImagine15TextToVideoPrivate` / `GrokImagine15ReferenceToVideoPrivate` — Grok Imagine 1.5 private
+
+#### New Music & ASR Model Enums
+- New `MusicModel` enum with 14 music/audio generation models (`ElevenlabsMusic`, `MinimaxMusicV2`/`V25`/`V26`, `AceStep15`, `Lyria3Pro`, `SoniloV11Music`, and more)
+- New `AsrModel` enum with 5 speech-to-text models (`WhisperLargeV3`, `ParakeetTdt06bV3`, `ScribeV2`, `Wizper`, `SttXaiV1`)
+- Expanded `EmbeddingModel` enum with 9 embedding models
+- Expanded `TextToSpeechModel` enum with 11 TTS models
+- Expanded `InpaintModel` enum with 21 image editing models
+- Added `ModelType.Music`
+
+#### New Services & Endpoints
+- **Augment API**: new `IAugmentService`/`AugmentService` (`client.Augment`) with `SearchWebAsync`, `ScrapeWebAsync`, `ParseTextAsync`
+- **Responses API (Alpha)**: new `IResponsesService`/`ResponsesService` (`client.Responses`) with `CreateResponseAsync`
+- **Audio**: queue/retrieve/complete/quote for audio generation, audio transcription, and voice cloning
+- **Video**: `TranscribeVideoAsync` for YouTube video transcription
+- **Images**: `MultiEditImageAsync` and `RemoveBackgroundAsync`
+
+#### New Request Parameters
+- Chat: `Fallbacks`, `Include`, `Store`, `Text` (verbosity)
+- Image generation: `Quality`, `DisablePromptOptimizationThinking`, `EnhancePrompt`, `StyleReferences`
+- Model spec: new fields (`MaxCompletionTokens`, `Privacy`, `Deprecation`, `SupportsE2EE`, `SupportsReasoningEffort`, etc.)
+
+### Changed
+- Updated SDK to match OpenAPI spec version `20260824.012517`
+- `IVeniceAIClient` now exposes `Augment` and `Responses` services
+
+### Deprecated
+- Various removed models marked `[Obsolete]` with replacement suggestions:
+  - `AionLabs2_0` → `AionLabs3_0`
+  - `ClaudeOpus4_6Fast`/`ClaudeOpus4_7Fast` → `ClaudeOpus5Fast`
+  - `MinimaxM3` → `MinimaxM3Preview`
+  - `NvidiaNemotronCascade2_30B` → `NvidiaNemotron3Ultra550B`
+  - `Qwen3Coder480B` → `Qwen3Coder480BTurbo`
+  - Obsolete LTX/Seedance video models → new basic/enhanced variants
+  - `Wan27Uncensored*` video models → `Wan27Enhanced*`
+
 ## [2.3.0] - 2026-06-16
 
 ### Added

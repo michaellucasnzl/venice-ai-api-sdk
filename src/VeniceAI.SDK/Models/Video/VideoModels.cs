@@ -346,3 +346,33 @@ public class QuoteVideoResponse : BaseResponse
     [JsonPropertyName("resolution")]
     public string? Resolution { get; set; }
 }
+
+/// <summary>
+/// Request to transcribe a YouTube video URL to text.
+/// </summary>
+public class VideoTranscriptionRequest
+{
+    /// <summary>
+    /// YouTube video URL to transcribe.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public string Url { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The format of the transcript output (json, text).
+    /// </summary>
+    [JsonPropertyName("response_format")]
+    public string? ResponseFormat { get; set; }
+}
+
+/// <summary>
+/// Response from transcribing a video to text.
+/// </summary>
+public class VideoTranscriptionResponse : BaseResponse
+{
+    /// <summary>
+    /// The transcribed text.
+    /// </summary>
+    [JsonPropertyName("text")]
+    public string Text { get; set; } = string.Empty;
+}

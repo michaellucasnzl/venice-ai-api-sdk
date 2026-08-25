@@ -160,6 +160,12 @@ public static class ServiceCollectionExtensions
         services.AddTransient<ICharacterService>(serviceProvider =>
             CreateService<CharacterService>(serviceProvider, useProvidedHttpClient));
 
+        services.AddTransient<IAugmentService>(serviceProvider =>
+            CreateService<AugmentService>(serviceProvider, useProvidedHttpClient));
+
+        services.AddTransient<IResponsesService>(serviceProvider =>
+            CreateService<ResponsesService>(serviceProvider, useProvidedHttpClient));
+
         services.AddTransient<IVeniceAIClient, VeniceAIClient>();
 
         return services;

@@ -210,4 +210,40 @@ public class VideoService : BaseHttpService, IVideoService
             throw new VeniceAIException($"Unexpected error during video quote: {ex.Message}", ex);
         }
     }
+
+    /// <summary>
+    /// Transcribes a YouTube video URL to text.
+    /// </summary>
+    /// <param name="request">The video transcription request.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The video transcription response.</returns>
+    public async Task<VideoTranscriptionResponse> TranscribeVideoAsync(
+        VideoTranscriptionRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (string.IsNullOrEmpty(request.Url))
+            throw new ArgumentException("Url is required", nameof(request));
+
+        try
+        {
+            var response = await PostAsync<VideoTranscriptionRequest, VideoTranscriptionResponse>(
+                "video/transcriptions",
+                request,
+                cancellationToken);
+
+            response.IsSuccess = true;
+            response.StatusCode = 200;
+            return response;
+        }
+        catch (VeniceAIException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw new VeniceAIException($"Unexpected error during video transcription: {ex.Message}", ex);
+        }
+    }
 }
