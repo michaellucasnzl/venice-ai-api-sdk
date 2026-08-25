@@ -12,6 +12,10 @@
         ModelSource: https://huggingface.co/stabilityai/stable-diffusion-3.5-large,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 1500,
           Steps: {
@@ -33,6 +37,37 @@
       }
     },
     {
+      Id: grok-imagine-image-2-0,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Grok Imagine 2.0,
+        Offline: false,
+        Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        ModelSets: [
+          venice_recommendations,
+          featured
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
+        Constraints: {
+          PromptCharacterLimit: 7500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: grok-imagine-image-quality,
       Object: model,
       Created: {Scrubbed},
@@ -42,8 +77,47 @@
         Name: Grok Imagine High Quality (SOTA),
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        ModelSets: [
+          venice_recommendations,
+          featured
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 7500,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: krea-2-turbo,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Krea 2 Turbo,
+        Offline: false,
+        Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        Uncensored: true,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
+        Constraints: {
+          PromptCharacterLimit: 5000,
           Steps: {
             Default: 20,
             Max: 50
@@ -65,6 +139,10 @@
         Name: Flux 2 Pro,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 3000,
           Steps: {
@@ -75,8 +153,8 @@
         },
         Pricing: {
           Generation: {
-            Usd: 0.04,
-            Diem: 0.04
+            Usd: 0.03,
+            Diem: 0.03
           },
           Upscale: {}
         }
@@ -92,6 +170,13 @@
         Name: Flux 2 Max,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 3000,
           Steps: {
@@ -119,6 +204,14 @@
         Name: GPT Image 2,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        ModelSets: [
+          venice_recommendations,
+          featured
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 10000,
           Steps: {
@@ -142,6 +235,10 @@
         Name: GPT Image 1.5,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 5000,
           Steps: {
@@ -169,6 +266,10 @@
         Name: Hunyuan Image 3.0,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 3000,
           Steps: {
@@ -196,6 +297,10 @@
         Name: Ideogram V4,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 10000,
           Steps: {
@@ -206,8 +311,8 @@
         },
         Pricing: {
           Generation: {
-            Usd: 0.15,
-            Diem: 0.15
+            Usd: 0.06,
+            Diem: 0.06
           },
           Upscale: {}
         }
@@ -223,6 +328,10 @@
         Name: ImagineArt 1.5 Pro,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 10000,
           Steps: {
@@ -250,6 +359,10 @@
         Name: Krea v2 Large,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: true,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 5000,
           Steps: {
@@ -277,6 +390,10 @@
         Name: Krea v2 Medium,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: true,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 5000,
           Steps: {
@@ -295,6 +412,71 @@
       }
     },
     {
+      Id: luma-uni-1,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Luma Uni-1,
+        Offline: false,
+        Beta: false,
+        SupportsStyleReferences: true,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
+        Constraints: {
+          PromptCharacterLimit: 6000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.05,
+            Diem: 0.05
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: luma-uni-1-max,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Luma Uni-1 Max,
+        Offline: false,
+        Beta: false,
+        SupportsStyleReferences: true,
+        Privacy: anonymized,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
+        Constraints: {
+          PromptCharacterLimit: 6000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.12,
+            Diem: 0.12
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: nano-banana-2,
       Object: model,
       Created: {Scrubbed},
@@ -304,6 +486,13 @@
         Name: Nano Banana 2,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: true,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 32768,
           Steps: {
@@ -327,6 +516,13 @@
         Name: Nano Banana Pro,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        ModelSets: [
+          featured
+        ],
+        SupportsWebSearch: true,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 32768,
           Steps: {
@@ -341,6 +537,40 @@
       }
     },
     {
+      Id: nano-banana-2-lite,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Nano Banana 2 Lite,
+        Offline: false,
+        Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Generation: {
+            Usd: 0.06,
+            Diem: 0.06
+          },
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: recraft-v4,
       Object: model,
       Created: {Scrubbed},
@@ -350,6 +580,10 @@
         Name: Recraft V4,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 10000,
           Steps: {
@@ -377,6 +611,10 @@
         Name: Recraft V4 Pro,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 10000,
           Steps: {
@@ -404,6 +642,11 @@
         Name: Seedream V4.5,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        Uncensored: true,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 10000,
           Steps: {
@@ -431,6 +674,11 @@
         Name: Seedream V5 Lite,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        Uncensored: true,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 10000,
           Steps: {
@@ -449,6 +697,37 @@
       }
     },
     {
+      Id: seedream-v5-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Seedream V5 Pro,
+        Offline: false,
+        Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        Uncensored: true,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: true,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: qwen-image-2,
       Object: model,
       Created: {Scrubbed},
@@ -458,6 +737,10 @@
         Name: Qwen Image 2,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 10000,
           Steps: {
@@ -485,6 +768,13 @@
         Name: Qwen Image 2 Pro,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 10000,
           Steps: {
@@ -512,6 +802,10 @@
         Name: Wan 2.7,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 3000,
           Steps: {
@@ -539,6 +833,10 @@
         Name: Wan 2.7 Pro,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 3000,
           Steps: {
@@ -566,6 +864,10 @@
         Name: Grok Imagine,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 7500,
           Steps: {
@@ -590,6 +892,11 @@
         ModelSource: https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        Uncensored: true,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 1500,
           Steps: {
@@ -618,6 +925,14 @@
         ModelSource: https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        Uncensored: true,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 1500,
           Steps: {
@@ -649,6 +964,14 @@
         ModelSource: https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        Uncensored: true,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 1500,
           Steps: {
@@ -680,6 +1003,10 @@
         ModelSource: https://huggingface.co/Qwen/Qwen-Image,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 2048,
           Steps: {
@@ -711,6 +1038,14 @@
         ModelSource: https://civitai.com/models/827184?modelVersionId=1761560,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        Uncensored: true,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 1500,
           Steps: {
@@ -739,6 +1074,13 @@
         ModelSource: https://huggingface.co/Tongyi-MAI/Z-Image-Turbo,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 7500,
           Steps: {
@@ -771,6 +1113,15 @@
         ModelSource: https://huggingface.co/lodestones/Chroma1-HD,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: private,
+        Uncensored: true,
+        ModelSets: [
+          venice_recommendations,
+          featured
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 7500,
           Steps: {
@@ -789,6 +1140,70 @@
       }
     },
     {
+      Id: qwen-image-3,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Qwen Image 3,
+        ModelSource: https://www.alibabacloud.com/help/en/model-studio/models,
+        Offline: false,
+        Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        Uncensored: true,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: true,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Upscale: {}
+        }
+      }
+    },
+    {
+      Id: qwen-image-3-pro,
+      Object: model,
+      Created: {Scrubbed},
+      OwnedBy: venice.ai,
+      Type: image,
+      ModelSpec: {
+        Name: Qwen Image 3 Pro,
+        ModelSource: https://www.alibabacloud.com/help/en/model-studio/models,
+        Offline: false,
+        Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        Uncensored: true,
+        ModelSets: [
+          venice_recommendations
+        ],
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: true,
+        Constraints: {
+          PromptCharacterLimit: 10000,
+          Steps: {
+            Default: 20,
+            Max: 50
+          },
+          WidthHeightDivisor: 1
+        },
+        Pricing: {
+          Upscale: {}
+        }
+      }
+    },
+    {
       Id: bria-bg-remover,
       Object: model,
       Created: {Scrubbed},
@@ -798,6 +1213,10 @@
         Name: Background Remover,
         Offline: false,
         Beta: false,
+        SupportsStyleReferences: false,
+        Privacy: anonymized,
+        SupportsWebSearch: false,
+        SupportsOptimizePromptThinking: false,
         Constraints: {
           PromptCharacterLimit: 1500,
           Steps: {

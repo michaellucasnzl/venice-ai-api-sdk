@@ -93,6 +93,26 @@ public static class ModelEnumExtensions
     }
 
     /// <summary>
+    /// Gets the string representation of a music model enum value.
+    /// </summary>
+    /// <param name="model">The music model enum value.</param>
+    /// <returns>The string representation.</returns>
+    public static string ToModelString(this MusicModel model)
+    {
+        return GetEnumDescription(model);
+    }
+
+    /// <summary>
+    /// Gets the string representation of an ASR model enum value.
+    /// </summary>
+    /// <param name="model">The ASR model enum value.</param>
+    /// <returns>The string representation.</returns>
+    public static string ToModelString(this AsrModel model)
+    {
+        return GetEnumDescription(model);
+    }
+
+    /// <summary>
     /// Gets the string representation of an image style enum value.
     /// </summary>
     /// <param name="style">The image style enum value.</param>
@@ -180,6 +200,28 @@ public static class ModelEnumExtensions
     }
 
     /// <summary>
+    /// Parses a string to a MusicModel enum value.
+    /// </summary>
+    /// <param name="modelString">The model string.</param>
+    /// <returns>The MusicModel enum value.</returns>
+    /// <exception cref="VeniceAIException">Thrown when the model string is not valid.</exception>
+    public static MusicModel ParseMusicModel(string modelString)
+    {
+        return ParseEnum<MusicModel>(modelString, "music model");
+    }
+
+    /// <summary>
+    /// Parses a string to an AsrModel enum value.
+    /// </summary>
+    /// <param name="modelString">The model string.</param>
+    /// <returns>The AsrModel enum value.</returns>
+    /// <exception cref="VeniceAIException">Thrown when the model string is not valid.</exception>
+    public static AsrModel ParseAsrModel(string modelString)
+    {
+        return ParseEnum<AsrModel>(modelString, "ASR model");
+    }
+
+    /// <summary>
     /// Parses a string to an ImageStyle enum value.
     /// </summary>
     /// <param name="styleString">The style string.</param>
@@ -263,6 +305,28 @@ public static class ModelEnumExtensions
     /// <param name="model">The parsed VideoModel enum value.</param>
     /// <returns>True if parsing was successful, false otherwise.</returns>
     public static bool TryParseVideoModel(string modelString, out VideoModel model)
+    {
+        return TryParseEnum(modelString, out model);
+    }
+
+    /// <summary>
+    /// Tries to parse a string to a MusicModel enum value.
+    /// </summary>
+    /// <param name="modelString">The model string.</param>
+    /// <param name="model">The parsed MusicModel enum value.</param>
+    /// <returns>True if parsing was successful, false otherwise.</returns>
+    public static bool TryParseMusicModel(string modelString, out MusicModel model)
+    {
+        return TryParseEnum(modelString, out model);
+    }
+
+    /// <summary>
+    /// Tries to parse a string to an AsrModel enum value.
+    /// </summary>
+    /// <param name="modelString">The model string.</param>
+    /// <param name="model">The parsed AsrModel enum value.</param>
+    /// <returns>True if parsing was successful, false otherwise.</returns>
+    public static bool TryParseAsrModel(string modelString, out AsrModel model)
     {
         return TryParseEnum(modelString, out model);
     }
@@ -408,6 +472,44 @@ public static class ModelEnumExtensions
         {
             var validStyles = string.Join(", ", Enum.GetValues<ImageStyle>().Select(s => s.ToStyleString()));
             throw new VeniceAIException($"Invalid image style '{styleString}'. Valid styles are: {validStyles}", 400);
+        }
+    }
+
+    /// <summary>
+    /// Validates that a model string is a valid music model.
+    /// </summary>
+    /// <param name="modelString">The model string to validate.</param>
+    /// <exception cref="VeniceAIException">Thrown when the model string is not valid.</exception>
+    public static void ValidateMusicModel(string modelString)
+    {
+        if (string.IsNullOrWhiteSpace(modelString))
+        {
+            throw new VeniceAIException(ModelCannotBeNullOrEmpty, 400);
+        }
+
+        if (!TryParseMusicModel(modelString, out _))
+        {
+            var validModels = string.Join(", ", Enum.GetValues<MusicModel>().Select(m => m.ToModelString()));
+            throw new VeniceAIException($"Invalid music model '{modelString}'. Valid models are: {validModels}", 400);
+        }
+    }
+
+    /// <summary>
+    /// Validates that a model string is a valid ASR model.
+    /// </summary>
+    /// <param name="modelString">The model string to validate.</param>
+    /// <exception cref="VeniceAIException">Thrown when the model string is not valid.</exception>
+    public static void ValidateAsrModel(string modelString)
+    {
+        if (string.IsNullOrWhiteSpace(modelString))
+        {
+            throw new VeniceAIException(ModelCannotBeNullOrEmpty, 400);
+        }
+
+        if (!TryParseAsrModel(modelString, out _))
+        {
+            var validModels = string.Join(", ", Enum.GetValues<AsrModel>().Select(m => m.ToModelString()));
+            throw new VeniceAIException($"Invalid ASR model '{modelString}'. Valid models are: {validModels}", 400);
         }
     }
 

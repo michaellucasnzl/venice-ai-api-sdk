@@ -204,10 +204,59 @@ public class ChatCompletionRequest
     public VeniceParameters? VeniceParameters { get; set; }
 
     /// <summary>
+    /// Anthropic beta parameter for Claude Fable 5 server-side refusal fallback.
+    /// Forwarded only for direct Anthropic routes; ignored for other providers.
+    /// </summary>
+    [JsonPropertyName("fallbacks")]
+    public List<FallbackModel>? Fallbacks { get; set; }
+
+    /// <summary>
+    /// OpenAI-compatible parameter specifying additional data to include in the response.
+    /// </summary>
+    [JsonPropertyName("include")]
+    public List<string>? Include { get; set; }
+
+    /// <summary>
+    /// This field is accepted for OpenAI compatibility but is not used by Venice.
+    /// </summary>
+    [JsonPropertyName("store")]
+    public bool? Store { get; set; }
+
+    /// <summary>
+    /// OpenAI-compatible text configuration parameter.
+    /// </summary>
+    [JsonPropertyName("text")]
+    public TextConfig? Text { get; set; }
+
+    /// <summary>
     /// This field is discarded on the request but is supported for compatibility.
     /// </summary>
     [JsonPropertyName("user")]
     public string? User { get; set; }
+}
+
+/// <summary>
+/// Fallback model configuration for server-side refusal fallback.
+/// </summary>
+public class FallbackModel
+{
+    /// <summary>
+    /// The fallback model ID.
+    /// </summary>
+    [JsonPropertyName("model")]
+    public string Model { get; set; } = string.Empty;
+}
+
+/// <summary>
+/// OpenAI-compatible text configuration parameter.
+/// </summary>
+public class TextConfig
+{
+    /// <summary>
+    /// Controls the verbosity of the text response (low, medium, high, auto).
+    /// </summary>
+    [JsonPropertyName("verbosity")]
+    public string? Verbosity { get; set; }
 }
 
 /// <summary>

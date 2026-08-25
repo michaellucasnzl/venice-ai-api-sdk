@@ -45,4 +45,20 @@ public interface IImageService
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The available image styles.</returns>
     Task<ImageStylesResponse> GetImageStylesAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Edits multiple images together based on the given prompt.
+    /// </summary>
+    /// <param name="request">The multi-edit image request.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The edited image response.</returns>
+    Task<ImageGenerationResponse> MultiEditImageAsync(MultiEditImageRequest request, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Removes the background from an image.
+    /// </summary>
+    /// <param name="request">The background removal request.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The resulting image response.</returns>
+    Task<ImageGenerationResponse> RemoveBackgroundAsync(BackgroundRemoveImageRequest request, CancellationToken cancellationToken = default);
 }

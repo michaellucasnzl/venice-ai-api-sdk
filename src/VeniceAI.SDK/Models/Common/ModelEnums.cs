@@ -38,7 +38,10 @@ public enum ModelType
     Upscale,
 
     [Description("inpaint")]
-    Inpaint
+    Inpaint,
+
+    [Description("music")]
+    Music
 }
 
 /// <summary>
@@ -99,6 +102,7 @@ public enum TextModel
     /// <summary>
     /// Qwen3 Coder 480B - Large coding-optimized model (default_code trait)
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Qwen3Coder480BTurbo (qwen3-coder-480b-a35b-instruct-turbo) instead.")]
     [Description("qwen3-coder-480b-a35b-instruct")]
     Qwen3Coder480B,
 
@@ -194,6 +198,7 @@ public enum TextModel
     /// Claude Opus 4.6 Fast - Speed-optimized variant of Claude Opus 4.6 with lower latency via optimized routing.
     /// Model ID: claude-opus-4-6-fast
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use ClaudeOpus5Fast (claude-opus-5-fast) instead.")]
     [Description("claude-opus-4-6-fast")]
     ClaudeOpus46Fast,
 
@@ -398,6 +403,7 @@ public enum TextModel
     /// Supports tool calling, multilingual input, and 256K context windows.
     /// Model ID: arcee-trinity-large-thinking
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Qwen38Max or another large reasoning model instead.")]
     [Description("arcee-trinity-large-thinking")]
     ArceeTrinityLargeThinking,
 
@@ -434,6 +440,7 @@ public enum TextModel
     /// Nemotron Cascade 2 30B A3B - Reasoning-optimized model from NVIDIA with strong reasoning capabilities.
     /// Model ID: nvidia-nemotron-cascade-2-30b-a3b
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use NvidiaNemotron3Ultra550B (nvidia-nemotron-3-ultra-550b-a55b) instead.")]
     [Description("nvidia-nemotron-cascade-2-30b-a3b")]
     NvidiaNemotronCascade2_30B,
 
@@ -486,6 +493,7 @@ public enum TextModel
     /// Aion 2.0 - DeepSeek V3.2-based model fine-tuned for immersive roleplaying and long-form storytelling.
     /// Model ID: aion-labs.aion-2-0
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use AionLabs3_0 (aion-labs-aion-3-0) instead.")]
     [Description("aion-labs-aion-2-0")]
     AionLabs2_0,
 
@@ -516,6 +524,7 @@ public enum TextModel
     /// Venice Uncensored 1.1 (E2EE TEE) - Venice Uncensored running in a Trusted Execution Environment.
     /// Model ID: e2ee-venice-uncensored-24b-p
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use a newer Venice uncensored model instead.")]
     [Description("e2ee-venice-uncensored-24b-p")]
     E2EEVeniceUncensored24B,
 
@@ -530,6 +539,7 @@ public enum TextModel
     /// GLM 4.7 (E2EE TEE) - Z.AI's flagship model running in a Trusted Execution Environment.
     /// Model ID: e2ee-glm-4-7-p
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use E2EEGlm52 (e2ee-glm-5-2-p) instead.")]
     [Description("e2ee-glm-4-7-p")]
     E2EEGlm47,
 
@@ -537,6 +547,7 @@ public enum TextModel
     /// GLM 4.7 Flash (E2EE TEE) - A 30B-class model optimized for agentic coding running in a Trusted Execution Environment.
     /// Model ID: e2ee-glm-4-7-flash-p
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use E2EEGlm52 (e2ee-glm-5-2-p) instead.")]
     [Description("e2ee-glm-4-7-flash-p")]
     E2EEGlm47Flash,
 
@@ -574,6 +585,7 @@ public enum TextModel
     /// Qwen3 30B A3B (E2EE TEE) - MoE model with 30.5B total parameters and 3.3B activated per inference running in a Trusted Execution Environment.
     /// Model ID: e2ee-qwen3-30b-a3b-p
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use E2EEQwen36_27B (e2ee-qwen3-6-27b) instead.")]
     [Description("e2ee-qwen3-30b-a3b-p")]
     E2EEQwen3_30B_A3B,
 
@@ -674,6 +686,7 @@ public enum TextModel
     /// Claude Opus 4.7 Fast - Speed-optimized variant of Claude Opus 4.7 with lower latency.
     /// Model ID: claude-opus-4-7-fast
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use ClaudeOpus5Fast (claude-opus-5-fast) instead.")]
     [Description("claude-opus-4-7-fast")]
     ClaudeOpus4_7Fast,
 
@@ -730,6 +743,7 @@ public enum TextModel
     /// MiniMax M3 - MiniMax's latest model.
     /// Model ID: minimax-m3
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use MinimaxM3Preview (minimax-m3-preview) instead.")]
     [Description("minimax-m3")]
     MinimaxM3,
 
@@ -808,6 +822,7 @@ public enum TextModel
     /// with 256K context.
     /// Model ID: tencent-hy3-preview
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use a newer large reasoning model instead.")]
     [Description("tencent-hy3-preview")]
     TencentHy3Preview,
 
@@ -819,6 +834,237 @@ public enum TextModel
     /// </summary>
     [Description("xiaomi-mimo-v2-5")]
     XiaomiMimoV25,
+
+    /// <summary>
+    /// Aion 3.0 is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. Multiple specialized models collaborate on each response to produce stronger narrative structure and more compelling tension and conflict. It handles mature and darker themes with nuance and supports tool calling for richer interactive fiction.
+    /// Model ID: aion-labs-aion-3-0
+    /// </summary>
+    [Description("aion-labs-aion-3-0")]
+    AionLabs3_0,
+
+    /// <summary>
+    /// Aion 3.0 Mini is a multi-model roleplaying and storytelling system from AionLabs, built on the DeepSeek family of models. Multiple specialized models collaborate on each response to produce stronger narrative structure and more compelling tension and conflict at lower cost. It handles mature and darker themes with nuance and supports tool calling for richer interactive fiction.
+    /// Model ID: aion-labs-aion-3-0-mini
+    /// </summary>
+    [Description("aion-labs-aion-3-0-mini")]
+    AionLabs3_0Mini,
+
+    /// <summary>
+    /// Claude Opus 5 is Anthropic's most capable model in the Opus family. It delivers major gains over Opus 4.8 in agentic coding, professional knowledge work, and long-horizon reasoning, with a 1M token context window, 128K max output tokens, adaptive thinking, and strong multimodal capabilities.
+    /// Model ID: claude-opus-5
+    /// </summary>
+    [Description("claude-opus-5")]
+    ClaudeOpus5,
+
+    /// <summary>
+    /// Claude Opus 5 (Fast) is a speed-optimized variant of Anthropic's most capable Opus model, offering the same 1M token context window and strong performance across agentic coding, professional knowledge work, and long-horizon reasoning — with lower latency.
+    /// Model ID: claude-opus-5-fast
+    /// </summary>
+    [Description("claude-opus-5-fast")]
+    ClaudeOpus5Fast,
+
+    /// <summary>
+    /// Claude Sonnet 5 is Anthropic's latest Sonnet model, substantially improving on Sonnet 4.6 in coding and agentic work and reaching near-Opus quality on many tasks. It features a 1M token context window, adaptive thinking, and strong document and vision understanding.
+    /// Model ID: claude-sonnet-5
+    /// </summary>
+    [Description("claude-sonnet-5")]
+    ClaudeSonnet5,
+
+    /// <summary>
+    /// DeepSeek V4 Flash is an efficiency-optimized 284B-parameter Mixture-of-Experts model with 13B active parameters and a 1M-token context window. Tuned for fast inference and high-throughput workloads while maintaining strong reasoning and coding performance.
+    /// Model ID: deepseek-v4-flash-0731
+    /// </summary>
+    [Description("deepseek-v4-flash-0731")]
+    DeepSeekV4Flash0731,
+
+    /// <summary>
+    /// DeepSeek V4 Flash is an efficiency-optimized 284B-parameter Mixture-of-Experts model with 13B active parameters and a 1M-token context window. Tuned for fast inference and high-throughput workloads while maintaining strong reasoning and coding performance.
+    /// Model ID: deepseek-v4-flash-0731-fast
+    /// </summary>
+    [Description("deepseek-v4-flash-0731-fast")]
+    DeepSeekV4Flash0731Fast,
+
+    /// <summary>
+    /// DeepSeek V4 Pro is a 1.6T-parameter Mixture-of-Experts model with 49B active parameters and a 1M-token context window. Built for advanced reasoning, coding, and long-horizon agentic workflows with a hybrid attention system for efficient long-context processing.
+    /// Model ID: deepseek-v4-pro-0813
+    /// </summary>
+    [Description("deepseek-v4-pro-0813")]
+    DeepSeekV4Pro0813,
+
+    /// <summary>
+    /// DeepSeek V4 Flash running in a Trusted Execution Environment (TEE). Hardware attestation evidence is available for independent verification of enclave identity and configuration.
+    /// Model ID: e2ee-deepseek-v4-flash
+    /// </summary>
+    [Description("e2ee-deepseek-v4-flash")]
+    E2EEDeepSeekV4Flash,
+
+    /// <summary>
+    /// GLM 5.2 running in a Trusted Execution Environment (TEE). Z.AI's flagship model for long-horizon tasks with enhanced reasoning and project-level engineering context, with hardware attestation evidence available for independent verification.
+    /// Model ID: e2ee-glm-5-2-p
+    /// </summary>
+    [Description("e2ee-glm-5-2-p")]
+    E2EEGlm52,
+
+    /// <summary>
+    /// Qwen 3.6 27B FP8 running in a Trusted Execution Environment (TEE). Hardware attestation evidence is available for independent verification of enclave identity and configuration.
+    /// Model ID: e2ee-qwen3-6-27b
+    /// </summary>
+    [Description("e2ee-qwen3-6-27b")]
+    E2EEQwen36_27B,
+
+    /// <summary>
+    /// Gemini 3.5 Flash-Lite is the fastest, most cost-efficient Gemini 3.5 model with 1M context, ideal for everyday questions, summarization, and lightweight coding tasks.
+    /// Model ID: gemini-3-5-flash-lite
+    /// </summary>
+    [Description("gemini-3-5-flash-lite")]
+    Gemini35FlashLite,
+
+    /// <summary>
+    /// Gemini 3.6 Flash is a high speed, high value thinking model with 1M context, designed for agentic workflows, multi-turn chat, and coding assistance. It delivers near Pro level reasoning with substantially lower latency.
+    /// Model ID: gemini-3-6-flash
+    /// </summary>
+    [Description("gemini-3-6-flash")]
+    Gemini36Flash,
+
+    /// <summary>
+    /// Gemini 3.7 Flash is Google's most capable Flash model, built for complex coding, agentic workflows, and reliable multi-step execution, with 1M context and tunable thinking.
+    /// Model ID: gemini-3-7-flash
+    /// </summary>
+    [Description("gemini-3-7-flash")]
+    Gemini37Flash,
+
+    /// <summary>
+    /// Grok 4.5 is xAI's intelligent coding model for agentic software engineering and workflow tasks, with function calling, structured outputs, and a 500K-token context window.
+    /// Model ID: grok-4-5
+    /// </summary>
+    [Description("grok-4-5")]
+    Grok4_5,
+
+    /// <summary>
+    /// Grok 4.6 is xAI's multimodal chat and reasoning model with function calling, structured outputs, adjustable reasoning effort (low/medium/high/xhigh), and a 500K-token context window.
+    /// Model ID: grok-4-6
+    /// </summary>
+    [Description("grok-4-6")]
+    Grok4_6,
+
+    /// <summary>
+    /// Inkling is a general-purpose multimodal model from Thinking Machines Lab that accepts text, image, and audio inputs and generates text. It is a 66-layer sparse MoE (975B total / 41B active) with hybrid local/global attention, 512K context, and variable thinking effort — suited for chat, coding, tool use, and agentic workflows. Video input is not supported on Venice.
+    /// Model ID: inkling
+    /// </summary>
+    [Description("inkling")]
+    Inkling,
+
+    /// <summary>
+    /// Kimi K3 is an ultra-large-scale, open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at navigating large repositories, using tools, debugging, and iterating against images, logs, tests, and runtime feedback.
+    /// Model ID: kimi-k3
+    /// </summary>
+    [Description("kimi-k3")]
+    KimiK3,
+
+    /// <summary>
+    /// Kimi K3 is an ultra-large-scale, open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at navigating large repositories, using tools, debugging, and iterating against images, logs, tests, and runtime feedback.
+    /// Model ID: kimi-k3-fast-api
+    /// </summary>
+    [Description("kimi-k3-fast-api")]
+    KimiK3FastApi,
+
+    /// <summary>
+    /// GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for its price tier.
+    /// Model ID: openai-gpt-56-luna
+    /// </summary>
+    [Description("openai-gpt-56-luna")]
+    OpenAIGpt56Luna,
+
+    /// <summary>
+    /// GPT-5.6 Luna Pro is the same underlying model as GPT-5.6 Luna, served with reasoning.mode set to pro for higher-quality responses on complex tasks.
+    /// Model ID: openai-gpt-56-luna-pro
+    /// </summary>
+    [Description("openai-gpt-56-luna-pro")]
+    OpenAIGpt56LunaPro,
+
+    /// <summary>
+    /// GPT-5.6 Sol is the flagship model in OpenAI's GPT-5.6 series. It is suited for complex reasoning, coding, and agentic workflows, and is particularly strong at command-line and multi-step coding tasks and long-horizon problem solving.
+    /// Model ID: openai-gpt-56-sol
+    /// </summary>
+    [Description("openai-gpt-56-sol")]
+    OpenAIGpt56Sol,
+
+    /// <summary>
+    /// GPT-5.6 Sol Pro is the same underlying model as GPT-5.6 Sol, served with reasoning.mode set to pro for higher-quality responses on complex tasks.
+    /// Model ID: openai-gpt-56-sol-pro
+    /// </summary>
+    [Description("openai-gpt-56-sol-pro")]
+    OpenAIGpt56SolPro,
+
+    /// <summary>
+    /// GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic tasks where capability and cost need to be balanced.
+    /// Model ID: openai-gpt-56-terra
+    /// </summary>
+    [Description("openai-gpt-56-terra")]
+    OpenAIGpt56Terra,
+
+    /// <summary>
+    /// GPT-5.6 Terra Pro is the same underlying model as GPT-5.6 Terra, served with reasoning.mode set to pro for higher-quality responses on complex tasks.
+    /// Model ID: openai-gpt-56-terra-pro
+    /// </summary>
+    [Description("openai-gpt-56-terra-pro")]
+    OpenAIGpt56TerraPro,
+
+    /// <summary>
+    /// Qwen 3.8 2.4T is Alibaba's open-weight 2.4-trillion-parameter MoE model (95B active), with major gains in software engineering, research, and long-horizon agentic tasks. It is text-only, requires thinking mode, and supports a 262K-token context window.
+    /// Model ID: qwen-3-8-2-4t-a95b
+    /// </summary>
+    [Description("qwen-3-8-2-4t-a95b")]
+    Qwen38_2_4T_A95B,
+
+    /// <summary>
+    /// Qwen 3.8 27B is a native vision-language dense model with 27B parameters. It improves coding, professional work, research, and long-horizon agentic tasks, with flexible thinking control and image and video understanding. It supports a native 262K-token context window.
+    /// Model ID: qwen-3-8-27b
+    /// </summary>
+    [Description("qwen-3-8-27b")]
+    Qwen38_27B,
+
+    /// <summary>
+    /// Qwen 3.8 Max is Alibaba's flagship 2.4-trillion-parameter MoE model, with major gains over Qwen 3.7 Max in software engineering and office-productivity workflows and strong long-horizon, multi-agent performance. It accepts both text and vision-language input (images and video), operates in thinking mode only, and supports a 1M-token context window.
+    /// Model ID: qwen-3-8-max
+    /// </summary>
+    [Description("qwen-3-8-max")]
+    Qwen38Max,
+
+    /// <summary>
+    /// Qwen 3.6 35B A3B is a fast mixture-of-experts model with 35B total parameters and ~3B active per token. Strong at agentic coding, STEM reasoning, and tool use, with a native 256K context window.
+    /// Model ID: qwen3-6-35b-a3b
+    /// </summary>
+    [Description("qwen3-6-35b-a3b")]
+    Qwen36_35B_A3B,
+
+    /// <summary>
+    /// Seed 2.1 Turbo (Dola-Seed-2.1) is ByteDance’s next-generation multimodal model for the coding and agent era, with engineering-grade code delivery, long-horizon agent execution, and upgraded GUI and video understanding. Supports text, image, and video inputs with a 256K context window.
+    /// Model ID: seed-2-1-turbo
+    /// </summary>
+    [Description("seed-2-1-turbo")]
+    Seed21Turbo,
+
+    /// <summary>
+    /// Ox Alpha is a reasoning model designed for coding, sustained agentic work, and production workloads. It is suited for long-horizon software engineering, complex reasoning, and workflows that combine text with visual context.
+    /// Model ID: stealth-ox-alpha
+    /// </summary>
+    [Description("stealth-ox-alpha")]
+    StealthOxAlpha,
+
+    /// <summary>
+    /// GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves on GLM-5.2 in coding and in the balance between performance and token efficiency.
+    /// Model ID: z-ai-glm-5-3
+    /// </summary>
+    [Description("z-ai-glm-5-3")]
+    ZAIGlm53,
+
+    /// <summary>
+    /// GLM-5.2 is the next-generation large language model developed by Zhiyuan AI, featuring significantly enhanced reasoning capabilities, improved instruction following, and support for multiple languages. Supports large context windows for processing extensive text and detailed analysis with fast inference speed.
+    /// Model ID: zai-org-glm-5-2
+    /// </summary>
+    [Description("zai-org-glm-5-2")]
+    Glm52,
 
     // Obsolete models - kept for backward compatibility
     [Obsolete("This model is no longer available in the Venice AI API. Use Glm47 (zai-org-glm-4.7) instead.")]
@@ -1090,6 +1336,62 @@ public enum ImageModel
     [Description("krea-v2-medium")]
     KreaV2Medium,
 
+    /// <summary>
+    /// Grok Imagine 2.0 image generation model.
+    /// Model ID: grok-imagine-image-2-0
+    /// </summary>
+    [Description("grok-imagine-image-2-0")]
+    GrokImagineImage2_0,
+
+    /// <summary>
+    /// Krea 2 Turbo image generation model.
+    /// Model ID: krea-2-turbo
+    /// </summary>
+    [Description("krea-2-turbo")]
+    Krea2Turbo,
+
+    /// <summary>
+    /// Luma Uni-1 image generation model.
+    /// Model ID: luma-uni-1
+    /// </summary>
+    [Description("luma-uni-1")]
+    LumaUni1,
+
+    /// <summary>
+    /// Luma Uni-1 Max image generation model.
+    /// Model ID: luma-uni-1-max
+    /// </summary>
+    [Description("luma-uni-1-max")]
+    LumaUni1Max,
+
+    /// <summary>
+    /// Nano Banana 2 Lite image generation model.
+    /// Model ID: nano-banana-2-lite
+    /// </summary>
+    [Description("nano-banana-2-lite")]
+    NanoBanana2Lite,
+
+    /// <summary>
+    /// Qwen Image 3 image generation model.
+    /// Model ID: qwen-image-3
+    /// </summary>
+    [Description("qwen-image-3")]
+    QwenImage3,
+
+    /// <summary>
+    /// Qwen Image 3 Pro image generation model.
+    /// Model ID: qwen-image-3-pro
+    /// </summary>
+    [Description("qwen-image-3-pro")]
+    QwenImage3Pro,
+
+    /// <summary>
+    /// Seedream V5 Pro image generation model.
+    /// Model ID: seedream-v5-pro
+    /// </summary>
+    [Description("seedream-v5-pro")]
+    SeedreamV5Pro,
+
     // Obsolete models - kept for backward compatibility
     [Obsolete("This model is no longer available in the Venice AI API. Use VeniceSD35 or HiDream instead.")]
     [Description("flux-dev")]
@@ -1140,24 +1442,28 @@ public enum VideoModel
     /// <summary>
     /// LTX Video 2.0 Fast - Image to Video generation
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Ltx2_5FastImageToVideo (ltx-2-5-fast-image-to-video) instead.")]
     [Description("ltx-2-fast-image-to-video")]
     Ltx2FastImageToVideo,
 
     /// <summary>
     /// LTX Video 2.0 Fast - Text to Video generation
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Ltx2_5FastTextToVideo (ltx-2-5-fast-text-to-video) instead.")]
     [Description("ltx-2-fast-text-to-video")]
     Ltx2FastTextToVideo,
 
     /// <summary>
     /// LTX Video 2.0 Full Quality - Image to Video generation
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Ltx2_5ProImageToVideo (ltx-2-5-pro-image-to-video) instead.")]
     [Description("ltx-2-full-image-to-video")]
     Ltx2FullImageToVideo,
 
     /// <summary>
     /// LTX Video 2.0 Full Quality - Text to Video generation
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Ltx2_5ProTextToVideo (ltx-2-5-pro-text-to-video) instead.")]
     [Description("ltx-2-full-text-to-video")]
     Ltx2FullTextToVideo,
 
@@ -1165,6 +1471,7 @@ public enum VideoModel
     /// LTX Video 2.0 19B - Text to Video generation with multiple aspect ratios
     /// Model ID: ltx-2-19b-full-text-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Ltx2_5ProTextToVideo (ltx-2-5-pro-text-to-video) instead.")]
     [Description("ltx-2-19b-full-text-to-video")]
     Ltx2_19BFullTextToVideo,
 
@@ -1172,6 +1479,7 @@ public enum VideoModel
     /// LTX Video 2.0 19B - Image to Video generation with multiple aspect ratios
     /// Model ID: ltx-2-19b-full-image-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Ltx2_5ProImageToVideo (ltx-2-5-pro-image-to-video) instead.")]
     [Description("ltx-2-19b-full-image-to-video")]
     Ltx2_19BFullImageToVideo,
 
@@ -1179,6 +1487,7 @@ public enum VideoModel
     /// LTX Video 2.0 19B Distilled - Text to Video generation with multiple aspect ratios
     /// Model ID: ltx-2-19b-distilled-text-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Ltx2_5FastTextToVideo (ltx-2-5-fast-text-to-video) instead.")]
     [Description("ltx-2-19b-distilled-text-to-video")]
     Ltx2_19BDistilledTextToVideo,
 
@@ -1186,6 +1495,7 @@ public enum VideoModel
     /// LTX Video 2.0 19B Distilled - Image to Video generation with multiple aspect ratios
     /// Model ID: ltx-2-19b-distilled-image-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Ltx2_5FastImageToVideo (ltx-2-5-fast-image-to-video) instead.")]
     [Description("ltx-2-19b-distilled-image-to-video")]
     Ltx2_19BDistilledImageToVideo,
 
@@ -1473,6 +1783,7 @@ public enum VideoModel
     /// Seedance 1.5 Pro - Image to Video generation.
     /// Model ID: seedance-1-5-pro-image-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Seedance15ProImageToVideoBasic (seedance-1-5-pro-image-to-video-basic) instead.")]
     [Description("seedance-1-5-pro-image-to-video")]
     Seedance15ProImageToVideo,
 
@@ -1480,6 +1791,7 @@ public enum VideoModel
     /// Seedance 1.5 Pro - Text to Video generation.
     /// Model ID: seedance-1-5-pro-text-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Seedance15ProTextToVideoBasic (seedance-1-5-pro-text-to-video-basic) instead.")]
     [Description("seedance-1-5-pro-text-to-video")]
     Seedance15ProTextToVideo,
 
@@ -1487,6 +1799,7 @@ public enum VideoModel
     /// Seedance 2.0 - Image to Video generation.
     /// Model ID: seedance-2-0-image-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Seedance20ImageToVideoBasic (seedance-2-0-image-to-video-basic) instead.")]
     [Description("seedance-2-0-image-to-video")]
     Seedance20ImageToVideo,
 
@@ -1494,6 +1807,7 @@ public enum VideoModel
     /// Seedance 2.0 - Text to Video generation.
     /// Model ID: seedance-2-0-text-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Seedance20TextToVideoBasic (seedance-2-0-text-to-video-basic) instead.")]
     [Description("seedance-2-0-text-to-video")]
     Seedance20TextToVideo,
 
@@ -1501,6 +1815,7 @@ public enum VideoModel
     /// Seedance 2.0 - Reference to Video generation.
     /// Model ID: seedance-2-0-reference-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Seedance20ReferenceToVideoBasic (seedance-2-0-reference-to-video-basic) instead.")]
     [Description("seedance-2-0-reference-to-video")]
     Seedance20ReferenceToVideo,
 
@@ -1508,6 +1823,7 @@ public enum VideoModel
     /// Seedance 2.0 Fast - Image to Video generation.
     /// Model ID: seedance-2-0-fast-image-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Seedance20FastImageToVideoBasic (seedance-2-0-fast-image-to-video-basic) instead.")]
     [Description("seedance-2-0-fast-image-to-video")]
     Seedance20FastImageToVideo,
 
@@ -1515,6 +1831,7 @@ public enum VideoModel
     /// Seedance 2.0 Fast - Text to Video generation.
     /// Model ID: seedance-2-0-fast-text-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Seedance20FastTextToVideoBasic (seedance-2-0-fast-text-to-video-basic) instead.")]
     [Description("seedance-2-0-fast-text-to-video")]
     Seedance20FastTextToVideo,
 
@@ -1522,6 +1839,7 @@ public enum VideoModel
     /// Seedance 2.0 Fast - Reference to Video generation.
     /// Model ID: seedance-2-0-fast-reference-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Seedance20FastReferenceToVideoBasic (seedance-2-0-fast-reference-to-video-basic) instead.")]
     [Description("seedance-2-0-fast-reference-to-video")]
     Seedance20FastReferenceToVideo,
 
@@ -1529,6 +1847,7 @@ public enum VideoModel
     /// Grok Imagine - Image to Video generation.
     /// Model ID: grok-imagine-image-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use GrokImagine15ImageToVideoPrivate (grok-imagine-1-5-image-to-video-private) instead.")]
     [Description("grok-imagine-image-to-video")]
     GrokImagineImageToVideo,
 
@@ -1536,6 +1855,7 @@ public enum VideoModel
     /// Grok Imagine - Text to Video generation.
     /// Model ID: grok-imagine-text-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use GrokImagine15TextToVideoPrivate (grok-imagine-1-5-text-to-video-private) instead.")]
     [Description("grok-imagine-text-to-video")]
     GrokImagineTextToVideo,
 
@@ -1543,6 +1863,7 @@ public enum VideoModel
     /// Grok Imagine - Reference to Video generation.
     /// Model ID: grok-imagine-reference-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use GrokImagine15ReferenceToVideoPrivate (grok-imagine-1-5-reference-to-video-private) instead.")]
     [Description("grok-imagine-reference-to-video")]
     GrokImagineReferenceToVideo,
 
@@ -1585,6 +1906,7 @@ public enum VideoModel
     /// Wan 2.7 Uncensored - Image to Video generation (uncensored).
     /// Model ID: wan-2-7-uncensored-image-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Wan27EnhancedImageToVideo (wan-2-7-enhanced-image-to-video) instead.")]
     [Description("wan-2-7-uncensored-image-to-video")]
     Wan27UncensoredImageToVideo,
 
@@ -1690,6 +2012,7 @@ public enum VideoModel
     /// Kling O3 Standard - Motion Control video generation.
     /// Model ID: kling-o3-standard-motion-control
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use another Kling motion control or video model instead.")]
     [Description("kling-o3-standard-motion-control")]
     KlingO3StandardMotionControl,
 
@@ -1760,6 +2083,7 @@ public enum VideoModel
     /// Runway Gen4 Aleph - Advanced video generation.
     /// Model ID: runway-gen4-aleph
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use RunwayGen45 (runway-gen4-5) instead.")]
     [Description("runway-gen4-aleph")]
     RunwayGen4Aleph,
 
@@ -1767,6 +2091,7 @@ public enum VideoModel
     /// Seedance 2.0 Enhanced - Text to Video generation with enhanced quality.
     /// Model ID: seedance-2-0-enhanced-text-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Seedance25TextToVideoBasic (seedance-2-5-text-to-video-basic) instead.")]
     [Description("seedance-2-0-enhanced-text-to-video")]
     Seedance20EnhancedTextToVideo,
 
@@ -1774,6 +2099,7 @@ public enum VideoModel
     /// Seedance 2.0 Enhanced - Reference to Video generation with enhanced quality.
     /// Model ID: seedance-2-0-enhanced-reference-to-video
     /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use Seedance25ReferenceToVideoBasic (seedance-2-5-reference-to-video-basic) instead.")]
     [Description("seedance-2-0-enhanced-reference-to-video")]
     Seedance20EnhancedReferenceToVideo,
 
@@ -1781,6 +2107,335 @@ public enum VideoModel
     /// Wan 2.7 Uncensored - Text to Video generation (uncensored).
     /// Model ID: wan-2-7-uncensored-text-to-video
     /// </summary>
+    /// <summary>
+    /// Flux 3 First Last Frame video generation model.
+    /// Model ID: flux-3-first-last-frame-to-video
+    /// </summary>
+    [Description("flux-3-first-last-frame-to-video")]
+    Flux3FirstLastFrameToVideo,
+
+    /// <summary>
+    /// Flux 3 video generation model.
+    /// Model ID: flux-3-image-to-video
+    /// </summary>
+    [Description("flux-3-image-to-video")]
+    Flux3ImageToVideo,
+
+    /// <summary>
+    /// Flux 3 video generation model.
+    /// Model ID: flux-3-text-to-video
+    /// </summary>
+    [Description("flux-3-text-to-video")]
+    Flux3TextToVideo,
+
+    /// <summary>
+    /// Gemini Omni Flash video generation model.
+    /// Model ID: gemini-omni-flash-image-to-video
+    /// </summary>
+    [Description("gemini-omni-flash-image-to-video")]
+    GeminiOmniFlashImageToVideo,
+
+    /// <summary>
+    /// Gemini Omni Flash R2V video generation model.
+    /// Model ID: gemini-omni-flash-reference-to-video
+    /// </summary>
+    [Description("gemini-omni-flash-reference-to-video")]
+    GeminiOmniFlashReferenceToVideo,
+
+    /// <summary>
+    /// Gemini Omni Flash video generation model.
+    /// Model ID: gemini-omni-flash-text-to-video
+    /// </summary>
+    [Description("gemini-omni-flash-text-to-video")]
+    GeminiOmniFlashTextToVideo,
+
+    /// <summary>
+    /// Grok Imagine 1.5 R2V video generation model.
+    /// Model ID: grok-imagine-1-5-reference-to-video-private
+    /// </summary>
+    [Description("grok-imagine-1-5-reference-to-video-private")]
+    GrokImagine15ReferenceToVideoPrivate,
+
+    /// <summary>
+    /// Grok Imagine 1.5 video generation model.
+    /// Model ID: grok-imagine-1-5-text-to-video-private
+    /// </summary>
+    [Description("grok-imagine-1-5-text-to-video-private")]
+    GrokImagine15TextToVideoPrivate,
+
+    /// <summary>
+    /// HappyHorse 1.1 video generation model.
+    /// Model ID: happyhorse-1-1-image-to-video
+    /// </summary>
+    [Description("happyhorse-1-1-image-to-video")]
+    HappyHorse11ImageToVideo,
+
+    /// <summary>
+    /// HappyHorse 1.1 Reference video generation model.
+    /// Model ID: happyhorse-1-1-reference-to-video
+    /// </summary>
+    [Description("happyhorse-1-1-reference-to-video")]
+    HappyHorse11ReferenceToVideo,
+
+    /// <summary>
+    /// HappyHorse 1.1 video generation model.
+    /// Model ID: happyhorse-1-1-text-to-video
+    /// </summary>
+    [Description("happyhorse-1-1-text-to-video")]
+    HappyHorse11TextToVideo,
+
+    /// <summary>
+    /// Kling V3 Turbo Pro video generation model.
+    /// Model ID: kling-v3-turbo-pro-image-to-video
+    /// </summary>
+    [Description("kling-v3-turbo-pro-image-to-video")]
+    KlingV3TurboProImageToVideo,
+
+    /// <summary>
+    /// Kling V3 Turbo Pro video generation model.
+    /// Model ID: kling-v3-turbo-pro-text-to-video
+    /// </summary>
+    [Description("kling-v3-turbo-pro-text-to-video")]
+    KlingV3TurboProTextToVideo,
+
+    /// <summary>
+    /// Kling V3 Turbo Standard video generation model.
+    /// Model ID: kling-v3-turbo-standard-image-to-video
+    /// </summary>
+    [Description("kling-v3-turbo-standard-image-to-video")]
+    KlingV3TurboStandardImageToVideo,
+
+    /// <summary>
+    /// Kling V3 Turbo Standard video generation model.
+    /// Model ID: kling-v3-turbo-standard-text-to-video
+    /// </summary>
+    [Description("kling-v3-turbo-standard-text-to-video")]
+    KlingV3TurboStandardTextToVideo,
+
+    /// <summary>
+    /// LTX Video 2.5 Fast video generation model.
+    /// Model ID: ltx-2-5-fast-image-to-video
+    /// </summary>
+    [Description("ltx-2-5-fast-image-to-video")]
+    Ltx2_5FastImageToVideo,
+
+    /// <summary>
+    /// LTX Video 2.5 Fast video generation model.
+    /// Model ID: ltx-2-5-fast-text-to-video
+    /// </summary>
+    [Description("ltx-2-5-fast-text-to-video")]
+    Ltx2_5FastTextToVideo,
+
+    /// <summary>
+    /// LTX Video 2.5 Pro video generation model.
+    /// Model ID: ltx-2-5-pro-image-to-video
+    /// </summary>
+    [Description("ltx-2-5-pro-image-to-video")]
+    Ltx2_5ProImageToVideo,
+
+    /// <summary>
+    /// LTX Video 2.5 Pro video generation model.
+    /// Model ID: ltx-2-5-pro-text-to-video
+    /// </summary>
+    [Description("ltx-2-5-pro-text-to-video")]
+    Ltx2_5ProTextToVideo,
+
+    /// <summary>
+    /// MiniMax H3 R2V Enhanced video generation model.
+    /// Model ID: minimax-h3-enhanced-reference-to-video
+    /// </summary>
+    [Description("minimax-h3-enhanced-reference-to-video")]
+    MinimaxH3EnhancedReferenceToVideo,
+
+    /// <summary>
+    /// MiniMax H3 Enhanced video generation model.
+    /// Model ID: minimax-h3-enhanced-text-to-video
+    /// </summary>
+    [Description("minimax-h3-enhanced-text-to-video")]
+    MinimaxH3EnhancedTextToVideo,
+
+    /// <summary>
+    /// MiniMax H3 video generation model.
+    /// Model ID: minimax-h3-image-to-video
+    /// </summary>
+    [Description("minimax-h3-image-to-video")]
+    MinimaxH3ImageToVideo,
+
+    /// <summary>
+    /// MiniMax H3 R2V video generation model.
+    /// Model ID: minimax-h3-reference-to-video
+    /// </summary>
+    [Description("minimax-h3-reference-to-video")]
+    MinimaxH3ReferenceToVideo,
+
+    /// <summary>
+    /// MiniMax H3 video generation model.
+    /// Model ID: minimax-h3-text-to-video
+    /// </summary>
+    [Description("minimax-h3-text-to-video")]
+    MinimaxH3TextToVideo,
+
+    /// <summary>
+    /// Seedance 1.5 Pro video generation model.
+    /// Model ID: seedance-1-5-pro-image-to-video-basic
+    /// </summary>
+    [Description("seedance-1-5-pro-image-to-video-basic")]
+    Seedance15ProImageToVideoBasic,
+
+    /// <summary>
+    /// Seedance 1.5 Pro video generation model.
+    /// Model ID: seedance-1-5-pro-text-to-video-basic
+    /// </summary>
+    [Description("seedance-1-5-pro-text-to-video-basic")]
+    Seedance15ProTextToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.0 Fast video generation model.
+    /// Model ID: seedance-2-0-fast-image-to-video-basic
+    /// </summary>
+    [Description("seedance-2-0-fast-image-to-video-basic")]
+    Seedance20FastImageToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.0 Fast R2V video generation model.
+    /// Model ID: seedance-2-0-fast-reference-to-video-basic
+    /// </summary>
+    [Description("seedance-2-0-fast-reference-to-video-basic")]
+    Seedance20FastReferenceToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.0 Fast video generation model.
+    /// Model ID: seedance-2-0-fast-text-to-video-basic
+    /// </summary>
+    [Description("seedance-2-0-fast-text-to-video-basic")]
+    Seedance20FastTextToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.0 video generation model.
+    /// Model ID: seedance-2-0-image-to-video-basic
+    /// </summary>
+    [Description("seedance-2-0-image-to-video-basic")]
+    Seedance20ImageToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.0 Mini video generation model.
+    /// Model ID: seedance-2-0-mini-image-to-video-basic
+    /// </summary>
+    [Description("seedance-2-0-mini-image-to-video-basic")]
+    Seedance20MiniImageToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.0 Mini R2V video generation model.
+    /// Model ID: seedance-2-0-mini-reference-to-video-basic
+    /// </summary>
+    [Description("seedance-2-0-mini-reference-to-video-basic")]
+    Seedance20MiniReferenceToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.0 Mini video generation model.
+    /// Model ID: seedance-2-0-mini-text-to-video-basic
+    /// </summary>
+    [Description("seedance-2-0-mini-text-to-video-basic")]
+    Seedance20MiniTextToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.0 R2V video generation model.
+    /// Model ID: seedance-2-0-reference-to-video-basic
+    /// </summary>
+    [Description("seedance-2-0-reference-to-video-basic")]
+    Seedance20ReferenceToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.0 video generation model.
+    /// Model ID: seedance-2-0-text-to-video-basic
+    /// </summary>
+    [Description("seedance-2-0-text-to-video-basic")]
+    Seedance20TextToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.5 video generation model.
+    /// Model ID: seedance-2-5-image-to-video-basic
+    /// </summary>
+    [Description("seedance-2-5-image-to-video-basic")]
+    Seedance25ImageToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.5 R2V video generation model.
+    /// Model ID: seedance-2-5-reference-to-video-basic
+    /// </summary>
+    [Description("seedance-2-5-reference-to-video-basic")]
+    Seedance25ReferenceToVideoBasic,
+
+    /// <summary>
+    /// Seedance 2.5 video generation model.
+    /// Model ID: seedance-2-5-text-to-video-basic
+    /// </summary>
+    [Description("seedance-2-5-text-to-video-basic")]
+    Seedance25TextToVideoBasic,
+
+    /// <summary>
+    /// Wan 2.2 Enhanced video generation model.
+    /// Model ID: wan-2-2-enhanced-image-to-video
+    /// </summary>
+    [Description("wan-2-2-enhanced-image-to-video")]
+    Wan22EnhancedImageToVideo,
+
+    /// <summary>
+    /// Wan 2.7 Enhanced video generation model.
+    /// Model ID: wan-2-7-enhanced-image-to-video
+    /// </summary>
+    [Description("wan-2-7-enhanced-image-to-video")]
+    Wan27EnhancedImageToVideo,
+
+    /// <summary>
+    /// Wan 2.7 Enhanced video generation model.
+    /// Model ID: wan-2-7-enhanced-text-to-video
+    /// </summary>
+    [Description("wan-2-7-enhanced-text-to-video")]
+    Wan27EnhancedTextToVideo,
+
+    /// <summary>
+    /// Wan 3.0 video generation model.
+    /// Model ID: wan-3-0-image-to-video
+    /// </summary>
+    [Description("wan-3-0-image-to-video")]
+    Wan30ImageToVideo,
+
+    /// <summary>
+    /// Wan 3.0 Prime video generation model.
+    /// Model ID: wan-3-0-prime-image-to-video
+    /// </summary>
+    [Description("wan-3-0-prime-image-to-video")]
+    Wan30PrimeImageToVideo,
+
+    /// <summary>
+    /// Wan 3.0 Prime Reference video generation model.
+    /// Model ID: wan-3-0-prime-reference-to-video
+    /// </summary>
+    [Description("wan-3-0-prime-reference-to-video")]
+    Wan30PrimeReferenceToVideo,
+
+    /// <summary>
+    /// Wan 3.0 Prime video generation model.
+    /// Model ID: wan-3-0-prime-text-to-video
+    /// </summary>
+    [Description("wan-3-0-prime-text-to-video")]
+    Wan30PrimeTextToVideo,
+
+    /// <summary>
+    /// Wan 3.0 Reference video generation model.
+    /// Model ID: wan-3-0-reference-to-video
+    /// </summary>
+    [Description("wan-3-0-reference-to-video")]
+    Wan30ReferenceToVideo,
+
+    /// <summary>
+    /// Wan 3.0 video generation model.
+    /// Model ID: wan-3-0-text-to-video
+    /// </summary>
+    [Description("wan-3-0-text-to-video")]
+    Wan30TextToVideo,
+    [Obsolete("This model is no longer available in the Venice AI API. Use Wan27EnhancedTextToVideo (wan-2-7-enhanced-text-to-video) instead.")]
     [Description("wan-2-7-uncensored-text-to-video")]
     Wan27UncensoredTextToVideo
 }
@@ -1790,18 +2445,156 @@ public enum VideoModel
 /// </summary>
 public enum EmbeddingModel
 {
+    /// <summary>
+    /// BGE-M3
+    /// Model ID: text-embedding-bge-m3
+    /// </summary>
     [Description("text-embedding-bge-m3")]
-    TextEmbeddingBGEM3
+    TextEmbeddingBGEM3,
+
+    /// <summary>
+    /// BGE-EN-ICL
+    /// Model ID: text-embedding-bge-en-icl
+    /// </summary>
+    [Description("text-embedding-bge-en-icl")]
+    TextEmbeddingBgeEnIcl,
+
+    /// <summary>
+    /// Qwen3 Embedding 8B
+    /// Model ID: text-embedding-qwen3-8b
+    /// </summary>
+    [Description("text-embedding-qwen3-8b")]
+    TextEmbeddingQwen38b,
+
+    /// <summary>
+    /// Qwen3 Embedding 0.6B
+    /// Model ID: text-embedding-qwen3-0-6b
+    /// </summary>
+    [Description("text-embedding-qwen3-0-6b")]
+    TextEmbeddingQwen306b,
+
+    /// <summary>
+    /// Multilingual E5 Large Instruct
+    /// Model ID: text-embedding-multilingual-e5-large-instruct
+    /// </summary>
+    [Description("text-embedding-multilingual-e5-large-instruct")]
+    TextEmbeddingMultilingualE5LargeInstruct,
+
+    /// <summary>
+    /// Text Embedding 3 Small
+    /// Model ID: text-embedding-3-small
+    /// </summary>
+    [Description("text-embedding-3-small")]
+    TextEmbedding3Small,
+
+    /// <summary>
+    /// Text Embedding 3 Large
+    /// Model ID: text-embedding-3-large
+    /// </summary>
+    [Description("text-embedding-3-large")]
+    TextEmbedding3Large,
+
+    /// <summary>
+    /// Gemini Embedding 2 Preview
+    /// Model ID: gemini-embedding-2-preview
+    /// </summary>
+    [Description("gemini-embedding-2-preview")]
+    GeminiEmbedding2Preview,
+
+    /// <summary>
+    /// Nemotron Embed VL 1B v2
+    /// Model ID: text-embedding-nemotron-embed-vl-1b-v2
+    /// </summary>
+    [Description("text-embedding-nemotron-embed-vl-1b-v2")]
+    TextEmbeddingNemotronEmbedVl1bV2
+
 }
+
 
 /// <summary>
 /// Available text-to-speech models.
 /// </summary>
 public enum TextToSpeechModel
 {
+    /// <summary>
+    /// Kokoro Text to Speech
+    /// Model ID: tts-kokoro
+    /// </summary>
     [Description("tts-kokoro")]
-    TtsKokoro
+    TtsKokoro,
+
+    /// <summary>
+    /// Qwen 3 TTS 0.6B
+    /// Model ID: tts-qwen3-0-6b
+    /// </summary>
+    [Description("tts-qwen3-0-6b")]
+    TtsQwen306b,
+
+    /// <summary>
+    /// Qwen 3 TTS 1.7B
+    /// Model ID: tts-qwen3-1-7b
+    /// </summary>
+    [Description("tts-qwen3-1-7b")]
+    TtsQwen317b,
+
+    /// <summary>
+    /// xAI TTS v1
+    /// Model ID: tts-xai-v1
+    /// </summary>
+    [Description("tts-xai-v1")]
+    TtsXaiV1,
+
+    /// <summary>
+    /// Inworld TTS-1.5 Max
+    /// Model ID: tts-inworld-1-5-max
+    /// </summary>
+    [Description("tts-inworld-1-5-max")]
+    TtsInworld15Max,
+
+    /// <summary>
+    /// Chatterbox HD (Resemble AI)
+    /// Model ID: tts-chatterbox-hd
+    /// </summary>
+    [Description("tts-chatterbox-hd")]
+    TtsChatterboxHd,
+
+    /// <summary>
+    /// Orpheus TTS
+    /// Model ID: tts-orpheus
+    /// </summary>
+    [Description("tts-orpheus")]
+    TtsOrpheus,
+
+    /// <summary>
+    /// ElevenLabs Turbo v2.5
+    /// Model ID: tts-elevenlabs-turbo-v2-5
+    /// </summary>
+    [Description("tts-elevenlabs-turbo-v2-5")]
+    TtsElevenlabsTurboV25,
+
+    /// <summary>
+    /// Clone your voice from a short recording and generate natural speech in it across 30+ languages.
+    /// Model ID: tts-minimax-speech-02-hd
+    /// </summary>
+    [Description("tts-minimax-speech-02-hd")]
+    TtsMinimaxSpeech02Hd,
+
+    /// <summary>
+    /// Gemini 3.1 Flash TTS
+    /// Model ID: tts-gemini-3-1-flash
+    /// </summary>
+    [Description("tts-gemini-3-1-flash")]
+    TtsGemini31Flash,
+
+    /// <summary>
+    /// Gradium TTS
+    /// Model ID: tts-gradium-v1
+    /// </summary>
+    [Description("tts-gradium-v1")]
+    TtsGradiumV1
+
 }
+
 
 /// <summary>
 /// Available upscale models.
@@ -1813,12 +2606,314 @@ public enum UpscaleModel
 }
 
 /// <summary>
-/// Available inpaint models.
+/// Available image editing (inpaint) models.
 /// </summary>
 public enum InpaintModel
 {
+    /// <summary>
+    /// FireRed Edit
+    /// Model ID: firered-image-edit
+    /// </summary>
+    [Description("firered-image-edit")]
+    FireredImageEdit,
+
+    /// <summary>
+    /// Qwen Edit Uncensored
+    /// Model ID: qwen-edit-uncensored
+    /// </summary>
+    [Description("qwen-edit-uncensored")]
+    QwenEditUncensored,
+
+    /// <summary>
+    /// Grok Imagine
+    /// Model ID: grok-imagine-edit
+    /// </summary>
+    [Description("grok-imagine-edit")]
+    GrokImagineEdit,
+
+    /// <summary>
+    /// Grok Imagine High Quality
+    /// Model ID: grok-imagine-quality-edit
+    /// </summary>
+    [Description("grok-imagine-quality-edit")]
+    GrokImagineQualityEdit,
+
+    /// <summary>
+    /// Grok Imagine 2.0
+    /// Model ID: grok-imagine-image-2-0-edit
+    /// </summary>
+    [Description("grok-imagine-image-2-0-edit")]
+    GrokImagineImage20Edit,
+
+    /// <summary>
+    /// Qwen Image 2
+    /// Model ID: qwen-image-2-edit
+    /// </summary>
+    [Description("qwen-image-2-edit")]
+    QwenImage2Edit,
+
+    /// <summary>
+    /// Qwen Image 2 Pro
+    /// Model ID: qwen-image-2-pro-edit
+    /// </summary>
+    [Description("qwen-image-2-pro-edit")]
+    QwenImage2ProEdit,
+
+    /// <summary>
+    /// Wan 2.7 Pro Edit
+    /// Model ID: wan-2-7-pro-edit
+    /// </summary>
+    [Description("wan-2-7-pro-edit")]
+    Wan27ProEdit,
+
+    /// <summary>
+    /// Flux 2 Max
+    /// Model ID: flux-2-max-edit
+    /// </summary>
+    [Description("flux-2-max-edit")]
+    Flux2MaxEdit,
+
+    /// <summary>
+    /// GPT Image 2
+    /// Model ID: gpt-image-2-edit
+    /// </summary>
+    [Description("gpt-image-2-edit")]
+    GptImage2Edit,
+
+    /// <summary>
+    /// GPT Image 1.5
+    /// Model ID: gpt-image-1-5-edit
+    /// </summary>
+    [Description("gpt-image-1-5-edit")]
+    GptImage15Edit,
+
+    /// <summary>
+    /// Nano Banana 2
+    /// Model ID: nano-banana-2-edit
+    /// </summary>
+    [Description("nano-banana-2-edit")]
+    NanoBanana2Edit,
+
+    /// <summary>
+    /// Nano Banana Pro
+    /// Model ID: nano-banana-pro-edit
+    /// </summary>
+    [Description("nano-banana-pro-edit")]
+    NanoBananaProEdit,
+
+    /// <summary>
+    /// Nano Banana 2 Lite
+    /// Model ID: nano-banana-2-lite-edit
+    /// </summary>
+    [Description("nano-banana-2-lite-edit")]
+    NanoBanana2LiteEdit,
+
+    /// <summary>
+    /// Luma Uni-1
+    /// Model ID: luma-uni-1-edit
+    /// </summary>
+    [Description("luma-uni-1-edit")]
+    LumaUni1Edit,
+
+    /// <summary>
+    /// Luma Uni-1 Max
+    /// Model ID: luma-uni-1-max-edit
+    /// </summary>
+    [Description("luma-uni-1-max-edit")]
+    LumaUni1MaxEdit,
+
+    /// <summary>
+    /// Seedream V5 Lite
+    /// Model ID: seedream-v5-lite-edit
+    /// </summary>
+    [Description("seedream-v5-lite-edit")]
+    SeedreamV5LiteEdit,
+
+    /// <summary>
+    /// Seedream V5 Pro
+    /// Model ID: seedream-v5-pro-edit
+    /// </summary>
+    [Description("seedream-v5-pro-edit")]
+    SeedreamV5ProEdit,
+
+    /// <summary>
+    /// Seedream V4.5
+    /// Model ID: seedream-v4-edit
+    /// </summary>
+    [Description("seedream-v4-edit")]
+    SeedreamV4Edit,
+
+    /// <summary>
+    /// Qwen Image 3 Edit
+    /// Model ID: qwen-image-3-edit
+    /// </summary>
+    [Description("qwen-image-3-edit")]
+    QwenImage3Edit,
+
+    /// <summary>
+    /// Qwen Image 3 Pro Edit
+    /// Model ID: qwen-image-3-pro-edit
+    /// </summary>
+    [Description("qwen-image-3-pro-edit")]
+    QwenImage3ProEdit,
+
+    /// <summary>
+    /// Legacy generic image editing model.
+    /// DEPRECATED: This model is no longer available in the Venice AI API.
+    /// Model ID: edit-image
+    /// </summary>
+    [Obsolete("This model is no longer available in the Venice AI API. Use FireredImageEdit (firered-image-edit) instead.")]
     [Description("edit-image")]
     EditImage
+
+}
+
+
+/// <summary>
+/// Available music and audio generation models.
+/// </summary>
+public enum MusicModel
+{
+    /// <summary>
+    /// Feature-rich song generation with optional lyrics and detailed musical controls.
+    /// Model ID: ace-step-15
+    /// </summary>
+    [Description("ace-step-15")]
+    AceStep15,
+
+    /// <summary>
+    /// High-quality instrumental music generation with configurable duration. Best for polished, production-ready tracks across a wide range of genres.
+    /// Model ID: elevenlabs-music
+    /// </summary>
+    [Description("elevenlabs-music")]
+    ElevenlabsMusic,
+
+    /// <summary>
+    /// Full song generation with vocals and lyrics. Provide your own lyrics with verse/chorus structure for complete songs with singing.
+    /// Model ID: minimax-music-v2
+    /// </summary>
+    [Description("minimax-music-v2")]
+    MinimaxMusicV2,
+
+    /// <summary>
+    /// Advanced song generation with vocals, lyrics optimizer, and instrumental mode. Supports structure tags and up to 3500 character lyrics.
+    /// Model ID: minimax-music-v25
+    /// </summary>
+    [Description("minimax-music-v25")]
+    MinimaxMusicV25,
+
+    /// <summary>
+    /// Latest MiniMax song generation with vocals, instrumental mode, and support for rich structure tags in lyrics.
+    /// Model ID: minimax-music-v26
+    /// </summary>
+    [Description("minimax-music-v26")]
+    MinimaxMusicV26,
+
+    /// <summary>
+    /// Google's Lyria 3 Pro generates full-length, structured songs up to 3 minutes long from a single text prompt. Supports vocals, lyrics, and multi-language generation across genres.
+    /// Model ID: lyria-3-pro
+    /// </summary>
+    [Description("lyria-3-pro")]
+    Lyria3Pro,
+
+    /// <summary>
+    /// Fast, lightweight audio generation for sound effects, ambient textures, and short musical clips. Flexible duration from 5 seconds to over 3 minutes.
+    /// Model ID: stable-audio-25
+    /// </summary>
+    [Description("stable-audio-25")]
+    StableAudio25,
+
+    /// <summary>
+    /// Generate licensed, commercial-use-safe music with precise control over style, mood, instrumentation, and duration.
+    /// Model ID: sonilo-v1-1-music
+    /// </summary>
+    [Description("sonilo-v1-1-music")]
+    SoniloV11Music,
+
+    /// <summary>
+    /// Generate licensed, commercial-use-safe sound effects with precise control over type, texture, intensity, and duration.
+    /// Model ID: sonilo-v1-1-sound-effects
+    /// </summary>
+    [Description("sonilo-v1-1-sound-effects")]
+    SoniloV11SoundEffects,
+
+    /// <summary>
+    /// Generate high-quality sound effects from text descriptions using ElevenLabs. Ideal for films, games, and digital content with configurable duration.
+    /// Model ID: elevenlabs-sound-effects-v2
+    /// </summary>
+    [Description("elevenlabs-sound-effects-v2")]
+    ElevenlabsSoundEffectsV2,
+
+    /// <summary>
+    /// Generate synchronized audio and sound effects from text prompts with MMAudio V2.
+    /// Model ID: mmaudio-v2-text-to-audio
+    /// </summary>
+    [Description("mmaudio-v2-text-to-audio")]
+    MmaudioV2TextToAudio,
+
+    /// <summary>
+    /// Generate natural text-to-speech audio using ElevenLabs Eleven-v3. High-quality voices with stability control and automatic text normalization.
+    /// Model ID: elevenlabs-tts-v3
+    /// </summary>
+    [Description("elevenlabs-tts-v3")]
+    ElevenlabsTtsV3,
+
+    /// <summary>
+    /// Multilingual text-to-speech using ElevenLabs. Supports 29 languages with high-quality natural-sounding voices, configurable speed, and accent accuracy.
+    /// Model ID: elevenlabs-tts-multilingual-v2
+    /// </summary>
+    [Description("elevenlabs-tts-multilingual-v2")]
+    ElevenlabsTtsMultilingualV2,
+
+    /// <summary>
+    /// Generate expressive multilingual speech and audio from a text prompt with BytePlus Seed Audio 1.0 (20 languages, timestamp length control).
+    /// Model ID: seed-audio-1-0
+    /// </summary>
+    [Description("seed-audio-1-0")]
+    SeedAudio10
+
+}
+
+/// <summary>
+/// Available speech-to-text (ASR) models.
+/// </summary>
+public enum AsrModel
+{
+    /// <summary>
+    /// Parakeet ASR
+    /// Model ID: nvidia/parakeet-tdt-0.6b-v3
+    /// </summary>
+    [Description("nvidia/parakeet-tdt-0.6b-v3")]
+    ParakeetTdt06bV3,
+
+    /// <summary>
+    /// Whisper Large V3
+    /// Model ID: openai/whisper-large-v3
+    /// </summary>
+    [Description("openai/whisper-large-v3")]
+    WhisperLargeV3,
+
+    /// <summary>
+    /// Wizper (Whisper v3)
+    /// Model ID: fal-ai/wizper
+    /// </summary>
+    [Description("fal-ai/wizper")]
+    Wizper,
+
+    /// <summary>
+    /// ElevenLabs Scribe V2
+    /// Model ID: elevenlabs/scribe-v2
+    /// </summary>
+    [Description("elevenlabs/scribe-v2")]
+    ScribeV2,
+
+    /// <summary>
+    /// xAI Speech to Text v1
+    /// Model ID: stt-xai-v1
+    /// </summary>
+    [Description("stt-xai-v1")]
+    SttXaiV1
+
 }
 
 /// <summary>

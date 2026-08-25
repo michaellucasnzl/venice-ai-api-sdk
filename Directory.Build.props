@@ -2,7 +2,7 @@
   <PropertyGroup>
     <!-- Centralized versioning for all projects -->
     <VersionMajor>2</VersionMajor>
-    <VersionMinor>3</VersionMinor>
+    <VersionMinor>4</VersionMinor>
     <VersionPatch>0</VersionPatch>
     <VersionBuild Condition="'$(VersionBuild)' == ''">0</VersionBuild>
 

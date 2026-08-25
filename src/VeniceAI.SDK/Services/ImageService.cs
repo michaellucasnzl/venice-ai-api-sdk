@@ -214,4 +214,101 @@ public class ImageService : BaseHttpService, IImageService
             throw new VeniceAIException($"Unexpected error getting image styles: {ex.Message}", ex);
         }
     }
+
+    /// <summary>
+    /// Edits multiple images together based on the given prompt.
+    /// </summary>
+    /// <param name="request">The multi-edit image request.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The edited image response.</returns>
+    public async Task<ImageGenerationResponse> MultiEditImageAsync(
+        MultiEditImageRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (string.IsNullOrEmpty(request.Prompt))
+            throw new ArgumentException("Prompt is required", nameof(request));
+
+        if (request.Images == null || request.Images.Count == 0)
+            throw new ArgumentException("At least one image is required", nameof(request));
+
+        try
+        {
+            var imageData = await PostForBinaryAsync(
+                "image/multi-edit",
+                request,
+                cancellationToken);
+
+            var response = new ImageGenerationResponse
+            {
+                Data = new List<ImageData>
+                {
+                    new ImageData
+                    {
+                        B64Json = Convert.ToBase64String(imageData.Data)
+                    }
+                },
+                IsSuccess = true,
+                StatusCode = 200
+            };
+
+            return response;
+        }
+        catch (VeniceAIException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw new VeniceAIException($"Unexpected error during multi-image editing: {ex.Message}", ex);
+        }
+    }
+
+    /// <summary>
+    /// Removes the background from an image.
+    /// </summary>
+    /// <param name="request">The background removal request.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The resulting image response.</returns>
+    public async Task<ImageGenerationResponse> RemoveBackgroundAsync(
+        BackgroundRemoveImageRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (string.IsNullOrEmpty(request.Image) && string.IsNullOrEmpty(request.ImageUrl))
+            throw new ArgumentException("Either Image or ImageUrl is required", nameof(request));
+
+        try
+        {
+            var imageData = await PostForBinaryAsync(
+                "image/background-remove",
+                request,
+                cancellationToken);
+
+            var response = new ImageGenerationResponse
+            {
+                Data = new List<ImageData>
+                {
+                    new ImageData
+                    {
+                        B64Json = Convert.ToBase64String(imageData.Data)
+                    }
+                },
+                IsSuccess = true,
+                StatusCode = 200
+            };
+
+            return response;
+        }
+        catch (VeniceAIException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw new VeniceAIException($"Unexpected error during background removal: {ex.Message}", ex);
+        }
+    }
 }

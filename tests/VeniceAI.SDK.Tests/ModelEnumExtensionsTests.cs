@@ -338,4 +338,92 @@ public class ModelEnumExtensionsTests
         Assert.True(success);
         Assert.Equal(VideoModel.Seedance20TextToVideo, model);
     }
+
+    // -------------------------------------------------------------------------
+    // New models added in this update (text / image / video / music / asr)
+    // -------------------------------------------------------------------------
+
+    [Theory]
+    [InlineData(TextModel.Gemini36Flash,        "gemini-3-6-flash")]
+    [InlineData(TextModel.Gemini37Flash,        "gemini-3-7-flash")]
+    [InlineData(TextModel.Gemini35FlashLite,    "gemini-3-5-flash-lite")]
+    [InlineData(TextModel.ClaudeOpus5,          "claude-opus-5")]
+    [InlineData(TextModel.ClaudeOpus5Fast,      "claude-opus-5-fast")]
+    [InlineData(TextModel.ClaudeSonnet5,        "claude-sonnet-5")]
+    [InlineData(TextModel.Grok4_5,              "grok-4-5")]
+    [InlineData(TextModel.Grok4_6,              "grok-4-6")]
+    [InlineData(TextModel.KimiK3,               "kimi-k3")]
+    [InlineData(TextModel.KimiK3FastApi,        "kimi-k3-fast-api")]
+    [InlineData(TextModel.OpenAIGpt56Luna,      "openai-gpt-56-luna")]
+    [InlineData(TextModel.OpenAIGpt56Sol,       "openai-gpt-56-sol")]
+    [InlineData(TextModel.OpenAIGpt56Terra,     "openai-gpt-56-terra")]
+    [InlineData(TextModel.Qwen38Max,            "qwen-3-8-max")]
+    [InlineData(TextModel.Qwen38_27B,           "qwen-3-8-27b")]
+    [InlineData(TextModel.Qwen36_35B_A3B,       "qwen3-6-35b-a3b")]
+    [InlineData(TextModel.Glm52,                "zai-org-glm-5-2")]
+    [InlineData(TextModel.ZAIGlm53,             "z-ai-glm-5-3")]
+    [InlineData(TextModel.DeepSeekV4Flash0731,  "deepseek-v4-flash-0731")]
+    [InlineData(TextModel.DeepSeekV4Pro0813,    "deepseek-v4-pro-0813")]
+    [InlineData(TextModel.E2EEDeepSeekV4Flash,  "e2ee-deepseek-v4-flash")]
+    [InlineData(TextModel.E2EEGlm52,            "e2ee-glm-5-2-p")]
+    [InlineData(TextModel.AionLabs3_0,          "aion-labs-aion-3-0")]
+    [InlineData(TextModel.Inkling,              "inkling")]
+    [InlineData(TextModel.Seed21Turbo,          "seed-2-1-turbo")]
+    [InlineData(TextModel.StealthOxAlpha,       "stealth-ox-alpha")]
+    public void TextModel_NewModels_ToModelString_ReturnsExpectedId(TextModel model, string expectedId)
+    {
+        Assert.Equal(expectedId, model.ToModelString());
+    }
+
+    [Theory]
+    [InlineData(ImageModel.GrokImagineImage2_0, "grok-imagine-image-2-0")]
+    [InlineData(ImageModel.Krea2Turbo,          "krea-2-turbo")]
+    [InlineData(ImageModel.LumaUni1,            "luma-uni-1")]
+    [InlineData(ImageModel.LumaUni1Max,         "luma-uni-1-max")]
+    [InlineData(ImageModel.NanoBanana2Lite,     "nano-banana-2-lite")]
+    [InlineData(ImageModel.QwenImage3,          "qwen-image-3")]
+    [InlineData(ImageModel.QwenImage3Pro,       "qwen-image-3-pro")]
+    [InlineData(ImageModel.SeedreamV5Pro,       "seedream-v5-pro")]
+    public void ImageModel_NewModels_ToModelString_ReturnsExpectedId(ImageModel model, string expectedId)
+    {
+        Assert.Equal(expectedId, model.ToModelString());
+    }
+
+    [Theory]
+    [InlineData(VideoModel.Flux3TextToVideo,          "flux-3-text-to-video")]
+    [InlineData(VideoModel.GeminiOmniFlashTextToVideo, "gemini-omni-flash-text-to-video")]
+    [InlineData(VideoModel.KlingV3TurboProTextToVideo, "kling-v3-turbo-pro-text-to-video")]
+    [InlineData(VideoModel.Wan30TextToVideo,           "wan-3-0-text-to-video")]
+    [InlineData(VideoModel.Wan30PrimeTextToVideo,      "wan-3-0-prime-text-to-video")]
+    [InlineData(VideoModel.Ltx2_5FastTextToVideo,      "ltx-2-5-fast-text-to-video")]
+    [InlineData(VideoModel.MinimaxH3TextToVideo,       "minimax-h3-text-to-video")]
+    [InlineData(VideoModel.Seedance20TextToVideoBasic, "seedance-2-0-text-to-video-basic")]
+    [InlineData(VideoModel.Seedance25TextToVideoBasic, "seedance-2-5-text-to-video-basic")]
+    [InlineData(VideoModel.HappyHorse11TextToVideo,    "happyhorse-1-1-text-to-video")]
+    [InlineData(VideoModel.Wan22EnhancedImageToVideo,  "wan-2-2-enhanced-image-to-video")]
+    public void VideoModel_NewModels_ToModelString_ReturnsExpectedId(VideoModel model, string expectedId)
+    {
+        Assert.Equal(expectedId, model.ToModelString());
+    }
+
+    [Theory]
+    [InlineData(MusicModel.ElevenlabsMusic,      "elevenlabs-music")]
+    [InlineData(MusicModel.MinimaxMusicV26,      "minimax-music-v26")]
+    [InlineData(MusicModel.AceStep15,            "ace-step-15")]
+    [InlineData(MusicModel.Lyria3Pro,            "lyria-3-pro")]
+    [InlineData(MusicModel.SoniloV11Music,       "sonilo-v1-1-music")]
+    public void MusicModel_ToModelString_ReturnsExpectedId(MusicModel model, string expectedId)
+    {
+        Assert.Equal(expectedId, model.ToModelString());
+    }
+
+    [Theory]
+    [InlineData(AsrModel.WhisperLargeV3,         "openai/whisper-large-v3")]
+    [InlineData(AsrModel.ParakeetTdt06bV3,       "nvidia/parakeet-tdt-0.6b-v3")]
+    [InlineData(AsrModel.ScribeV2,               "elevenlabs/scribe-v2")]
+    [InlineData(AsrModel.SttXaiV1,               "stt-xai-v1")]
+    public void AsrModel_ToModelString_ReturnsExpectedId(AsrModel model, string expectedId)
+    {
+        Assert.Equal(expectedId, model.ToModelString());
+    }
 }

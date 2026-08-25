@@ -12,6 +12,17 @@
         ModelSource: https://huggingface.co/hexgrad/Kokoro-82M,
         Offline: false,
         Beta: false,
+        Privacy: private,
+        DefaultFormat: mp3,
+        SupportedFormats: [
+          mp3,
+          opus,
+          aac,
+          flac,
+          wav,
+          pcm
+        ],
+        SupportsCustomVoiceId: false,
         Pricing: {
           Input: {
             Usd: 3.5,
@@ -87,6 +98,12 @@
         ModelSource: https://huggingface.co/Qwen/Qwen3-TTS,
         Offline: false,
         Beta: false,
+        Privacy: private,
+        DefaultFormat: mp3,
+        SupportedFormats: [
+          mp3
+        ],
+        SupportsCustomVoiceId: false,
         Pricing: {
           Input: {
             Usd: 87.5,
@@ -117,6 +134,12 @@
         ModelSource: https://huggingface.co/Qwen/Qwen3-TTS,
         Offline: false,
         Beta: false,
+        Privacy: private,
+        DefaultFormat: mp3,
+        SupportedFormats: [
+          mp3
+        ],
+        SupportsCustomVoiceId: false,
         Pricing: {
           Input: {
             Usd: 112.5,
@@ -146,6 +169,14 @@
         Name: xAI TTS v1,
         Offline: false,
         Beta: false,
+        Privacy: anonymized,
+        DefaultFormat: mp3,
+        SupportedFormats: [
+          mp3,
+          wav,
+          pcm
+        ],
+        SupportsCustomVoiceId: false,
         Pricing: {
           Input: {
             Usd: 18.75,
@@ -153,11 +184,32 @@
           }
         },
         Voices: [
+          altair,
           ara,
+          atlas,
+          carina,
+          castor,
+          celeste,
+          cosmo,
           eve,
+          helios,
+          helix,
+          iris,
+          kepler,
           leo,
+          lumen,
+          luna,
+          lux,
+          naksh,
+          orion,
+          perseus,
           rex,
-          sal
+          rigel,
+          sal,
+          sirius,
+          ursa,
+          zagan,
+          zenith
         ]
       }
     },
@@ -171,6 +223,12 @@
         Name: Inworld TTS-1.5 Max,
         Offline: false,
         Beta: false,
+        Privacy: anonymized,
+        DefaultFormat: wav,
+        SupportedFormats: [
+          wav
+        ],
+        SupportsCustomVoiceId: false,
         Pricing: {
           Input: {
             Usd: 12.5,
@@ -205,6 +263,23 @@
         Name: Chatterbox HD (Resemble AI),
         Offline: false,
         Beta: false,
+        Privacy: private,
+        DefaultFormat: wav,
+        SupportedFormats: [
+          wav
+        ],
+        SupportsCustomVoiceId: false,
+        VoiceCloning: {
+          Mode: zero_shot,
+          AcceptedFormats: [
+            mp3,
+            wav,
+            flac,
+            mp4
+          ],
+          MinSampleSeconds: 5,
+          RetentionDays: 7
+        },
         Pricing: {
           Input: {
             Usd: 50.0,
@@ -235,6 +310,12 @@
         ModelSource: https://huggingface.co/canopylabs/orpheus-3b-0.1-ft,
         Offline: false,
         Beta: false,
+        Privacy: private,
+        DefaultFormat: wav,
+        SupportedFormats: [
+          wav
+        ],
+        SupportsCustomVoiceId: false,
         Pricing: {
           Input: {
             Usd: 62.5,
@@ -263,6 +344,12 @@
         Name: ElevenLabs Turbo v2.5,
         Offline: false,
         Beta: false,
+        Privacy: anonymized,
+        DefaultFormat: mp3,
+        SupportedFormats: [
+          mp3
+        ],
+        SupportsCustomVoiceId: true,
         Pricing: {
           Input: {
             Usd: 62.5,
@@ -304,6 +391,15 @@
         Name: MiniMax Speech-02 HD,
         Offline: false,
         Beta: false,
+        Privacy: anonymized,
+        Description: Clone your voice from a short recording and generate natural speech in it across 30+ languages.,
+        DefaultFormat: mp3,
+        SupportedFormats: [
+          mp3,
+          pcm,
+          flac
+        ],
+        SupportsCustomVoiceId: false,
         Pricing: {
           Input: {
             Usd: 125.0,
@@ -339,6 +435,14 @@
         Name: Gemini 3.1 Flash TTS,
         Offline: false,
         Beta: false,
+        Privacy: anonymized,
+        DefaultFormat: mp3,
+        SupportedFormats: [
+          mp3,
+          opus,
+          wav
+        ],
+        SupportsCustomVoiceId: false,
         Pricing: {
           Input: {
             Usd: 187.5,
@@ -389,6 +493,14 @@
         Name: Gradium TTS,
         Offline: false,
         Beta: false,
+        Privacy: anonymized,
+        DefaultFormat: wav,
+        SupportedFormats: [
+          wav,
+          pcm,
+          opus
+        ],
+        SupportsCustomVoiceId: false,
         Pricing: {
           Input: {
             Usd: 47.5,

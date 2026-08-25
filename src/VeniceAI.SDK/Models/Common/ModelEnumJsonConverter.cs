@@ -192,3 +192,57 @@ public class VideoModelJsonConverter : JsonConverter<VideoModel>
         writer.WriteStringValue(value.ToModelString());
     }
 }
+
+/// <summary>
+/// JSON converter for MusicModel enum.
+/// </summary>
+public class MusicModelJsonConverter : JsonConverter<MusicModel>
+{
+    public override MusicModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        if (reader.TokenType != JsonTokenType.String)
+        {
+            throw new JsonException($"Expected string value for {nameof(MusicModel)}.");
+        }
+
+        var value = reader.GetString();
+        if (string.IsNullOrEmpty(value))
+        {
+            throw new JsonException($"{nameof(MusicModel)} cannot be null or empty.");
+        }
+
+        return ModelEnumExtensions.ParseMusicModel(value);
+    }
+
+    public override void Write(Utf8JsonWriter writer, MusicModel value, JsonSerializerOptions options)
+    {
+        writer.WriteStringValue(value.ToModelString());
+    }
+}
+
+/// <summary>
+/// JSON converter for AsrModel enum.
+/// </summary>
+public class AsrModelJsonConverter : JsonConverter<AsrModel>
+{
+    public override AsrModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        if (reader.TokenType != JsonTokenType.String)
+        {
+            throw new JsonException($"Expected string value for {nameof(AsrModel)}.");
+        }
+
+        var value = reader.GetString();
+        if (string.IsNullOrEmpty(value))
+        {
+            throw new JsonException($"{nameof(AsrModel)} cannot be null or empty.");
+        }
+
+        return ModelEnumExtensions.ParseAsrModel(value);
+    }
+
+    public override void Write(Utf8JsonWriter writer, AsrModel value, JsonSerializerOptions options)
+    {
+        writer.WriteStringValue(value.ToModelString());
+    }
+}

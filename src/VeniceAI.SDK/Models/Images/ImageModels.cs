@@ -123,6 +123,54 @@ public class GenerateImageRequest
     /// </summary>
     [JsonPropertyName("enable_web_search")]
     public bool? EnableWebSearch { get; set; }
+
+    /// <summary>
+    /// Output quality for supported models (e.g. GPT Image 2). Values: low, medium, high.
+    /// Higher values can increase the final request charge.
+    /// </summary>
+    [JsonPropertyName("quality")]
+    public string? Quality { get; set; }
+
+    /// <summary>
+    /// Skip the model's prompt-optimization thinking step for faster generation.
+    /// Only supported by models with supportsOptimizePromptThinking; ignored by others.
+    /// </summary>
+    [JsonPropertyName("disable_prompt_optimization_thinking")]
+    public bool? DisablePromptOptimizationThinking { get; set; }
+
+    /// <summary>
+    /// Rewrite the prompt before generation to add clarifying visual detail.
+    /// Additional credits are charged when a rewrite is generated.
+    /// When applied, the final prompt is returned URL-encoded in the x-venice-enhanced-prompt response header.
+    /// </summary>
+    [JsonPropertyName("enhance_prompt")]
+    public bool? EnhancePrompt { get; set; }
+
+    /// <summary>
+    /// Style reference images that guide the output. Each reference includes an image
+    /// (base64 string, data URI, or http/https URL) and an optional strength between 0.1 and 1.
+    /// </summary>
+    [JsonPropertyName("style_references")]
+    public List<StyleReference>? StyleReferences { get; set; }
+}
+
+/// <summary>
+/// A style reference image used to guide image generation output.
+/// </summary>
+public class StyleReference
+{
+    /// <summary>
+    /// The style reference image as a base64-encoded string (raw or data URI) or a URL.
+    /// Must be less than 8MB.
+    /// </summary>
+    [JsonPropertyName("image")]
+    public string Image { get; set; } = string.Empty;
+
+    /// <summary>
+    /// How strongly the reference guides the output (0.1-1). Defaults to 0.5.
+    /// </summary>
+    [JsonPropertyName("strength")]
+    public double? Strength { get; set; }
 }
 
 /// <summary>
@@ -244,6 +292,95 @@ public class UpscaleImageRequest
     /// </summary>
     [JsonPropertyName("replication")]
     public double? Replication { get; set; }
+}
+
+/// <summary>
+/// Request for editing multiple images together (multi-edit).
+/// </summary>
+public class MultiEditImageRequest
+{
+    /// <summary>
+    /// The text directions to edit or modify the images. Short, descriptive prompts work best.
+    /// Character limit is model specific.
+    /// </summary>
+    [JsonPropertyName("prompt")]
+    public string Prompt { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Images used for multi-editing (minimum 1). The first image is treated as the base image,
+    /// and the remaining images are used as edit layers/masks. Each image can be a base64-encoded
+    /// string or a URL starting with http:// or https://.
+    /// </summary>
+    [JsonPropertyName("images")]
+    public List<string> Images { get; set; } = new();
+
+    /// <summary>
+    /// The model ID to use for multi-edit.
+    /// </summary>
+    [JsonPropertyName("modelId")]
+    public string? ModelId { get; set; }
+
+    /// <summary>
+    /// The aspect ratio for the output image. Use 'auto' or omit to infer from the input image.
+    /// </summary>
+    [JsonPropertyName("aspect_ratio")]
+    public string? AspectRatio { get; set; }
+
+    /// <summary>
+    /// The resolution of the output image (e.g. "1K", "2K", "4K").
+    /// </summary>
+    [JsonPropertyName("resolution")]
+    public string? Resolution { get; set; }
+
+    /// <summary>
+    /// The output format of the generated image (e.g. "png", "jpeg", "webp").
+    /// </summary>
+    [JsonPropertyName("output_format")]
+    public string? OutputFormat { get; set; }
+
+    /// <summary>
+    /// Whether to apply safe mode filtering to the output image.
+    /// </summary>
+    [JsonPropertyName("safe_mode")]
+    public bool? SafeMode { get; set; }
+
+    /// <summary>
+    /// Output quality for supported models (low, medium, high).
+    /// </summary>
+    [JsonPropertyName("quality")]
+    public string? Quality { get; set; }
+
+    /// <summary>
+    /// Skip the model's prompt-optimization thinking step for faster generation.
+    /// </summary>
+    [JsonPropertyName("disable_prompt_optimization_thinking")]
+    public bool? DisablePromptOptimizationThinking { get; set; }
+
+    /// <summary>
+    /// Rewrite the edit prompt using the input images before editing to add clarifying detail.
+    /// </summary>
+    [JsonPropertyName("enhance_prompt")]
+    public bool? EnhancePrompt { get; set; }
+}
+
+/// <summary>
+/// Request to remove the background from an image.
+/// Provide either an image file/base64 or an image URL.
+/// </summary>
+public class BackgroundRemoveImageRequest
+{
+    /// <summary>
+    /// The image to remove the background from. Can be a base64-encoded string (file upload).
+    /// File size must be less than 25MB.
+    /// </summary>
+    [JsonPropertyName("image")]
+    public string? Image { get; set; }
+
+    /// <summary>
+    /// URL of the image to remove the background from.
+    /// </summary>
+    [JsonPropertyName("image_url")]
+    public string? ImageUrl { get; set; }
 }
 
 /// <summary>
