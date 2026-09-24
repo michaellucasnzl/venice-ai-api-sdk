@@ -16,6 +16,13 @@ public class GenerateImageRequest
     public ImageModel Model { get; set; }
 
     /// <summary>
+    /// Optional identifier for the API customer's end user. Combined with the Venice user id when
+    /// attributing the request to upstream providers. Must be printable ASCII and must not contain "||".
+    /// </summary>
+    [JsonPropertyName("anon_user_id")]
+    public string? AnonUserId { get; set; }
+
+    /// <summary>
     /// The description for the image.
     /// </summary>
     [JsonPropertyName("prompt")]
@@ -250,6 +257,13 @@ public class SimpleGenerateImageRequest
     /// </summary>
     [JsonPropertyName("user")]
     public string? User { get; set; }
+
+    /// <summary>
+    /// Optional identifier for the API customer's end user. Combined with the Venice user id when
+    /// attributing the request to upstream providers. Must be printable ASCII and must not contain "||".
+    /// </summary>
+    [JsonPropertyName("anon_user_id")]
+    public string? AnonUserId { get; set; }
 }
 
 /// <summary>
@@ -361,6 +375,13 @@ public class MultiEditImageRequest
     /// </summary>
     [JsonPropertyName("enhance_prompt")]
     public bool? EnhancePrompt { get; set; }
+
+    /// <summary>
+    /// Optional identifier for the API customer's end user. Combined with the Venice user id when
+    /// attributing the request to upstream providers. Must be printable ASCII and must not contain "||".
+    /// </summary>
+    [JsonPropertyName("anon_user_id")]
+    public string? AnonUserId { get; set; }
 }
 
 /// <summary>
@@ -369,6 +390,13 @@ public class MultiEditImageRequest
 /// </summary>
 public class BackgroundRemoveImageRequest
 {
+    /// <summary>
+    /// Optional identifier for the API customer's end user. Combined with the Venice user id when
+    /// attributing the request to upstream providers. Must be printable ASCII and must not contain "||".
+    /// </summary>
+    [JsonPropertyName("anon_user_id")]
+    public string? AnonUserId { get; set; }
+
     /// <summary>
     /// The image to remove the background from. Can be a base64-encoded string (file upload).
     /// File size must be less than 25MB.
@@ -430,6 +458,13 @@ public class EditImageRequest
     /// </summary>
     [JsonPropertyName("safe_mode")]
     public bool? SafeMode { get; set; }
+
+    /// <summary>
+    /// Optional identifier for the API customer's end user. Combined with the Venice user id when
+    /// attributing the request to upstream providers. Must be printable ASCII and must not contain "||".
+    /// </summary>
+    [JsonPropertyName("anon_user_id")]
+    public string? AnonUserId { get; set; }
 }
 
 /// <summary>

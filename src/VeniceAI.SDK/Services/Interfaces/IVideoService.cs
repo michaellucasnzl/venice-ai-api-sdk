@@ -60,9 +60,12 @@ public interface IVideoService
 
     /// <summary>
     /// Transcribes a YouTube video URL to text.
+    /// DEPRECATED: The /video/transcriptions endpoint has been removed from the Venice AI API.
+    /// Use <see cref="IAudioService.TranscribeAudioAsync"/> (POST /api/v1/audio/transcriptions) instead.
     /// </summary>
     /// <param name="request">The video transcription request.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The video transcription response.</returns>
+    [Obsolete("The /video/transcriptions endpoint has been removed from the Venice AI API. Use Audio.TranscribeAudioAsync (POST /api/v1/audio/transcriptions) instead.")]
     Task<VideoTranscriptionResponse> TranscribeVideoAsync(VideoTranscriptionRequest request, CancellationToken cancellationToken = default);
 }

@@ -20,6 +20,8 @@ public class VeniceAIClient : IVeniceAIClient
     /// <param name="characterService">The character service.</param>
     /// <param name="augmentService">The augment service.</param>
     /// <param name="responsesService">The Responses API service.</param>
+    /// <param name="voiceChangerService">The voice changer (speech-to-speech) service.</param>
+    /// <param name="decisionsService">The Decisions API service.</param>
     public VeniceAIClient(
         IChatService chatService,
         IImageService imageService,
@@ -30,7 +32,9 @@ public class VeniceAIClient : IVeniceAIClient
         IBillingService billingService,
         ICharacterService characterService,
         IAugmentService augmentService,
-        IResponsesService responsesService)
+        IResponsesService responsesService,
+        IVoiceChangerService voiceChangerService,
+        IDecisionsService decisionsService)
     {
         Chat = chatService;
         Images = imageService;
@@ -42,6 +46,8 @@ public class VeniceAIClient : IVeniceAIClient
         Characters = characterService;
         Augment = augmentService;
         Responses = responsesService;
+        VoiceChanger = voiceChangerService;
+        Decisions = decisionsService;
     }
 
     /// <inheritdoc />
@@ -73,4 +79,10 @@ public class VeniceAIClient : IVeniceAIClient
 
     /// <inheritdoc />
     public IResponsesService Responses { get; }
+
+    /// <inheritdoc />
+    public IVoiceChangerService VoiceChanger { get; }
+
+    /// <inheritdoc />
+    public IDecisionsService Decisions { get; }
 }

@@ -166,6 +166,12 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IResponsesService>(serviceProvider =>
             CreateService<ResponsesService>(serviceProvider, useProvidedHttpClient));
 
+        services.AddTransient<IVoiceChangerService>(serviceProvider =>
+            CreateService<VoiceChangerService>(serviceProvider, useProvidedHttpClient));
+
+        services.AddTransient<IDecisionsService>(serviceProvider =>
+            CreateService<DecisionsService>(serviceProvider, useProvidedHttpClient));
+
         services.AddTransient<IVeniceAIClient, VeniceAIClient>();
 
         return services;

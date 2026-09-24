@@ -56,4 +56,14 @@ public interface IVeniceAIClient
     /// Gets the Responses API service (Alpha).
     /// </summary>
     IResponsesService Responses { get; }
+
+    /// <summary>
+    /// Gets the voice changer (speech-to-speech) service.
+    /// </summary>
+    IVoiceChangerService VoiceChanger { get; }
+
+    /// <summary>
+    /// Gets the Decisions API service (Beta).
+    /// </summary>
+    IDecisionsService Decisions { get; }
 }

@@ -309,6 +309,49 @@ public class BaseHttpService
         return JsonSerializer.Deserialize<TResponse>(responseContent, _jsonOptions)!;
     }
 
+    /// <summary>
+    /// Makes a POST request that may return either JSON (an in-progress status) or binary data (a finished asset).
+    /// </summary>
+    /// <typeparam name="TRequest">The request type.</typeparam>
+    /// <param name="endpoint">The API endpoint.</param>
+    /// <param name="request">The request object.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>Binary data when the asset is ready, otherwise the raw JSON body; content type is always populated for binary.</returns>
+    protected async Task<(byte[]? Binary, string? Json, string? ContentType, string? Error)> PostBinaryOrJsonAsync<TRequest>(
+        string endpoint,
+        TRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        var json = JsonSerializer.Serialize(request, _jsonOptions);
+
+        _logger.LogDebug("POST {Endpoint} (Binary or JSON)", endpoint);
+        _logger.LogDebug("Request: {Json}", json);
+
+        using var content = new StringContent(json, Encoding.UTF8, ApplicationJsonMediaType);
+        content.Headers.ContentType = new MediaTypeHeaderValue(ApplicationJsonMediaType);
+
+        using var response = await _httpClient.PostAsync(endpoint, content, cancellationToken);
+
+        var mediaType = response.Content.Headers.ContentType?.MediaType;
+        _logger.LogDebug("Response Status: {StatusCode}", response.StatusCode);
+        _logger.LogDebug("Response Content-Type: {ContentType}", mediaType);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorContent = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new VeniceAIException($"API Error (Status: {(int)response.StatusCode}): {errorContent}");
+        }
+
+        if (mediaType != null && mediaType.Contains("json", StringComparison.OrdinalIgnoreCase))
+        {
+            var body = await response.Content.ReadAsStringAsync(cancellationToken);
+            return (null, body, mediaType, null);
+        }
+
+        var data = await response.Content.ReadAsByteArrayAsync(cancellationToken);
+        return (data, null, mediaType ?? "application/octet-stream", null);
+    }
+
     private ChatCompletionStreamResponse? TryDeserializeStreamResponse(string jsonData)
     {
         try

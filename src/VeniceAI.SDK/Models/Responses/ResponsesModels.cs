@@ -17,6 +17,13 @@ public class ResponsesRequest
     public TextModel Model { get; set; }
 
     /// <summary>
+    /// Optional identifier for the API customer's end user. Combined with the Venice user id when
+    /// attributing the request to upstream providers. Must be printable ASCII and must not contain "||".
+    /// </summary>
+    [JsonPropertyName("anon_user_id")]
+    public string? AnonUserId { get; set; }
+
+    /// <summary>
     /// The input to the model: a string or a list of input items (messages, images, etc.).
     /// </summary>
     [JsonPropertyName("input")]
@@ -207,6 +214,25 @@ public class ResponsesResponse : BaseResponse
     /// </summary>
     [JsonPropertyName("error")]
     public ResponsesError? ResponseError { get; set; }
+
+    /// <summary>
+    /// Details explaining why generation ended before completion, if applicable.
+    /// Partial output and usage are retained when present.
+    /// </summary>
+    [JsonPropertyName("incomplete_details")]
+    public ResponseIncompleteDetails? IncompleteDetails { get; set; }
+}
+
+/// <summary>
+/// Details explaining why a Responses API generation ended before completion.
+/// </summary>
+public class ResponseIncompleteDetails
+{
+    /// <summary>
+    /// The reason generation stopped early (max_output_tokens, content_filter).
+    /// </summary>
+    [JsonPropertyName("reason")]
+    public string? Reason { get; set; }
 }
 
 /// <summary>

@@ -22,6 +22,13 @@ public class ChatCompletionRequest
     public TextModel Model { get; set; }
 
     /// <summary>
+    /// Optional identifier for the API customer's end user. Combined with the Venice user id when
+    /// attributing the request to upstream providers. Must be printable ASCII and must not contain "||".
+    /// </summary>
+    [JsonPropertyName("anon_user_id")]
+    public string? AnonUserId { get; set; }
+
+    /// <summary>
     /// The maximum number of tokens that can be generated in the chat completion.
     /// </summary>
     [JsonPropertyName("max_tokens")]
