@@ -5,6 +5,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2026-09-25
+
+### Added
+
+#### New Text Models
+- `AionLabs3_5` (`aion-labs-aion-3-5`) — AionLabs 3.5 multi-model roleplaying and storytelling system
+- `AionLabs3_5Mini` (`aion-labs-aion-3-5-mini`) — AionLabs 3.5 Mini
+- `ClaudeFable5_1` (`claude-fable-5-1`) — Anthropic Claude Fable 5.1
+- `ClaudeOpus5_5` (`claude-opus-5-5`) — Anthropic Claude Opus 5.5
+- `DeepSeekV4_1Flash` (`deepseek-v4-1-flash`) — DeepSeek V4.1 Flash 552B MoE with 1M context
+- `Gemini38Flash` (`gemini-3-8-flash`) — Google Gemini 3.8 Flash
+- `Grok4_7` (`grok-4-7`) — xAI Grok 4.7 multimodal reasoning model
+- `Mercury2_5` (`mercury-2-5`) — Inception Mercury 2.5 diffusion-based reasoning model
+- `OpenAIGpt6Astra` / `OpenAIGpt6AstraPro` (`openai-gpt-6-astra`, `openai-gpt-6-astra-pro`) — OpenAI GPT-6 Astra
+- `OpenAIGpt6Luna` (`openai-gpt-6-luna`) — OpenAI GPT-6 Luna efficient model
+- `OpenAIGpt6Sol` (`openai-gpt-6-sol`) — OpenAI GPT-6 Sol coding/agent model
+- `Qwen38Flash` (`qwen-3-8-flash`) — Alibaba Qwen 3.8 Flash multimodal model
+- `ZAIGlm53Flash` (`z-ai-glm-5-3-flash`) — Z.AI GLM 5.3 Flash reasoning model
+- `E2EEGlm53` / `E2EEGlm53Flash` (`e2ee-glm-5-3-p`, `e2ee-glm-5-3-flash`) — GLM 5.3 in TEE
+- `E2EEKimiK2_6` (`e2ee-kimi-k2-6`) — Kimi K2.6 in TEE
+- `E2EEKimiK3` (`e2ee-kimi-k3-p`) — Kimi K3 in TEE
+- `E2EEQwen38_27B` (`e2ee-qwen3-8-27b`) — Qwen 3.8 27B in TEE
+
+#### New Image Models
+- `GptImage25Flare` (`gpt-image-2-5-flare`) — OpenAI GPT Image 2.5 Flare
+- `GptImage25Sunburst` (`gpt-image-2-5-sunburst`) — OpenAI GPT Image 2.5 Sunburst
+- `MuseImage` (`muse-image`) — Muse Image generation model
+
+#### New Video Models
+- `GeminiOmniFlash11TextToVideo` / `GeminiOmniFlash11ImageToVideo` / `GeminiOmniFlash11ReferenceToVideo` / `GeminiOmniFlash11VideoToVideo` — Gemini Omni Flash 1.1
+- `MinimaxH3MaxTextToVideo` / `MinimaxH3MaxImageToVideo` / `MinimaxH3MaxReferenceToVideo` / `MinimaxH3MaxMultiAngle` / `MinimaxH3MaxTurboTextToVideo` / `MinimaxH3MaxTurboImageToVideo` — MiniMax H3 Max
+- `Wan30PrimeProTextToVideo` / `Wan30PrimeProImageToVideo` / `Wan30PrimeProReferenceToVideo` — Wan 3.0 Prime Pro
+- `Wan30ProTextToVideo` / `Wan30ProImageToVideo` / `Wan30ProReferenceToVideo` — Wan 3.0 Pro
+
+#### New Services & Endpoints
+- **Voice Changer**: new `IVoiceChangerService`/`VoiceChangerService` (`client.VoiceChanger`) with queue (URL or file upload), retrieve, and complete for speech-to-speech conversion
+- **Decisions API (Beta)**: new `IDecisionsService`/`DecisionsService` (`client.Decisions`) with `CreateDecisionAsync` and `CreateDecisionSystemOneAsync` for typed structured judgments (`noul`/`choice`/`score`)
+
+#### New Request Parameters
+- Chat, Responses, and image generation requests: `AnonUserId` (`anon_user_id`)
+- Responses response: `IncompleteDetails` (why generation ended before completion)
+- Video queue: `CameraTrajectory` (`camera_trajectory`) camera keyframes for camera-controlled models
+
+### Changed
+- Updated SDK to match the latest Venice AI OpenAPI spec and live `/models` data (2026-09-25)
+- `IVeniceAIClient` now exposes `VoiceChanger` and `Decisions` services
+
+### Deprecated
+- `VideoService.TranscribeVideoAsync` — the `/api/v1/video/transcriptions` endpoint was removed; use `Audio.TranscribeAudioAsync` (`/api/v1/audio/transcriptions`) instead
+- Removed text models marked `[Obsolete]`: `OpenAIGpt52Codex` → `OpenAIGpt53Codex`, `MistralSmall2603` → `MistralSmall3_2_24B`, `E2EEGemma3_27B`/`E2EEGemma4_31B` → `E2EEGemma4_26B_A4B_Uncensored`, `E2EEGptOss20B` → `E2EEGptOss120B`, `E2EEQwen36_35B_A3B_Uncensored` → `E2EEQwen36_35B_A3B`, `E2EEGlm51` → `E2EEGlm52`, `E2EEQwen36_27B` → `E2EEQwen38_27B`, `StealthOxAlpha`
+- Removed video models marked `[Obsolete]`: `Sora2TextToVideo`/`Sora2ProTextToVideo` and `Sora2ImageToVideo`/`Sora2ProImageToVideo` (use Veo 3.1 models instead)
+
 ## [2.4.0] - 2026-08-26
 
 ### Added

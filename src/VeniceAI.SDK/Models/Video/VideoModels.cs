@@ -110,6 +110,43 @@ public class QueueVideoRequest
     /// </summary>
     [JsonPropertyName("scene_image_urls")]
     public List<string>? SceneImageUrls { get; set; }
+
+    /// <summary>
+    /// Camera trajectory keyframes for camera-controlled video models (e.g. Wan).
+    /// At least 2 keyframes are required. The time values must be normalised between 0 and 1.
+    /// </summary>
+    [JsonPropertyName("camera_trajectory")]
+    public List<CameraTrajectoryPoint>? CameraTrajectory { get; set; }
+}
+
+/// <summary>
+/// A single camera trajectory keyframe for camera-controlled video generation.
+/// </summary>
+public class CameraTrajectoryPoint
+{
+    /// <summary>
+    /// Normalised time of this keyframe along the video (0 to 1).
+    /// </summary>
+    [JsonPropertyName("time")]
+    public double Time { get; set; }
+
+    /// <summary>
+    /// Horizontal rotation of the camera in degrees.
+    /// </summary>
+    [JsonPropertyName("azimuth")]
+    public double Azimuth { get; set; }
+
+    /// <summary>
+    /// Vertical angle of the camera in degrees (-90 to 90).
+    /// </summary>
+    [JsonPropertyName("elevation")]
+    public double Elevation { get; set; }
+
+    /// <summary>
+    /// Distance of the camera from the subject (must be greater than 0).
+    /// </summary>
+    [JsonPropertyName("distance")]
+    public double Distance { get; set; }
 }
 
 /// <summary>

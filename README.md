@@ -22,8 +22,9 @@ This SDK is community-maintained and **not yet officially affiliated with Venice
 - **Chat Completions** — Text generation with streaming, vision, function calling, and reasoning
 - **Responses API (Alpha)** — Create responses using the OpenAI-compatible `/api/v1/responses` endpoint
 - **Image Generation** — Create, upscale, edit, multi-edit, and background-remove images with multiple models and styles
-- **Video Generation** — Queue-based workflow with 100+ models (Wan, LTX, Kling, Veo, Sora, Seedance, Flux) plus YouTube transcription
-- **Audio Generation** — Queue-based music/audio generation, text-to-speech with streaming, transcription, and voice cloning
+- **Video Generation** — Queue-based workflow with 100+ models (Wan, LTX, Kling, Veo, Sora, Seedance, Flux) and camera trajectory control
+- **Audio Generation** — Queue-based music/audio generation, text-to-speech with streaming, transcription, voice cloning, and voice changer (speech-to-speech)
+- **Decisions API (Beta)** — Typed structured judgments (`noul`/`choice`/`score`) over a state via `/api/v1/decisions`
 - **Text-to-Speech** — Multiple voices with streaming audio support
 - **Embeddings** — Generate text embeddings for semantic search
 - **Web Search & Scraping** — Privacy-preserving web search, page scraping, and document text parsing
@@ -235,6 +236,66 @@ var response = await client.Audio.TranscribeAudioAsync(request);
 Console.WriteLine(response.Text);
 ```
 
+### Voice Changer (Speech-to-Speech)
+
+```csharp
+// Queue a conversion from a public URL
+var queued = await client.VoiceChanger.QueueVoiceChangerAsync(new QueueVoiceChangerRequest
+{
+    Model = "elevenlabs-voice-changer",
+    AudioUrl = "https://example.com/source-recording.mp3",
+    Voice = "Aria"
+});
+
+// Or upload a local file
+var queuedFromFile = await client.VoiceChanger.QueueVoiceChangerWithFileAsync(new QueueVoiceChangerRequest
+{
+    Model = "elevenlabs-voice-changer",
+    File = await File.ReadAllBytesAsync("source.mp3"),
+    Filename = "source.mp3"
+});
+
+// Poll until converted audio is returned
+var conversion = await client.VoiceChanger.RetrieveVoiceChangerAsync(new RetrieveVoiceChangerRequest
+{
+    Model = "elevenlabs-voice-changer",
+    QueueId = queued.QueueId
+});
+
+if (conversion.AudioContent is { Length: > 0 } audio)
+{
+    await File.WriteAllBytesAsync("converted.mp3", audio);
+}
+
+await client.VoiceChanger.CompleteVoiceChangerAsync(new CompleteVoiceChangerRequest
+{
+    Model = "elevenlabs-voice-changer",
+    QueueId = queued.QueueId
+});
+```
+
+### Decisions (Beta)
+
+```csharp
+var decision = await client.Decisions.CreateDecisionAsync(new DecisionRequest
+{
+    Model = "jev-latest",
+    State = "Help! My payouts have been failing for 3 days.",
+    Questions = new Dictionary<string, DecisionQuestion>
+    {
+        ["is_urgent"] = DecisionQuestion.Noul("Does this message convey urgency?"),
+        ["team"] = DecisionQuestion.Choice(
+            "Which team should handle this?",
+            new() { ["billing"] = "Payments, invoicing, refunds", ["technical"] = "Bugs, outages" }),
+        ["frustration"] = DecisionQuestion.Score(
+            "How frustrated is the customer?",
+            new() { "Calm", "Frustrated", "Very angry" })
+    }
+});
+
+Console.WriteLine(decision.Answers["is_urgent"].Noul);
+```
+
 ### Video Generation (Queue-based)
 
 ```csharp
@@ -254,12 +315,17 @@ var result = await client.Video.RetrieveVideoAsync(new RetrieveVideoRequest
 });
 ```
 
-### Video Transcription
+### Video Transcription (Deprecated)
+
+The `/api/v1/video/transcriptions` endpoint has been removed from the Venice AI API.
+`client.Video.TranscribeVideoAsync` is obsolete; use `client.Audio.TranscribeAudioAsync`
+(posting to `/api/v1/audio/transcriptions`) instead.
 
 ```csharp
-var response = await client.Video.TranscribeVideoAsync(new VideoTranscriptionRequest
+var response = await client.Audio.TranscribeAudioAsync(new CreateTranscriptionRequest
 {
-    Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    File = await File.ReadAllBytesAsync("video-audio.mp3"),
+    Filename = "video-audio.mp3"
 });
 Console.WriteLine(response.Text);
 ```
